@@ -1,8 +1,9 @@
-import { Cpu, CheckCircle2, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Cpu, ShieldCheck, Wrench, CheckCircle2, ArrowRight, Zap, RefreshCw, Layers, Phone } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import CTASection from "../components/CTASection";
 import EnquiryForm from "../components/EnquiryForm";
-import { IMAGES, TRANSFORMER_SERVICES } from "../data/companyData";
+import { IMAGES, TRANSFORMER_SERVICES, COMPANY_DETAILS } from "../data/companyData";
 
 export default function PowerTransformers() {
   return (
@@ -26,25 +27,26 @@ export default function PowerTransformers() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              High-Performance Power Transformers Built for Solar & Industry
+              Power Up Your Energy Efficiency with High-Performance Transformers.
             </h1>
 
             <p className="text-base sm:text-lg text-[#E9F0E9]/85 leading-relaxed font-normal">
-              Unlock the power of reliable energy transmission with Proton Power Infra. We are the leading manufacturer of Inverter Duty Solar Transformers and specialists in step-up and step-down transformer repair and services across India.
+              Unlock the power of reliable and efficient energy solutions with Proton Power Infra—the leading manufacturer of Inverter Duty Solar Transformers and specialists in step-up and step-down transformer repair and services across India.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <a
-                href="#transformer-enquiry"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-lg text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-md transition-all"
+              <Link
+                to="/enquiry?type=industrial&requirement=Power%20Transformers"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg transition-all"
               >
-                <span>Request Transformer Quote or Service</span>
-              </a>
+                <span>Request Transformer Quote / Service</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
               <a
                 href="#transformer-services"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all"
               >
-                <span>Explore Transformer Services</span>
+                <span>Explore Transformer Solutions</span>
               </a>
             </div>
           </div>
@@ -52,14 +54,14 @@ export default function PowerTransformers() {
       </section>
 
       {/* 2. Real Transformer Gallery & Overview */}
-      <section className="py-20 bg-white border-b border-[#E2E8E2]">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
             <div className="lg:col-span-6 space-y-6">
               <SectionHeading
                 eyebrow="Your Trusted Transformer Partner"
                 title="Engineered for Severe Solar Duty Cycles & Industrial Demands"
-                description="Solar transformers endure unique thermal stresses, non-linear harmonic loads, and fluctuating power cycles. Our transformers are precision-engineered to deliver maximum efficiency and zero-downtime reliability."
+                description="Solar transformers endure unique thermal stresses, non-linear harmonic loads, and fluctuating power output. Our transformers are precision-engineered to deliver maximum efficiency and zero-downtime reliability."
               />
 
               <p className="text-sm text-[#525D57] leading-relaxed">
@@ -79,97 +81,123 @@ export default function PowerTransformers() {
             </div>
 
             <div className="lg:col-span-6 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden shadow-xs border border-[#E2E8E2] h-60">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#E2E8E2] h-60">
                 <img
                   src={IMAGES.transformerSubstation}
                   alt="High-voltage step-up transformer substation"
-                  className="w-full h-full object-cover hover:scale-104 transition-transform duration-500"
-                  loading="lazy"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="rounded-2xl overflow-hidden shadow-xs border border-[#E2E8E2] h-60">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#E2E8E2] h-60">
                 <img
                   src={IMAGES.transformerUnit1}
                   alt="Inverter duty transformer core and winding assembly"
-                  className="w-full h-full object-cover hover:scale-104 transition-transform duration-500"
-                  loading="lazy"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="rounded-2xl overflow-hidden shadow-xs border border-[#E2E8E2] h-60">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#E2E8E2] h-60">
                 <img
                   src={IMAGES.transformerUnit2}
-                  alt="Step-up transformer inspection and testing"
-                  className="w-full h-full object-cover hover:scale-104 transition-transform duration-500"
-                  loading="lazy"
+                  alt="Industrial power transformer testing unit"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="rounded-2xl overflow-hidden shadow-xs border border-[#E2E8E2] h-60">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#E2E8E2] h-60">
                 <img
                   src={IMAGES.transformerUnit3}
-                  alt="Step-down transformer oil filtration and servicing"
-                  className="w-full h-full object-cover hover:scale-104 transition-transform duration-500"
-                  loading="lazy"
+                  alt="Step-down transformer maintenance and testing"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
+            </div>
+          </div>
+
+          {/* 3. Services We Offer */}
+          <div id="transformer-services" className="scroll-mt-24 pt-8 border-t border-[#E2E8E2]">
+            <SectionHeading
+              eyebrow="Services We Offer"
+              title="Comprehensive Transformer Manufacturing & Repair Services"
+              description="From ground-up fabrication to on-site testing, oil filtration, and emergency rewinding."
+              align="center"
+              className="mb-14"
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {TRANSFORMER_SERVICES.map((srv, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div className="h-56 overflow-hidden bg-[#202724]">
+                    <img
+                      src={srv.image}
+                      alt={srv.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold text-[#202724] group-hover:text-[#123C32] transition-colors mb-2">
+                        {srv.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mb-4">
+                        {srv.desc}
+                      </p>
+
+                      <div className="space-y-2 pt-2 border-t border-gray-100">
+                        {srv.specs.map((sp, sIdx) => (
+                          <div key={sIdx} className="flex items-start gap-2.5 text-xs text-[#252A27]">
+                            <CheckCircle2 className="w-4 h-4 text-[#123C32] shrink-0 mt-0.5" />
+                            <span>{sp}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-6 mt-6 border-t border-[#E2E8E2]">
+                      <Link
+                        to={`/enquiry?type=industrial&requirement=${encodeURIComponent(srv.title)}`}
+                        className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-lg text-xs font-bold bg-[#F7F8F4] group-hover:bg-[#123C32] text-[#123C32] group-hover:text-white transition-all"
+                      >
+                        <span>Request Specs & Pricing</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Detailed Services Showcase */}
-      <section id="transformer-services" className="py-20 lg:py-24 bg-[#F7F8F4] scroll-mt-20">
+      {/* 4. Why Choose Proton Power Infra for Transformers? */}
+      <section className="py-20 bg-[#E9F0E9] border-y border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Our Transformer Offerings"
-            title="Comprehensive Manufacturing & Repair Capabilities"
-            description="Explore our specialized transformer engineering solutions tailored to multi-megawatt solar plants and industrial power systems."
+            eyebrow="Why Choose Proton Power Infra"
+            title="The Advantage of an Integrated Transformer Manufacturer"
+            description="Unlike commercial aggregators, our hands-on manufacturing expertise guarantees engineering precision and dependable lifecycle support."
             align="center"
-            className="mb-16"
+            className="mb-14"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {TRANSFORMER_SERVICES.map((serv, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl overflow-hidden border border-[#E2E8E2] shadow-xs flex flex-col justify-between"
-              >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              { title: "Trusted Manufacturer", desc: "Years of experience delivering cutting-edge transformer solutions across solar and industrial sectors." },
+              { title: "Premium Quality", desc: "Robust and reliable designs built to last with high-grade CRGO laminations and pure electrolytic copper." },
+              { title: "Expert Repairs", desc: "Comprehensive step-up and step-down transformer repair, vacuum oil filling, and rewinding to keep your business running." },
+              { title: "Customized Solutions", desc: "Tailored transformer designs matching exact client impedances, vector groups, and ambient temperature ratings." },
+              { title: "Nationwide Support", desc: "Comprehensive technical assistance and rapid field engineer mobilization whenever you need it." },
+            ].map((pillar, idx) => (
+              <div key={idx} className="p-5 rounded-2xl bg-white border border-[#E2E8E2] shadow-sm flex flex-col justify-between">
                 <div>
-                  <div className="h-56 overflow-hidden bg-[#202724]">
-                    <img
-                      src={serv.image}
-                      alt={serv.title}
-                      className="w-full h-full object-cover hover:scale-103 transition-transform duration-500"
-                      loading="lazy"
-                    />
+                  <div className="w-10 h-10 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center font-bold mb-3">
+                    0{idx + 1}
                   </div>
-
-                  <div className="p-6 sm:p-8 space-y-4">
-                    <h3 className="text-xl font-bold text-[#202724]">
-                      {serv.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
-                      {serv.desc}
-                    </p>
-
-                    <div className="space-y-2 pt-2 border-t border-gray-100">
-                      {serv.specs.map((sp, sIdx) => (
-                        <div key={sIdx} className="flex items-start gap-2.5 text-xs text-[#252A27]">
-                          <CheckCircle2 className="w-4 h-4 text-[#123C32] shrink-0 mt-0.5" />
-                          <span>{sp}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 pt-0">
-                  <a
-                    href="#transformer-enquiry"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#E8A83E] transition-colors"
-                  >
-                    <span>Request Quotation for {serv.title}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
+                  <h4 className="text-base font-bold text-[#202724] mb-2">{pillar.title}</h4>
+                  <p className="text-xs text-[#525D57] leading-relaxed">{pillar.desc}</p>
                 </div>
               </div>
             ))}
@@ -177,26 +205,19 @@ export default function PowerTransformers() {
         </div>
       </section>
 
-      {/* 4. Consultation Form */}
-      <section id="transformer-enquiry" className="py-20 bg-white border-t border-[#E2E8E2] scroll-mt-20">
+      {/* 5. Consultation Form */}
+      <section className="py-20 bg-[#F7F8F4]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Direct Transformer Consultation"
-            title="Request a Custom Transformer Quote or Maintenance Dispatch"
-            description="Our engineering works in Dewas and headquarters in Indore provide customized transformer specifications and rapid maintenance response."
+            eyebrow="Transformer Inquiries"
+            title="Discuss Your Transformer Requirement or Repair Schedule"
+            description="Speak directly with our transformer design engineers for new equipment manufacturing or on-site testing and repair."
             align="center"
-            className="mb-12"
+            className="mb-10"
           />
-
           <EnquiryForm defaultCustomerType="industrial" />
         </div>
       </section>
-
-      {/* 5. Footer CTA */}
-      <CTASection
-        title="Need Inverter Duty Transformers or Rapid Repair?"
-        description="Connect directly with our transformer engineering specialists for immediate quotation and technical specifications."
-      />
     </div>
   );
 }

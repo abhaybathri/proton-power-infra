@@ -62,7 +62,6 @@ export default function App() {
             <Route path="/industrial-solar" element={<IndustrialSolar />} />
             <Route path="/power-transformers" element={<PowerTransformers />} />
             <Route path="/solar-epc-services" element={<SolarEPCServices />} />
-            <Route path="/utility-solar" element={<SolarEPCServices />} />
             <Route path="/enquiry" element={<Enquiry />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />

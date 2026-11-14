@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Calendar, Sparkles } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { SOLAR_JOURNEY } from "../data/companyData";
 

@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { CheckCircle2, Send, RefreshCw } from "lucide-react";
+import { useState, useEffect } from "react";
+import { CheckCircle2, AlertCircle, ArrowRight, Send, RefreshCw } from "lucide-react";
+import { COMPANY_DETAILS } from "../data/companyData";
 
-export default function EnquiryForm({ defaultCustomerType = "residential" }) {
+export default function EnquiryForm({ defaultCustomerType = "residential", defaultCapacity = "" }) {
   const [formData, setFormData] = useState({
     fullName: "",
     mobileNumber: "",
@@ -17,6 +18,12 @@ export default function EnquiryForm({ defaultCustomerType = "residential" }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [referenceId, setReferenceId] = useState("");
+
+  useEffect(() => {
+    if (defaultCustomerType) {
+      setFormData((prev) => ({ ...prev, customerType: defaultCustomerType }));
+    }
+  }, [defaultCustomerType]);
 
   const validate = () => {
     const newErrors = {};
@@ -63,6 +70,7 @@ export default function EnquiryForm({ defaultCustomerType = "residential" }) {
 
     setIsSubmitting(true);
 
+    // Simulate realistic asynchronous submission
     setTimeout(() => {
       const generatedId = "PPI-" + Math.floor(100000 + Math.random() * 900000);
       setReferenceId(generatedId);
@@ -125,7 +133,7 @@ export default function EnquiryForm({ defaultCustomerType = "residential" }) {
             href={`https://wa.me/919770744687?text=Hello%20Proton%20Power%20Infra%2C%20I%20just%20submitted%20solar%20enquiry%20Ref%20${referenceId}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#25D366] text-white text-xs font-bold shadow-xs hover:bg-[#20ba59] transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#25D366] text-white text-xs font-bold shadow hover:bg-[#20ba59] transition-colors"
           >
             <span>Notify us immediately on WhatsApp</span>
           </a>
@@ -173,7 +181,7 @@ export default function EnquiryForm({ defaultCustomerType = "residential" }) {
               key={type.id}
               className={`flex items-center justify-center py-2.5 px-3 rounded-lg border text-xs font-bold cursor-pointer transition-all ${
                 formData.customerType === type.id
-                  ? "bg-[#123C32] text-white border-[#123C32] shadow-xs"
+                  ? "bg-[#123C32] text-white border-[#123C32] shadow-sm"
                   : "bg-[#F7F8F4] text-[#525D57] border-[#E2E8E2] hover:border-[#123C32]/40"
               }`}
             >

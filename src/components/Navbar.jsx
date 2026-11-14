@@ -23,13 +23,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [prevPath, setPrevPath] = useState(location.pathname);
-  if (prevPath !== location.pathname) {
-    setPrevPath(location.pathname);
+  useEffect(() => {
     setMobileMenuOpen(false);
     setSolutionsDropdownOpen(false);
     setMobileSolutionsOpen(false);
-  }
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

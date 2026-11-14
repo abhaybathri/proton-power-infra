@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, MessageSquare, Send, CheckCircle2, Building } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageSquare, Send, CheckCircle2, Building, ShieldCheck, Globe } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
 import { COMPANY_DETAILS } from "../data/companyData";
 
 export default function Contact() {

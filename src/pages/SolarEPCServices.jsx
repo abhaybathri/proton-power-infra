@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CheckCircle2, ArrowRight, Sun } from "lucide-react";
+import { CheckCircle2, ArrowRight, ShieldCheck, FileCheck, Layers, Wrench, Activity, Sun, Globe } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import CTASection from "../components/CTASection";
 import EnquiryForm from "../components/EnquiryForm";
@@ -27,7 +27,7 @@ export default function SolarEPCServices() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Turnkey Solar EPC & Solar Park Development Across India
+              Turnkey Solar EPC & Solar Park Development Across India.
             </h1>
 
             <p className="text-base sm:text-lg text-[#E9F0E9]/85 leading-relaxed font-normal">
@@ -37,14 +37,14 @@ export default function SolarEPCServices() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <Link
                 to="/enquiry?type=industrial&requirement=Turnkey%20EPC"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-md transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg transition-all"
               >
                 <span>Consult Our Solar EPC Team</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#epc-phases"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all"
               >
                 <span>View Full EPC Scope</span>
               </a>
@@ -57,28 +57,25 @@ export default function SolarEPCServices() {
       <section className="py-16 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl overflow-hidden shadow-xs border border-[#E2E8E2] h-64 group">
+            <div className="rounded-2xl overflow-hidden shadow border border-[#E2E8E2] h-64 group">
               <img
                 src={IMAGES.heroSecondary}
                 alt="Utility ground-mount solar park built by Proton Power Infra"
-                className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
-                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xs border border-[#E2E8E2] h-64 group">
+            <div className="rounded-2xl overflow-hidden shadow border border-[#E2E8E2] h-64 group">
               <img
                 src={IMAGES.industrialHero}
                 alt="Solar panel tracker arrays installed by Proton Power Infra"
-                className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
-                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xs border border-[#E2E8E2] h-64 group">
+            <div className="rounded-2xl overflow-hidden shadow border border-[#E2E8E2] h-64 group">
               <img
                 src={IMAGES.transformerSubstation}
                 alt="Substation transformer step up manufactured by Proton Power Infra"
-                className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
-                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
@@ -91,20 +88,20 @@ export default function SolarEPCServices() {
           <SectionHeading
             eyebrow="Comprehensive EPC Scope"
             title="End-to-End Capabilities from Regulatory Approvals to SCADA O&M"
-            description="Here is an in-depth look at the turnkey services Proton Power Infra delivers across every phase of project development."
+            description="Here is an in-depth look at the various turnkey services Proton Power Infra delivers across every phase of project development."
             align="center"
             className="mb-16"
           />
 
-          <div className="space-y-10">
+          <div className="space-y-12">
             {EPC_SERVICES_BREAKDOWN.map((phase, idx) => {
               const isEven = idx % 2 === 1;
               return (
                 <div
                   key={idx}
-                  className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-xs p-6 sm:p-10"
+                  className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-sm p-6 sm:p-10"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                  <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${isEven ? "lg:flex-row-reverse" : ""}`}>
                     <div className={`lg:col-span-6 space-y-4 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
                       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 text-[#123C32] text-xs font-bold uppercase tracking-wider">
                         <span>Phase 0{idx + 1}</span>
@@ -129,12 +126,11 @@ export default function SolarEPCServices() {
                     </div>
 
                     <div className={`lg:col-span-6 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-                      <div className="rounded-xl overflow-hidden shadow-xs border border-[#E2E8E2] h-72 sm:h-80 bg-[#202724]">
+                      <div className="rounded-xl overflow-hidden shadow border border-[#E2E8E2] h-72 sm:h-80 bg-[#202724]">
                         <img
                           src={phase.image}
                           alt={phase.title}
                           className="w-full h-full object-cover"
-                          loading="lazy"
                         />
                       </div>
                     </div>
@@ -159,12 +155,6 @@ export default function SolarEPCServices() {
           <EnquiryForm defaultCustomerType="industrial" />
         </div>
       </section>
-
-      {/* 5. Direct CTA */}
-      <CTASection
-        title="Ready to Develop Your Solar Project or Park?"
-        description="Our senior EPC engineers and power infrastructure consultants are ready to discuss your site feasibility and transmission tie-in."
-      />
     </div>
   );
 }

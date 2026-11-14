@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Send, Upload, CheckCircle2, FileText, Sparkles, MapPin, Users, Award } from "lucide-react";
-
+import SectionHeading from "../components/SectionHeading";
+import { COMPANY_DETAILS } from "../data/companyData";
 
 export default function Careers() {
   const [formData, setFormData] = useState({

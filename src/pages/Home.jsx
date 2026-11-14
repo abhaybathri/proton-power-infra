@@ -2,7 +2,7 @@ import Hero from "../components/Hero";
 import CompanyHighlights from "../components/CompanyHighlights";
 import SolarSolutions from "../components/SolarSolutions";
 import WhyChooseUs from "../components/WhyChooseUs";
-import TransformerShowcase from "../components/TransformerShowcase";
+import SolarJourney from "../components/SolarJourney";
 import FeaturedProjects from "../components/FeaturedProjects";
 import SustainabilityImpact from "../components/SustainabilityImpact";
 import CTASection from "../components/CTASection";
@@ -10,31 +10,33 @@ import CTASection from "../components/CTASection";
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* 1. Hero Section: Focused visual, concise intro, clear CTAs */}
+      {/* 1. Hero Section with Real 125+ MW Metrics & Real Project Photography */}
       <Hero />
 
-      {/* 2. Company Credibility: Compact verified statistics bar */}
+      {/* 2. Company Highlights & Trust Bar */}
       <CompanyHighlights />
 
-      {/* 3. Solutions & Services: Balanced visual layout */}
+      {/* 3. Solar & Transformer Solutions */}
       <SolarSolutions />
 
-      {/* 4. Company Expertise: Consolidated editorial two-column layout */}
+      {/* 4. Why Choose Us (125+ MW, IPP, In-House Transformers, 4 Offices) */}
       <WhyChooseUs />
 
-      {/* 5. In-House Power Transformer Manufacturing Showcase */}
-      <TransformerShowcase />
+      {/* 5. How It Works — 4-Phase Solar Journey */}
+      <SolarJourney />
 
-      {/* 6. Featured Commissioned Projects & Substations */}
+      {/* 6. Featured Real Projects & Substations Portfolio */}
       <FeaturedProjects />
 
-      {/* 7. Solar Consultation & Interactive Feasibility Calculator */}
+      {/* 7. Sustainability & Impact with Interactive Savings Calculator */}
       <SustainabilityImpact />
 
-      {/* 8. Direct Consultation CTA */}
+      {/* Customer feedback completely removed per request */}
+
+      {/* 8. Strong Enquiry CTA */}
       <CTASection
-        title="Ready to Transition to Solar & Reliable Grid Power?"
-        description="Connect directly with our engineering headquarters in Indore or regional offices in Delhi, Bhopal, and Dewas for a complete technical evaluation."
+        title="Ready to Make the Switch to Solar & Reliable Power?"
+        description="Let's find the right solar energy or transformer solution for your facility. Connect with our engineering headquarters in Indore or regional offices in Delhi, Bhopal, and Dewas."
       />
     </div>
   );
