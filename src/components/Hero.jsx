@@ -1,13 +1,88 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Activity } from "lucide-react";
+import { ArrowRight, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import homeTopImage from "../assets/home-assets/home-top-image.jpg";
+import homeTop2 from "../assets/home-assets/home-top-2.jpg";
+import homeTop3 from "../assets/home-assets/home-top-3.jpg";
+import homeTop4 from "../assets/home-assets/home-top-4.jpg";
+
+const HERO_SLIDES = [
+  {
+    id: 1,
+    image: homeTopImage,
+    tag: "DISTRIBUTED SOLAR",
+    title: "High-Yield Rooftop Solar Systems",
+    subtitle: "Precision-engineered solar installations for independent villas, institutions & residential societies.",
+    telemetry: "Telemetry Active • 100% Online",
+    coordinates: "22.71° N, 75.85° E • Indore HQ",
+    metric: "3 kW – 25 kW",
+  },
+  {
+    id: 2,
+    image: homeTop2,
+    tag: "AGRI-VOLTAICS",
+    title: "Agri-Voltaic & Elevated Solar Canopies",
+    subtitle: "Bifacial overhead solar arrays engineered for agricultural synergy, shade crops & dual land-use.",
+    telemetry: "Dual-Yield Active • 98.4% PR",
+    coordinates: "28.61° N, 77.20° E • Delhi Hub",
+    metric: "Elevated Solar Structure",
+  },
+  {
+    id: 3,
+    image: homeTop3,
+    tag: "BIPV COMMERCIAL",
+    title: "Architectural BIPV & Commercial Rooftops",
+    subtitle: "Aesthetic building-integrated photovoltaics engineered for corporate campuses and commercial hubs.",
+    telemetry: "Peak Generation • Synchronized",
+    coordinates: "23.25° N, 77.41° E • Bhopal Hub",
+    metric: "Commercial Scale BIPV",
+  },
+  {
+    id: 4,
+    image: homeTop4,
+    tag: "UTILITY INFRA",
+    title: "Utility-Scale Solar Parks & Grid Transmission",
+    subtitle: "Multi-megawatt solar generation infrastructure synchronized with in-house 33kV power transformers.",
+    telemetry: "33kV Substation • 125+ MW IPP",
+    coordinates: "22.96° N, 76.05° E • Dewas Plant",
+    metric: "125+ MW IPP Asset",
+  },
+];
 
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef(null);
+
+  const SLIDE_DURATION = 4800; // ms per slide
+
+  // Auto-advance slider with pause on hover
+  useEffect(() => {
+    if (isHovered) return;
+
+    timerRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, SLIDE_DURATION);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isHovered, currentSlide]);
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+  };
+
+  const activeSlide = HERO_SLIDES[currentSlide];
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-20 bg-[#F7F8F4]">
+    <section className="relative overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 bg-[#F7F8F4]">
       {/* High-tech engineering grid background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -63,58 +138,126 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column (Interactive Image Presentation) */}
+          {/* Right Column: Dynamic Motion Showcase Carousel */}
           <div className="lg:col-span-5 relative">
             <div
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-[#123C32] group transition-all duration-500 cursor-pointer"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-[#123C32] group select-none transition-all duration-500"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {/* Image from home-assets/home-top-image.jpg */}
-              <div className="relative aspect-[4/4.5] overflow-hidden">
-                <img
-                  src={homeTopImage}
-                  alt="Proton Power Infra Utility Solar Park and Infrastructure"
-                  className={`w-full h-full object-cover transition-transform duration-700 ease-out ${
-                    isHovered ? "scale-108" : "scale-100"
-                  }`}
-                  loading="eager"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/90 via-[#123C32]/20 to-black/10"></div>
+              {/* Image Presentation Frame with Smooth Crossfade & Motion */}
+              <div className="relative aspect-[4/4.5] overflow-hidden bg-black/40">
+                {HERO_SLIDES.map((slide, idx) => {
+                  const isActive = idx === currentSlide;
+                  return (
+                    <div
+                      key={slide.id}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                        isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                      }`}
+                    >
+                      <img
+                        src={slide.image}
+                        alt={`Proton Power Infra ${slide.title}`}
+                        className={`w-full h-full object-cover transition-transform duration-7000 ease-out ${
+                          isActive && !isHovered ? "scale-108" : "scale-100"
+                        }`}
+                        loading={idx === 0 ? "eager" : "lazy"}
+                      />
+                      {/* Gradient overlay for contrast and telemetry readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/95 via-[#123C32]/25 to-black/35"></div>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* High-Tech Overlay Elements */}
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+              {/* High-Tech Top Overlay Bar */}
+              <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
                   <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
-                  <span>Telemetry Active • 100% Online</span>
+                  <span className="transition-all duration-300">{activeSlide.telemetry}</span>
                 </div>
-                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#202724]/80 backdrop-blur-md text-[10px] font-mono text-[#E9F0E9] border border-white/10">
-                  <span>22.71° N, 75.85° E</span>
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#202724]/85 backdrop-blur-md text-[10px] font-mono text-[#E9F0E9] border border-white/10">
+                  <span>{activeSlide.coordinates}</span>
                 </div>
+              </div>
+
+              {/* Navigation Arrows (Interactive on hover/tap) */}
+              <div className="absolute top-1/2 -translate-y-1/2 left-3 right-3 z-30 flex items-center justify-between pointer-events-none">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="pointer-events-auto w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#123C32] shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 opacity-70 group-hover:opacity-100 hover:scale-110 cursor-pointer focus:outline-none"
+                  aria-label="Previous Slide"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="pointer-events-auto w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#123C32] shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 opacity-70 group-hover:opacity-100 hover:scale-110 cursor-pointer focus:outline-none"
+                  aria-label="Next Slide"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
               </div>
 
               {/* Bottom Interactive Control Capsule */}
-              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/60 transition-all duration-300">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#E8A83E]"></span>
-                    <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
-                      Utility Solar Park & Inverter Substation
-                    </span>
+              <div className="absolute bottom-4 left-4 right-4 z-20 p-4 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/60 transition-all duration-300">
+                {/* Progress Indicators & Slide Counter */}
+                <div className="flex items-center justify-between gap-3 mb-2.5">
+                  <div className="flex items-center gap-1.5 flex-1">
+                    {HERO_SLIDES.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentSlide(i);
+                        }}
+                        className="flex-1 h-1.5 rounded-full overflow-hidden bg-gray-200 relative cursor-pointer"
+                        aria-label={`Jump to slide ${i + 1}`}
+                      >
+                        <div
+                          className={`h-full transition-all ${
+                            i === currentSlide
+                              ? "bg-[#123C32] w-full"
+                              : i < currentSlide
+                              ? "bg-[#123C32]/60 w-full"
+                              : "w-0"
+                          }`}
+                        />
+                      </button>
+                    ))}
                   </div>
-                  <span className="text-[10px] font-bold text-[#123C32] bg-[#E9F0E9] px-2 py-0.5 rounded font-mono">
-                    IPP ASSET
+
+                  <span className="text-[10px] font-mono font-bold text-[#123C32] px-1.5 py-0.5 rounded bg-[#123C32]/10 shrink-0">
+                    0{currentSlide + 1} / 0{HERO_SLIDES.length}
                   </span>
                 </div>
-                <p className="text-xs text-[#525D57] leading-relaxed">
-                  Turnkey multi-megawatt generation infrastructure synchronized with HT 33kV power transformers.
+
+                {/* Dynamic Title & Tag */}
+                <div className="flex items-center justify-between mb-1.5 gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-[#E8A83E] shrink-0 animate-pulse"></span>
+                    <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech truncate">
+                      {activeSlide.title}
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-bold text-[#123C32] bg-[#E9F0E9] px-2 py-0.5 rounded font-mono shrink-0 uppercase">
+                    {activeSlide.tag}
+                  </span>
+                </div>
+
+                {/* Dynamic Subtitle */}
+                <p className="text-xs text-[#525D57] leading-relaxed line-clamp-2">
+                  {activeSlide.subtitle}
                 </p>
               </div>
 
               {/* Corner Engineering Accents */}
-              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#E8A83E] pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#E8A83E] pointer-events-none"></div>
+              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#E8A83E] pointer-events-none z-20"></div>
+              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#E8A83E] pointer-events-none z-20"></div>
             </div>
           </div>
         </div>

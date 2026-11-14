@@ -63,7 +63,7 @@ export default function SolarSolutions() {
   ];
 
   return (
-    <section id="solutions" className="py-16 md:py-20 lg:py-24 bg-[#F7F8F4] scroll-mt-20">
+    <section id="solutions" className="py-10 md:py-10 lg:py-12 bg-[#F7F8F4] scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header as requested */}
         <div className="max-w-3xl mb-12 sm:mb-16">

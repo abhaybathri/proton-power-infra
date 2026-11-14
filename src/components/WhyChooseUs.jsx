@@ -74,7 +74,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-[#E9F0E9] relative overflow-hidden">
+    <section className="py-10 md:py-10 lg:py-12 bg-[#E9F0E9] relative overflow-hidden">
       {/* Background Subtle Pattern */}
       <div className="absolute inset-0 opacity-[0.035] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
