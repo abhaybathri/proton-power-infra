@@ -1,114 +1,76 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Leaf, Sun, Zap, TrendingDown, Info } from "lucide-react";
-import { IMAGES } from "../data/companyData";
+import { ArrowRight, Sun, ShieldCheck } from "lucide-react";
 
 export default function SustainabilityImpact() {
-  // Interactive mini calculator state
-  const [monthlyBill, setMonthlyBill] = useState(15000); // INR
+  // Interactive mini calculator state (Preserving original calculation logic)
+  const [monthlyBill, setMonthlyBill] = useState(25000); // INR
   const [consumerType, setConsumerType] = useState("commercial"); // residential, commercial, industrial
 
-  // Approximate calculations
-  // Average tariff: Res ~₹7.5/kWh, Comm ~₹9/kWh, Ind ~₹8/kWh
+  // Tariff assumptions: Res ~₹7.5/kWh, Comm ~₹9/kWh, Ind ~₹8/kWh
   const tariff = consumerType === "residential" ? 7.5 : consumerType === "commercial" ? 9.0 : 8.0;
   const monthlyUnits = Math.round(monthlyBill / tariff);
   // 1 kWp produces approx 120 units/month in Central India
   const recommendedKW = Math.max(1, Math.round((monthlyUnits / 120) * 10) / 10);
   const monthlySavings = Math.round(monthlyBill * 0.85); // 85% offset
   const annualSavings = monthlySavings * 12;
-  const annualCO2Tons = Math.round((monthlyUnits * 12 * 0.82) / 1000 * 10) / 10; // ~0.82 kg CO2/kWh
+  const annualCO2Tons = Math.round(((monthlyUnits * 12 * 0.82) / 1000) * 10) / 10;
 
   return (
-    <section className="py-20 lg:py-28 bg-[#123C32] text-white relative overflow-hidden">
-      {/* Background Solar Pattern */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:28px_28px]"></div>
+    <section className="py-20 lg:py-24 bg-[#123C32] text-white relative overflow-hidden">
+      {/* Background Subtle Texture */}
+      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-          {/* Left Column: Bold Editorial Narrative */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Narrative */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/40">
-              <Leaf className="w-3.5 h-3.5" />
-              <span>Sustainability & Environmental Responsibility</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8A83E]/15 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/30">
+              <Sun className="w-3.5 h-3.5" />
+              <span>Solar Feasibility & Energy Yield Planning</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Every Sunlight Hour <br />
-              <span className="text-[#E8A83E]">Is an Opportunity.</span>
+              Calculate Your Potential <br />
+              <span className="text-[#E8A83E]">Solar Savings & CO2 Offset</span>
             </h2>
 
-            <p className="text-base sm:text-lg text-[#E9F0E9]/85 leading-relaxed font-normal">
-              Accelerating India’s transition to clean distributed energy requires more than panel installation—it demands precision engineering that guarantees 25 years of steady decarbonization.
+            <p className="text-base text-[#E9F0E9]/85 leading-relaxed font-normal">
+              Electricity rates in India increase by an average of 4% to 7% annually. On-site rooftop or ground-mount solar locks in your power costs for 25 years while slashing monthly utility expenditures by up to 85%.
             </p>
 
-            <p className="text-sm text-[#E9F0E9]/75 leading-relaxed">
-              By replacing coal-reliant grid energy with on-site solar generation, every kilowatt installed acts as a permanent hedge against grid tariff inflation while directly shrinking enterprise carbon footprints.
-            </p>
-
-            {/* Editable Placeholder Impact Metrics (Clearly marked) */}
-            <div className="pt-4 border-t border-white/10">
-              <div className="flex items-center gap-2 mb-3 text-xs text-[#E8A83E] font-medium">
-                <Info className="w-3.5 h-3.5" />
-                <span>Standard Environmental Impact Benchmarks (Per 100 kWp Solar Plant)</span>
+            <div className="space-y-3 pt-2 text-sm text-[#E9F0E9]/80">
+              <div className="flex items-center gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-[#E8A83E] shrink-0" />
+                <span>Tier-1 high-efficiency monocrystalline PV panels</span>
               </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-xl sm:text-2xl font-extrabold text-[#E8A83E]">
-                    ~140k
-                  </div>
-                  <div className="text-[11px] text-[#E9F0E9]/80 mt-1">
-                    Units Clean Power / Yr
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-xl sm:text-2xl font-extrabold text-[#E8A83E]">
-                    ~115
-                  </div>
-                  <div className="text-[11px] text-[#E9F0E9]/80 mt-1">
-                    Tonnes CO2 Offset / Yr
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-xl sm:text-2xl font-extrabold text-[#E8A83E]">
-                    ~5,200
-                  </div>
-                  <div className="text-[11px] text-[#E9F0E9]/80 mt-1">
-                    Equivalent Trees Planted
-                  </div>
-                </div>
+              <div className="flex items-center gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-[#E8A83E] shrink-0" />
+                <span>In-house manufactured Inverter Duty Solar Transformers</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-[#E8A83E] shrink-0" />
+                <span>DISCOM net-metering & statutory subsidy assistance</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Interactive Solar Savings & Environmental Offset Simulator */}
+          {/* Right Column: Calculator Tool */}
           <div className="lg:col-span-6">
-            <div className="p-6 sm:p-8 rounded-2xl bg-[#202724] border border-[#E8A83E]/30 shadow-2xl space-y-6">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center">
-                    <Sun className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-white">
-                      Solar Impact & Savings Calculator
-                    </h3>
-                    <p className="text-xs text-[#E9F0E9]/70">
-                      Estimate your capacity, financial savings & CO2 offset
-                    </p>
-                  </div>
-                </div>
-                <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-[#E8A83E]/20 text-[#E8A83E]">
-                  Interactive
-                </span>
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#202724] border border-[#E8A83E]/30 shadow-xl space-y-6">
+              <div>
+                <h3 className="text-lg font-bold text-white mb-1">
+                  Solar Energy Estimator
+                </h3>
+                <p className="text-xs text-[#E9F0E9]/70">
+                  Select your facility type and monthly power bill
+                </p>
               </div>
 
-              {/* Segment Selector */}
+              {/* Consumer Type Toggle */}
               <div>
-                <label className="text-xs font-semibold text-[#E9F0E9]/80 block mb-2">
-                  Select Your Facility Type
+                <label className="block text-xs font-semibold text-[#E9F0E9]/90 uppercase tracking-wider mb-2">
+                  1. Facility Type
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   {[
@@ -120,10 +82,10 @@ export default function SustainabilityImpact() {
                       key={tab.id}
                       type="button"
                       onClick={() => setConsumerType(tab.id)}
-                      className={`py-2 px-2 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                      className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         consumerType === tab.id
-                          ? "bg-[#E8A83E] text-[#202724] border-[#E8A83E]"
-                          : "bg-white/5 text-white/80 border-white/10 hover:bg-white/10"
+                          ? "bg-[#E8A83E] text-[#202724] shadow-xs"
+                          : "bg-white/10 text-white hover:bg-white/15 border border-white/10"
                       }`}
                     >
                       {tab.label}
@@ -132,79 +94,72 @@ export default function SustainabilityImpact() {
                 </div>
               </div>
 
-              {/* Slider for Monthly Electricity Bill */}
+              {/* Monthly Bill Slider & Input */}
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-semibold text-[#E9F0E9]/80">
-                    Average Monthly Electricity Bill
-                  </span>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-semibold text-[#E9F0E9]/90 uppercase tracking-wider">
+                    2. Monthly Electricity Bill (₹)
+                  </label>
                   <span className="text-base font-extrabold text-[#E8A83E]">
                     ₹{monthlyBill.toLocaleString("en-IN")}
                   </span>
                 </div>
                 <input
                   type="range"
-                  min={consumerType === "residential" ? 2500 : consumerType === "commercial" ? 10000 : 50000}
-                  max={consumerType === "residential" ? 35000 : consumerType === "commercial" ? 200000 : 800000}
-                  step={consumerType === "residential" ? 500 : 5000}
+                  min="3000"
+                  max="500000"
+                  step="1000"
                   value={monthlyBill}
                   onChange={(e) => setMonthlyBill(Number(e.target.value))}
-                  className="w-full accent-[#E8A83E] h-2 bg-white/20 rounded-lg cursor-pointer"
+                  className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#E8A83E]"
                 />
-                <div className="flex justify-between text-[10px] text-[#E9F0E9]/50 mt-1">
-                  <span>Min Bill</span>
-                  <span>Max Bill</span>
+                <div className="flex justify-between text-[11px] text-[#E9F0E9]/50 mt-1">
+                  <span>₹3,000</span>
+                  <span>₹1,00,000</span>
+                  <span>₹5,00,000+</span>
                 </div>
               </div>
 
-              {/* Real-time Calculation Cards */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-[11px] text-[#E9F0E9]/70 flex items-center gap-1">
-                    <Zap className="w-3.5 h-3.5 text-[#E8A83E]" />
-                    <span>Recommended Capacity</span>
+              {/* Calculation Output Dashboard */}
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center">
+                  <div className="text-xl sm:text-2xl font-extrabold text-white">
+                    {recommendedKW} <span className="text-xs text-[#E8A83E]">kW</span>
                   </div>
-                  <div className="text-xl font-bold text-white mt-1">
-                    {recommendedKW} <span className="text-xs font-normal text-[#E8A83E]">kWp</span>
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-[11px] text-[#E9F0E9]/70 flex items-center gap-1">
-                    <TrendingDown className="w-3.5 h-3.5 text-[#E8A83E]" />
-                    <span>Est. Annual Savings</span>
-                  </div>
-                  <div className="text-xl font-bold text-[#E8A83E] mt-1">
-                    ₹{annualSavings.toLocaleString("en-IN")}
+                  <div className="text-[10px] text-[#E9F0E9]/70 mt-1 uppercase tracking-wide">
+                    Recommended Size
                   </div>
                 </div>
 
-                <div className="col-span-2 p-3.5 rounded-xl bg-[#123C32]/60 border border-[#123C32] flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Leaf className="w-4 h-4 text-[#E8A83E]" />
-                    <div>
-                      <div className="text-xs font-bold text-white">
-                        Carbon Abatement
-                      </div>
-                      <div className="text-[10px] text-[#E9F0E9]/70">
-                        Annual greenhouse gas reduction
-                      </div>
-                    </div>
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center">
+                  <div className="text-xl sm:text-2xl font-extrabold text-[#E8A83E]">
+                    ₹{(annualSavings / 100000).toFixed(1)}L
                   </div>
-                  <div className="text-sm font-extrabold text-[#E8A83E]">
-                    ~{annualCO2Tons} Tonnes / Yr
+                  <div className="text-[10px] text-[#E9F0E9]/70 mt-1 uppercase tracking-wide">
+                    Est. Annual Savings
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center">
+                  <div className="text-xl sm:text-2xl font-extrabold text-[#4ADE80]">
+                    {annualCO2Tons} <span className="text-xs text-[#E9F0E9]">T</span>
+                  </div>
+                  <div className="text-[10px] text-[#E9F0E9]/70 mt-1 uppercase tracking-wide">
+                    CO2 Offset / Yr
                   </div>
                 </div>
               </div>
 
-              {/* Inquire Action Button */}
-              <Link
-                to={`/enquiry?type=${consumerType}&bill=${monthlyBill}&capacity=${recommendedKW}`}
-                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] font-bold text-sm transition-colors shadow-lg shadow-[#E8A83E]/20"
-              >
-                <span>Request Detailed Engineering Feasibility</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              {/* Action Button */}
+              <div className="pt-2">
+                <Link
+                  to={`/enquiry?type=${consumerType}&capacity=${recommendedKW}&bill=${monthlyBill}`}
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-lg text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] transition-all shadow-md group cursor-pointer"
+                >
+                  <span>Request Verified Feasibility Study</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

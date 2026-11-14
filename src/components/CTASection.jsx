@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, MessageSquare, SunMedium } from "lucide-react";
-import { COMPANY_DETAILS, IMAGES } from "../data/companyData";
+import { ArrowRight, Phone, SunMedium } from "lucide-react";
+import { COMPANY_DETAILS } from "../data/companyData";
 
 export default function CTASection({
   title = "Ready to Make the Switch to Solar?",
@@ -30,16 +30,16 @@ export default function CTASection({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
               to="/enquiry"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-base font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-[#E8A83E]/20 transition-all duration-200 group cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-md transition-all duration-200 group cursor-pointer"
             >
               <span>Get a Free Quote</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
 
             {showContactButtons && (
               <a
                 href={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-base font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all duration-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all duration-200"
               >
                 <Phone className="w-4 h-4 text-[#E8A83E]" />
                 <span>Talk to Our Team ({COMPANY_DETAILS.primaryPhone})</span>
@@ -47,7 +47,7 @@ export default function CTASection({
             )}
           </div>
 
-          <div className="pt-6 text-xs text-[#E9F0E9]/60 flex items-center justify-center gap-4 flex-wrap">
+          <div className="pt-6 text-xs text-[#E9F0E9]/70 flex items-center justify-center gap-4 flex-wrap">
             <span>✓ Zero Obligation Site Survey</span>
             <span>•</span>
             <span>✓ Tailored Engineering Report</span>
