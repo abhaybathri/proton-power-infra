@@ -13,6 +13,14 @@ import project2Img from "../assets/company/project-2.jpg";
 import approvalImg from "../assets/company/approval-liasoning.jpg";
 import engineeringImg from "../assets/company/engineering-design.jpg";
 
+// Dedicated Home Assets
+import homeTopImage from "../assets/home-assets/home-top-image.jpg";
+import homeResidential from "../assets/home-assets/residential-solar.jpg";
+import homeCommercialGround from "../assets/home-assets/comercial-ground-solar.jpg";
+import homeIndustrial from "../assets/home-assets/industrial-solar.jpg";
+import homeTransformer from "../assets/home-assets/solar-transformer.jpg";
+import homeTurnkeyEPC from "../assets/home-assets/turnkey-solar.jpg";
+
 export const COMPANY_DETAILS = {
   name: "Proton Power Infra",
   legalName: "Proton Power Infrastructure Pvt. Ltd.",
@@ -56,7 +64,13 @@ export const COMPANY_DETAILS = {
 export const IMAGES = {
   logo: logoPng,
   officialLogo: officialLogo,
-  hero: realUtilityPlant,
+  hero: homeTopImage,
+  heroTop: homeTopImage,
+  homeResidential: homeResidential,
+  homeCommercialGround: homeCommercialGround,
+  homeIndustrial: homeIndustrial,
+  homeTransformer: homeTransformer,
+  homeTurnkeyEPC: homeTurnkeyEPC,
   heroSecondary: realGroundMount,
   residentialHero: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80",
   residentialModern: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=1200&q=80",
@@ -118,10 +132,11 @@ export const SOLUTIONS = [
       "Eco-friendly carbon footprint reduction",
       "Net-metering & government subsidy liaisoning",
     ],
-    image: IMAGES.residentialModern,
+    image: homeResidential,
     badge: "Residential",
     capacityRange: "3 kW to 25 kW",
     idealFor: "Villas, Independent Bungalows & Housing Societies",
+    ctaText: "Explore Residential Solar",
   },
   {
     id: "commercial",
@@ -135,10 +150,11 @@ export const SOLUTIONS = [
       "Accelerated depreciation (Section 32) tax benefits",
       "Scalable configurations tailored to commercial energy demand",
     ],
-    image: IMAGES.heroSecondary,
+    image: homeCommercialGround,
     badge: "Commercial & Ground-Mount",
     capacityRange: "25 kW to 500+ kW",
     idealFor: "Offices, Retail Plazas, Educational Campuses, Hospitals & Resorts",
+    ctaText: "Explore Commercial & Ground-Mount",
   },
   {
     id: "industrial",
@@ -152,10 +168,11 @@ export const SOLUTIONS = [
       "Agriculture, food processing & chemical plants",
       "High-tension (HT) 11kV/33kV grid synchronization",
     ],
-    image: IMAGES.industrialHero,
+    image: homeIndustrial,
     badge: "Industrial MW-Scale",
     capacityRange: "100 kW to 10+ MW",
     idealFor: "Manufacturing Plants, Cold Storage, Chemical Units & Warehouses",
+    ctaText: "Explore Industrial Solar System",
   },
   {
     id: "transformers",
@@ -169,10 +186,11 @@ export const SOLUTIONS = [
       "Step-down transformer repair with minimal power loss",
       "Custom transformer engineering for specialized operational specs",
     ],
-    image: IMAGES.transformerSubstation,
+    image: homeTransformer,
     badge: "In-House Manufacturing",
     capacityRange: "Customized KVA / MVA Ratings",
     idealFor: "Solar Parks, Industrial Substations, Utilities & Commercial Campuses",
+    ctaText: "Explore Power Transformers Manufacture",
   },
   {
     id: "epc-services",
@@ -186,10 +204,11 @@ export const SOLUTIONS = [
       "Tier-1 Construction & Procurement Management",
       "Post-Commissioning O&M with 24/7 cloud SCADA monitoring",
     ],
-    image: IMAGES.hero,
+    image: homeTurnkeyEPC,
     badge: "Turnkey EPC Services",
     capacityRange: "End-to-End Execution",
     idealFor: "Solar Park Developers, Private IPPs, Government & Public Sector Tenders",
+    ctaText: "Explore Turnkey Solar EPC & O&M",
   },
 ];
 

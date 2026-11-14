@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X, Phone, ArrowRight, Home, Building2, Factory, Cpu, Sun } from "lucide-react";
-import { COMPANY_DETAILS, IMAGES } from "../data/companyData";
+import { ChevronDown, Menu, X, ArrowRight, Home, Building2, Factory, Cpu, Sun } from "lucide-react";
+import { IMAGES } from "../data/companyData";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,11 +23,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
+  const [prevPath, setPrevPath] = useState(location.pathname);
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname);
     setMobileMenuOpen(false);
     setSolutionsDropdownOpen(false);
     setMobileSolutionsOpen(false);
-  }, [location.pathname]);
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -40,7 +42,7 @@ export default function Navbar() {
   }, []);
 
   const navLinkClass = ({ isActive }) =>
-    `text-sm font-medium transition-colors duration-200 py-1.5 px-3 rounded-md ${
+    `text-sm font-semibold transition-colors duration-200 py-2 px-3.5 rounded-lg ${
       isActive
         ? "text-[#123C32] bg-[#123C32]/10 font-bold"
         : "text-[#252A27] hover:text-[#123C32] hover:bg-black/5"
@@ -58,19 +60,19 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E2E8E2] py-2.5"
+          ? "bg-white/95 backdrop-blur-md shadow-xs border-b border-[#E2E8E2] py-2.5"
           : "bg-[#F7F8F4]/95 backdrop-blur-sm py-3 border-b border-[#E2E8E2]/60"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo with official company logo image */}
+          {/* Logo */}
           <Link
             to="/"
             className="flex items-center gap-3 group focus:outline-none"
             aria-label="Proton Power Infra Homepage"
           >
-            <div className="h-10 sm:h-11 flex items-center justify-center p-1 rounded-lg bg-white border border-[#E2E8E2] shadow-xs group-hover:shadow transition-shadow">
+            <div className="h-10 sm:h-11 flex items-center justify-center p-1 rounded-lg bg-white border border-[#E2E8E2] shadow-2xs group-hover:shadow transition-shadow">
               <img
                 src={IMAGES.officialLogo}
                 alt="Proton Power Infra Official Logo"
@@ -78,7 +80,7 @@ export default function Navbar() {
               />
             </div>
             <div className="hidden sm:flex flex-col">
-              <span className="font-extrabold text-xs tracking-tight text-[#123C32] leading-none uppercase">
+              <span className="font-extrabold text-xs tracking-tight text-[#123C32] leading-none uppercase font-tech">
                 Proton Power Infra
               </span>
               <span className="text-[9px] font-semibold tracking-wider text-[#E8A83E] uppercase mt-0.5">
@@ -87,30 +89,30 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation: Home, Services & Solutions, About Us, Contact Us */}
           <nav className="hidden lg:flex items-center space-x-1" aria-label="Main Navigation">
             <NavLink to="/" end className={navLinkClass}>
               Home
             </NavLink>
 
-            <NavLink to="/about" className={navLinkClass}>
-              About Us
-            </NavLink>
-
-            {/* Solutions Dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            {/* Services & Solutions Dropdown (Hover & Click) */}
+            <div
+              className="relative"
+              ref={dropdownRef}
+              onMouseEnter={() => setSolutionsDropdownOpen(true)}
+              onMouseLeave={() => setSolutionsDropdownOpen(false)}
+            >
               <button
                 type="button"
                 onClick={() => setSolutionsDropdownOpen(!solutionsDropdownOpen)}
-                onMouseEnter={() => setSolutionsDropdownOpen(true)}
-                className={`text-sm font-medium transition-colors duration-200 py-1.5 px-3 rounded-md flex items-center gap-1.5 cursor-pointer ${
+                className={`text-sm font-semibold transition-colors duration-200 py-2 px-3.5 rounded-lg flex items-center gap-1.5 cursor-pointer ${
                   isSolutionActive
                     ? "text-[#123C32] bg-[#123C32]/10 font-bold"
                     : "text-[#252A27] hover:text-[#123C32] hover:bg-black/5"
                 }`}
                 aria-expanded={solutionsDropdownOpen}
               >
-                <span>Solutions & Manufacturing</span>
+                <span>Services & Solutions</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${
                     solutionsDropdownOpen ? "rotate-180" : ""
@@ -118,112 +120,111 @@ export default function Navbar() {
                 />
               </button>
 
-              {/* Dropdown Menu with all 5 distinct offerings */}
+              {/* Dropdown Menu */}
               {solutionsDropdownOpen && (
-                <div
-                  onMouseLeave={() => setSolutionsDropdownOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-88 bg-white rounded-xl shadow-xl border border-[#E2E8E2] p-2 transition-all duration-200 transform origin-top-left z-50"
-                >
-                  <div className="px-3 py-2 border-b border-gray-100 mb-1">
-                    <p className="text-xs font-bold text-[#123C32] uppercase tracking-wider">
-                      Solar Infrastructure & Transformers
-                    </p>
-                    <p className="text-[11px] text-[#525D57]">
-                      125+ MW Installed • In-House Transformer Manufacturing
-                    </p>
+                <div className="absolute top-full left-0 pt-2 w-92 z-50">
+                  <div className="bg-white rounded-2xl shadow-xl border border-[#E2E8E2] p-2 transition-all duration-200 origin-top-left">
+                    <div className="px-3.5 py-2.5 border-b border-gray-100 mb-1">
+                      <p className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
+                        Solar & Transformer Infrastructure
+                      </p>
+                      <p className="text-[11px] text-[#525D57]">
+                        125+ MW Commissioned • In-House Manufacturing
+                      </p>
+                    </div>
+
+                    <Link
+                      to="/residential-solar"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F7F8F4] transition-colors group"
+                    >
+                      <div className="p-2 rounded-lg bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
+                        <Home className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-[#202724] group-hover:text-[#123C32]">
+                          Residential Solar
+                        </div>
+                        <div className="text-xs text-[#525D57] line-clamp-1">
+                          Rooftop installations for independent villas & homes
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/commercial-solar"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F7F8F4] transition-colors group"
+                    >
+                      <div className="p-2 rounded-lg bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
+                        <Building2 className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-[#202724] group-hover:text-[#123C32]">
+                          Commercial & Ground-Mounted Solar
+                        </div>
+                        <div className="text-xs text-[#525D57] line-clamp-1">
+                          Ground-mounted arrays & commercial rooftop systems
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/industrial-solar"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F7F8F4] transition-colors group"
+                    >
+                      <div className="p-2 rounded-lg bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
+                        <Factory className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-[#202724] group-hover:text-[#123C32]">
+                          Industrial Solar Systems
+                        </div>
+                        <div className="text-xs text-[#525D57] line-clamp-1">
+                          MW-scale systems for factories, chemicals & warehouses
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/power-transformers"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F7F8F4] transition-colors group"
+                    >
+                      <div className="p-2 rounded-lg bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
+                        <Cpu className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-[#202724] group-hover:text-[#123C32] flex items-center gap-1.5">
+                          <span>Power Transformers Manufacturer</span>
+                          <span className="text-[10px] font-bold bg-[#E8A83E]/20 text-[#123C32] px-1.5 py-0.2 rounded">In-House</span>
+                        </div>
+                        <div className="text-xs text-[#525D57] line-clamp-1">
+                          Inverter duty solar transformers & step-up/down repair
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/solar-epc-services"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F7F8F4] transition-colors group"
+                    >
+                      <div className="p-2 rounded-lg bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
+                        <Sun className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-[#202724] group-hover:text-[#123C32]">
+                          Turnkey Solar EPC & O&M
+                        </div>
+                        <div className="text-xs text-[#525D57] line-clamp-1">
+                          MNRE liaisoning, PPA, engineering & SCADA O&M
+                        </div>
+                      </div>
+                    </Link>
                   </div>
-
-                  <Link
-                    to="/residential-solar"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F7F8F4] transition-colors group"
-                  >
-                    <div className="p-2 rounded-md bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
-                      <Home className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-[#202724] group-hover:text-[#123C32]">
-                        Residential Solar
-                      </div>
-                      <div className="text-xs text-[#525D57] line-clamp-1">
-                        Rooftop installations for independent villas & homes
-                      </div>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/commercial-solar"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F7F8F4] transition-colors group"
-                  >
-                    <div className="p-2 rounded-md bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
-                      <Building2 className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-[#202724] group-hover:text-[#123C32]">
-                        Commercial & Ground-Mounted Solar
-                      </div>
-                      <div className="text-xs text-[#525D57] line-clamp-1">
-                        Ground-mounted arrays & commercial rooftop systems
-                      </div>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/industrial-solar"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F7F8F4] transition-colors group"
-                  >
-                    <div className="p-2 rounded-md bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
-                      <Factory className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-[#202724] group-hover:text-[#123C32]">
-                        Industrial Solar Systems
-                      </div>
-                      <div className="text-xs text-[#525D57] line-clamp-1">
-                        MW-scale systems for factories, chemicals & warehouses
-                      </div>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/power-transformers"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F7F8F4] transition-colors group"
-                  >
-                    <div className="p-2 rounded-md bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
-                      <Cpu className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-[#202724] group-hover:text-[#123C32] flex items-center gap-1.5">
-                        <span>Power Transformers Manufacturer</span>
-                        <span className="text-[10px] font-bold bg-[#E8A83E]/20 text-[#123C32] px-1.5 py-0.2 rounded">In-House</span>
-                      </div>
-                      <div className="text-xs text-[#525D57] line-clamp-1">
-                        Inverter duty solar transformers & step-up/down repair
-                      </div>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/solar-epc-services"
-                    className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F7F8F4] transition-colors group"
-                  >
-                    <div className="p-2 rounded-md bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-colors mt-0.5">
-                      <Sun className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-[#202724] group-hover:text-[#123C32]">
-                        Solar EPC & O&M Services
-                      </div>
-                      <div className="text-xs text-[#525D57] line-clamp-1">
-                        MNRE liaisoning, PPA, engineering & SCADA O&M
-                      </div>
-                    </div>
-                  </Link>
                 </div>
               )}
             </div>
 
-            <NavLink to="/careers" className={navLinkClass}>
-              Careers
+            <NavLink to="/about" className={navLinkClass}>
+              About Us
             </NavLink>
 
             <NavLink to="/contact" className={navLinkClass}>
@@ -231,32 +232,24 @@ export default function Navbar() {
             </NavLink>
           </nav>
 
-          {/* Right Action Buttons */}
-          <div className="hidden lg:flex items-center space-x-3">
-            <a
-              href={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
-              className="flex items-center gap-2 text-xs font-semibold text-[#123C32] bg-[#123C32]/5 hover:bg-[#123C32]/10 px-3 py-2 rounded-lg transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#E8A83E]" />
-              <span>{COMPANY_DETAILS.primaryPhone}</span>
-            </a>
-
+          {/* Right Action: Only "Enquiry Now" (Contact number removed as requested) */}
+          <div className="hidden lg:flex items-center">
             <Link
               to="/enquiry"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-sm hover:shadow transition-all duration-200 group"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-xs hover:shadow transition-all duration-200 group"
             >
-              <span>Get a Quote</span>
+              <span>Enquiry Now</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Right */}
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               to="/enquiry"
-              className="text-xs font-semibold bg-[#123C32] text-white px-3 py-2 rounded-md"
+              className="text-xs font-bold bg-[#123C32] text-white px-3.5 py-2 rounded-lg shadow-xs"
             >
-              Get Quote
+              Enquiry Now
             </Link>
             <button
               type="button"
@@ -270,7 +263,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-x-0 top-[60px] bottom-0 bg-black/40 z-40 backdrop-blur-sm transition-opacity">
           <div className="bg-white w-full max-h-[calc(100vh-60px)] overflow-y-auto border-b border-[#E2E8E2] p-5 shadow-2xl flex flex-col justify-between">
@@ -279,7 +272,7 @@ export default function Navbar() {
                 to="/"
                 end
                 className={({ isActive }) =>
-                  `block px-3 py-2.5 rounded-lg text-base font-medium ${
+                  `block px-3 py-2.5 rounded-lg text-base font-bold ${
                     isActive ? "bg-[#123C32] text-white" : "text-[#202724] hover:bg-gray-50"
                   }`
                 }
@@ -287,10 +280,61 @@ export default function Navbar() {
                 Home
               </NavLink>
 
+              {/* Mobile Solutions Accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
+                  className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-bold text-[#202724] hover:bg-gray-50"
+                >
+                  <span>Services & Solutions</span>
+                  <ChevronDown
+                    className={`w-5 h-5 transition-transform ${
+                      mobileSolutionsOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {mobileSolutionsOpen && (
+                  <div className="pl-4 pr-2 py-2 space-y-1 bg-[#F7F8F4] rounded-xl mt-1 border border-[#E2E8E2]/60">
+                    <Link
+                      to="/residential-solar"
+                      className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
+                    >
+                      Residential Solar
+                    </Link>
+                    <Link
+                      to="/commercial-solar"
+                      className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
+                    >
+                      Commercial & Ground-Mounted Solar
+                    </Link>
+                    <Link
+                      to="/industrial-solar"
+                      className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
+                    >
+                      Industrial Solar Systems
+                    </Link>
+                    <Link
+                      to="/power-transformers"
+                      className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
+                    >
+                      Power Transformers Manufacturer
+                    </Link>
+                    <Link
+                      to="/solar-epc-services"
+                      className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
+                    >
+                      Turnkey Solar EPC & O&M
+                    </Link>
+                  </div>
+                )}
+              </div>
+
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
-                  `block px-3 py-2.5 rounded-lg text-base font-medium ${
+                  `block px-3 py-2.5 rounded-lg text-base font-bold ${
                     isActive ? "bg-[#123C32] text-white" : "text-[#202724] hover:bg-gray-50"
                   }`
                 }
@@ -298,74 +342,10 @@ export default function Navbar() {
                 About Us
               </NavLink>
 
-              {/* Mobile Solutions Accordion */}
-              <div>
-                <button
-                  type="button"
-                  onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-medium text-[#202724] hover:bg-gray-50"
-                >
-                  <span className={isSolutionActive ? "font-bold text-[#123C32]" : ""}>
-                    Solutions & Manufacturing
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform ${
-                      mobileSolutionsOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                {mobileSolutionsOpen && (
-                  <div className="pl-4 pr-2 py-1 space-y-1 bg-[#F7F8F4] rounded-lg mt-1">
-                    <NavLink
-                      to="/residential-solar"
-                      className="block px-3 py-2 text-sm text-[#252A27] hover:text-[#123C32] font-medium"
-                    >
-                      Residential Solar
-                    </NavLink>
-                    <NavLink
-                      to="/commercial-solar"
-                      className="block px-3 py-2 text-sm text-[#252A27] hover:text-[#123C32] font-medium"
-                    >
-                      Commercial & Ground-Mounted Solar
-                    </NavLink>
-                    <NavLink
-                      to="/industrial-solar"
-                      className="block px-3 py-2 text-sm text-[#252A27] hover:text-[#123C32] font-medium"
-                    >
-                      Industrial Solar Systems
-                    </NavLink>
-                    <NavLink
-                      to="/power-transformers"
-                      className="block px-3 py-2 text-sm text-[#252A27] hover:text-[#123C32] font-bold text-[#123C32]"
-                    >
-                      Power Transformers Manufacturer
-                    </NavLink>
-                    <NavLink
-                      to="/solar-epc-services"
-                      className="block px-3 py-2 text-sm text-[#252A27] hover:text-[#123C32] font-medium"
-                    >
-                      Turnkey Solar EPC & O&M
-                    </NavLink>
-                  </div>
-                )}
-              </div>
-
-              <NavLink
-                to="/careers"
-                className={({ isActive }) =>
-                  `block px-3 py-2.5 rounded-lg text-base font-medium ${
-                    isActive ? "bg-[#123C32] text-white" : "text-[#202724] hover:bg-gray-50"
-                  }`
-                }
-              >
-                Careers
-              </NavLink>
-
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
-                  `block px-3 py-2.5 rounded-lg text-base font-medium ${
+                  `block px-3 py-2.5 rounded-lg text-base font-bold ${
                     isActive ? "bg-[#123C32] text-white" : "text-[#202724] hover:bg-gray-50"
                   }`
                 }
@@ -374,28 +354,14 @@ export default function Navbar() {
               </NavLink>
             </div>
 
-            {/* Mobile Contact Quick Actions & Socials */}
-            <div className="pt-6 mt-6 border-t border-gray-100 space-y-3">
-              <a
-                href={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-[#123C32] text-[#123C32] font-semibold text-sm"
+            <div className="pt-6 border-t border-[#E2E8E2] mt-6">
+              <Link
+                to="/enquiry"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold bg-[#123C32] text-white shadow-md text-center"
               >
-                <Phone className="w-4 h-4 text-[#E8A83E]" />
-                <span>Call {COMPANY_DETAILS.primaryPhone}</span>
-              </a>
-
-              <a
-                href={COMPANY_DETAILS.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#25D366] text-white font-semibold text-sm"
-              >
-                <span>Chat on WhatsApp</span>
-              </a>
-
-              <div className="text-center pt-2 text-[11px] text-[#525D57]">
-                Headquartered in Indore • Offices in Delhi, Dewas & Bhopal
-              </div>
+                <span>Enquiry Now</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>

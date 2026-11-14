@@ -15,8 +15,9 @@
   --color-text-muted: #525D57;
   --color-border-subtle: #E2E8E2;
   
-  --font-heading: 'Manrope', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Manrope', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-tech: 'Space Grotesk', sans-serif;
 }
 
 @layer base {
