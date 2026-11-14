@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Rounded Background Container -->
+  <rect width="64" height="64" rx="14" fill="#123C32"/>
+  
+  <!-- Outer Solar Rays -->
+  <circle cx="32" cy="32" r="16" stroke="#E8A83E" stroke-width="2.5" stroke-dasharray="4 4" opacity="0.9"/>
+  
+  <!-- Central Energy Core -->
+  <circle cx="32" cy="32" r="10" fill="#E8A83E"/>
+  
+  <!-- Orbital Electron / Clean Energy Swirl -->
+  <ellipse cx="32" cy="32" rx="22" ry="8" stroke="#4ADE80" stroke-width="2.5" transform="rotate(-30 32 32)"/>
+  <circle cx="48" cy="23" r="3" fill="#4ADE80"/>
+</svg>
