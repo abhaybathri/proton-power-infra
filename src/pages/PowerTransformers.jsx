@@ -34,58 +34,46 @@ export default function PowerTransformers() {
     setOpenFaq(openFaq === idx ? null : idx);
   };
 
-  // 4 Core Transformer Services (Powered by User Assets)
+  // 4 Core Transformer Services (Compact & Visual-Focused)
   const services = [
     {
       id: "manufacturing",
+      step: "01",
       image: manufacturingImg,
       badge: "In-House Manufacturing",
-      title: "Inverter Duty Solar Transformer Manufacturing",
-      desc: "Custom-engineered for grid-connected solar power plants to step up fluctuating inverter AC voltages (e.g. 690V / 800V) to 11kV or 33kV transmission grids with low harmonic distortion.",
-      specs: [
-        "Multiple low-voltage inputs for multi-inverter array pairing",
-        "Electrostatic shielding between HV and LV windings",
-        "High harmonic tolerance (K-factor rated) for non-linear solar loads",
-      ],
+      tag: "Solar Dual-Winding",
+      title: "Inverter Duty Solar Transformers",
+      desc: "Dual-winding solar step-up to 11kV/33kV engineered for high harmonic tolerance and minimal no-load losses.",
       enquiryParam: "Inverter Duty Solar Transformers",
     },
     {
       id: "step-up",
+      step: "02",
       image: stepUpImg,
-      badge: "Grid Substation EPC",
-      title: "Step-Up Transformer Repair & Services",
-      desc: "Specialized diagnostics, emergency rewinding, and preventative overhaul for high-voltage substation step-up transformers, safeguarding continuous power evacuation without transmission dips.",
-      specs: [
-        "HV coil rewinding with Class-A electrolytic copper conductor",
-        "On-load (OLTC) and off-circuit (OCTC) tap changer maintenance",
-        "High-vacuum transformer oil dehydration and BDV breakdown testing",
-      ],
+      badge: "Substation Repair",
+      tag: "HV Step-Up to 33kV",
+      title: "Step-Up Transformer Services",
+      desc: "Emergency high-voltage coil rewinding, OLTC tap overhaul, and mobile high-vacuum BDV oil filtration.",
       enquiryParam: "Step-Up Transformer Repair",
     },
     {
       id: "step-down",
+      step: "03",
       image: stepDownImg,
-      badge: "Industrial Substation",
-      title: "Step-Down Transformer Repair & Services",
-      desc: "Fast-turnaround servicing and re-engineering for industrial step-down transformers (33kV/11kV to 415V), protecting heavy factory machinery, furnaces, and drives from voltage fluctuations.",
-      specs: [
-        "Core re-clamping and low-loss CRGO lamination alignment",
-        "Nitrogen leak detection, bushing overhaul, and gasket renewal",
-        "Winding resistance, magnetic balance, and Tan Delta diagnostics",
-      ],
+      badge: "Plant Maintenance",
+      tag: "Industrial Distribution",
+      title: "Step-Down Transformer Repair",
+      desc: "Core re-clamping, low-loss CRGO alignment, and gasket leak stoppage for heavy industrial loads.",
       enquiryParam: "Step-Down Transformer Repair",
     },
     {
       id: "custom",
+      step: "04",
       image: customizeImg,
       badge: "Custom Engineering",
-      title: "Customized Transformer Solutions",
-      desc: "Tailor-made transformer architectures engineered to match precise factory impedance constraints, specialized vector groups (Dyn11, YNd11), and extreme ambient thermal requirements.",
-      specs: [
-        "Custom KVA / MVA sizing with dual secondary windings",
-        "Nitrogen Injection Fire Protection (NIFPS) integration",
-        "Routine and type testing adhering strictly to IS 2026 & IEC 60076",
-      ],
+      tag: "IS 2026 / IEC 60076",
+      title: "Custom Transformer Solutions",
+      desc: "Tailored impedances, specialized vector groups (Dyn11/YNd11), and NIFPS fire protection integration.",
       enquiryParam: "Customized Transformers",
     },
   ];
@@ -274,62 +262,55 @@ export default function PowerTransformers() {
             </p>
           </div>
 
-          {/* 4 Balanced Cards in 2x2 Grid with Real Assets */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* 4 Compact Cards in 4-Column Balanced Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             {services.map((srv) => (
               <div
                 key={srv.id}
                 className="bg-white rounded-2xl border border-[#E2E8E2] hover:border-[#123C32]/40 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
               >
-                {/* Image Container with Zoom */}
-                <div className="relative h-48 sm:h-52 overflow-hidden bg-[#202724]">
+                {/* Visual Front & Center with Zoom */}
+                <div className="relative h-40 sm:h-44 overflow-hidden bg-[#202724]">
                   <img
                     src={srv.image}
                     alt={srv.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
 
-                  {/* Badge */}
+                  {/* Step Pill */}
                   <div className="absolute top-2.5 left-2.5">
-                    <span className="px-2.5 py-0.5 rounded-md bg-[#123C32] text-[#E8A83E] text-[10px] font-bold uppercase tracking-wider font-tech shadow-sm">
-                      {srv.badge}
+                    <span className="w-6 h-6 rounded-md bg-[#123C32] text-[#E8A83E] flex items-center justify-center font-bold text-xs font-mono shadow-sm">
+                      {srv.step}
                     </span>
                   </div>
 
-                  {/* Title overlay */}
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white font-heading font-bold text-sm sm:text-base leading-tight truncate">
-                    {srv.title}
+                  {/* Tag Pill */}
+                  <div className="absolute bottom-2 left-2.5 right-2.5 text-[10px] font-bold text-white/95 uppercase tracking-wider font-tech truncate">
+                    {srv.tag}
                   </div>
                 </div>
 
-                {/* Card Body */}
-                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                {/* Minimal Content */}
+                <div className="p-3.5 flex-1 flex flex-col justify-between">
                   <div>
-                    <p className="text-xs text-[#525D57] leading-relaxed mb-3">
+                    <h3 className="text-sm sm:text-base font-bold text-[#202724] font-heading mb-1.5 leading-snug">
+                      {srv.title}
+                    </h3>
+                    <p className="text-xs text-[#525D57] leading-relaxed line-clamp-2">
                       {srv.desc}
                     </p>
-
-                    {/* Engineering Specs */}
-                    <div className="space-y-1.5 pt-2 border-t border-[#E2E8E2]">
-                      {srv.specs.map((sp, sIdx) => (
-                        <div key={sIdx} className="flex items-start gap-2 text-xs text-[#202724]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32] shrink-0 mt-0.5" />
-                          <span>{sp}</span>
-                        </div>
-                      ))}
-                    </div>
                   </div>
 
                   {/* Action Link */}
-                  <div className="pt-4 mt-4 border-t border-[#E2E8E2]">
+                  <div className="pt-2.5 mt-2.5 border-t border-[#E2E8E2]">
                     <Link
                       to={`/enquiry?type=industrial&requirement=${encodeURIComponent(srv.enquiryParam)}`}
-                      className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl text-xs font-bold bg-[#F7F8F4] group-hover:bg-[#123C32] text-[#123C32] group-hover:text-white transition-all font-tech"
+                      className="inline-flex items-center justify-between w-full text-xs font-bold text-[#123C32] hover:text-[#E8A83E] transition-colors font-tech group/btn"
                     >
-                      <span>Request Specs & Pricing</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>Request Specs</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
