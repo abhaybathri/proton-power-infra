@@ -70,8 +70,8 @@ export default function ResidentialSolar() {
       subtitle: "Shrink Carbon Footprint",
       stat: "~4.5 Tons",
       statLabel: "CO2 Offset / Year",
-      desc: "Lower your carbon footprint and actively build a sustainable future. A standard 5 kWp residential system offsets the equivalent of planting 100+ mature trees annually.",
-      highlight: "Equivalent to 100+ Trees Planted Every Year",
+      desc: "Lower carbon emissions permanently. A 5 kWp home system offsets ~4.5 tons of CO2 yearly—equal to planting 100+ trees.",
+      highlight: "Offsets 100+ Mature Trees Annually",
     },
     {
       id: "valuation",
@@ -92,8 +92,8 @@ export default function ResidentialSolar() {
       subtitle: "PM Surya Ghar Yojana",
       stat: "Up to ₹78,000",
       statLabel: "Direct DBT Benefit",
-      desc: "Enjoy direct central and state capital subsidies credited straight to your bank account via Direct Benefit Transfer (DBT), coupled with hassle-free net-metering.",
-      highlight: "Direct Bank Transfer & DISCOM Liaisoning",
+      desc: "Receive direct DBT subsidies up to ₹78,000 credited to your bank account, paired with seamless net-metering support.",
+      highlight: "Direct DBT Bank Transfer Assistance",
     },
   ];
 
@@ -385,7 +385,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 3. Section 3 — How We Bring Solar (Interactive 4-Phase Story Walkthrough - Ultra Compact & Zero-Scroll) */}
-      <section id="process" className="py-10 md:py-12 lg:py-12 bg-[#F7F8F4] scroll-mt-20">
+      <section id="process" className="py-4 md:py-6 lg:py-6 bg-[#F7F8F4] scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header (Clean & Horizontal on Desktop) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
@@ -565,7 +565,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 4. Section 4 — Engineered for Household Reliability (Compact & Non-Repetitive) */}
-      <section className="py-12 md:py-16 bg-white border-y border-[#E2E8E2]">
+      <section className="py-6 md:py-6 bg-white border-y border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Image Column using why-choose-image.jpg */}
@@ -644,7 +644,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 5. Common Questions (FAQs) */}
-      <section className="py-16 md:py-20 bg-[#F7F8F4]">
+      <section className="py-8 md:py-10 bg-[#F7F8F4]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-3">
@@ -695,7 +695,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 6. Compact Consultation CTA Banner (Form Replaced with Single High-Impact Action) */}
-      <section className="py-14 md:py-18 bg-[#123C32] text-white relative overflow-hidden">
+      <section className="py-14 md:py-10 bg-[#123C32] text-white relative overflow-hidden">
         {/* Subtle radial glow */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
