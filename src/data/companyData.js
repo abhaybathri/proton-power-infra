@@ -1,17 +1,20 @@
 // Official Assets & Real Projects
 import officialLogo from "../assets/company/official-logo.jpg";
 import logoPng from "../assets/company/logo.png";
-import realGroundMount from "../assets/company/real-project-ground-mount.jpg";
+import mainCompanyTopImage from "../assets/company/main-comany-name-image-or-top-image.jpg";
 import realSolarRows from "../assets/company/real-project-solar-rows.jpg";
 import realTransformerSubstation from "../assets/company/real-project-transformer-substation.jpg";
 import realUtilityPlant from "../assets/company/real-project-utility-plant.jpg";
-import transformerUnit1 from "../assets/company/transformer-1.jpg";
-import transformerUnit2 from "../assets/company/transformer-2.jpg";
-import transformerUnit3 from "../assets/company/transformer-3.jpg";
 import project1Img from "../assets/company/project-1.jpg";
 import project2Img from "../assets/company/project-2.jpg";
-import approvalImg from "../assets/company/approval-liasoning.jpg";
-import engineeringImg from "../assets/company/engineering-design.jpg";
+
+// Supporting Verified Assets
+import commercialGround from "../assets/commercial-assets/ground-mounted-image.jpg";
+import transformerUnit1 from "../assets/power-transformer-assets/manufacturing.png";
+import transformerUnit2 from "../assets/power-transformer-assets/step-up-transformer.png";
+import transformerUnit3 from "../assets/power-transformer-assets/step-down.png";
+import approvalImg from "../assets/solar-epc-assets/Approvals & Liaisoning.png";
+import engineeringImg from "../assets/solar-epc-assets/Plant Design & Engineering.png";
 
 // Dedicated Home Assets
 import homeTopImage from "../assets/home-assets/home-top-image.jpg";
@@ -71,10 +74,10 @@ export const IMAGES = {
   homeIndustrial: homeIndustrial,
   homeTransformer: homeTransformer,
   homeTurnkeyEPC: homeTurnkeyEPC,
-  heroSecondary: realGroundMount,
+  heroSecondary: commercialGround,
   residentialHero: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80",
   residentialModern: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=1200&q=80",
-  commercialHero: realGroundMount,
+  commercialHero: commercialGround,
   commercialRoof: "https://images.unsplash.com/photo-1545208942-e1c5c91bad50?auto=format&fit=crop&w=1200&q=80",
   industrialHero: realSolarRows,
   industrialPark: realUtilityPlant,
@@ -86,7 +89,8 @@ export const IMAGES = {
   solarProject2: project2Img,
   approvalLiasoning: approvalImg,
   engineeringDesign: engineeringImg,
-  aboutHero: realGroundMount,
+  aboutHero: mainCompanyTopImage,
+  mainCompanyTopImage: mainCompanyTopImage,
 };
 
 export const STATS = [
@@ -285,7 +289,7 @@ export const REAL_PROJECTS = [
     capacity: "Multi-MW Plant",
     location: "Central India Grid Interconnection",
     description: "Extensive utility-scale ground-mounted solar park developed by Proton Power Infra featuring high-efficiency PV arrays, on-site control cabins, and HT 33kV substation synchronization.",
-    image: realGroundMount,
+    image: commercialGround,
     highlights: ["Inverter Duty Step-Up Transformer Substation", "SCADA Integrated Weather Monitoring", "Independent Power Producer (IPP) Asset"],
     isReal: true,
   },

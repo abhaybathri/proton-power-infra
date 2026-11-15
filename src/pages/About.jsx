@@ -1,235 +1,459 @@
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ShieldCheck, Target, Eye, Compass, Award, CheckCircle2, ArrowRight, Zap, Users, Building, MapPin, Cpu } from "lucide-react";
-import SectionHeading from "../components/SectionHeading";
-import CTASection from "../components/CTASection";
-import { IMAGES, COMPANY_DETAILS, STATS } from "../data/companyData";
+import {
+  ShieldCheck,
+  Target,
+  Eye,
+  Award,
+  CheckCircle2,
+  ArrowRight,
+  Zap,
+  Building,
+  MapPin,
+  Cpu,
+  Sparkles,
+  Phone,
+  Activity,
+  ChevronLeft,
+  ChevronRight,
+  Globe,
+  Clock,
+} from "lucide-react";
+import { COMPANY_DETAILS } from "../data/companyData";
+
+// Authentic Company Assets
+import mainTopImg from "../assets/company/main-comany-name-image-or-top-image.jpg";
+import utilityPlantImg from "../assets/company/real-project-utility-plant.jpg";
+import solarRowsImg from "../assets/company/real-project-solar-rows.jpg";
+import transformerSubstationImg from "../assets/company/real-project-transformer-substation.jpg";
+import project1Img from "../assets/company/project-1.jpg";
+import project2Img from "../assets/company/project-2.jpg";
 
 export default function About() {
+  const scrollContainerRef = useRef(null);
+
+  const scrollPortfolio = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === "left" ? -340 : 340;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  // Real Executed Projects Showcase (Compact & Visual-First)
+  const portfolioProjects = [
+    {
+      id: "project-utility",
+      title: "Utility Ground-Mounted Solar Park",
+      tagline: "Central India Grid Evacuation Substation",
+      capacity: "Multi-MW Plant",
+      image: utilityPlantImg,
+      category: "Utility Scale EPC",
+    },
+    {
+      id: "project-rows",
+      title: "High-Yield Tracker & Fixed-Tilt Arrays",
+      tagline: "Industrial Captive Solar Generation",
+      capacity: "High PR Ratio",
+      image: solarRowsImg,
+      category: "Industrial Captive",
+    },
+    {
+      id: "project-substation",
+      title: "Inverter Duty Transformer Substation",
+      tagline: "Step-Up Voltage Synchronization to 33kV",
+      capacity: "HT Grid Sync",
+      image: transformerSubstationImg,
+      category: "In-House Transformers",
+    },
+    {
+      id: "project-1",
+      title: "Commercial Rooftop Solar Array",
+      tagline: "Zero-Downtime Facility Power Integration",
+      capacity: "Commercial Scale",
+      image: project1Img,
+      category: "Commercial EPC",
+    },
+    {
+      id: "project-2",
+      title: "Multi-Megawatt Power Infrastructure",
+      tagline: "Turnkey Civil, Electrical & CEIG Execution",
+      capacity: "Turnkey EPC",
+      image: project2Img,
+      category: "Turnkey Solar Park",
+    },
+  ];
+
   return (
-    <div className="pt-20">
-      {/* 1. Hero Banner */}
-      <section className="relative py-20 lg:py-28 bg-[#202724] text-white overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={IMAGES.heroSecondary}
-            alt="Proton Power Infra 125+ MW solar installation"
-            className="w-full h-full object-cover opacity-25"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#202724] via-[#202724]/90 to-[#123C32]/70"></div>
-        </div>
+    <div className="pt-20 bg-[#F7F8F4] min-h-screen">
+      {/* 1. Hero Section (Compact py-10, Single CTA Button, Tech Typography) */}
+      <section className="relative py-10 md:py-10 lg:py-10 bg-[#123C32] text-white overflow-hidden">
+        {/* Subtle background tech pattern */}
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/40">
-              <span>At the Forefront of Clean Energy Since 2012</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            {/* Left Column: Heading, Subtext, Single CTA, Micro-Metrics */}
+            <div className="lg:col-span-7 space-y-4 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/40 font-tech">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Established 2012 • Indore, Madhya Pradesh</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight font-heading">
+                At the Forefront of India's Clean Energy Revolution.
+              </h1>
+
+              <p className="text-xs sm:text-sm md:text-base text-[#E9F0E9]/85 leading-relaxed font-normal max-w-2xl">
+                Proton Power Infra is a leading solar panel installation company and power transformer manufacturer headquartered in Indore, with a nationwide footprint. Since 2012, we deliver clean energy with precision, passion, and purpose.
+              </p>
+
+              {/* Exactly ONE CTA Button */}
+              <div className="pt-1">
+                <a
+                  href="#projects"
+                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
+                >
+                  <span>Explore Executed Projects</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+
+              {/* Micro-Metrics Bar */}
+              <div className="pt-4 border-t border-white/15 grid grid-cols-3 gap-3 font-tech">
+                <div>
+                  <div className="text-lg sm:text-xl lg:text-2xl font-black text-[#E8A83E]">125+ MW</div>
+                  <div className="text-[10px] sm:text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                    Installed in India
+                  </div>
+                </div>
+                <div>
+                  <div className="text-lg sm:text-xl lg:text-2xl font-black text-[#E8A83E]">Since 2012</div>
+                  <div className="text-[10px] sm:text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                    Over a Decade
+                  </div>
+                </div>
+                <div>
+                  <div className="text-lg sm:text-xl lg:text-2xl font-black text-[#E8A83E]">IPP & EPC</div>
+                  <div className="text-[10px] sm:text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                    Turnkey Specialists
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              125+ MW Installed Across India. Engineering with Precision, Passion & Purpose.
-            </h1>
+            {/* Right Column: Visual Frame with Authentic Top Image */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/80 bg-[#202724] group">
+                <div className="relative h-64 sm:h-72 lg:h-[320px] overflow-hidden">
+                  <img
+                    src={mainTopImg}
+                    alt="Proton Power Infra Corporate Headquarters & Solar Projects"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    loading="eager"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/90 via-transparent to-black/20"></div>
+                </div>
 
-            <p className="text-base sm:text-lg text-[#E9F0E9]/80 leading-relaxed font-normal">
-              Proton Power Infra is a leading solar panel installation company and power transformer manufacturer headquartered in Indore, with a nationwide footprint. Delivering world-class solar EPC and in-house inverter duty transformers.
-            </p>
+                {/* Top Status Capsule */}
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-bold text-[#123C32] shadow-sm font-tech">
+                    <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
+                    <span>Proton Power Infra • Corporate HQ</span>
+                  </div>
+                  <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[10px] font-mono text-[#E9F0E9] border border-white/10">
+                    <span>22.75° N, 75.89° E</span>
+                  </div>
+                </div>
+
+                {/* Bottom Spec Capsule */}
+                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-white/60 z-10">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#E8A83E]"></span>
+                      <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
+                        Solar EPC & Transformer Manufacturing
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-[#525D57] leading-relaxed">
+                    Headquartered in Indore with strategic regional operations in Delhi, Dewas, and Bhopal.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 4 Stats Highlights */}
-      <section className="bg-white py-10 border-b border-[#E2E8E2]">
+      {/* 2. Section 2 — Who We Are & Our Corporate Story (Visual & Narrative Driven, No Clutter) */}
+      <section className="py-10 md:py-10 lg:py-10 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {STATS.map((st, idx) => (
-              <div key={idx} className="p-4 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2]">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#123C32]">{st.value}</div>
-                <div className="text-xs font-bold text-[#202724] mt-1">{st.label}</div>
-                <div className="text-[11px] text-[#525D57]">{st.sub}</div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Column: Narrative Story & Milestone Timeline */}
+            <div className="lg:col-span-7 space-y-4 text-left">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
+                  <span>Our Corporate Story</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+                  Engineering India's Renewable Future Since 2012
+                </h2>
+              </div>
+
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
+                Founded in Indore, Proton Power Infra emerged with a single conviction: to make clean, green, and cost-effective solar energy accessible to every corner of India. Over the past decade, we transformed from regional solar EPC contractors into an <strong>Independent Power Producer (IPP)</strong> and <strong>high-performance power transformer manufacturer</strong> with over <strong>125+ MW installed nationwide</strong>.
+              </p>
+
+              {/* 3 Visual Milestone Steps (Connected Timeline) */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-7 h-7 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center font-bold text-xs font-mono shrink-0 mt-0.5">
+                    01
+                  </div>
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-bold text-[#202724] font-heading">
+                      Independent Power Producer (IPP) & Turnkey EPC
+                    </h3>
+                    <p className="text-xs text-[#525D57] leading-relaxed">
+                      Executing large-scale utility solar parks and industrial captive generation across public and private sectors.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <div className="w-7 h-7 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center font-bold text-xs font-mono shrink-0 mt-0.5">
+                    02
+                  </div>
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-bold text-[#202724] font-heading">
+                      In-House Power Transformer Manufacturing
+                    </h3>
+                    <p className="text-xs text-[#525D57] leading-relaxed">
+                      Manufacturing Inverter Duty Solar Transformers in Dewas & Indore, eliminating third-party substation delays.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <div className="w-7 h-7 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center font-bold text-xs font-mono shrink-0 mt-0.5">
+                    03
+                  </div>
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-bold text-[#202724] font-heading">
+                      Dynamic Team & Global Standards
+                    </h3>
+                    <p className="text-xs text-[#525D57] leading-relaxed">
+                      The ideal mix of energetic young engineers and seasoned industry veterans adhering to global IEC & CEA grid codes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Mission & Vision Visual Capsule */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden border border-[#E2E8E2] bg-[#202724] shadow-md group">
+                <div className="relative h-60 sm:h-72 lg:h-[300px] overflow-hidden">
+                  <img
+                    src={solarRowsImg}
+                    alt="Proton Power Infra Solar Arrays"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#123C32] via-[#123C32]/70 to-transparent"></div>
+                </div>
+
+                {/* Overlaid Mission & Vision Content */}
+                <div className="absolute inset-0 p-5 sm:p-6 flex flex-col justify-end text-white">
+                  <div className="mb-3">
+                    <span className="text-[10px] font-bold text-[#E8A83E] uppercase tracking-wider font-tech bg-white/10 px-2 py-0.5 rounded">
+                      Our Guiding Mission
+                    </span>
+                    <p className="text-xs sm:text-sm font-bold mt-1.5 leading-snug text-white font-heading">
+                      "To make clean, green, and cost-effective solar energy accessible to every corner of India."
+                    </p>
+                  </div>
+
+                  <div className="pt-2.5 border-t border-white/15">
+                    <span className="text-[10px] font-bold text-[#E8A83E] uppercase tracking-wider font-tech">
+                      Our Core Purpose
+                    </span>
+                    <p className="text-[11px] text-[#E9F0E9]/85 leading-relaxed mt-0.5">
+                      Technical brilliance, dependable lifecycle support, and uncompromised safety across all power infrastructure projects.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Section 3 — Projects & Portfolio Showcase (Compact & Horizontal Scrollable) */}
+      <section id="projects" className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] border-b border-[#E2E8E2] scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header with Scroll Controls */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
+                <span>Executed Portfolios</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+                Real Projects Executed Across India
+              </h2>
+            </div>
+
+            {/* Scroll Navigation Controls */}
+            <div className="flex items-center gap-2 font-tech">
+              <button
+                type="button"
+                onClick={() => scrollPortfolio("left")}
+                className="w-9 h-9 rounded-xl bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors flex items-center justify-center text-[#123C32] shadow-sm cursor-pointer"
+                aria-label="Scroll projects left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollPortfolio("right")}
+                className="w-9 h-9 rounded-xl bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors flex items-center justify-center text-[#123C32] shadow-sm cursor-pointer"
+                aria-label="Scroll projects right"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Compact Scrollable Showcase Rail */}
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-4 overflow-x-auto pb-3 pt-1 scrollbar-none snap-x snap-mandatory"
+          >
+            {portfolioProjects.map((p) => (
+              <div
+                key={p.id}
+                className="w-72 sm:w-80 shrink-0 snap-start bg-white rounded-2xl border border-[#E2E8E2] hover:border-[#123C32]/40 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
+              >
+                {/* Project Image */}
+                <div className="relative h-44 sm:h-48 overflow-hidden bg-[#202724]">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+                  {/* Category Pill */}
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="px-2.5 py-0.5 rounded-md bg-[#123C32] text-[#E8A83E] text-[10px] font-bold uppercase tracking-wider font-tech shadow-sm">
+                      {p.category}
+                    </span>
+                  </div>
+
+                  {/* Capacity Badge */}
+                  <div className="absolute bottom-2.5 right-2.5">
+                    <span className="text-[10px] font-mono font-bold bg-white/20 text-white px-2 py-0.5 rounded backdrop-blur-sm">
+                      {p.capacity}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Minimal Information */}
+                <div className="p-3.5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-[#202724] font-heading mb-1 truncate">
+                      {p.title}
+                    </h3>
+                    <p className="text-xs text-[#525D57] leading-relaxed line-clamp-2">
+                      {p.tagline}
+                    </p>
+                  </div>
+
+                  <div className="pt-2.5 mt-2.5 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] text-[#123C32] font-bold font-tech">
+                    <span>100% Commissioned Asset</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 2. Who We Are */}
-      <section className="py-20 lg:py-24 bg-white">
+      {/* 4. Section 4 — Pan-India Regional Footprint Strip */}
+      <section className="py-8 md:py-8 lg:py-8 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
-              <SectionHeading
-                eyebrow="Who We Are"
-                title="A Nationwide Footprint in Renewable Energy & Power Infrastructure"
-                description="Since 2012, Proton Power Infra has been at the forefront of India’s clean energy revolution. Headquartered in Indore with offices in Delhi, Dewas, and Bhopal, we deliver clean energy solutions with precision, passion, and purpose."
-              />
-
-              <p className="text-sm text-[#525D57] leading-relaxed">
-                Operating both as an <strong>Independent Power Producer (IPP)</strong> and as turnkey <strong>EPC & O&M specialists</strong>, we maintain a proud presence across both public and private sector projects. Our dynamic team represents the perfect mix of energetic young talent and seasoned industry veterans.
-              </p>
-
-              <div className="p-4 rounded-xl bg-[#E9F0E9] border border-[#123C32]/20 space-y-2 text-xs">
-                <div className="flex items-center gap-2 font-bold text-[#123C32]">
-                  <MapPin className="w-4 h-4 text-[#E8A83E]" />
-                  <span>Pan-India Strategic Presence</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-[#525D57] pt-1">
-                  <div>• <strong>Indore (HQ):</strong> Scheme 78, Vijay Nagar</div>
-                  <div>• <strong>Delhi:</strong> NCR Corporate Liaisoning</div>
-                  <div>• <strong>Bhopal:</strong> Regional Operations</div>
-                  <div>• <strong>Dewas:</strong> Industrial Manufacturing & Hub</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-[#F7F8F4] bg-[#123C32]">
-                <img
-                  src={IMAGES.hero}
-                  alt="Proton Power Infra real utility solar plant installation"
-                  className="w-full h-[430px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/85 via-transparent to-transparent"></div>
-                <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-white/95 backdrop-blur-md border border-white/80">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center font-bold">
-                      <Award className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-[#123C32] uppercase">
-                        125+ MW Installed Nationwide
-                      </div>
-                      <div className="text-[11px] text-[#525D57]">
-                        Public & Private Sector Track Record Since 2012
-                      </div>
-                    </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {COMPANY_DETAILS.offices.map((off, idx) => (
+              <div
+                key={idx}
+                className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] hover:border-[#123C32]/30 transition-colors"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-1.5">
+                    <Building className="w-3.5 h-3.5 text-[#123C32]" />
+                    <h4 className="text-xs sm:text-sm font-bold text-[#202724] font-heading">
+                      {off.city}
+                    </h4>
                   </div>
+                  <span className="text-[9px] font-bold text-[#123C32] bg-[#E9F0E9] px-1.5 py-0.5 rounded font-tech">
+                    {off.role}
+                  </span>
                 </div>
+                <p className="text-[11px] text-[#525D57] leading-relaxed truncate">
+                  {off.address}
+                </p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. Mission & Vision */}
-      <section className="py-20 bg-[#F7F8F4] border-y border-[#E2E8E2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Our Guiding Principles"
-            title="Mission, Vision & Engineering Standards"
-            align="center"
-            className="mb-14"
-          />
+      {/* 5. Section 5 — Compact Consultation CTA Banner */}
+      <section className="py-10 md:py-10 lg:py-10 bg-[#123C32] text-white relative overflow-hidden">
+        {/* Subtle radial glow */}
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Mission */}
-            <div className="bg-white p-8 rounded-2xl border border-[#E2E8E2] shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center mb-5">
-                <Target className="w-6 h-6 stroke-[2]" />
-              </div>
-              <h3 className="text-xl font-bold text-[#202724] mb-3">
-                Our Mission
-              </h3>
-              <p className="text-sm text-[#525D57] leading-relaxed">
-                "To make clean, green, and cost-effective solar energy accessible to every corner of India."
-              </p>
-            </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold uppercase tracking-wider border border-[#E8A83E]/40 font-tech mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Powering India Since 2012</span>
+          </div>
 
-            {/* Vision */}
-            <div className="bg-white p-8 rounded-2xl border border-[#E2E8E2] shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center mb-5">
-                <Eye className="w-6 h-6 stroke-[2]" />
-              </div>
-              <h3 className="text-xl font-bold text-[#202724] mb-3">
-                Our Vision
-              </h3>
-              <p className="text-sm text-[#525D57] leading-relaxed">
-                To continue leading India’s renewable transition through technical brilliance with global standards, pioneering in-house power transformer manufacturing and dependable lifecycle asset management.
-              </p>
-            </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight font-heading mb-3">
+            Partner with Proton Power Infra for Your Energy Transition
+          </h2>
 
-            {/* Core Pillars */}
-            <div className="bg-white p-8 rounded-2xl border border-[#E2E8E2] shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center mb-5">
-                <Compass className="w-6 h-6 stroke-[2]" />
-              </div>
-              <h3 className="text-xl font-bold text-[#202724] mb-3">
-                Dynamic Team
-              </h3>
-              <p className="text-sm text-[#525D57] leading-relaxed">
-                The perfect mix of young talent and seasoned professionals ensuring technical brilliance, agile execution, and uncompromised compliance with global standards.
-              </p>
-            </div>
+          <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
+            Whether developing a multi-megawatt solar park, installing captive factory arrays, or sourcing Inverter Duty Solar Transformers, our engineers are ready to assist.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              to="/enquiry"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
+            >
+              <span>Schedule Project Consultation</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+            </Link>
+
+            <a
+              href={`tel:${COMPANY_DETAILS.primaryPhoneRaw || "+919770744687"}`}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all font-tech"
+            >
+              <Phone className="w-4 h-4 text-[#E8A83E]" />
+              <span>Call Us: {COMPANY_DETAILS.primaryPhone || "+91 97707 44687"}</span>
+            </a>
+          </div>
+
+          <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-center gap-5 text-[11px] text-[#E9F0E9]/75 font-tech">
+            <span>✓ 125+ MW Proven Track Record</span>
+            <span>✓ In-House Solar Transformer Manufacturing</span>
+            <span>✓ Strategic Presence in Delhi, Indore, Dewas & Bhopal</span>
           </div>
         </div>
       </section>
-
-      {/* 4. In-House Power Transformer Manufacturing Advantage */}
-      <section className="py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5">
-              <div className="rounded-2xl overflow-hidden border border-[#E2E8E2] shadow-lg">
-                <img
-                  src={IMAGES.transformerSubstation}
-                  alt="Proton Power Infra transformer manufacturing"
-                  className="w-full h-[400px] object-cover"
-                />
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 space-y-6">
-              <SectionHeading
-                eyebrow="Integrated Manufacturing Capability"
-                title="Your Trusted Power Transformer Manufacturer"
-                description="A major differentiator for Proton Power Infra is our in-house manufacturing of Inverter Duty Solar Transformers and specialized repair services."
-              />
-
-              <div className="space-y-4">
-                {[
-                  {
-                    title: "Inverter Duty Solar Transformer Manufacturing",
-                    desc: "Efficient energy transformation engineered specifically for multi-megawatt solar power systems.",
-                  },
-                  {
-                    title: "Step-Up Transformer Repair & Services",
-                    desc: "Boost voltage and maintain smooth power flow across HT transmission lines.",
-                  },
-                  {
-                    title: "Step-Down Transformer Repair & Services",
-                    desc: "Lower voltage with minimal loss, ensuring optimal factory machine performance.",
-                  },
-                  {
-                    title: "Custom Transformer Solutions",
-                    desc: "Tailored to meet exact operational requirements with nationwide service support.",
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3.5">
-                    <CheckCircle2 className="w-5 h-5 text-[#123C32] shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-bold text-[#202724]">{item.title}</h4>
-                      <p className="text-xs text-[#525D57] leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-2">
-                <Link
-                  to="/power-transformers"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#123C32] hover:text-[#E8A83E]"
-                >
-                  <span>Explore full transformer manufacturing & repair portfolio</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. CTA Section */}
-      <CTASection
-        title="Discuss Your Solar or Transformer Project with Our Team"
-        description="Connect with our technical consultants in Indore, Delhi, Bhopal, or Dewas for a complete project evaluation."
-      />
     </div>
   );
 }
