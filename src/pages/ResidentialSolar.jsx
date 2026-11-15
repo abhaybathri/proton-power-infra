@@ -97,7 +97,7 @@ export default function ResidentialSolar() {
     },
   ];
 
-  // 4 Process Phases (Interactive Story Experience)
+  // 4 Process Phases (Interactive Story Experience - Compact & Zero-Scroll)
   const phases = [
     {
       step: "01",
@@ -105,13 +105,13 @@ export default function ResidentialSolar() {
       subtitle: "Precision On-Site Rooftop Engineering",
       image: siteAssesmentImg,
       icon: Activity,
-      desc: "Our solar engineers visit your home to inspect rooftop structural integrity, 3D sun-path orientation, shadow cast from water tanks or parapets, and analyze your historical electrical bills.",
+      desc: "Our solar engineers inspect rooftop structural integrity, 3D sun-path orientation, and analyze historical electricity bills to calculate optimal system capacity.",
       highlights: [
-        "3D Solar Irradiance & Shadow Modeling",
-        "Rooftop Structural Load Capacity Check",
-        "Peak Household Connected Load Optimization",
+        "3D Irradiance & Shadow Modeling",
+        "Rooftop Load Capacity Inspection",
+        "Connected Load Optimization",
       ],
-      deliverable: "Feasibility Report, Shadow Map & Recommended System Size (kWp)",
+      deliverable: "Feasibility Report, Shadow Map & Recommended kWp",
     },
     {
       step: "02",
@@ -119,13 +119,13 @@ export default function ResidentialSolar() {
       subtitle: "Bespoke Architectural Integration",
       image: customizeDesignImg,
       icon: FileCheck,
-      desc: "We design a custom rooftop solar arrangement tailored to your terrace lifestyle. Whether elevated superstructures for usable terrace space or low-tilt flush mounts, we balance maximum kWh generation with elegant home aesthetics.",
+      desc: "We design a customized rooftop layout tailored to your terrace lifestyle—balancing maximum solar energy yield with usable living space and clean aesthetics.",
       highlights: [
-        "Walkable / Elevated Superstructure Options",
-        "Tier-1 Mono PERC & Inverter Selection",
-        "DISCOM-Compliant Single Line Diagram (SLD)",
+        "Elevated / Walkable Frame Layouts",
+        "Tier-1 Mono PERC & Inverter Spec",
+        "DISCOM-Compliant Single Line Diagram",
       ],
-      deliverable: "Photorealistic 3D CAD Blueprint & Generation Simulation",
+      deliverable: "Photorealistic 3D Blueprint & Generation Yield Estimate",
     },
     {
       step: "03",
@@ -133,11 +133,11 @@ export default function ResidentialSolar() {
       subtitle: "Zero-Waterproofing Compromise",
       image: installationImg,
       icon: Wrench,
-      desc: "Our certified technicians erect corrosion-resistant hot-dip galvanized mounting structures using non-penetrating clamps or chemical anchor grouting to guarantee zero terrace leakage. UV-shielded DC cables and multi-tier surge arrestors are deployed with civil precision.",
+      desc: "Certified technicians erect corrosion-resistant hot-dip galvanized mounting structures with non-penetrating clamps and chemical anchoring to guarantee zero leakage.",
       highlights: [
-        "Hot-Dip Galvanized / Anodized Aluminum Frames",
-        "Zero-Leak Waterproof Chemical Anchoring",
-        "Dedicated Lightning & Double-Earthing Grids",
+        "Hot-Dip Galvanized Frames",
+        "Zero-Leak Chemical Anchoring",
+        "Dual Earthing & Lightning Arrester",
       ],
       deliverable: "Structural Safety Sign-Off & Turnkey Equipment Commissioning",
     },
@@ -147,13 +147,13 @@ export default function ResidentialSolar() {
       subtitle: "Grid Synchronization & Smart App Tracking",
       image: systemInstallationImg,
       icon: Zap,
-      desc: "We manage the entire government paperwork with MPPKVVCL / DISCOM, CEIG electrical safety verification, and bi-directional net-meter synchronization. Once activated, your bi-directional meter spins backward during the day, exporting excess power to the grid.",
+      desc: "We handle complete MPPKVVCL / DISCOM net-metering liaisoning, CEIG safety approval, and grid synchronization with real-time smartphone telemetry.",
       highlights: [
-        "End-to-End MPPKVVCL / DISCOM Liaisoning",
-        "Bi-Directional Net-Meter Synchronization",
-        "IoT Mobile App Real-Time Energy Telemetry",
+        "MPPKVVCL Net-Meter Liaisoning",
+        "Bi-Directional Meter Synchronization",
+        "Real-Time IoT Mobile App Telemetry",
       ],
-      deliverable: "Live Clean Energy Generation & Automated Subsidy Claim DBT",
+      deliverable: "Bi-Directional Net-Meter Activation & Subsidy DBT Processing",
     },
   ];
 
@@ -162,11 +162,11 @@ export default function ResidentialSolar() {
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
       {/* 1. Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-14 md:pt-16 md:pb-20 lg:pt-20 lg:pb-24 bg-[#123C32] text-white">
+      <section className="relative overflow-hidden pt-12 pb-14 md:pt-16 md:pb-20 lg:pt-10 lg:pb-10 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6 text-left">
@@ -273,7 +273,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 2. Section 2 — Benefits of Residential Solar (Interactive 5-Pillar Compact Deck) */}
-      <section className="py-14 md:py-18 lg:py-20 bg-white border-b border-[#E2E8E2]">
+      <section className="py-14 md:py-18 lg:py-10 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="max-w-3xl mb-10 sm:mb-12">
@@ -384,24 +384,26 @@ export default function ResidentialSolar() {
         </div>
       </section>
 
-      {/* 3. Section 3 — How We Bring Solar (Interactive 4-Phase Story Walkthrough) */}
-      <section className="py-16 md:py-20 lg:py-24 bg-[#F7F8F4]">
+      {/* 3. Section 3 — How We Bring Solar (Interactive 4-Phase Story Walkthrough - Ultra Compact & Zero-Scroll) */}
+      <section id="process" className="py-10 md:py-12 lg:py-12 bg-[#F7F8F4] scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="max-w-3xl mb-12 sm:mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-3">
-              <span>Execution Journey</span>
+          {/* Header (Clean & Horizontal on Desktop) */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
+                <span>Execution Journey</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+                How We Bring Solar to Your Home
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#202724] tracking-tight leading-tight font-heading">
-              How We Bring Solar to Your Home
-            </h2>
-            <p className="text-sm sm:text-base text-[#525D57] leading-relaxed mt-3">
-              From the initial terrace shadow scan to grid net-meter synchronization, here is the complete 4-phase turnkey story engineered for zero disruption to your daily life.
+            <p className="text-xs sm:text-sm text-[#525D57] max-w-md leading-relaxed md:text-right">
+              A seamless 4-phase turnkey story engineered for maximum yield and zero household disruption.
             </p>
           </div>
 
-          {/* Phase Navigation Tabs */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+          {/* Phase Navigation Tabs (Compact) */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
             {phases.map((ph, idx) => {
               const isActive = activePhase === idx;
               return (
@@ -409,14 +411,14 @@ export default function ResidentialSolar() {
                   key={ph.step}
                   type="button"
                   onClick={() => setActivePhase(idx)}
-                  className={`p-4 rounded-xl border text-left transition-all cursor-pointer font-tech flex items-center gap-3.5 ${
+                  className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer font-tech flex items-center gap-2.5 ${
                     isActive
-                      ? "bg-[#123C32] text-white border-[#123C32] shadow-md ring-2 ring-[#E8A83E]/40"
-                      : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-white"
+                      ? "bg-[#123C32] text-white border-[#123C32] shadow-sm ring-2 ring-[#E8A83E]/40"
+                      : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4]"
                   }`}
                 >
                   <div
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
                       isActive ? "bg-[#E8A83E] text-[#123C32]" : "bg-[#123C32]/10 text-[#123C32]"
                     }`}
                   >
@@ -424,7 +426,7 @@ export default function ResidentialSolar() {
                   </div>
                   <div className="min-w-0">
                     <div
-                      className={`text-[10px] font-bold uppercase tracking-wider ${
+                      className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${
                         isActive ? "text-[#E8A83E]" : "text-[#525D57]"
                       }`}
                     >
@@ -439,13 +441,13 @@ export default function ResidentialSolar() {
             })}
           </div>
 
-          {/* Active Phase Story Stage */}
-          <div className="bg-white rounded-3xl border border-[#E2E8E2] overflow-hidden shadow-lg p-6 sm:p-8 lg:p-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Active Phase Story Stage (Compact & Zero Scroll) */}
+          <div className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-md p-4 sm:p-5 lg:p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
               {/* Left Column: Phase Photography */}
-              <div className="lg:col-span-6 relative">
-                <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#E2E8E2] bg-[#202724] group">
-                  <div className="relative aspect-[16/11] overflow-hidden">
+              <div className="lg:col-span-5 relative">
+                <div className="relative rounded-xl overflow-hidden shadow-sm border border-[#E2E8E2] bg-[#202724] group">
+                  <div className="relative h-48 sm:h-60 lg:h-[260px] overflow-hidden">
                     <img
                       src={currentPhaseData.image}
                       alt={currentPhaseData.title}
@@ -456,86 +458,104 @@ export default function ResidentialSolar() {
                   </div>
 
                   {/* Phase Badge */}
-                  <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
-                    <span className="px-3.5 py-1 rounded-full text-xs font-black tracking-wide uppercase bg-[#123C32] text-[#E8A83E] shadow-sm font-tech">
+                  <div className="absolute top-2.5 left-2.5 flex items-center gap-2">
+                    <span className="px-3 py-0.5 rounded-full text-[11px] font-black tracking-wide uppercase bg-[#123C32] text-[#E8A83E] shadow-sm font-tech">
                       Phase {currentPhaseData.step} Execution
                     </span>
                   </div>
 
                   {/* Subtitle Bar */}
-                  <div className="absolute bottom-3 left-3.5 right-3.5 text-xs text-white/95 font-medium font-tech truncate">
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 text-[11px] text-white/95 font-medium font-tech truncate">
                     {currentPhaseData.subtitle}
                   </div>
                 </div>
               </div>
 
               {/* Right Column: Story Narrative & Checkpoints */}
-              <div className="lg:col-span-6 space-y-6 text-left">
+              <div className="lg:col-span-7 space-y-3.5 text-left flex flex-col justify-between">
                 <div>
-                  <div className="text-xs font-bold text-[#E8A83E] uppercase tracking-wider font-tech mb-1.5">
-                    Step {currentPhaseData.step} of 04
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-bold text-[#E8A83E] uppercase tracking-wider font-tech bg-[#123C32] px-2 py-0.5 rounded">
+                      Step {currentPhaseData.step} of 04
+                    </span>
+                    <span className="text-xs font-semibold text-[#123C32] uppercase tracking-wide font-tech truncate">
+                      {currentPhaseData.subtitle}
+                    </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
                     {currentPhaseData.title}
                   </h3>
-                  <p className="text-xs font-semibold text-[#123C32] uppercase tracking-wide font-tech mt-1">
-                    {currentPhaseData.subtitle}
-                  </p>
                 </div>
 
-                <p className="text-sm text-[#525D57] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
                   {currentPhaseData.desc}
                 </p>
 
-                {/* Key Technical Highlights */}
-                <div className="space-y-2.5 pt-2">
-                  <div className="text-xs font-bold text-[#202724] uppercase tracking-wider font-tech">
+                {/* Key Technical Highlights (2-column compact grid) */}
+                <div>
+                  <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
                     Engineering Checkpoints:
                   </div>
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-[#202724]">
                     {currentPhaseData.highlights.map((h, i) => (
-                      <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#202724]">
-                        <CheckCircle2 className="w-4 h-4 text-[#123C32] shrink-0 mt-0.5" />
-                        <span>{h}</span>
+                      <div key={i} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32] shrink-0" />
+                        <span className="truncate">{h}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Milestone Deliverable Box */}
-                <div className="p-4 rounded-xl bg-[#E9F0E9] border border-[#123C32]/15 flex items-center justify-between gap-4 font-tech">
-                  <div>
-                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider block">
-                      Phase Milestone Deliverable:
-                    </span>
-                    <span className="text-xs sm:text-sm font-bold text-[#202724]">
-                      {currentPhaseData.deliverable}
-                    </span>
-                  </div>
+                {/* Milestone Deliverable Compact Capsule */}
+                <div className="px-3 py-2 rounded-lg bg-[#E9F0E9] border border-[#123C32]/15 flex items-center gap-2 font-tech">
+                  <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0">
+                    Deliverable:
+                  </span>
+                  <span className="text-xs font-bold text-[#202724] truncate">
+                    {currentPhaseData.deliverable}
+                  </span>
                 </div>
 
-                {/* Phase Pagination Controls */}
+                {/* In-Card Phase Navigation: Prev / Phase Pills / Next */}
                 <div className="pt-2 flex items-center justify-between border-t border-[#E2E8E2]">
                   <button
                     type="button"
                     onClick={() => setActivePhase((prev) => (prev - 1 + phases.length) % phases.length)}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#525D57] hover:text-[#123C32] p-2 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#525D57] hover:text-[#123C32] px-2.5 py-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
                   >
-                    <ChevronLeft className="w-4 h-4" />
-                    <span>Previous Phase</span>
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Previous</span>
                   </button>
 
-                  <span className="text-xs font-mono font-bold text-[#123C32]">
-                    0{activePhase + 1} / 04
-                  </span>
+                  {/* Interactive Phase Number Pills directly inside the card */}
+                  <div className="flex items-center gap-1.5">
+                    {phases.map((ph, idx) => {
+                      const isActive = activePhase === idx;
+                      return (
+                        <button
+                          key={ph.step}
+                          type="button"
+                          onClick={() => setActivePhase(idx)}
+                          className={`w-7 h-7 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                            isActive
+                              ? "bg-[#123C32] text-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]"
+                              : "bg-[#F7F8F4] text-[#525D57] hover:bg-black/5"
+                          }`}
+                          title={`Switch to Phase ${ph.step}`}
+                        >
+                          {ph.step}
+                        </button>
+                      );
+                    })}
+                  </div>
 
                   <button
                     type="button"
                     onClick={() => setActivePhase((prev) => (prev + 1) % phases.length)}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#1A4D41] p-2 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#123C32] hover:text-[#1A4D41] px-2.5 py-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
                   >
-                    <span>Next Phase</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <span className="hidden sm:inline">Next</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
