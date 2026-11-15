@@ -1,147 +1,313 @@
+import { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ShieldCheck, Phone, Mail, MapPin, CheckCircle2, Clock, SunMedium, MessageSquare } from "lucide-react";
-import EnquiryForm from "../components/EnquiryForm";
+import {
+  ShieldCheck,
+  Phone,
+  Mail,
+  MapPin,
+  CheckCircle2,
+  Clock,
+  SunMedium,
+  MessageSquare,
+  Sparkles,
+  Zap,
+  Cpu,
+  Layers,
+  ArrowRight,
+} from "lucide-react";
+import EnquiryForm, { SOLUTION_CATEGORIES } from "../components/EnquiryForm";
 import { COMPANY_DETAILS } from "../data/companyData";
+
+const DELIVERABLES_DATA = {
+  residential: {
+    categoryLabel: "Residential Solar Feasibility",
+    deliverables: [
+      {
+        title: "3D Shadow & Rooftop Feasibility Audit",
+        desc: "High-resolution irradiance mapping to identify zero-shadow usable rooftop areas.",
+      },
+      {
+        title: "PVSyst Generation & Yield Projections",
+        desc: "Accurate computer-simulated annual kWh generation tailored to your location.",
+      },
+      {
+        title: "Bill Reduction & Payback ROI Model",
+        desc: "Financial payback timeline, up to 90% monthly power bill savings, and ROI curve.",
+      },
+      {
+        title: "PM Surya Ghar Subsidy Assistance",
+        desc: "Direct navigation of central and state rooftop solar subsidies and net-metering.",
+      },
+      {
+        title: "Tier-1 Hardware Bill of Materials",
+        desc: "Mono-PERC bifacial panels and European/top-tier smart grid inverters.",
+      },
+    ],
+  },
+  commercial: {
+    categoryLabel: "Commercial Solar Proposal",
+    deliverables: [
+      {
+        title: "Rooftop & Super-Structure Engineering",
+        desc: "Elevated structures and structural load validation for commercial office buildings.",
+      },
+      {
+        title: "PVSyst Financial & Accelerated Depreciation",
+        desc: "Detailed cash-flow analysis incorporating 40% accelerated tax depreciation.",
+      },
+      {
+        title: "LCOE vs Commercial Tariff Benchmarking",
+        desc: "Direct comparison between levelized solar unit cost vs state grid tariffs.",
+      },
+      {
+        title: "HT/LT Grid Synchronization Roadmap",
+        desc: "Single-line diagram (SLD), net-metering sanctioning, and DISCOM clearances.",
+      },
+      {
+        title: "Automated Remote Cloud Monitoring",
+        desc: "Real-time generation telemetry and preventative maintenance SLA package.",
+      },
+    ],
+  },
+  industrial: {
+    categoryLabel: "Industrial Captive Feasibility",
+    deliverables: [
+      {
+        title: "Captive & Open Access Feasibility Study",
+        desc: "Evaluation of ground-mount, industrial shed, or open-access group captive models.",
+      },
+      {
+        title: "Structural & Purlin Load Vetting",
+        desc: "Wind speed and static load analysis for industrial metal sheds and terrain.",
+      },
+      {
+        title: "Contract Demand & Peak Shaving Analysis",
+        desc: "Curtail peak tariff demand surcharges and document verified ESG carbon offsets.",
+      },
+      {
+        title: "CEIG & Transmission Liaisoning",
+        desc: "End-to-end statutory approvals for electrical inspectorate and substation link.",
+      },
+      {
+        title: "Utility-Grade High-Yield Hardware",
+        desc: "Heavy-duty industrial inverters and structures with 25-year linear performance warranty.",
+      },
+    ],
+  },
+  transformers: {
+    categoryLabel: "Power Transformer Engineering Specifications",
+    deliverables: [
+      {
+        title: "Core & Coil Technical Topology Review",
+        desc: "Electrolytic copper-wound design customized for solar inverter or industrial duty.",
+      },
+      {
+        title: "Strict IS 2026 / IEC 60076 Standards",
+        desc: "Engineered to withstand harsh harmonics, extreme temperatures, and voltage spikes.",
+      },
+      {
+        title: "In-House Routine & Type Test Protocols",
+        desc: "Losses, impedance, HV, and temperature-rise testing at our Dewas/Indore facility.",
+      },
+      {
+        title: "Short-Circuit & Seismic Withstand Design",
+        desc: "High mechanical stability and low acoustic noise level engineering.",
+      },
+      {
+        title: "Fast-Track Logistics & Commissioning",
+        desc: "Direct transit to site, oil filtration, and on-site testing support.",
+      },
+    ],
+  },
+  "turnkey-epc": {
+    categoryLabel: "Turnkey Solar EPC Project Scope",
+    deliverables: [
+      {
+        title: "Topography, Geotechnical & Hydrology Study",
+        desc: "Comprehensive civil and soil assessments for MW-scale utility solar parks.",
+      },
+      {
+        title: "33kV / 132kV Grid Evacuation Clearance",
+        desc: "Transmission line routing, bay extension, and DISCOM / TRANSCO liaisoning.",
+      },
+      {
+        title: "Integrated Transformer Substation Supply",
+        desc: "Single-source procurement with in-house manufactured step-up transformers.",
+      },
+      {
+        title: "MMS, Trackers & Robotic Cleaning Ready",
+        desc: "Optimized tilt or tracker arrays for peak solar irradiance capture.",
+      },
+      {
+        title: "CEIG Certification & 5-Year O&M SLA",
+        desc: "Rapid commercial operation date (COD) commissioning and preventive maintenance.",
+      },
+    ],
+  },
+};
 
 export default function Enquiry() {
   const [searchParams] = useSearchParams();
-  const defaultType = searchParams.get("type") || "residential";
-  const defaultCap = searchParams.get("capacity") || "";
+
+  // Parse incoming parameters
+  const paramType = (searchParams.get("type") || "").toLowerCase();
+  const paramReq = searchParams.get("requirement") || "";
+  const paramIndustry = searchParams.get("industry") || "";
+  const paramCap = searchParams.get("capacity") || "";
+  const paramBill = searchParams.get("bill") || "";
+
+  // Determine initial category dynamically based on parameters
+  const initialCategory = useMemo(() => {
+    const reqLower = paramReq.toLowerCase();
+    if (reqLower.includes("transformer")) return "transformers";
+    if (reqLower.includes("turnkey") || reqLower.includes("epc")) return "turnkey-epc";
+    if (paramType === "commercial") return "commercial";
+    if (paramType === "industrial") return "industrial";
+    if (paramType === "transformers") return "transformers";
+    if (paramType === "epc" || paramType === "turnkey-epc") return "turnkey-epc";
+    return "residential";
+  }, [paramType, paramReq]);
+
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+
+  const activeDeliverables = DELIVERABLES_DATA[selectedCategory] || DELIVERABLES_DATA.residential;
 
   return (
-    <div className="pt-24 pb-20 bg-[#F7F8F4] min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-10 bg-[#F7F8F4] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider">
-            <SunMedium className="w-3.5 h-3.5 text-[#E8A83E]" />
-            <span>Dedicated Consultation Portal</span>
+        {/* Compact Hero Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2.5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech">
+            <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
+            <span>Dedicated Consultation Portal • Turnaround &lt; 24h</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#202724] tracking-tight">
-            Request Your Tailored Solar Feasibility Study
+          <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#202724] tracking-tight leading-snug">
+            Request Your Techno-Commercial Feasibility &amp; Project Proposal
           </h1>
 
-          <p className="text-sm sm:text-base text-[#525D57] leading-relaxed">
-            Connect directly with Proton Power Infra's senior photovoltaic engineering team. We deliver accurate yield projections, structural evaluations, and clear payback models.
+          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto">
+            Connect directly with Proton Power Infra's senior photovoltaic engineers and transformer specialists. We provide verified PVSyst yield projections, turnkey EPC budgets, and transformer engineering quotes with zero obligation.
           </p>
+
+          {/* Micro-Telemetry Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-white border border-[#E2E8E2] text-[11px] font-tech text-[#202724] shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Indore HQ &amp; Dewas Plant
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-white border border-[#E2E8E2] text-[11px] font-tech text-[#202724] shadow-xs">
+              125+ MW Portfolio Verified
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-white border border-[#E2E8E2] text-[11px] font-tech text-[#202724] shadow-xs">
+              IS 2026 / IEC Compliant
+            </span>
+          </div>
         </div>
 
-        {/* Two-Column Conversion Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column (Benefits & Direct Contact) */}
-          <div className="lg:col-span-5 space-y-8">
-            {/* Consultation Benefits Box */}
-            <div className="bg-[#123C32] text-white rounded-2xl p-7 lg:p-8 space-y-6 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-36 h-36 bg-[#E8A83E]/10 rounded-full blur-2xl"></div>
+        {/* Balanced Two-Column Grid: Form First on Mobile (order-1 lg:order-2) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          {/* Left Column (Deliverables & Fast Desk SLA) - lg:col-span-5, order-2 lg:order-1 */}
+          <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-between bg-[#123C32] text-white rounded-2xl p-6 sm:p-7 shadow-xl relative overflow-hidden border border-[#123C32]/40">
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 right-0 w-48 h-48 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none"></div>
 
+            <div className="space-y-4 relative z-10">
               <div>
-                <span className="text-xs font-bold tracking-wider text-[#E8A83E] uppercase block mb-1">
-                  What You Receive
-                </span>
-                <h3 className="text-2xl font-bold text-white">
-                  Complimentary Site Audit & Engineering Report
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-tech font-bold tracking-wider text-[#E8A83E] uppercase block">
+                    What You Receive
+                  </span>
+                  <span className="text-[10px] font-tech text-[#E9F0E9]/60 px-2 py-0.5 rounded bg-white/10">
+                    Complimentary Audit
+                  </span>
+                </div>
+                <h3 className="font-heading text-lg sm:text-xl font-bold text-white mt-1">
+                  {activeDeliverables.categoryLabel}
                 </h3>
               </div>
 
-              <div className="space-y-4 text-sm text-[#E9F0E9]/85">
-                {[
-                  "Detailed 3D shadow simulation & usable rooftop area audit",
-                  "Estimated annual energy generation (kWh) using PVSyst models",
-                  "Financial payback timeline, monthly bill reduction & ROI projection",
-                  "DISCOM net-metering regulatory roadmap & technical compliance check",
-                  "Transparent hardware bill of materials (Tier-1 modules & inverters)",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#E8A83E] shrink-0 mt-0.5" />
-                    <span className="text-xs sm:text-sm leading-relaxed">{item}</span>
+              {/* Dynamic Deliverables List */}
+              <div className="space-y-3">
+                {activeDeliverables.deliverables.map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5 group">
+                    <CheckCircle2 className="w-4 h-4 text-[#E8A83E] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                    <div>
+                      <h4 className="text-xs font-bold text-white leading-tight">
+                        {item.title}
+                      </h4>
+                      <p className="text-[11px] text-[#E9F0E9]/75 mt-0.5 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-4 border-t border-white/10 text-xs text-[#E9F0E9]/70 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#E8A83E]" />
-                <span>Zero obligation. 100% engineering-backed consultation.</span>
+              {/* Engineering SLA Guarantee */}
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-[#E8A83E] text-[11px] font-tech uppercase tracking-wider">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Engineering Commitment &amp; SLA</span>
+                </div>
+                <p className="text-[11px] text-[#E9F0E9]/80 leading-relaxed">
+                  Every feasibility review is prepared by a qualified electrical engineer using calibrated satellite irradiance and electrical load models. Zero obligation.
+                </p>
               </div>
             </div>
 
-            {/* Direct Contact Card */}
-            <div className="bg-white rounded-2xl p-6 border border-[#E2E8E2] shadow-sm space-y-4">
-              <h4 className="text-sm font-bold text-[#202724] uppercase tracking-wider text-[#123C32]">
-                Prefer to Speak Immediately?
-              </h4>
-
-              <div className="space-y-3 text-xs text-[#525D57]">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#E9F0E9] text-[#123C32] flex items-center justify-center shrink-0">
-                    <Phone className="w-4 h-4 text-[#123C32]" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[#202724]">Direct Calling</div>
-                    <div className="space-x-2">
-                      <a href={`tel:${COMPANY_DETAILS.phones[0].raw}`} className="text-[#123C32] hover:underline font-bold">
-                        {COMPANY_DETAILS.phones[0].display}
-                      </a>
-                      <span>/</span>
-                      <a href={`tel:${COMPANY_DETAILS.phones[1].raw}`} className="text-[#123C32] hover:underline font-bold">
-                        {COMPANY_DETAILS.phones[1].display}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#E9F0E9] text-[#123C32] flex items-center justify-center shrink-0">
-                    <Mail className="w-4 h-4 text-[#123C32]" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[#202724]">Official Email</div>
-                    <a href={`mailto:${COMPANY_DETAILS.email}`} className="text-[#123C32] hover:underline font-medium">
-                      {COMPANY_DETAILS.email}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#E9F0E9] text-[#123C32] flex items-center justify-center shrink-0 mt-0.5">
-                    <MapPin className="w-4 h-4 text-[#123C32]" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[#202724]">Corporate Office</div>
-                    <address className="not-italic leading-relaxed text-[#525D57]">
-                      {COMPANY_DETAILS.address.full}
-                    </address>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#E9F0E9] text-[#123C32] flex items-center justify-center shrink-0">
-                    <Clock className="w-4 h-4 text-[#123C32]" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[#202724]">Business Hours</div>
-                    <div>{COMPANY_DETAILS.workingHours}</div>
-                  </div>
-                </div>
+            {/* Bottom Direct Engineering Desk */}
+            <div className="mt-5 pt-4 border-t border-white/10 relative z-10 space-y-3">
+              <div className="text-[11px] font-tech font-bold text-[#E8A83E] uppercase tracking-wider">
+                Direct Engineering Desk
               </div>
 
-              <div className="pt-2">
+              <div className="grid grid-cols-2 gap-2 text-xs">
                 <a
-                  href={COMPANY_DETAILS.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#25D366] text-white text-xs font-bold shadow hover:bg-[#20ba59] transition-colors"
+                  href={`tel:${COMPANY_DETAILS.phones[0].raw}`}
+                  className="flex items-center gap-2 p-2 rounded-lg bg-white/10 hover:bg-white/15 transition-colors border border-white/10 text-white"
                 >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Chat with an Engineer on WhatsApp</span>
+                  <Phone className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+                  <div className="truncate">
+                    <div className="text-[9px] text-[#E9F0E9]/70 font-tech">Direct Calling</div>
+                    <div className="text-[11px] font-bold truncate">{COMPANY_DETAILS.phones[0].display}</div>
+                  </div>
+                </a>
+
+                <a
+                  href={`mailto:${COMPANY_DETAILS.email}`}
+                  className="flex items-center gap-2 p-2 rounded-lg bg-white/10 hover:bg-white/15 transition-colors border border-white/10 text-white"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+                  <div className="truncate">
+                    <div className="text-[9px] text-[#E9F0E9]/70 font-tech">Official Desk</div>
+                    <div className="text-[11px] font-bold truncate">support@protonpower...</div>
+                  </div>
                 </a>
               </div>
+
+              <a
+                href={COMPANY_DETAILS.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 py-2 rounded-lg bg-[#25D366] text-white text-xs font-bold shadow hover:bg-[#20ba59] transition-colors"
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                <span>Instant Technical Consultation on WhatsApp</span>
+              </a>
             </div>
           </div>
 
-          {/* Right Column (Form) */}
-          <div className="lg:col-span-7">
-            <EnquiryForm defaultCustomerType={defaultType} defaultCapacity={defaultCap} />
+          {/* Right Column (Streamlined Form) - lg:col-span-7, order-1 lg:order-2 */}
+          <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col">
+            <EnquiryForm
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              initialRequirement={paramReq}
+              initialIndustry={paramIndustry}
+              initialCapacity={paramCap}
+              initialBill={paramBill}
+            />
           </div>
         </div>
       </div>
