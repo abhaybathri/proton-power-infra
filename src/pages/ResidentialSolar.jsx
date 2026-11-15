@@ -1,267 +1,669 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, ChevronDown, ChevronUp, Home, Zap, Shield, ArrowRight, DollarSign, Leaf, TrendingUp, Award, MapPin } from "lucide-react";
-import SectionHeading from "../components/SectionHeading";
-import CTASection from "../components/CTASection";
-import EnquiryForm from "../components/EnquiryForm";
-import { IMAGES, FAQS, COMPANY_DETAILS } from "../data/companyData";
+import {
+  CheckCircle2,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  DollarSign,
+  Shield,
+  Leaf,
+  TrendingUp,
+  Award,
+  Activity,
+  FileCheck,
+  Wrench,
+  Zap,
+  Phone,
+  Sparkles,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
+import { FAQS, COMPANY_DETAILS } from "../data/companyData";
+
+// Residential Assets
+import topImage from "../assets/residential-solar-assets/top-image.png";
+import siteAssesmentImg from "../assets/residential-solar-assets/site-assesment-phase.png";
+import customizeDesignImg from "../assets/residential-solar-assets/customize-design-phase.png";
+import installationImg from "../assets/residential-solar-assets/installation-phase.png";
+import systemInstallationImg from "../assets/residential-solar-assets/system-installation-phase.png";
+import whyChooseImg from "../assets/residential-solar-assets/why-choose-image.jpg";
 
 export default function ResidentialSolar() {
+  const [activeBenefit, setActiveBenefit] = useState(0);
+  const [activePhase, setActivePhase] = useState(0);
   const [openFaq, setOpenFaq] = useState(null);
 
   const toggleFaq = (idx) => {
     setOpenFaq(openFaq === idx ? null : idx);
   };
 
+  // 5 Focused Residential Solar Benefits (Interactive Hover-Expanding Deck)
   const benefits = [
     {
+      id: "savings",
+      number: "01",
       icon: DollarSign,
       title: "Cost Savings",
-      desc: "Reduce your electricity bills significantly by generating your own clean power from the sun.",
+      subtitle: "Slash Monthly Bills",
+      stat: "Up to 90%",
+      statLabel: "Bill Reduction",
+      desc: "Cut electricity bills drastically by generating your own clean power from the sun, converting non-productive terrace space into permanent financial yield.",
+      highlight: "Average ₹45,000+ Annual Household Savings",
     },
     {
+      id: "independence",
+      number: "02",
       icon: Shield,
       title: "Energy Independence",
-      desc: "Protect your household from rising utility grid tariffs and annual rate hikes for decades.",
+      subtitle: "Hedge Grid Tariff Hikes",
+      stat: "25 Years",
+      statLabel: "Price Stability",
+      desc: "Protect your family from unpredictable utility grid tariff hikes and annual rate surges with captive clean solar generation that remains steady for decades.",
+      highlight: "Shielded Against 5–8% Annual DISCOM Rate Hikes",
     },
     {
+      id: "eco",
+      number: "03",
       icon: Leaf,
       title: "Eco-Friendly Lifestyle",
-      desc: "Lower your carbon footprint and actively contribute to a greener, more sustainable future.",
+      subtitle: "Shrink Carbon Footprint",
+      stat: "~4.5 Tons",
+      statLabel: "CO2 Offset / Year",
+      desc: "Lower your carbon footprint and actively build a sustainable future. A standard 5 kWp residential system offsets the equivalent of planting 100+ mature trees annually.",
+      highlight: "Equivalent to 100+ Trees Planted Every Year",
     },
     {
+      id: "valuation",
+      number: "04",
       icon: TrendingUp,
       title: "Increased Property Value",
-      desc: "High-efficiency solar installations demonstrably add long-term resale value to your home.",
+      subtitle: "Smart Home Asset",
+      stat: "+4% to 6%",
+      statLabel: "Home Resale Value",
+      desc: "Certified rooftop solar systems demonstrably enhance long-term property appraisal values, attracting eco-conscious premium homebuyers.",
+      highlight: "Appraised as a Self-Powered Modern Home",
     },
     {
+      id: "subsidy",
+      number: "05",
       icon: Award,
-      title: "Government Incentives",
-      desc: "Enjoy direct central and state subsidies (PM Surya Ghar / DISCOM net-metering rebates).",
+      title: "Government Subsidies",
+      subtitle: "PM Surya Ghar Yojana",
+      stat: "Up to ₹78,000",
+      statLabel: "Direct DBT Benefit",
+      desc: "Enjoy direct central and state capital subsidies credited straight to your bank account via Direct Benefit Transfer (DBT), coupled with hassle-free net-metering.",
+      highlight: "Direct Bank Transfer & DISCOM Liaisoning",
     },
   ];
 
-  const processSteps = [
+  // 4 Process Phases (Interactive Story Experience)
+  const phases = [
     {
       step: "01",
-      title: "Site Assessment",
-      desc: "Our experts assess your property's energy needs, rooftop structure, and solar generation potential.",
+      title: "Site Assessment & Shadow Analysis",
+      subtitle: "Precision On-Site Rooftop Engineering",
+      image: siteAssesmentImg,
+      icon: Activity,
+      desc: "Our solar engineers visit your home to inspect rooftop structural integrity, 3D sun-path orientation, shadow cast from water tanks or parapets, and analyze your historical electrical bills.",
+      highlights: [
+        "3D Solar Irradiance & Shadow Modeling",
+        "Rooftop Structural Load Capacity Check",
+        "Peak Household Connected Load Optimization",
+      ],
+      deliverable: "Feasibility Report, Shadow Map & Recommended System Size (kWp)",
     },
     {
       step: "02",
-      title: "Customized Design",
-      desc: "We craft a solar system layout tailored precisely to your household energy requirements and aesthetics.",
+      title: "Customized 3D Layout & Electrical CAD",
+      subtitle: "Bespoke Architectural Integration",
+      image: customizeDesignImg,
+      icon: FileCheck,
+      desc: "We design a custom rooftop solar arrangement tailored to your terrace lifestyle. Whether elevated superstructures for usable terrace space or low-tilt flush mounts, we balance maximum kWh generation with elegant home aesthetics.",
+      highlights: [
+        "Walkable / Elevated Superstructure Options",
+        "Tier-1 Mono PERC & Inverter Selection",
+        "DISCOM-Compliant Single Line Diagram (SLD)",
+      ],
+      deliverable: "Photorealistic 3D CAD Blueprint & Generation Simulation",
     },
     {
       step: "03",
-      title: "Professional Installation",
-      desc: "Certified technicians install your solar panels with civil precision and high-altitude safety adherence.",
+      title: "Precision Mechanical & Electrical Installation",
+      subtitle: "Zero-Waterproofing Compromise",
+      image: installationImg,
+      icon: Wrench,
+      desc: "Our certified technicians erect corrosion-resistant hot-dip galvanized mounting structures using non-penetrating clamps or chemical anchor grouting to guarantee zero terrace leakage. UV-shielded DC cables and multi-tier surge arrestors are deployed with civil precision.",
+      highlights: [
+        "Hot-Dip Galvanized / Anodized Aluminum Frames",
+        "Zero-Leak Waterproof Chemical Anchoring",
+        "Dedicated Lightning & Double-Earthing Grids",
+      ],
+      deliverable: "Structural Safety Sign-Off & Turnkey Equipment Commissioning",
     },
     {
       step: "04",
-      title: "System Activation",
-      desc: "Net-meter synchronization completes so you start generating clean energy and saving money immediately.",
+      title: "DISCOM Net-Metering & Live Telemetry",
+      subtitle: "Grid Synchronization & Smart App Tracking",
+      image: systemInstallationImg,
+      icon: Zap,
+      desc: "We manage the entire government paperwork with MPPKVVCL / DISCOM, CEIG electrical safety verification, and bi-directional net-meter synchronization. Once activated, your bi-directional meter spins backward during the day, exporting excess power to the grid.",
+      highlights: [
+        "End-to-End MPPKVVCL / DISCOM Liaisoning",
+        "Bi-Directional Net-Meter Synchronization",
+        "IoT Mobile App Real-Time Energy Telemetry",
+      ],
+      deliverable: "Live Clean Energy Generation & Automated Subsidy Claim DBT",
     },
   ];
 
-  const whyChooseUs = [
-    { title: "Expert Guidance", desc: "From initial consultation to installation, we're with you every step of the way." },
-    { title: "Customized Solutions", desc: "Tailored solar systems to meet your unique architectural and energy needs." },
-    { title: "Quality Assurance", desc: "We use premium Tier-1 solar panels and equipment for durability and maximum efficiency." },
-    { title: "Hassle-Free Process", desc: "Our team handles permits, net-metering approvals, installations, and activation seamlessly." },
-    { title: "Local Expertise in Indore", desc: "Headquartered in Indore, we understand local DISCOM regulations and deliver reliable solutions." },
-  ];
+  const currentPhaseData = phases[activePhase];
 
   return (
-    <div className="pt-20">
-      {/* 1. Hero */}
-      <section className="relative py-20 lg:py-28 bg-[#123C32] text-white overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={IMAGES.residentialHero}
-            alt="Residential home with solar panels"
-            className="w-full h-full object-cover opacity-25"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#123C32] via-[#123C32]/95 to-transparent"></div>
-        </div>
+    <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
+      {/* 1. Hero Section */}
+      <section className="relative overflow-hidden pt-12 pb-14 md:pt-16 md:pb-20 lg:pt-20 lg:pb-24 bg-[#123C32] text-white">
+        {/* Subtle engineering grid background */}
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/40">
-              <Home className="w-3.5 h-3.5" />
-              <span>Switch to Solar – Save Money, Save the Planet</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Empower Your Home with Solar Energy.
-            </h1>
-
-            <p className="text-base sm:text-lg text-[#E9F0E9]/85 leading-relaxed font-normal">
-              At Proton Power Infra, we specialize in residential solar installations designed to bring clean, renewable energy to your home. Say goodbye to high electricity bills and hello to energy independence.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <Link
-                to="/enquiry?type=residential"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg transition-all"
-              >
-                <span>Request Free Home Solar Audit</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="#residential-benefits"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all"
-              >
-                <span>Explore Home Benefits</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Benefits of Residential Solar Installation */}
-      <section id="residential-benefits" className="py-20 bg-white scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Benefits of Residential Solar"
-            title="Why Choose Solar for Your Home?"
-            description="Our customized solar solutions not only reduce your energy costs but also contribute to a greener, more sustainable future."
-            align="center"
-            className="mb-14"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {benefits.map((b, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-[#F7F8F4] border border-[#E2E8E2] hover:border-[#123C32]/40 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center mb-4">
-                  <b.icon className="w-6 h-6 stroke-[2]" />
-                </div>
-                <h3 className="text-base font-bold text-[#202724] mb-2">{b.title}</h3>
-                <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">{b.desc}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#E8A83E]/20 border border-[#E8A83E]/40 text-[#E8A83E] text-xs font-bold tracking-wider uppercase font-tech">
+                <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
+                <span>Residential Solar Solutions • 3 kW to 25 kW</span>
               </div>
-            ))}
 
-            <div className="p-6 rounded-2xl bg-[#123C32] text-white flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold text-[#E8A83E] uppercase tracking-wider block mb-1">
-                  Local Indore Support
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1] font-heading">
+                Empower Your Home with <br />
+                <span className="text-[#E8A83E] relative inline-block">
+                  Clean Solar Energy.
+                  <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                 </span>
-                <h3 className="text-lg font-bold text-white mb-2">
-                  DISCOM Net Metering Liaisoning
-                </h3>
-                <p className="text-xs text-[#E9F0E9]/80 leading-relaxed">
-                  We manage all paperwork with MPPKVVCL / DISCOM so your bi-directional meter is approved swiftly with zero hassle.
-                </p>
-              </div>
-              <div className="pt-4">
+              </h1>
+
+              <p className="text-base sm:text-lg text-[#E9F0E9]/85 leading-relaxed max-w-2xl font-normal">
+                At Proton Power Infra, we bring industrial-grade engineering to residential rooftops across Indore and India. Generate your own clean electricity, safeguard your family against rising utility tariffs, and transition to reliable solar power with seamless PM Surya Ghar subsidy support.
+              </p>
+
+              {/* Exactly ONE CTA Button */}
+              <div className="pt-2">
                 <Link
                   to="/enquiry?type=residential"
-                  className="text-xs font-bold text-[#E8A83E] hover:underline flex items-center gap-1"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
                 >
-                  <span>Apply for Subsidy Assessment →</span>
+                  <span>Request Free Home Solar Audit</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
                 </Link>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* 3. Our Process: How We Bring Solar to Your Home */}
-      <section className="py-20 bg-[#F7F8F4] border-y border-[#E2E8E2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Our Process"
-            title="How We Bring Solar to Your Home"
-            description="A seamless 4-step execution designed for zero disruption to your daily home life."
-            align="center"
-            className="mb-14"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((st, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-white border border-[#E2E8E2] shadow-sm flex flex-col justify-between"
-              >
+              {/* Micro-Metrics Bar */}
+              <div className="pt-6 border-t border-white/15 grid grid-cols-3 gap-4 font-tech">
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center font-extrabold text-sm mb-4">
-                    {st.step}
+                  <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">3 – 25 kW</div>
+                  <div className="text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                    Household Range
                   </div>
-                  <h3 className="text-base font-bold text-[#202724] mb-2">{st.title}</h3>
-                  <p className="text-xs text-[#525D57] leading-relaxed">{st.desc}</p>
+                </div>
+                <div>
+                  <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">Up to 90%</div>
+                  <div className="text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                    Monthly Savings
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">25-Year</div>
+                  <div className="text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                    Linear Warranty
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Right Interactive Visual Capsule */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/90 bg-[#202724] group transition-all duration-500">
+                <div className="relative aspect-[4/4.5] overflow-hidden bg-black/40">
+                  <img
+                    src={topImage}
+                    alt="Proton Power Infra Premium Residential Rooftop Solar Installation"
+                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
+                    loading="eager"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/95 via-[#123C32]/25 to-black/25"></div>
+                </div>
+
+                {/* Top Telemetry Capsule */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
+                    <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
+                    <span>Residential Array • Active</span>
+                  </div>
+                  <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#202724]/85 backdrop-blur-md text-[10px] font-mono text-[#E9F0E9] border border-white/10">
+                    <span>22.71° N, 75.85° E</span>
+                  </div>
+                </div>
+
+                {/* Bottom Spec Capsule */}
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/60 z-10">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#E8A83E]"></span>
+                      <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
+                        High-Yield Rooftop Monocrystalline Array
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-bold text-[#123C32] bg-[#E9F0E9] px-2 py-0.5 rounded font-mono">
+                      PM SURYA GHAR
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#525D57] leading-relaxed">
+                    Custom-engineered rooftop installations designed for independent villas, bungalows, and residential societies.
+                  </p>
+                </div>
+
+                {/* Gold Engineering Brackets */}
+                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#E8A83E] pointer-events-none z-10"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#E8A83E] pointer-events-none z-10"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 4. Why Choose Proton Power Infra for Residential Solar */}
-      <section className="py-20 bg-white">
+      {/* 2. Section 2 — Benefits of Residential Solar (Interactive 5-Pillar Compact Deck) */}
+      <section className="py-14 md:py-18 lg:py-20 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5">
-              <div className="rounded-2xl overflow-hidden border border-[#E2E8E2] shadow-lg">
-                <img
-                  src={IMAGES.residentialModern}
-                  alt="Modern villa rooftop solar by Proton Power Infra"
-                  className="w-full h-[400px] object-cover"
-                />
-              </div>
+          {/* Header */}
+          <div className="max-w-3xl mb-10 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-3">
+              <span>Benefits of Residential Solar</span>
             </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              Why Homeowners Across India Are Choosing Solar
+            </h2>
+            <p className="text-sm sm:text-base text-[#525D57] leading-relaxed mt-2.5">
+              Transform unused terrace space into a high-return clean energy asset. Hover or tap each benefit below to explore the financial and environmental returns.
+            </p>
+          </div>
 
-            <div className="lg:col-span-7 space-y-6">
-              <SectionHeading
-                eyebrow="Why Choose Proton Power Infra?"
-                title="Your Residential Solar Experts in Indore & Pan-India"
-                description="We bring the same industrial-grade engineering discipline to home rooftops that we apply to multi-megawatt solar parks."
-              />
+          {/* Interactive 5-Pillar Expanding Deck (Takes small vertical space & has ZERO empty space) */}
+          <div className="flex flex-col lg:flex-row gap-3.5 lg:h-[320px] items-stretch">
+            {benefits.map((b, idx) => {
+              const Icon = b.icon;
+              const isActive = activeBenefit === idx;
 
-              <div className="space-y-4">
-                {whyChooseUs.map((w, idx) => (
-                  <div key={idx} className="flex items-start gap-3.5">
-                    <CheckCircle2 className="w-5 h-5 text-[#123C32] shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-bold text-[#202724]">{w.title}</h4>
-                      <p className="text-xs text-[#525D57] leading-relaxed">{w.desc}</p>
+              return (
+                <div
+                  key={b.id}
+                  onMouseEnter={() => setActiveBenefit(idx)}
+                  onClick={() => setActiveBenefit(idx)}
+                  className={`rounded-2xl border transition-all duration-500 cursor-pointer overflow-hidden flex flex-col justify-between ${
+                    isActive
+                      ? "bg-[#123C32] text-white border-[#123C32] shadow-xl lg:flex-[2.5] p-6 sm:p-7 ring-2 ring-[#E8A83E]/40"
+                      : "bg-[#F7F8F4] text-[#252A27] border-[#E2E8E2] hover:border-[#123C32]/40 lg:flex-1 p-5 hover:bg-white"
+                  }`}
+                >
+                  {/* Top Bar: Icon + Number */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                        isActive
+                          ? "bg-[#E8A83E] text-[#123C32]"
+                          : "bg-white border border-[#E2E8E2] text-[#123C32]"
+                      }`}
+                    >
+                      <Icon className="w-5 h-5 stroke-[2.2]" />
+                    </div>
+                    <span
+                      className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
+                        isActive ? "bg-white/10 text-[#E8A83E]" : "bg-black/5 text-[#525D57]"
+                      }`}
+                    >
+                      {b.number}
+                    </span>
+                  </div>
+
+                  {/* Middle Content */}
+                  <div className="flex-1 flex flex-col justify-center">
+                    <div className="mb-2">
+                      <div
+                        className={`text-xl font-black font-tech tracking-tight ${
+                          isActive ? "text-[#E8A83E]" : "text-[#123C32]"
+                        }`}
+                      >
+                        {b.stat}
+                      </div>
+                      <h3
+                        className={`text-base sm:text-lg font-bold font-heading mt-0.5 ${
+                          isActive ? "text-white" : "text-[#202724]"
+                        }`}
+                      >
+                        {b.title}
+                      </h3>
+                    </div>
+
+                    {/* Expanded details visible only when active */}
+                    <div
+                      className={`overflow-hidden transition-all duration-500 ${
+                        isActive ? "max-h-60 opacity-100 mt-2" : "max-h-0 lg:max-h-0 opacity-0"
+                      }`}
+                    >
+                      <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed mb-4">
+                        {b.desc}
+                      </p>
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 border border-white/15 text-xs text-[#E8A83E] font-medium font-tech">
+                        <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                        <span>{b.highlight}</span>
+                      </div>
                     </div>
                   </div>
-                ))}
+
+                  {/* Bottom Indicator */}
+                  <div className="pt-3 mt-auto border-t border-current/10 flex items-center justify-between text-xs font-tech">
+                    <span
+                      className={`text-[11px] font-semibold uppercase tracking-wider ${
+                        isActive ? "text-[#E8A83E]" : "text-[#525D57]"
+                      }`}
+                    >
+                      {b.subtitle}
+                    </span>
+                    <span
+                      className={`transition-transform duration-300 ${
+                        isActive ? "rotate-90 text-[#E8A83E]" : "text-[#525D57]"
+                      }`}
+                    >
+                      →
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Section 3 — How We Bring Solar (Interactive 4-Phase Story Walkthrough) */}
+      <section className="py-16 md:py-20 lg:py-24 bg-[#F7F8F4]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="max-w-3xl mb-12 sm:mb-14">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-3">
+              <span>Execution Journey</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              How We Bring Solar to Your Home
+            </h2>
+            <p className="text-sm sm:text-base text-[#525D57] leading-relaxed mt-3">
+              From the initial terrace shadow scan to grid net-meter synchronization, here is the complete 4-phase turnkey story engineered for zero disruption to your daily life.
+            </p>
+          </div>
+
+          {/* Phase Navigation Tabs */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+            {phases.map((ph, idx) => {
+              const isActive = activePhase === idx;
+              return (
+                <button
+                  key={ph.step}
+                  type="button"
+                  onClick={() => setActivePhase(idx)}
+                  className={`p-4 rounded-xl border text-left transition-all cursor-pointer font-tech flex items-center gap-3.5 ${
+                    isActive
+                      ? "bg-[#123C32] text-white border-[#123C32] shadow-md ring-2 ring-[#E8A83E]/40"
+                      : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-white"
+                  }`}
+                >
+                  <div
+                    className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                      isActive ? "bg-[#E8A83E] text-[#123C32]" : "bg-[#123C32]/10 text-[#123C32]"
+                    }`}
+                  >
+                    {ph.step}
+                  </div>
+                  <div className="min-w-0">
+                    <div
+                      className={`text-[10px] font-bold uppercase tracking-wider ${
+                        isActive ? "text-[#E8A83E]" : "text-[#525D57]"
+                      }`}
+                    >
+                      Phase {ph.step}
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold truncate">
+                      {ph.title.split("&")[0].trim()}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Phase Story Stage */}
+          <div className="bg-white rounded-3xl border border-[#E2E8E2] overflow-hidden shadow-lg p-6 sm:p-8 lg:p-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Left Column: Phase Photography */}
+              <div className="lg:col-span-6 relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#E2E8E2] bg-[#202724] group">
+                  <div className="relative aspect-[16/11] overflow-hidden">
+                    <img
+                      src={currentPhaseData.image}
+                      alt={currentPhaseData.title}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+                  </div>
+
+                  {/* Phase Badge */}
+                  <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
+                    <span className="px-3.5 py-1 rounded-full text-xs font-black tracking-wide uppercase bg-[#123C32] text-[#E8A83E] shadow-sm font-tech">
+                      Phase {currentPhaseData.step} Execution
+                    </span>
+                  </div>
+
+                  {/* Subtitle Bar */}
+                  <div className="absolute bottom-3 left-3.5 right-3.5 text-xs text-white/95 font-medium font-tech truncate">
+                    {currentPhaseData.subtitle}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Story Narrative & Checkpoints */}
+              <div className="lg:col-span-6 space-y-6 text-left">
+                <div>
+                  <div className="text-xs font-bold text-[#E8A83E] uppercase tracking-wider font-tech mb-1.5">
+                    Step {currentPhaseData.step} of 04
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                    {currentPhaseData.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-[#123C32] uppercase tracking-wide font-tech mt-1">
+                    {currentPhaseData.subtitle}
+                  </p>
+                </div>
+
+                <p className="text-sm text-[#525D57] leading-relaxed">
+                  {currentPhaseData.desc}
+                </p>
+
+                {/* Key Technical Highlights */}
+                <div className="space-y-2.5 pt-2">
+                  <div className="text-xs font-bold text-[#202724] uppercase tracking-wider font-tech">
+                    Engineering Checkpoints:
+                  </div>
+                  <div className="space-y-2">
+                    {currentPhaseData.highlights.map((h, i) => (
+                      <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#202724]">
+                        <CheckCircle2 className="w-4 h-4 text-[#123C32] shrink-0 mt-0.5" />
+                        <span>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Milestone Deliverable Box */}
+                <div className="p-4 rounded-xl bg-[#E9F0E9] border border-[#123C32]/15 flex items-center justify-between gap-4 font-tech">
+                  <div>
+                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider block">
+                      Phase Milestone Deliverable:
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-[#202724]">
+                      {currentPhaseData.deliverable}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Phase Pagination Controls */}
+                <div className="pt-2 flex items-center justify-between border-t border-[#E2E8E2]">
+                  <button
+                    type="button"
+                    onClick={() => setActivePhase((prev) => (prev - 1 + phases.length) % phases.length)}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#525D57] hover:text-[#123C32] p-2 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span>Previous Phase</span>
+                  </button>
+
+                  <span className="text-xs font-mono font-bold text-[#123C32]">
+                    0{activePhase + 1} / 04
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => setActivePhase((prev) => (prev + 1) % phases.length)}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#1A4D41] p-2 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
+                  >
+                    <span>Next Phase</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. FAQs */}
-      <section className="py-20 bg-[#F7F8F4] border-t border-[#E2E8E2]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Residential FAQs"
-            title="Common Questions About Home Solar"
-            description="Clear answers regarding subsidies, terrace space requirements, and net-metering timelines."
-            align="center"
-            className="mb-12"
-          />
+      {/* 4. Section 4 — Engineered for Household Reliability (Compact & Non-Repetitive) */}
+      <section className="py-12 md:py-16 bg-white border-y border-[#E2E8E2]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Image Column using why-choose-image.jpg */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-2xl overflow-hidden border border-[#E2E8E2] shadow-md group">
+                <img
+                  src={whyChooseImg}
+                  alt="Proton Power Infra Engineered Residential Rooftop Solar"
+                  className="w-full h-72 sm:h-80 object-cover group-hover:scale-104 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/90 via-transparent to-transparent"></div>
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-white font-tech">
+                  <span className="text-xs font-bold">Terrace Preservation & Waterproofing</span>
+                  <span className="text-[10px] font-mono bg-white/20 px-2 py-0.5 rounded">
+                    25-YR DURABILITY
+                  </span>
+                </div>
+              </div>
+            </div>
 
-          <div className="space-y-4">
+            {/* Compact Technical Highlights */}
+            <div className="lg:col-span-7 space-y-4 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech">
+                <span>Engineering Discipline</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight">
+                Engineered for 25 Years of Household Reliability
+              </h2>
+
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
+                We bring the same industrial-grade engineering discipline to home rooftops that we apply to multi-megawatt utility solar parks:
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 font-tech">
+                <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2]">
+                  <div className="text-xs font-bold text-[#123C32] mb-1">
+                    ✓ High-Conversion Mono PERC
+                  </div>
+                  <p className="text-[11px] text-[#525D57] leading-normal">
+                    Tier-1 half-cut bifacial panels designed to deliver maximum generation even under severe 45°C summer heat.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2]">
+                  <div className="text-xs font-bold text-[#123C32] mb-1">
+                    ✓ Zero Roof Puncture Technology
+                  </div>
+                  <p className="text-[11px] text-[#525D57] leading-normal">
+                    Chemical anchor fastenings or elevated pergolas that preserve full terrace usability and eliminate water seepage.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2]">
+                  <div className="text-xs font-bold text-[#123C32] mb-1">
+                    ✓ Complete PM Surya Ghar Subsidy
+                  </div>
+                  <p className="text-[11px] text-[#525D57] leading-normal">
+                    End-to-end documentation assistance to ensure your direct bank transfer subsidy (up to ₹78,000) is credited promptly.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2]">
+                  <div className="text-xs font-bold text-[#123C32] mb-1">
+                    ✓ Rapid Local Indore Mobilization
+                  </div>
+                  <p className="text-[11px] text-[#525D57] leading-normal">
+                    Headquartered in Indore with quick-dispatch service engineers for proactive O&M and warranty assistance.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Common Questions (FAQs) */}
+      <section className="py-16 md:py-20 bg-[#F7F8F4]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-3">
+              <span>Residential FAQs</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              Common Questions About Home Solar
+            </h2>
+            <p className="text-sm text-[#525D57] leading-relaxed mt-2">
+              Clear answers regarding subsidies, terrace space requirements, and net-metering timelines.
+            </p>
+          </div>
+
+          <div className="space-y-3.5">
             {FAQS.residential.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
-                <div key={idx} className="rounded-xl border border-[#E2E8E2] overflow-hidden">
+                <div
+                  key={idx}
+                  className="rounded-xl border border-[#E2E8E2] overflow-hidden bg-white shadow-2xs transition-all"
+                >
                   <button
                     type="button"
                     onClick={() => toggleFaq(idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 bg-white hover:bg-[#E9F0E9] transition-colors cursor-pointer"
+                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 hover:bg-[#F7F8F4] transition-colors cursor-pointer"
                   >
-                    <span className="text-sm sm:text-base font-bold text-[#202724]">{faq.q}</span>
-                    {isOpen ? <ChevronUp className="w-5 h-5 text-[#123C32] shrink-0" /> : <ChevronDown className="w-5 h-5 text-[#525D57] shrink-0" />}
+                    <span className="text-sm sm:text-base font-bold text-[#202724] font-heading">
+                      {faq.q}
+                    </span>
+                    <div
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                        isOpen ? "bg-[#123C32] text-white" : "bg-black/5 text-[#525D57]"
+                      }`}
+                    >
+                      {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </div>
                   </button>
                   {isOpen && (
-                    <div className="p-5 text-xs sm:text-sm text-[#525D57] leading-relaxed bg-white border-t border-[#E2E8E2]">
+                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#525D57] leading-relaxed border-t border-[#E2E8E2]/60">
                       {faq.a}
                     </div>
                   )}
@@ -272,17 +674,48 @@ export default function ResidentialSolar() {
         </div>
       </section>
 
-      {/* 6. Consultation Form */}
-      <section className="py-20 bg-[#E9F0E9]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Home Solar Consultation"
-            title="Request Your Free Home Solar Feasibility Survey"
-            description="Our engineers will inspect your terrace, calculate shadow-free capacity, and provide an accurate cost and subsidy simulation."
-            align="center"
-            className="mb-10"
-          />
-          <EnquiryForm defaultCustomerType="residential" />
+      {/* 6. Compact Consultation CTA Banner (Form Replaced with Single High-Impact Action) */}
+      <section className="py-14 md:py-18 bg-[#123C32] text-white relative overflow-hidden">
+        {/* Subtle radial glow */}
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold uppercase tracking-wider border border-[#E8A83E]/40 font-tech mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Ready to Power Your Home with Clean Energy?</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight font-heading mb-4">
+            Request Your Free Home Solar Feasibility Survey
+          </h2>
+
+          <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed max-w-2xl mx-auto mb-8 font-normal">
+            Our certified solar engineers will inspect your terrace, calculate shadow-free capacity, and provide an accurate cost and PM Surya Ghar subsidy simulation with zero obligation.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/enquiry?type=residential"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
+            >
+              <span>Schedule Free On-Site Survey</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+            </Link>
+
+            <a
+              href={`tel:${COMPANY_DETAILS.primaryPhoneRaw || "+919770744687"}`}
+              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all font-tech"
+            >
+              <Phone className="w-4 h-4 text-[#E8A83E]" />
+              <span>Call Us: {COMPANY_DETAILS.primaryPhone || "+91 97707 44687"}</span>
+            </a>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-xs text-[#E9F0E9]/75 font-tech">
+            <span>✓ 100% Free On-Site Inspection</span>
+            <span>✓ PM Surya Ghar Subsidy Assistance</span>
+            <span>✓ 25-Year Performance Warranty</span>
+          </div>
         </div>
       </section>
     </div>
