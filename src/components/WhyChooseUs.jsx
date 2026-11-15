@@ -74,13 +74,13 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-10 md:py-10 lg:py-12 bg-[#E9F0E9] relative overflow-hidden">
+    <section className="py-10 md:py-10 lg:py-10 bg-[#E9F0E9] relative overflow-hidden">
       {/* Background Subtle Pattern */}
       <div className="absolute inset-0 opacity-[0.035] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header as requested */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-3">
             <span>Why choose Proton Power Infra</span>
           </div>
