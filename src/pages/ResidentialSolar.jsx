@@ -71,7 +71,7 @@ function BenefitCard({
         isActive ? "lg:flex-[2.6]" : "lg:flex-1"
       } h-auto lg:h-full`}
     >
-      {/* Dynamic Cursor-Responsive Border Glow: Follows cursor position with directional intensity (e.g. right edge glows brighter when focused) */}
+      {/* Dynamic Cursor-Responsive Border Glow */}
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300"
         style={{
@@ -84,83 +84,96 @@ function BenefitCard({
         }}
       />
 
-      {/* Inner Card Surface: Height is constant (350px on desktop), content strictly centered horizontally */}
+      {/* Inner Card Surface: Height is constant (240px on desktop), compact padding and zero empty space */}
       <div
-        className={`relative rounded-[14.5px] p-5 transition-all duration-500 overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
+        className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-500 overflow-hidden flex flex-col items-center text-center justify-between h-full w-full ${
           isActive
             ? "bg-[#123C32] text-white shadow-xl shadow-black/20"
             : "bg-white text-[#252A27] shadow-xs hover:shadow-md hover:bg-neutral-50"
         }`}
       >
-        {/* Soft Interior Ambient Glow following cursor */}
+        {/* Soft Interior Ambient Glow */}
         <div
           className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
           style={{
             background: isActive
-              ? `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.20), transparent 70%)`
-              : `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.12), transparent 70%)`,
+              ? `radial-gradient(160px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.20), transparent 70%)`
+              : `radial-gradient(160px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.12), transparent 70%)`,
           }}
         />
 
-        {/* Top / Main Group (Icon + Heading + Subheading Centered) */}
+        {/* Top Group: Icon + Heading + Subheading (Strictly Centered) */}
         <div className="relative z-10 w-full flex flex-col items-center text-center">
           {/* Centered Icon */}
           <div
             className={`rounded-xl flex items-center justify-center shrink-0 mx-auto transition-all duration-500 ${
               isActive
-                ? "w-11 h-11 bg-[#E8A83E] text-[#123C32] scale-105 shadow-[0_0_20px_rgba(232,168,62,0.4)] mb-2.5"
-                : "w-12 h-12 bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32] group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300 mb-4"
+                ? "w-8 h-8 sm:w-9 sm:h-9 bg-[#E8A83E] text-[#123C32] shadow-[0_0_16px_rgba(232,168,62,0.4)] mb-1"
+                : "w-9 h-9 sm:w-10 sm:h-10 bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32] group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300 mb-1.5"
             }`}
           >
-            <Icon className={`stroke-[2.2] transition-all duration-300 ${isActive ? "w-5 h-5" : "w-6 h-6"}`} />
+            <Icon className={`stroke-[2.2] transition-all duration-300 ${isActive ? "w-4 h-4 sm:w-4.5 sm:h-4.5" : "w-4.5 h-4.5 sm:w-5 sm:h-5"}`} />
           </div>
 
-          {/* Heading: Larger when inactive to fill vertical space cleanly, smoothly returns to original size on active */}
+          {/* Heading */}
           <h3
             className={`font-black font-heading tracking-tight transition-all duration-500 text-center mx-auto ${
               isActive
-                ? "text-base sm:text-lg text-white mb-1"
-                : "text-base sm:text-lg lg:text-xl text-[#202724] group-hover:text-[#123C32] max-w-[160px] leading-snug mb-2"
+                ? "text-xs sm:text-sm lg:text-base text-white mb-0.5"
+                : "text-xs sm:text-sm lg:text-[15px] text-[#202724] group-hover:text-[#123C32] max-w-[145px] leading-snug mb-1"
             }`}
           >
             {benefit.title}
           </h3>
 
-          {/* Subheading: Centered */}
+          {/* Subheading */}
           <div
             className={`font-mono font-bold uppercase tracking-wider transition-colors duration-300 text-center mx-auto ${
               isActive
-                ? "text-[10px] sm:text-[11px] text-[#E8A83E] mb-3"
-                : "text-[11px] sm:text-xs text-[#525D57] group-hover:text-[#E8A83E]"
+                ? "text-[9px] sm:text-[10px] text-[#E8A83E]"
+                : "text-[9px] sm:text-[10px] text-[#525D57] group-hover:text-[#E8A83E]"
             }`}
           >
             {benefit.subtitle}
           </div>
         </div>
 
-        {/* Remaining Details: Visible in Active Horizontally Expanded Card (Zero bottom growth, strictly width-based expansion) */}
+        {/* Active Expanded Details: Stat + Description + Milestone (Appears smoothly when active/hovered) */}
         <div
           className={`relative z-10 w-full flex flex-col items-center text-center transition-all duration-500 ease-out ${
             isActive
-              ? "opacity-100 max-h-48 mt-1"
-              : "opacity-0 max-h-0 overflow-hidden pointer-events-none mt-0"
+              ? "opacity-100 max-h-40 my-1 pointer-events-auto"
+              : "opacity-0 max-h-0 overflow-hidden pointer-events-none my-0"
           }`}
         >
           {/* Stat Badge */}
-          <div className="text-sm sm:text-base font-black font-tech text-[#E8A83E] text-center mb-1.5">
+          <div className="text-xs sm:text-sm font-black font-tech text-[#E8A83E] text-center mb-1">
             {benefit.stat}
           </div>
 
-          {/* Description */}
-          <p className="text-xs text-[#E9F0E9]/90 leading-relaxed text-center max-w-[280px] mx-auto mb-2.5 line-clamp-3">
+          {/* Description (Concise 2 lines) */}
+          <p className="text-[11px] sm:text-xs text-[#E9F0E9]/90 leading-snug text-center max-w-[320px] mx-auto line-clamp-2 mb-1.5">
             {benefit.desc}
           </p>
 
           {/* Milestone Highlight */}
-          <div className="pt-2 border-t border-white/10 flex items-center justify-center gap-1.5 text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full">
+          <div className="pt-1.5 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full truncate">
             <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
             <span className="truncate">{benefit.highlight}</span>
           </div>
+        </div>
+
+        {/* Inactive Bottom Metric Capsule: Fills the inactive card without empty space */}
+        <div
+          className={`relative z-10 w-full flex items-center justify-center transition-all duration-500 ${
+            isActive
+              ? "opacity-0 max-h-0 overflow-hidden pointer-events-none mt-0"
+              : "opacity-100 max-h-10 pt-1.5"
+          }`}
+        >
+          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/15 group-hover:border-[#E8A83E]/30 group-hover:text-[#9A6208] transition-all truncate max-w-full">
+            {benefit.stat}
+          </span>
         </div>
       </div>
     </div>
@@ -460,20 +473,20 @@ export default function ResidentialSolar() {
         </div>
       </section>
 
-      {/* 2. Section 2 — Benefits of Residential Solar (Compact Cards in Same Line with Auto-Glowing Hover) */}
-      <section className="py-10 md:py-10 lg:py-10 bg-white border-b border-[#E2E8E2]">
+      {/* 2. Section 2 — Benefits of Residential Solar (Compact Horizontal Accordion, Trimmed Padding, Zero Empty Space) */}
+      <section className="py-6 sm:py-7 lg:py-8 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="max-w-3xl mb-6 sm:mb-8 text-left">
+          {/* Section Header - Streamlined Margins */}
+          <div className="max-w-3xl mb-4 sm:mb-5 text-left">
             <ScrollReveal delay={0}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
                 <span>Benefits of Residential Solar</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
                 Why Homeowners Across India Are Choosing Solar
               </h2>
             </ScrollReveal>
@@ -485,9 +498,9 @@ export default function ResidentialSolar() {
             </ScrollReveal>
           </div>
 
-          {/* 5 Cards in Same Line: Horizontal Expanding Accordion (Fixed Height, Expands Rightward on Desktop) */}
+          {/* 5 Cards in Same Line: Horizontal Expanding Accordion (Compact 240px Height, Zero Empty Space in Both States) */}
           <ScrollReveal delay={150}>
-            <div className="flex flex-col lg:flex-row gap-3 sm:gap-3.5 h-auto lg:h-[350px] items-stretch">
+            <div className="flex flex-col lg:flex-row gap-2.5 sm:gap-3 h-auto lg:h-[240px] items-stretch">
               {benefits.map((b, idx) => (
                 <BenefitCard
                   key={b.id}
