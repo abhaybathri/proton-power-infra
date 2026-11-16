@@ -215,7 +215,7 @@ export default function ResidentialSolar() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
-      {/* 1. Hero Section - Engineered & Proportionate */}
+      {/* 1. Hero Section - Equal Width & Height, Centered Content */}
       <section className="relative overflow-hidden pt-10 pb-10 md:pt-14 md:pb-12 lg:pt-12 lg:pb-12 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
@@ -224,35 +224,29 @@ export default function ResidentialSolar() {
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
-              <ScrollReveal delay={0}>
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[#E8A83E]/20 border border-[#E8A83E]/40 text-[#E8A83E] text-xs font-bold tracking-wider uppercase font-tech">
-                  <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
-                  <span>Residential Solar Solutions • 3 kW to 25 kW</span>
-                </div>
-              </ScrollReveal>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+            {/* Left Content Column - Equal 50% Width, Matching Height, All Text & Buttons Centered */}
+            <div className="flex flex-col h-full w-full">
+              <ScrollReveal delay={0} className="h-full flex flex-col justify-between items-center text-center space-y-4 sm:space-y-5 py-1">
+                {/* Eyebrow Badge - Centered */}
+                
 
-              <ScrollReveal delay={70}>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] font-heading">
+                {/* Heading - Centered */}
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] font-heading text-center mx-auto max-w-lg">
                   Empower Your Home with <br />
                   <span className="text-[#E8A83E] relative inline-block">
                     Clean Solar Energy.
                     <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                   </span>
                 </h1>
-              </ScrollReveal>
 
-              <ScrollReveal delay={120}>
-                <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed font-normal text-justify-clean max-w-xl">
+                {/* Paragraph Description - Centered */}
+                <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
                   At Proton Power Infra, we bring industrial-grade engineering to residential rooftops across Indore and India. Generate your own clean electricity, safeguard your family against rising utility tariffs, and transition to reliable solar power with seamless PM Surya Ghar subsidy support.
                 </p>
-              </ScrollReveal>
 
-              {/* Clean CTA with Ambient Glow */}
-              <ScrollReveal delay={160}>
-                <div className="pt-1 flex items-center justify-start">
+                {/* CTA Button with Ambient Glow - Centered */}
+                <div className="pt-1 flex items-center justify-center w-full">
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <Link
@@ -264,11 +258,9 @@ export default function ResidentialSolar() {
                     </Link>
                   </div>
                 </div>
-              </ScrollReveal>
 
-              {/* Compact Metrics Bar */}
-              <ScrollReveal delay={200}>
-                <div className="pt-4 border-t border-white/15 grid grid-cols-3 gap-3 font-tech max-w-xl">
+                {/* Metrics Bar - Centered */}
+                <div className="pt-4 border-t border-white/15 grid grid-cols-3 gap-3 font-tech w-full max-w-lg mx-auto text-center">
                   <div>
                     <div className="text-lg sm:text-xl font-black text-[#E8A83E]">3 – 25 kW</div>
                     <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
@@ -291,12 +283,12 @@ export default function ResidentialSolar() {
               </ScrollReveal>
             </div>
 
-            {/* Right Visual Capsule: SmartImage with progressive shimmer & zero green gap */}
-            <div className="lg:col-span-5 relative">
-              <ScrollReveal delay={140}>
-                <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none">
-                  {/* Photo Frame */}
-                  <div className="relative w-full h-[280px] sm:h-[320px] lg:h-[350px] overflow-hidden bg-black/40">
+            {/* Right Visual Capsule - Equal 50% Width, Matching Height */}
+            <div className="flex flex-col h-full w-full">
+              <ScrollReveal delay={140} className="h-full flex flex-col">
+                <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
+                  {/* Photo Frame (Full Height Edge-to-Edge) */}
+                  <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] overflow-hidden bg-black/40">
                     <SmartImage
                       src={topImage}
                       alt="Proton Power Infra Premium Residential Rooftop Solar Installation"
@@ -319,10 +311,10 @@ export default function ResidentialSolar() {
                   </div>
 
                   {/* Bottom Spec Capsule */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3 sm:p-3.5 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
+                  <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse shrink-0"></span>
                         <span className="text-xs font-bold text-white uppercase tracking-wider font-tech truncate">
                           High-Yield Monocrystalline Array
                         </span>
@@ -348,10 +340,7 @@ export default function ResidentialSolar() {
           {/* Section Header */}
           <div className="max-w-3xl mb-6 sm:mb-8 text-left">
             <ScrollReveal delay={0}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-                <span>Benefits of Residential Solar</span>
-              </div>
+              
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
