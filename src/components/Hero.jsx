@@ -112,7 +112,7 @@ export default function Hero() {
   const activeSlide = HERO_SLIDES[currentSlide];
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-10 md:pt-26 md:pb-10 lg:pt-24 lg:pb-10 bg-[#F7F8F4]">
+    <section className="relative overflow-hidden pt-20 pb-8 md:pt-22 md:pb-9 lg:pt-20 lg:pb-8 bg-[#F7F8F4]">
       {/* High-tech engineering grid background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -121,11 +121,11 @@ export default function Hero() {
       <div className="absolute top-1/2 -right-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" style={{ animationDelay: "2s" }}></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Left Column (Content) */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          {/* Left Column (Content) - Perfectly Proportioned */}
+          <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-left">
             {/* Aesthetic Tech Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#202724] tracking-tight leading-[1.08] font-heading">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#202724] tracking-tight leading-[1.12] font-heading">
               Smarter Solar Solutions. <br />
               <span className="text-[#123C32] relative inline-block">
                 A Brighter Tomorrow.
@@ -134,17 +134,17 @@ export default function Hero() {
             </h1>
 
             {/* Clean Justified Description */}
-            <p className="text-base sm:text-lg text-[#525D57] leading-relaxed max-w-2xl font-normal text-justify-clean">
+            <p className="text-sm sm:text-base text-[#525D57] leading-relaxed font-normal text-justify-clean">
               Proton Power Infra is a leading solar panel installation company and power transformer manufacturer headquartered in Indore, with a nationwide footprint. Delivering high-yield solar EPC and in-house inverter duty transformers with precision, passion, and purpose.
             </p>
 
             {/* Centered CTA Button with Ambient Glow Halo */}
-            <div className="pt-2 flex items-center justify-center max-w-2xl">
+            <div className="pt-1 flex items-center justify-center max-w-xl">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-[#123C32] via-[#E8A83E] to-[#123C32] rounded-2xl blur-md opacity-25 group-hover:opacity-60 transition duration-500 group-hover:scale-105"></div>
                 <Link
                   to="/enquiry"
-                  className="relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-lg shadow-[#123C32]/25 hover:shadow-[0_0_30px_rgba(232,168,62,0.35)] transition-all duration-300 group cursor-pointer font-tech tracking-wide"
+                  className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-lg shadow-[#123C32]/25 hover:shadow-[0_0_30px_rgba(232,168,62,0.35)] transition-all duration-300 group cursor-pointer font-tech tracking-wide"
                 >
                   <span>Request a Free Consultation</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -153,10 +153,10 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Dynamic Motion Showcase Carousel */}
-          <div className="lg:col-span-5 relative">
+          {/* Right Column: Compact Balanced Motion Showcase Carousel */}
+          <div className="lg:col-span-6 relative">
             <div
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-[#123C32] group select-none transition-all duration-500 cursor-grab active:cursor-grabbing"
+              className="relative rounded-2xl overflow-hidden shadow-xl border-2 border-white/90 bg-[#123C32] group select-none transition-all duration-500 cursor-grab active:cursor-grabbing"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               onTouchStart={handleTouchStart}
@@ -164,8 +164,8 @@ export default function Hero() {
               onPointerDown={handleTouchStart}
               onPointerUp={handleTouchEnd}
             >
-              {/* Image Presentation Frame with Progressive Shimmer & Motion */}
-              <div className="relative aspect-[4/4.5] overflow-hidden bg-black/40">
+              {/* Image Presentation Frame with Balanced Compact Height */}
+              <div className="relative aspect-[16/10] sm:aspect-[16/10] lg:h-[345px] overflow-hidden bg-black/40">
                 {HERO_SLIDES.map((slide, idx) => {
                   const isActive = idx === currentSlide;
                   return (
@@ -179,53 +179,65 @@ export default function Hero() {
                         src={slide.image}
                         alt={`Proton Power Infra ${slide.title}`}
                         className={`w-full h-full object-cover transition-transform duration-7000 ease-out ${
-                          isActive && !isHovered ? "scale-108" : "scale-100"
+                          isActive && !isHovered ? "scale-106" : "scale-100"
                         }`}
                         priority={idx === 0}
                       />
                       {/* Gradient overlay for contrast and telemetry readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/95 via-[#123C32]/25 to-black/35 pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 pointer-events-none"></div>
                     </div>
                   );
                 })}
               </div>
 
               {/* High-Tech Top Overlay Bar */}
-              <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
-                  <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
+              <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
+                <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-bold text-[#123C32] shadow-sm font-tech">
+                  <Activity className="w-3 h-3 text-[#E8A83E] animate-pulse" />
                   <span className="transition-all duration-300">{activeSlide.telemetry}</span>
                 </div>
-                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#202724]/85 backdrop-blur-md text-[10px] font-mono text-[#E9F0E9] border border-white/10">
+                <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[9px] font-mono text-[#E9F0E9] border border-white/10">
                   <span>{activeSlide.coordinates}</span>
                 </div>
               </div>
 
               {/* Navigation Arrows (Interactive on hover/tap) */}
-              <div className="absolute top-1/2 -translate-y-1/2 left-3 right-3 z-30 flex items-center justify-between pointer-events-none">
+              <div className="absolute top-1/2 -translate-y-1/2 left-2 right-2 z-30 flex items-center justify-between pointer-events-none">
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="pointer-events-auto w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#123C32] shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 opacity-70 group-hover:opacity-100 hover:scale-110 cursor-pointer focus:outline-none"
+                  className="pointer-events-auto w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#123C32] shadow-md backdrop-blur-md flex items-center justify-center transition-all duration-200 opacity-70 group-hover:opacity-100 hover:scale-110 cursor-pointer focus:outline-none"
                   aria-label="Previous Slide"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="pointer-events-auto w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#123C32] shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 opacity-70 group-hover:opacity-100 hover:scale-110 cursor-pointer focus:outline-none"
+                  className="pointer-events-auto w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#123C32] shadow-md backdrop-blur-md flex items-center justify-center transition-all duration-200 opacity-70 group-hover:opacity-100 hover:scale-110 cursor-pointer focus:outline-none"
                   aria-label="Next Slide"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Bottom Interactive Control Capsule */}
-              <div className="absolute bottom-4 left-4 right-4 z-20 p-4 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/60 transition-all duration-300">
+              {/* Bottom Compact Telemetry Capsule */}
+              <div className="absolute bottom-3 left-3 right-3 z-20 px-3.5 py-2.5 rounded-xl bg-black/65 backdrop-blur-md shadow-lg border border-white/15 transition-all duration-300 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-2 h-2 rounded-full bg-[#E8A83E] shrink-0 animate-pulse"></span>
+                  <div className="truncate">
+                    <span className="text-xs font-bold text-white uppercase tracking-wider font-tech block truncate">
+                      {activeSlide.title}
+                    </span>
+                    <span className="text-[10px] text-gray-300 font-mono hidden sm:inline">
+                      {activeSlide.tag} • {activeSlide.subtitle}
+                    </span>
+                  </div>
+                </div>
+
                 {/* Progress Indicators & Slide Counter */}
-                <div className="flex items-center justify-between gap-3 mb-2.5">
-                  <div className="flex items-center gap-1.5 flex-1">
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex items-center gap-1">
                     {HERO_SLIDES.map((_, i) => (
                       <button
                         key={i}
@@ -234,49 +246,22 @@ export default function Hero() {
                           e.stopPropagation();
                           setCurrentSlide(i);
                         }}
-                        className="flex-1 h-1.5 rounded-full overflow-hidden bg-gray-200 relative cursor-pointer"
+                        className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                          i === currentSlide ? "w-5 bg-[#E8A83E]" : "w-1.5 bg-white/40 hover:bg-white/70"
+                        }`}
                         aria-label={`Jump to slide ${i + 1}`}
-                      >
-                        <div
-                          className={`h-full transition-all ${
-                            i === currentSlide
-                              ? "bg-[#123C32] w-full"
-                              : i < currentSlide
-                              ? "bg-[#123C32]/60 w-full"
-                              : "w-0"
-                          }`}
-                        />
-                      </button>
+                      />
                     ))}
                   </div>
-
-                  <span className="text-[10px] font-mono font-bold text-[#123C32] px-1.5 py-0.5 rounded bg-[#123C32]/10 shrink-0">
-                    0{currentSlide + 1} / 0{HERO_SLIDES.length}
+                  <span className="text-[10px] font-mono font-bold text-[#E8A83E] px-1.5 py-0.5 rounded bg-white/10">
+                    0{currentSlide + 1}/0{HERO_SLIDES.length}
                   </span>
                 </div>
-
-                {/* Dynamic Title & Tag */}
-                <div className="flex items-center justify-between mb-1.5 gap-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="w-2 h-2 rounded-full bg-[#E8A83E] shrink-0 animate-pulse"></span>
-                    <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech truncate">
-                      {activeSlide.title}
-                    </span>
-                  </div>
-                  <span className="text-[9px] font-bold text-[#123C32] bg-[#E9F0E9] px-2 py-0.5 rounded font-mono shrink-0 uppercase">
-                    {activeSlide.tag}
-                  </span>
-                </div>
-
-                {/* Dynamic Subtitle */}
-                <p className="text-xs text-[#525D57] leading-relaxed line-clamp-2">
-                  {activeSlide.subtitle}
-                </p>
               </div>
 
               {/* Corner Engineering Accents */}
-              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#E8A83E] pointer-events-none z-20"></div>
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#E8A83E] pointer-events-none z-20"></div>
+              <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#E8A83E] pointer-events-none z-20"></div>
+              <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-[#E8A83E] pointer-events-none z-20"></div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Award, Cpu, Users, MapPin, FileCheck, Sparkles, CheckCircle2 } from "lucide-react";
 
-function PillarCard({ pillar }) {
+function PillarCard({ pillar, index }) {
   const Icon = pillar.icon;
   const cardRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -20,27 +20,35 @@ function PillarCard({ pillar }) {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="relative bg-white rounded-2xl p-4 sm:p-5 border border-[#E2E8E2] hover:border-[#123C32]/60 shadow-2xs hover:shadow-xl hover:shadow-[#123C32]/10 transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:-translate-y-1.5 cursor-pointer"
+      className="relative bg-white rounded-2xl p-4 sm:p-5 border border-[#E2E8E2] hover:border-[#E8A83E]/70 shadow-2xs hover:shadow-xl hover:shadow-[#E8A83E]/15 transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:-translate-y-2 cursor-pointer"
     >
-      {/* Interactive Cursor Spotlight Glow following mouse coordinates */}
+      {/* Top Illuminated Accent Bar on Hover */}
+      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#123C32] via-[#E8A83E] to-[#123C32] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+
+      {/* Interactive Luminous Spotlight Glow (Golden Solar Energy - Never Dark) */}
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
-          background: `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.18), rgba(18, 60, 50, 0.1) 50%, transparent 80%)`,
+          background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.22), rgba(254, 243, 199, 0.12) 50%, transparent 75%)`,
         }}
       />
 
       {/* Subtle Glowing Border Ring on Hover */}
       <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ring-1 ring-inset ring-[#E8A83E]/40 z-0" />
 
+      {/* Architectural Watermark in Background */}
+      <div className="absolute -bottom-2 -right-1 font-tech font-black text-4xl text-[#123C32]/[0.03] group-hover:text-[#E8A83E]/12 pointer-events-none transition-colors select-none z-0">
+        0{index + 1}
+      </div>
+
       <div className="relative z-10">
-        {/* Top: Icon & Metric Tag */}
+        {/* Top: Radiant Glowing Icon & High-Contrast Stat Tag */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="w-10 h-10 rounded-xl bg-[#E9F0E9] text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] group-hover:scale-110 group-hover:rotate-2 group-hover:shadow-[0_0_20px_rgba(232,168,62,0.35)] flex items-center justify-center shrink-0 transition-all duration-300">
+          <div className="w-11 h-11 rounded-xl bg-[#E9F0E9] text-[#123C32] border border-[#123C32]/10 group-hover:bg-gradient-to-br group-hover:from-amber-100 group-hover:to-amber-200 group-hover:text-amber-900 group-hover:border-amber-400/60 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_0_24px_rgba(232,168,62,0.45)] flex items-center justify-center shrink-0 transition-all duration-300">
             <Icon className="w-5 h-5 stroke-[2.2]" />
           </div>
 
-          <span className="text-xs font-black font-tech px-2.5 py-1 rounded-md bg-[#123C32]/10 text-[#123C32] group-hover:bg-[#123C32] group-hover:text-[#E8A83E] transition-all duration-300">
+          <span className="text-xs font-black font-tech px-2.5 py-1 rounded-md bg-[#123C32]/8 text-[#123C32] border border-[#123C32]/10 group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300 group-hover:scale-105 group-hover:shadow-xs transition-all duration-300">
             {pillar.stat}
           </span>
         </div>
@@ -50,15 +58,17 @@ function PillarCard({ pillar }) {
           {pillar.title}
         </h3>
 
-        <p className="text-[11px] sm:text-xs text-[#525D57] leading-relaxed">
+        <p className="text-[11px] sm:text-xs text-[#525D57] group-hover:text-[#25322B] leading-relaxed transition-colors">
           {pillar.desc}
         </p>
       </div>
 
-      {/* Bottom Micro-Badge */}
-      <div className="relative z-10 pt-3 mt-3 border-t border-[#E2E8E2]/70 flex items-center gap-1.5 text-[10px] font-tech text-[#123C32] font-semibold">
-        <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
-        <span className="truncate">{pillar.tag}</span>
+      {/* Bottom Micro-Badge - Bright & Elegant */}
+      <div className="relative z-10 pt-3 mt-3 border-t border-[#E2E8E2]/70 flex items-center gap-1.5">
+        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#123C32]/5 group-hover:bg-amber-50 group-hover:border group-hover:border-amber-200/80 text-[10px] font-tech text-[#123C32] group-hover:text-amber-950 font-bold transition-all duration-300 truncate">
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] group-hover:scale-110 transition-transform shrink-0" />
+          <span className="truncate">{pillar.tag}</span>
+        </div>
       </div>
     </div>
   );
@@ -150,8 +160,8 @@ export default function WhyChooseUs() {
 
         {/* 5-Card Panoramic Bento with Interactive Spotlight Glow */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-stretch">
-          {pillars.map((pillar) => (
-            <PillarCard key={pillar.id} pillar={pillar} />
+          {pillars.map((pillar, idx) => (
+            <PillarCard key={pillar.id} pillar={pillar} index={idx} />
           ))}
         </div>
       </div>

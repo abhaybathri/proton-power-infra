@@ -1,6 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Target, CheckCircle2, Sun, Zap, ShieldCheck, Cpu, Award } from "lucide-react";
+import {
+  ArrowRight,
+  Target,
+  Sun,
+  Zap,
+  ShieldCheck,
+  Cpu,
+  Award,
+  ChevronLeft,
+  ChevronRight,
+  Pause,
+  Play,
+  Sparkles,
+  Layers,
+} from "lucide-react";
 import SmartImage from "./SmartImage";
 
 // Home Assets Images
@@ -10,7 +24,86 @@ import industrialImg from "../assets/home-assets/industrial-solar.jpg";
 import transformerImg from "../assets/home-assets/solar-transformer.jpg";
 import turnkeyImg from "../assets/home-assets/turnkey-solar.jpg";
 
-function SolarCard({ sol }) {
+const INFRA_CAPABILITIES = [
+  {
+    id: "residential",
+    slug: "residential-solar",
+    step: "01",
+    index: "01 // ROOFTOP",
+    title: "Residential Solar",
+    capacity: "3 kW to 25 kW",
+    target: "Villas & Housing Societies",
+    tagline: "Cut household electricity bills up to 90% with custom rooftop net-metering and MNRE subsidy assistance.",
+    highlights: ["Rooftop & Terrace Arrays", "Net-Metering Subsidy", "Tier-1 Mono PERC"],
+    cta: "Explore Residential",
+    image: residentialImg,
+    icon: Sun,
+    badgeColor: "bg-emerald-500",
+  },
+  {
+    id: "commercial",
+    slug: "commercial-solar",
+    step: "02",
+    index: "02 // COMMERCIAL",
+    title: "Commercial Solar",
+    capacity: "25 kW to 500+ kW",
+    target: "Offices, Campuses & Hospitals",
+    tagline: "High-yield commercial arrays maximizing ROI with 40% accelerated tax depreciation and peak demand shaving.",
+    highlights: ["Rooftop & Ground Mount", "40% Accelerated Tax", "3.2 Year Payback"],
+    cta: "Explore Commercial",
+    image: commercialImg,
+    icon: Zap,
+    badgeColor: "bg-amber-500",
+  },
+  {
+    id: "industrial",
+    slug: "industrial-solar",
+    step: "03",
+    index: "03 // INDUSTRIAL",
+    title: "Industrial Captive",
+    capacity: "500 kW to 10+ MW",
+    target: "Manufacturing Plants & Mills",
+    tagline: "Heavy-duty captive solar systems shaving peak power tariffs for energy-intensive factories with HT grid sync.",
+    highlights: ["MW-Scale Captive Solar", "HT Grid Synchronization", "Zero-Export Protection"],
+    cta: "Explore Industrial",
+    image: industrialImg,
+    icon: ShieldCheck,
+    badgeColor: "bg-blue-500",
+  },
+  {
+    id: "transformers",
+    slug: "power-transformers",
+    step: "04",
+    index: "04 // TRANSFORMERS",
+    title: "Power Transformers Mfg",
+    capacity: "Custom KVA / MVA Ratings",
+    target: "Solar Parks, Substations & Utilities",
+    tagline: "Manufactured in-house in Dewas: Inverter Duty Solar Transformers with complete step-up/step-down repair facilities.",
+    highlights: ["In-House Dewas Plant", "IS 2026 / IEC 60076", "Routine & Type Tested"],
+    cta: "Explore Transformers",
+    image: transformerImg,
+    icon: Cpu,
+    badgeColor: "bg-amber-600",
+  },
+  {
+    id: "epc-services",
+    slug: "solar-epc-services",
+    step: "05",
+    index: "05 // TURNKEY EPC",
+    title: "Turnkey Solar EPC & O&M",
+    capacity: "125+ MW Proven Track Record",
+    target: "Park Developers, IPPs & Tenders",
+    tagline: "End-to-end liaisoning from MNRE approvals and 3D irradiance modeling to civil erection and 24/7 IoT SCADA telemetry.",
+    highlights: ["Full CEIG Approvals", "Transmission Line Bay", "24/7 IoT SCADA Telemetry"],
+    cta: "Explore Turnkey EPC",
+    image: turnkeyImg,
+    icon: Award,
+    badgeColor: "bg-emerald-600",
+  },
+];
+
+function StreamCard({ item, isHovered, onHover, onLeave }) {
+  const Icon = item.icon;
   const cardRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -27,284 +120,244 @@ function SolarCard({ sol }) {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="group relative bg-white rounded-2xl overflow-hidden border border-[#E2E8E2] hover:border-[#123C32]/60 shadow-2xs hover:shadow-xl hover:shadow-[#123C32]/10 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5"
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      className="group/card relative w-[310px] sm:w-[350px] shrink-0 bg-white rounded-2xl overflow-hidden border border-[#E2E8E2] hover:border-[#E8A83E]/70 shadow-sm hover:shadow-2xl hover:shadow-[#123C32]/15 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 cursor-pointer select-none"
     >
+      {/* Top Gradient Accent Line */}
+      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#123C32] via-[#E8A83E] to-[#123C32] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-20" />
+
       {/* Interactive Cursor Spotlight Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-10"
         style={{
-          background: `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.15), rgba(18, 60, 50, 0.08) 50%, transparent 80%)`,
+          background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.22), rgba(254, 243, 199, 0.12) 50%, transparent 75%)`,
         }}
       />
 
-      <div className="relative z-10">
-        {/* Top Image Frame with Smart Progressive Loading */}
-        <div className="relative h-44 sm:h-48 overflow-hidden bg-[#202724]">
-          <SmartImage
-            src={sol.image}
-            alt={sol.title}
-            className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-            containerClassName="w-full h-full"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none"></div>
+      {/* Top Image Frame with Smart Progressive Loading */}
+      <div className="relative h-44 overflow-hidden bg-[#202724]">
+        <SmartImage
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover group-hover/card:scale-108 transition-transform duration-700 ease-out"
+          containerClassName="w-full h-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20 pointer-events-none"></div>
 
-          {/* Top Glassmorphic Telemetry Bar */}
-          <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5 pointer-events-none">
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold font-tech uppercase tracking-wide bg-white/95 text-[#123C32] shadow-sm flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] animate-pulse"></span>
-              <span>{sol.capacity}</span>
-            </span>
-            <span className="px-2 py-1 rounded-full text-[9px] font-bold font-tech uppercase tracking-wider bg-black/60 backdrop-blur-md text-[#E9F0E9] border border-white/15">
-              {sol.index}
-            </span>
-          </div>
-
-          {/* Target Application Capsule */}
-          <div className="absolute bottom-2.5 left-2.5 right-2.5 pointer-events-none">
-            <div className="flex items-center gap-1.5 text-[10px] font-semibold text-[#E8A83E] bg-[#202724]/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 truncate shadow-xs">
-              <Target className="w-3 h-3 shrink-0" />
-              <span className="truncate">{sol.target}</span>
-            </div>
-          </div>
+        {/* Top Telemetry Pills */}
+        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5 pointer-events-none z-10">
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold font-tech uppercase tracking-wide bg-white/95 text-[#123C32] shadow-sm flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] animate-pulse"></span>
+            <span>{item.capacity}</span>
+          </span>
+          <span className="px-2 py-1 rounded-full text-[9px] font-bold font-mono uppercase tracking-wider bg-black/60 backdrop-blur-md text-[#E9F0E9] border border-white/15">
+            {item.index}
+          </span>
         </div>
 
-        {/* Body Content */}
-        <div className="p-4 sm:p-5 space-y-2">
-          <h3 className="text-base sm:text-lg font-bold text-[#202724] group-hover:text-[#123C32] transition-colors font-heading tracking-tight leading-snug">
-            {sol.title}
-          </h3>
-          <p className="text-[11px] sm:text-xs text-[#525D57] leading-relaxed line-clamp-2">
-            {sol.tagline}
+        {/* Target Audience Capsule */}
+        <div className="absolute bottom-2.5 left-2.5 right-2.5 pointer-events-none z-10">
+          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-[#E8A83E] bg-[#202724]/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 truncate shadow-xs">
+            <Target className="w-3 h-3 shrink-0" />
+            <span className="truncate">{item.target}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Body Content */}
+      <div className="p-4 sm:p-4.5 space-y-2.5 relative z-10 flex flex-col justify-between flex-1">
+        <div>
+          {/* Title & Icon Header */}
+          <div className="flex items-center justify-between gap-2 mb-1">
+            <h3 className="text-base font-bold text-[#202724] group-hover/card:text-[#123C32] transition-colors font-heading tracking-tight leading-snug">
+              {item.title}
+            </h3>
+            <div className="w-8 h-8 rounded-lg bg-[#E9F0E9] group-hover/card:bg-amber-100 text-[#123C32] group-hover/card:text-amber-900 border border-[#123C32]/10 group-hover/card:border-amber-300 flex items-center justify-center shrink-0 transition-all duration-300">
+              <Icon className="w-4 h-4" />
+            </div>
+          </div>
+
+          {/* Punchy Tagline */}
+          <p className="text-[11px] text-[#525D57] group-hover/card:text-[#25322B] leading-relaxed line-clamp-2 transition-colors">
+            {item.tagline}
           </p>
 
           {/* Micro-Spec Highlights */}
-          <div className="pt-2 flex flex-wrap gap-1.5">
-            {sol.highlights.map((h, hIdx) => (
+          <div className="pt-2 flex flex-wrap gap-1">
+            {item.highlights.map((h, hIdx) => (
               <span
                 key={hIdx}
-                className="px-2 py-0.5 rounded-md text-[10px] font-tech font-medium bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724]"
+                className="px-2 py-0.5 rounded-md text-[9.5px] font-tech font-semibold bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] group-hover/card:border-[#E8A83E]/40 transition-colors"
               >
                 {h}
               </span>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Explore Action Link */}
-      <div className="relative z-10 p-4 sm:p-5 pt-0">
-        <Link
-          to={`/${sol.slug}`}
-          className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-xl bg-[#F7F8F4] group-hover:bg-[#123C32] text-[#123C32] group-hover:text-white border border-[#E2E8E2] group-hover:border-[#123C32] font-tech text-xs font-bold transition-all duration-300 shadow-2xs group-hover:shadow-md"
-        >
-          <span>{sol.cta}</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-200" />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-function InfraCard({ sol }) {
-  const cardRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      className="group relative bg-white rounded-2xl overflow-hidden border border-[#E2E8E2] hover:border-[#123C32]/60 shadow-2xs hover:shadow-xl hover:shadow-[#123C32]/10 transition-all duration-300 grid grid-cols-1 sm:grid-cols-12 hover:-translate-y-1.5"
-    >
-      {/* Interactive Cursor Spotlight Glow */}
-      <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-        style={{
-          background: `radial-gradient(280px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.15), rgba(18, 60, 50, 0.08) 50%, transparent 80%)`,
-        }}
-      />
-
-      {/* Left Visual Column */}
-      <div className="sm:col-span-5 relative overflow-hidden bg-[#202724] min-h-[170px] sm:min-h-full">
-        <SmartImage
-          src={sol.image}
-          alt={sol.title}
-          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-          containerClassName="w-full h-full"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/90 via-black/35 to-transparent pointer-events-none"></div>
-
-        {/* Top Badges */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start pointer-events-none">
-          <span className="px-2.5 py-0.5 rounded-full text-[9px] font-bold font-tech uppercase tracking-wider bg-[#E8A83E] text-[#123C32] shadow-xs">
-            {sol.badge}
-          </span>
-          <span className="px-2 py-0.5 rounded-full text-[9px] font-bold font-tech uppercase tracking-wide bg-black/60 backdrop-blur-xs text-[#E9F0E9] border border-white/15">
-            {sol.index}
-          </span>
+        {/* Explore Architecture Action Button */}
+        <div className="pt-2">
+          <Link
+            to={`/${item.slug}`}
+            className="w-full inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-[#F7F8F4] group-hover/card:bg-[#123C32] text-[#123C32] group-hover/card:text-white border border-[#E2E8E2] group-hover/card:border-[#123C32] font-tech text-xs font-bold transition-all duration-300 shadow-2xs group-hover/card:shadow-md cursor-pointer"
+          >
+            <span>{item.cta}</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover/card:translate-x-1 transition-transform duration-200" />
+          </Link>
         </div>
-
-        {/* Capacity Micro-Badge */}
-        <div className="absolute bottom-2.5 left-2.5 right-2.5 text-[10px] font-tech font-bold text-white/95 pointer-events-none truncate bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded border border-white/10">
-          {sol.capacity}
-        </div>
-      </div>
-
-      {/* Right Content Column */}
-      <div className="relative z-10 sm:col-span-7 p-4 sm:p-5 flex flex-col justify-between space-y-3">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-[#123C32] truncate font-tech">
-            <Target className="w-3 h-3 text-[#E8A83E] shrink-0" />
-            <span className="truncate">{sol.target}</span>
-          </div>
-
-          <h3 className="text-base sm:text-lg font-bold text-[#202724] group-hover:text-[#123C32] transition-colors font-heading tracking-tight leading-snug">
-            {sol.title}
-          </h3>
-
-          <p className="text-[11px] sm:text-xs text-[#525D57] leading-relaxed line-clamp-2">
-            {sol.tagline}
-          </p>
-
-          {/* Features Strip */}
-          <div className="pt-1.5 space-y-1 font-tech">
-            {sol.features.map((f, fIdx) => (
-              <div key={fIdx} className="flex items-center gap-1.5 text-[10px] text-[#202724]">
-                <CheckCircle2 className="w-3 h-3 text-[#123C32] shrink-0" />
-                <span className="truncate">{f}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Explore Action Button */}
-        <Link
-          to={`/${sol.slug}`}
-          className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-xl bg-[#F7F8F4] group-hover:bg-[#123C32] text-[#123C32] group-hover:text-white border border-[#E2E8E2] group-hover:border-[#123C32] font-tech text-xs font-bold transition-all duration-300 shadow-2xs group-hover:shadow-md"
-        >
-          <span>{sol.cta}</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-200" />
-        </Link>
       </div>
     </div>
   );
 }
 
 export default function SolarSolutions() {
-  const solarOfferings = [
-    {
-      id: "residential",
-      slug: "residential-solar",
-      index: "01 • ROOFTOP",
-      title: "Residential Solar",
-      capacity: "3 kW to 25 kW",
-      target: "Villas & Housing Societies",
-      tagline: "Cut household electricity bills up to 90% with custom rooftop net-metering.",
-      highlights: ["Rooftop & Terrace Arrays", "Net-Metering Support"],
-      cta: "Explore Residential",
-      image: residentialImg,
-      icon: Sun,
-    },
-    {
-      id: "commercial",
-      slug: "commercial-solar",
-      index: "02 • COMMERCIAL",
-      title: "Commercial Solar",
-      capacity: "25 kW to 500+ kW",
-      target: "Offices, Campuses & Hospitals",
-      tagline: "High-yield commercial arrays maximizing ROI and 40% accelerated tax depreciation.",
-      highlights: ["Rooftop & Ground Mount", "Accelerated Depreciation"],
-      cta: "Explore Commercial",
-      image: commercialImg,
-      icon: Zap,
-    },
-    {
-      id: "industrial",
-      slug: "industrial-solar",
-      index: "03 • INDUSTRIAL",
-      title: "Industrial Captive",
-      capacity: "500 kW to 10+ MW",
-      target: "Manufacturing Plants & Mills",
-      tagline: "Heavy-duty captive solar systems shaving peak power tariffs for factories.",
-      highlights: ["MW-Scale Captive Solar", "HT Grid Synchronization"],
-      cta: "Explore Industrial",
-      image: industrialImg,
-      icon: ShieldCheck,
-    },
-  ];
+  const [isPaused, setIsPaused] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const scrollContainerRef = useRef(null);
 
-  const infraOfferings = [
-    {
-      id: "transformers",
-      slug: "power-transformers",
-      index: "04 • TRANSFORMERS",
-      badge: "In-House Manufacturing",
-      title: "Power Transformers Manufacturer",
-      capacity: "Custom KVA / MVA Ratings",
-      target: "Solar Parks, Substations & Utilities",
-      tagline: "Proton Power Infra manufactures high-efficiency Inverter Duty Solar Transformers with complete step-up/step-down repair in Dewas.",
-      features: [
-        "Inverter Duty Solar Transformers",
-        "Step-Up & Step-Down HT Repair",
-        "Tested to IS 2026 / IEC 60076",
-      ],
-      cta: "Explore Power Transformers",
-      image: transformerImg,
-      icon: Cpu,
-    },
-    {
-      id: "epc-services",
-      slug: "solar-epc-services",
-      index: "05 • TURNKEY EPC",
-      badge: "Turnkey EPC Backbone",
-      title: "Turnkey Solar EPC & O&M",
-      capacity: "125+ MW Proven Track Record",
-      target: "Park Developers, IPPs & Tenders",
-      tagline: "From MNRE approvals and 3D irradiance modeling to Tier-1 procurement, structural civil erection, and 24/7 IoT SCADA monitoring.",
-      features: [
-        "MNRE Liaisoning & PPA Drafting",
-        "Civil Erection & Transmission Line",
-        "24/7 IoT SCADA Telemetry O&M",
-      ],
-      cta: "Explore Turnkey EPC",
-      image: turnkeyImg,
-      icon: Award,
-    },
-  ];
+  // Combine items twice to make continuous infinite marquee
+  const streamItems = [...INFRA_CAPABILITIES, ...INFRA_CAPABILITIES];
+
+  const handlePrev = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -360, behavior: "smooth" });
+    }
+  };
+
+  const handleNext = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 360, behavior: "smooth" });
+    }
+  };
 
   return (
-    <section id="solutions" className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] scroll-mt-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Clean, Non-Repetitive Section Header (Common Badges Removed) */}
-        <div className="max-w-3xl mb-6 text-left">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
-            Complete Clean Energy Infrastructure
-          </h2>
+    <section id="solutions" className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] scroll-mt-20 relative overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1.5 font-normal">
-            From high-yield private rooftop installations to utility-scale solar parks and custom in-house inverter duty transformers engineered under one roof.
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header with Live Stream Status and Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-5 sm:mb-6 gap-4">
+          <div className="max-w-2xl">
+            {/* Live Automated Stream Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
+              <span className={`w-2 h-2 rounded-full ${isPaused ? "bg-amber-500" : "bg-emerald-500 animate-pulse"}`}></span>
+              <span>{isPaused ? "Stream Paused for Inspection" : "Live Automated Capability Stream • Hover to Pause"}</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              Complete Clean Energy Infrastructure
+            </h2>
+
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal">
+              From high-yield private rooftop installations to utility-scale solar parks and custom in-house inverter duty transformers engineered under one roof.
+            </p>
+          </div>
+
+          {/* Interactive Navigation & Play/Pause Controls */}
+          <div className="flex items-center gap-2 self-start md:self-end shrink-0">
+            {/* Play/Pause Toggle */}
+            <button
+              type="button"
+              onClick={() => setIsPaused((prev) => !prev)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-[#E2E8E2] text-xs font-bold text-[#123C32] hover:bg-[#123C32] hover:text-white transition-all shadow-2xs font-tech cursor-pointer"
+              title={isPaused ? "Resume automated flow" : "Pause stream"}
+            >
+              {isPaused ? (
+                <>
+                  <Play className="w-3.5 h-3.5 text-[#E8A83E] fill-current" />
+                  <span>Resume</span>
+                </>
+              ) : (
+                <>
+                  <Pause className="w-3.5 h-3.5 text-[#123C32]" />
+                  <span>Pause</span>
+                </>
+              )}
+            </button>
+
+            {/* Manual Slide Controls */}
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="w-8 h-8 rounded-lg bg-white border border-[#E2E8E2] text-[#123C32] hover:bg-[#123C32] hover:text-white flex items-center justify-center transition-all shadow-2xs cursor-pointer"
+              aria-label="Previous capability"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="w-8 h-8 rounded-lg bg-white border border-[#E2E8E2] text-[#123C32] hover:bg-[#123C32] hover:text-white flex items-center justify-center transition-all shadow-2xs cursor-pointer"
+              aria-label="Next capability"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Row 1: 3 Solar Generation Offerings with Smart Shimmer & Spotlight Hover */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-4.5 items-stretch">
-          {solarOfferings.map((sol) => (
-            <SolarCard key={sol.id} sol={sol} />
-          ))}
+        {/* Interactive Timeline Step Navigation Rail */}
+        <div className="mb-5 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex items-center justify-between min-w-[620px] p-2 rounded-xl bg-white/80 backdrop-blur-xs border border-[#E2E8E2] shadow-2xs font-tech text-xs">
+            {INFRA_CAPABILITIES.map((cap, idx) => {
+              const Icon = cap.icon;
+              const isActive = activeStep === idx;
+              return (
+                <div
+                  key={cap.id}
+                  onMouseEnter={() => {
+                    setActiveStep(idx);
+                    setIsPaused(true);
+                  }}
+                  onMouseLeave={() => setIsPaused(false)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    isActive
+                      ? "bg-[#123C32] text-white shadow-xs font-bold"
+                      : "text-[#525D57] hover:text-[#123C32] hover:bg-[#E9F0E9]/70"
+                  }`}
+                >
+                  <span className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-mono ${
+                    isActive ? "bg-[#E8A83E] text-[#123C32] font-black" : "bg-[#123C32]/10 text-[#123C32]"
+                  }`}>
+                    {cap.step}
+                  </span>
+                  <span className="font-semibold whitespace-nowrap">{cap.title}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
+      </div>
 
-        {/* Row 2: 2 Heavy Infrastructure Pillars (Horizontal Split Cards with Spotlight Glow) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-4.5 mt-4 sm:mt-4.5 items-stretch">
-          {infraOfferings.map((sol) => (
-            <InfraCard key={sol.id} sol={sol} />
+      {/* Automated Continuous Floating Track with Edge Gradient Fade Masks */}
+      <div
+        ref={scrollContainerRef}
+        className="relative w-full overflow-hidden py-2"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        {/* Left Optical Fade Mask */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-[#F7F8F4] to-transparent z-20"></div>
+
+        {/* Right Optical Fade Mask */}
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-[#F7F8F4] to-transparent z-20"></div>
+
+        {/* Flow Rail with Continuous Seamless CSS Animation */}
+        <div
+          className="flex gap-4 sm:gap-5 px-4 animate-float-stream"
+          style={{ animationPlayState: isPaused ? "paused" : "running" }}
+        >
+          {streamItems.map((item, idx) => (
+            <StreamCard
+              key={`${item.id}-${idx}`}
+              item={item}
+              onHover={() => {
+                setIsPaused(true);
+                setActiveStep(idx % INFRA_CAPABILITIES.length);
+              }}
+              onLeave={() => setIsPaused(false)}
+            />
           ))}
         </div>
       </div>

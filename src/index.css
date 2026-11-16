@@ -110,3 +110,31 @@
   text-justify: inter-word;
   hyphens: auto;
 }
+
+/* Automated Floating Stream (Marquee) */
+@keyframes floatStream {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-float-stream {
+  display: flex;
+  width: max-content;
+  animation: floatStream 42s linear infinite;
+  will-change: transform;
+}
+
+.animate-float-stream:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-stream {
+    animation: none;
+    overflow-x: auto;
+  }
+}
