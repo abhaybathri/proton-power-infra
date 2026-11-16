@@ -156,7 +156,7 @@ export default function Hero() {
           {/* Right Column: Compact Balanced Motion Showcase Carousel */}
           <div className="lg:col-span-6 relative">
             <div
-              className="relative rounded-2xl overflow-hidden shadow-xl border-2 border-white/90 bg-[#123C32] group select-none transition-all duration-500 cursor-grab active:cursor-grabbing"
+              className="relative w-full rounded-2xl overflow-hidden shadow-xl border-2 border-white/90 bg-neutral-900 group select-none transition-all duration-500 cursor-grab active:cursor-grabbing"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               onTouchStart={handleTouchStart}
@@ -164,14 +164,14 @@ export default function Hero() {
               onPointerDown={handleTouchStart}
               onPointerUp={handleTouchEnd}
             >
-              {/* Image Presentation Frame with Balanced Compact Height */}
-              <div className="relative aspect-[16/10] sm:aspect-[16/10] lg:h-[345px] overflow-hidden bg-black/40">
+              {/* Image Presentation Frame: Full Width & Balanced Height (Edge-to-Edge) */}
+              <div className="relative w-full h-[280px] sm:h-[320px] lg:h-[345px] overflow-hidden bg-black/40">
                 {HERO_SLIDES.map((slide, idx) => {
                   const isActive = idx === currentSlide;
                   return (
                     <div
                       key={slide.id}
-                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
                         isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
                       }`}
                     >
@@ -181,6 +181,7 @@ export default function Hero() {
                         className={`w-full h-full object-cover transition-transform duration-7000 ease-out ${
                           isActive && !isHovered ? "scale-106" : "scale-100"
                         }`}
+                        containerClassName="w-full h-full absolute inset-0"
                         priority={idx === 0}
                       />
                       {/* Gradient overlay for contrast and telemetry readability */}

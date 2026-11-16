@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Award, Cpu, Users, MapPin, FileCheck, Sparkles, CheckCircle2 } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 function PillarCard({ pillar, index }) {
   const Icon = pillar.icon;
@@ -20,16 +21,13 @@ function PillarCard({ pillar, index }) {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="relative bg-white rounded-2xl p-4 sm:p-5 border border-[#E2E8E2] hover:border-[#E8A83E]/70 shadow-2xs hover:shadow-xl hover:shadow-[#E8A83E]/15 transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:-translate-y-2 cursor-pointer"
+      className="relative bg-white rounded-2xl p-4 sm:p-5 border border-[#E2E8E2] hover:border-[#E8A83E]/80 shadow-2xs hover:shadow-xl hover:shadow-[#E8A83E]/15 transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:-translate-y-1.5 cursor-pointer"
     >
-      {/* Top Illuminated Accent Bar on Hover */}
-      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#123C32] via-[#E8A83E] to-[#123C32] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-
       {/* Interactive Luminous Spotlight Glow (Golden Solar Energy - Never Dark) */}
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
-          background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.22), rgba(254, 243, 199, 0.12) 50%, transparent 75%)`,
+          background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.20), rgba(254, 243, 199, 0.10) 50%, transparent 75%)`,
         }}
       />
 
@@ -161,7 +159,9 @@ export default function WhyChooseUs() {
         {/* 5-Card Panoramic Bento with Interactive Spotlight Glow */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-stretch">
           {pillars.map((pillar, idx) => (
-            <PillarCard key={pillar.id} pillar={pillar} index={idx} />
+            <ScrollReveal key={pillar.id} delay={idx * 70} className="h-full">
+              <PillarCard pillar={pillar} index={idx} />
+            </ScrollReveal>
           ))}
         </div>
       </div>

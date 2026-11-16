@@ -111,7 +111,27 @@
   hyphens: auto;
 }
 
-/* Automated Floating Stream (Marquee) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Automated Floating & Sliding Stream (Marquee) */
+@keyframes slideStream {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-slide-stream {
+  display: flex;
+  width: max-content;
+  animation: slideStream 32s linear infinite;
+  will-change: transform;
+}
+
 @keyframes floatStream {
   0% {
     transform: translateX(0);
@@ -124,15 +144,12 @@
 .animate-float-stream {
   display: flex;
   width: max-content;
-  animation: floatStream 42s linear infinite;
+  animation: floatStream 36s linear infinite;
   will-change: transform;
 }
 
-.animate-float-stream:hover {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
+  .animate-slide-stream,
   .animate-float-stream {
     animation: none;
     overflow-x: auto;
