@@ -8,9 +8,5 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
-  server: {
-    allowedHosts: [
-      'refrigerator-tolerance-funky-input.trycloudflare.com'
-    ]
-  }
+  
 })

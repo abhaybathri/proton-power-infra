@@ -299,7 +299,7 @@ export default function Enquiry() {
           </div>
 
           {/* Right Column (Streamlined Form) - lg:col-span-7, order-1 lg:order-2 */}
-          <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col">
+          <div className="lg:col-span-7 order-2 lg:order-2 flex flex-col">
             <EnquiryForm
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
