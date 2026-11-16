@@ -68,7 +68,7 @@ function BenefitCard({
       }}
       onClick={() => onActivate(idx)}
       className={`relative rounded-2xl p-[1.5px] transition-all duration-500 ease-in-out cursor-pointer select-none group min-w-0 ${
-        isActive ? "lg:flex-[2.6]" : "lg:flex-1"
+        isActive ? "lg:flex-[1.45]" : "lg:flex-1"
       } h-auto lg:h-full`}
     >
       {/* Dynamic Cursor-Responsive Border Glow */}
@@ -151,8 +151,8 @@ function BenefitCard({
             {benefit.stat}
           </div>
 
-          {/* Description (Concise 2 lines) */}
-          <p className="text-[11px] sm:text-xs text-[#E9F0E9]/90 leading-snug text-center max-w-[320px] mx-auto line-clamp-2 mb-1.5">
+          {/* Description (Concise 2 lines, naturally proportioned to card width) */}
+          <p className="text-[11px] sm:text-xs text-[#E9F0E9]/90 leading-snug text-center w-full px-1 line-clamp-2 mb-1.5">
             {benefit.desc}
           </p>
 
