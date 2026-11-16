@@ -67,13 +67,13 @@ function BenefitCard({
         onHoverEnd();
       }}
       onClick={() => onActivate(idx)}
-      className={`relative rounded-2xl p-[1.5px] transition-all duration-500 ease-in-out cursor-pointer select-none group min-w-0 ${
+      className={`relative rounded-2xl p-[1.5px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer select-none group min-w-0 ${
         isActive ? "lg:flex-[1.45]" : "lg:flex-1"
       } h-auto lg:h-full`}
     >
       {/* Dynamic Cursor-Responsive Border Glow */}
       <div
-        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
         style={{
           opacity: isMouseOver ? 1 : isActive ? 0.75 : 0.25,
           background: isMouseOver
@@ -86,7 +86,7 @@ function BenefitCard({
 
       {/* Inner Card Surface: Perfectly centered vertically with equal top and bottom distance */}
       <div
-        className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-500 overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
+        className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
           isActive
             ? "bg-[#123C32] text-white shadow-xl shadow-black/20"
             : "bg-white text-[#252A27] shadow-xs hover:shadow-md hover:bg-neutral-50"
@@ -106,10 +106,10 @@ function BenefitCard({
         <div className="relative z-10 w-full flex flex-col items-center text-center">
           {/* Centered Icon */}
           <div
-            className={`rounded-xl flex items-center justify-center shrink-0 mx-auto transition-all duration-500 ${
+            className={`rounded-xl flex items-center justify-center shrink-0 mx-auto transition-all duration-500 ease-out ${
               isActive
-                ? "w-8 h-8 sm:w-9 sm:h-9 bg-[#E8A83E] text-[#123C32] shadow-[0_0_16px_rgba(232,168,62,0.4)] mb-1"
-                : "w-9 h-9 sm:w-10 sm:h-10 bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32] group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300 mb-1.5"
+                ? "w-8 h-8 sm:w-9 sm:h-9 bg-[#E8A83E] text-[#123C32] shadow-[0_0_16px_rgba(232,168,62,0.4)] mb-1 scale-105"
+                : "w-9 h-9 sm:w-10 sm:h-10 bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32] group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300 mb-1.5 scale-100"
             }`}
           >
             <Icon className={`stroke-[2.2] transition-all duration-300 ${isActive ? "w-4 h-4 sm:w-4.5 sm:h-4.5" : "w-4.5 h-4.5 sm:w-5 sm:h-5"}`} />
@@ -117,7 +117,7 @@ function BenefitCard({
 
           {/* Heading */}
           <h3
-            className={`font-black font-heading tracking-tight transition-all duration-500 text-center mx-auto ${
+            className={`font-black font-heading tracking-tight transition-all duration-500 ease-out text-center mx-auto ${
               isActive
                 ? "text-xs sm:text-sm lg:text-base text-white mb-0.5"
                 : "text-xs sm:text-sm lg:text-[15px] text-[#202724] group-hover:text-[#123C32] max-w-[145px] leading-snug mb-1"
@@ -128,7 +128,7 @@ function BenefitCard({
 
           {/* Subheading */}
           <div
-            className={`font-mono font-bold uppercase tracking-wider transition-colors duration-300 text-center mx-auto ${
+            className={`font-mono font-bold uppercase tracking-wider transition-colors duration-500 text-center mx-auto ${
               isActive
                 ? "text-[9px] sm:text-[10px] text-[#E8A83E]"
                 : "text-[9px] sm:text-[10px] text-[#525D57] group-hover:text-[#E8A83E]"
@@ -138,12 +138,12 @@ function BenefitCard({
           </div>
         </div>
 
-        {/* Active Expanded Details: Stat + Description + Milestone (Appears smoothly when active/hovered) */}
+        {/* Active Expanded Details: Stat + Description + Milestone (Gently glides in with smooth vertical float) */}
         <div
-          className={`relative z-10 w-full flex flex-col items-center text-center transition-all duration-500 ease-out ${
+          className={`relative z-10 w-full flex flex-col items-center text-center transition-all duration-600 ease-out ${
             isActive
-              ? "opacity-100 max-h-40 my-1 pointer-events-auto"
-              : "opacity-0 max-h-0 overflow-hidden pointer-events-none my-0"
+              ? "opacity-100 translate-y-0 max-h-40 my-1 pointer-events-auto"
+              : "opacity-0 translate-y-2 max-h-0 overflow-hidden pointer-events-none my-0"
           }`}
         >
           {/* Stat Badge */}
@@ -163,12 +163,12 @@ function BenefitCard({
           </div>
         </div>
 
-        {/* Inactive Bottom Metric Capsule: Centered with equal top and bottom spacing */}
+        {/* Inactive Bottom Metric Capsule: Centered with smooth crossfade */}
         <div
-          className={`relative z-10 w-full flex items-center justify-center transition-all duration-500 ${
+          className={`relative z-10 w-full flex items-center justify-center transition-all duration-600 ease-out ${
             isActive
-              ? "opacity-0 max-h-0 overflow-hidden pointer-events-none mt-0"
-              : "opacity-100 max-h-10 mt-2"
+              ? "opacity-0 -translate-y-1 max-h-0 overflow-hidden pointer-events-none mt-0"
+              : "opacity-100 translate-y-0 max-h-10 mt-2"
           }`}
         >
           <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/15 group-hover:border-[#E8A83E]/30 group-hover:text-[#9A6208] transition-all truncate max-w-full">
@@ -562,13 +562,17 @@ export default function ResidentialSolar() {
                       setActivePhase(idx);
                       setIsPhaseHovered(true);
                     }}
-                    className={`py-2 px-3 rounded-xl border text-center transition-all cursor-pointer font-tech flex items-center justify-center gap-2 ${
+                    className={`py-2 px-3 rounded-xl border text-center transition-all duration-500 ease-out cursor-pointer font-tech flex items-center justify-center gap-2 ${
                       isActive
-                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]/50"
-                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4]"
+                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]/50 scale-[1.02]"
+                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4] scale-100"
                     }`}
                   >
-                    <span className={`w-2 h-2 rounded-full shrink-0 ${isActive ? "bg-[#E8A83E]" : "bg-neutral-300"}`} />
+                    <span
+                      className={`w-2 h-2 rounded-full shrink-0 transition-colors duration-500 ${
+                        isActive ? "bg-[#E8A83E]" : "bg-neutral-300"
+                      }`}
+                    />
                     <span className="text-xs sm:text-sm font-bold truncate">{ph.name}</span>
                   </button>
                 );
@@ -586,26 +590,43 @@ export default function ResidentialSolar() {
               onPointerUp={handlePhaseTouchEnd}
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
-                {/* Left Column: Phase Photograph (Identical Height to Right Column, No Repetitive Phase Numbers) */}
+                {/* Left Column: Phase Photograph (Silky Crossfade Transition Between All Phases) */}
                 <div className="lg:col-span-5 flex flex-col h-full">
                   <div className="relative rounded-xl overflow-hidden border border-[#E2E8E2] bg-neutral-900 group h-full min-h-[260px] sm:min-h-[290px] lg:min-h-full">
-                    <SmartImage
-                      src={currentPhaseData.image}
-                      alt={currentPhaseData.title}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      containerClassName="w-full h-full absolute inset-0"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/15 pointer-events-none"></div>
+                    {phases.map((ph, idx) => {
+                      const isCurrent = activePhase === idx;
+                      return (
+                        <div
+                          key={ph.step}
+                          className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                            isCurrent
+                              ? "opacity-100 scale-100 z-10"
+                              : "opacity-0 scale-105 z-0 pointer-events-none"
+                          }`}
+                        >
+                          <SmartImage
+                            src={ph.image}
+                            alt={ph.title}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            containerClassName="w-full h-full absolute inset-0"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/15 pointer-events-none"></div>
 
-                    {/* Subtitle Bar Overlay */}
-                    <div className="absolute bottom-3 left-3 right-3 text-[11px] text-[#E9F0E9] font-medium font-tech truncate pointer-events-none bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
-                      {currentPhaseData.subtitle}
-                    </div>
+                          {/* Subtitle Bar Overlay */}
+                          <div className="absolute bottom-3 left-3 right-3 text-[11px] text-[#E9F0E9] font-medium font-tech truncate pointer-events-none bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
+                            {ph.subtitle}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
-                {/* Right Column: Clean Story Narrative & Engineering Checkpoints (Matching Height) */}
-                <div className="lg:col-span-7 flex flex-col justify-between space-y-3 text-left h-full py-0.5">
+                {/* Right Column: Clean Story Narrative & Engineering Checkpoints (Matching Height with Smooth Fade Animation) */}
+                <div
+                  key={activePhase}
+                  className="lg:col-span-7 flex flex-col justify-between space-y-3 text-left h-full py-0.5 animate-smooth-fade"
+                >
                   <div>
                     <div className="text-[10px] sm:text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider mb-1">
                       {currentPhaseData.subtitle}
