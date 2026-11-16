@@ -186,6 +186,9 @@ export default function ResidentialSolar() {
   const benefitTimerRef = useRef(null);
 
   const [activePhase, setActivePhase] = useState(0);
+  const [isPhaseHovered, setIsPhaseHovered] = useState(false);
+  const phaseTimerRef = useRef(null);
+
   // Default first FAQ open as requested
   const [openFaq, setOpenFaq] = useState(0);
 
@@ -317,6 +320,19 @@ export default function ResidentialSolar() {
       deliverable: "Bi-Directional Net-Meter Activation & Subsidy DBT Processing",
     },
   ];
+
+  // Auto-Shift Phases in Section 3 (Every 2.0 seconds continuously as requested)
+  useEffect(() => {
+    if (isPhaseHovered) return;
+
+    phaseTimerRef.current = setInterval(() => {
+      setActivePhase((prev) => (prev + 1) % phases.length);
+    }, 2000);
+
+    return () => {
+      if (phaseTimerRef.current) clearInterval(phaseTimerRef.current);
+    };
+  }, [isPhaseHovered, phases.length]);
 
   const currentPhaseData = phases[activePhase];
 
@@ -476,22 +492,15 @@ export default function ResidentialSolar() {
       {/* 2. Section 2 — Benefits of Residential Solar (Compact Horizontal Accordion, Trimmed Padding, Zero Empty Space) */}
       <section className="py-6 sm:py-7 lg:py-8 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header - Centered */}
+          {/* Section Header - Centered without badge */}
           <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
             <ScrollReveal delay={0}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-                <span>Benefits of Residential Solar</span>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={70}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
                 Why Homeowners Across India Are Choosing Solar
               </h2>
             </ScrollReveal>
 
-            <ScrollReveal delay={120}>
+            <ScrollReveal delay={70}>
               <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
                 Transform unused terrace space into a high-return clean energy asset with guaranteed linear yield for 25 years.
               </p>
@@ -499,7 +508,7 @@ export default function ResidentialSolar() {
           </div>
 
           {/* 5 Cards in Same Line: Horizontal Expanding Accordion (Compact 230px Height, Equal Top & Bottom Distance) */}
-          <ScrollReveal delay={150}>
+          <ScrollReveal delay={120}>
             <div className="flex flex-col lg:flex-row gap-2.5 sm:gap-3 h-auto lg:h-[230px] items-stretch">
               {benefits.map((b, idx) => (
                 <BenefitCard
@@ -517,25 +526,23 @@ export default function ResidentialSolar() {
         </div>
       </section>
 
-      {/* 3. Section 3 — How We Bring Solar (Streamlined & Non-Repetitive Phase Story) */}
-      <section id="process" className="py-6 sm:py-7 lg:py-8 bg-[#F7F8F4] scroll-mt-20">
+      {/* 3. Section 3 — How We Bring Solar (Auto-Cycles every 2.0s, Pauses on Hover) */}
+      <section
+        id="process"
+        className="py-6 sm:py-7 lg:py-8 bg-[#F7F8F4] scroll-mt-20"
+        onMouseEnter={() => setIsPhaseHovered(true)}
+        onMouseLeave={() => setIsPhaseHovered(false)}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header - Centered */}
+          {/* Section Header - Centered without badge */}
           <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
             <ScrollReveal delay={0}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
-                <span>Execution Journey</span>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={70}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
                 How We Bring Solar to Your Home
               </h2>
             </ScrollReveal>
 
-            <ScrollReveal delay={120}>
+            <ScrollReveal delay={70}>
               <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
                 A seamless 4-phase turnkey story engineered for maximum yield and zero household disruption.
               </p>
@@ -543,7 +550,7 @@ export default function ResidentialSolar() {
           </div>
 
           {/* Single Streamlined Phase Stepper Rail (Compact, Clean & Non-Repetitive) */}
-          <ScrollReveal delay={150}>
+          <ScrollReveal delay={120}>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 mb-4 max-w-4xl mx-auto">
               {phases.map((ph, idx) => {
                 const isActive = activePhase === idx;
@@ -551,7 +558,10 @@ export default function ResidentialSolar() {
                   <button
                     key={ph.step}
                     type="button"
-                    onClick={() => setActivePhase(idx)}
+                    onClick={() => {
+                      setActivePhase(idx);
+                      setIsPhaseHovered(true);
+                    }}
                     className={`py-2 px-3 rounded-xl border text-center transition-all cursor-pointer font-tech flex items-center justify-center gap-2 ${
                       isActive
                         ? "bg-[#123C32] text-white border-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]/50"
@@ -648,15 +658,9 @@ export default function ResidentialSolar() {
       {/* 5. Common Questions (FAQs) - Default FAQ #1 Open */}
       <section className="py-5 md:py-5 lg:py-5 bg-[#F7F8F4]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
             <ScrollReveal delay={0}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
-                <span>Residential FAQs</span>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={70}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
                 Common Questions About Home Solar
               </h2>
             </ScrollReveal>
