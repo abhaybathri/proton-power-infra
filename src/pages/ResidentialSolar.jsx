@@ -206,7 +206,7 @@ export default function ResidentialSolar() {
     {
       id: "independence",
       icon: Shield,
-      title: "Energy Independence",
+      title: "Independence",
       subtitle: "Hedge Tariff Hikes",
       stat: "25 Years Price Stability",
       desc: "Protect your family from unpredictable utility grid rate hikes with captive clean solar generation that remains steady for decades.",
@@ -476,8 +476,8 @@ export default function ResidentialSolar() {
       {/* 2. Section 2 — Benefits of Residential Solar (Compact Horizontal Accordion, Trimmed Padding, Zero Empty Space) */}
       <section className="py-6 sm:py-7 lg:py-8 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header - Streamlined Margins */}
-          <div className="max-w-3xl mb-4 sm:mb-5 text-left">
+          {/* Section Header - Centered */}
+          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
             <ScrollReveal delay={0}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
@@ -486,13 +486,13 @@ export default function ResidentialSolar() {
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
                 Why Homeowners Across India Are Choosing Solar
               </h2>
             </ScrollReveal>
 
             <ScrollReveal delay={120}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
                 Transform unused terrace space into a high-return clean energy asset with guaranteed linear yield for 25 years.
               </p>
             </ScrollReveal>
@@ -518,35 +518,33 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 3. Section 3 — How We Bring Solar (Streamlined & Non-Repetitive Phase Story) */}
-      <section id="process" className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] scroll-mt-20">
+      <section id="process" className="py-6 sm:py-7 lg:py-8 bg-[#F7F8F4] scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
-            <div className="text-left">
-              <ScrollReveal delay={0}>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
-                  <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
-                  <span>Execution Journey</span>
-                </div>
-              </ScrollReveal>
+          {/* Section Header - Centered */}
+          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
+            <ScrollReveal delay={0}>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
+                <span>Execution Journey</span>
+              </div>
+            </ScrollReveal>
 
-              <ScrollReveal delay={70}>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
-                  How We Bring Solar to Your Home
-                </h2>
-              </ScrollReveal>
-            </div>
+            <ScrollReveal delay={70}>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
+                How We Bring Solar to Your Home
+              </h2>
+            </ScrollReveal>
 
             <ScrollReveal delay={120}>
-              <p className="text-xs sm:text-sm text-[#525D57] max-w-md leading-relaxed md:text-right">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
                 A seamless 4-phase turnkey story engineered for maximum yield and zero household disruption.
               </p>
             </ScrollReveal>
           </div>
 
-          {/* Single Streamlined Phase Stepper Rail (Replaces redundant top/bottom buttons) */}
+          {/* Single Streamlined Phase Stepper Rail (Compact, Clean & Non-Repetitive) */}
           <ScrollReveal delay={150}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-5">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 mb-4 max-w-4xl mx-auto">
               {phases.map((ph, idx) => {
                 const isActive = activePhase === idx;
                 return (
@@ -554,141 +552,88 @@ export default function ResidentialSolar() {
                     key={ph.step}
                     type="button"
                     onClick={() => setActivePhase(idx)}
-                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer font-tech flex items-center justify-between ${
+                    className={`py-2 px-3 rounded-xl border text-center transition-all cursor-pointer font-tech flex items-center justify-center gap-2 ${
                       isActive
-                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-md ring-2 ring-[#E8A83E]/40"
+                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]/50"
                         : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4]"
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <div
-                        className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                          isActive ? "bg-[#E8A83E] text-[#123C32]" : "bg-[#123C32]/10 text-[#123C32]"
-                        }`}
-                      >
-                        {ph.step}
-                      </div>
-                      <div className="truncate">
-                        <div className="text-xs sm:text-sm font-bold truncate">
-                          {ph.name}
-                        </div>
-                      </div>
-                    </div>
-
-                    <span
-                      className={`text-xs font-mono font-bold ${
-                        isActive ? "text-[#E8A83E]" : "text-gray-400"
-                      }`}
-                    >
-                      →
-                    </span>
+                    <span className={`w-2 h-2 rounded-full shrink-0 ${isActive ? "bg-[#E8A83E]" : "bg-neutral-300"}`} />
+                    <span className="text-xs sm:text-sm font-bold truncate">{ph.name}</span>
                   </button>
                 );
               })}
             </div>
           </ScrollReveal>
 
-          {/* Active Phase Story Stage with Mobile Touch Swipe & Prev/Next Navigation */}
+          {/* Active Phase Story Stage with Mobile Touch Swipe */}
           <ScrollReveal delay={200}>
             <div
-              className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-lg p-5 sm:p-6 lg:p-7 select-none"
+              className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-sm p-4 sm:p-5 lg:p-6 select-none"
               onTouchStart={handlePhaseTouchStart}
               onTouchEnd={handlePhaseTouchEnd}
               onPointerDown={handlePhaseTouchStart}
               onPointerUp={handlePhaseTouchEnd}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-                {/* Left Column: Phase Photograph with SmartImage Lazy Loading */}
-                <div className="lg:col-span-5 relative">
-                  <div className="relative rounded-xl overflow-hidden shadow-sm border border-[#E2E8E2] bg-neutral-900 group">
-                    <div className="relative h-52 sm:h-64 lg:h-[270px] overflow-hidden">
-                      <SmartImage
-                        src={currentPhaseData.image}
-                        alt={currentPhaseData.title}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-106"
-                        containerClassName="w-full h-full absolute inset-0"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
-                    </div>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
+                {/* Left Column: Phase Photograph (Identical Height to Right Column, No Repetitive Phase Numbers) */}
+                <div className="lg:col-span-5 flex flex-col h-full">
+                  <div className="relative rounded-xl overflow-hidden border border-[#E2E8E2] bg-neutral-900 group h-full min-h-[260px] sm:min-h-[290px] lg:min-h-full">
+                    <SmartImage
+                      src={currentPhaseData.image}
+                      alt={currentPhaseData.title}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      containerClassName="w-full h-full absolute inset-0"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/15 pointer-events-none"></div>
 
-                    {/* Clean Tag */}
-                    <div className="absolute top-3 left-3 flex items-center gap-2 pointer-events-none">
-                      <span className="px-3 py-1 rounded-full text-[11px] font-black tracking-wide uppercase bg-[#123C32] text-[#E8A83E] shadow-sm font-tech border border-[#E8A83E]/30">
-                        Phase {currentPhaseData.step} Execution
-                      </span>
-                    </div>
-
-                    {/* Subtitle Bar */}
-                    <div className="absolute bottom-3 left-3 right-3 text-xs text-white font-medium font-tech truncate pointer-events-none">
+                    {/* Subtitle Bar Overlay */}
+                    <div className="absolute bottom-3 left-3 right-3 text-[11px] text-[#E9F0E9] font-medium font-tech truncate pointer-events-none bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
                       {currentPhaseData.subtitle}
                     </div>
                   </div>
                 </div>
 
-                {/* Right Column: Clean Story Narrative & Engineering Checkpoints */}
-                <div className="lg:col-span-7 space-y-4 text-left flex flex-col justify-between">
+                {/* Right Column: Clean Story Narrative & Engineering Checkpoints (Matching Height) */}
+                <div className="lg:col-span-7 flex flex-col justify-between space-y-3 text-left h-full py-0.5">
                   <div>
-                    <div className="text-xs font-mono font-bold text-[#E8A83E] uppercase tracking-wider mb-1">
+                    <div className="text-[10px] sm:text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider mb-1">
                       {currentPhaseData.subtitle}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
                       {currentPhaseData.title}
                     </h3>
+                    <p className="text-xs sm:text-[13px] text-[#525D57] leading-relaxed mt-1.5 font-normal">
+                      {currentPhaseData.desc}
+                    </p>
                   </div>
-
-                  <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
-                    {currentPhaseData.desc}
-                  </p>
 
                   {/* Key Engineering Checkpoints */}
                   <div>
-                    <div className="text-[11px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-2">
+                    <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
                       Engineering Checkpoints:
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#202724]">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                       {currentPhaseData.highlights.map((h, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-[#123C32] shrink-0" />
-                          <span className="truncate">{h}</span>
+                        <div
+                          key={i}
+                          className="flex items-center gap-1.5 text-xs text-[#202724] bg-[#F7F8F4] px-2.5 py-1.5 rounded-lg border border-[#E2E8E2]/70"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32] shrink-0" />
+                          <span className="truncate font-medium">{h}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Deliverable Capsule */}
-                  <div className="px-3.5 py-2.5 rounded-xl bg-[#E9F0E9] border border-[#123C32]/15 flex items-center gap-2.5 font-tech">
+                  <div className="px-3.5 py-2 rounded-xl bg-[#E9F0E9] border border-[#123C32]/15 flex items-center gap-2.5 font-tech">
                     <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10">
                       Deliverable
                     </span>
                     <span className="text-xs font-bold text-[#202724] truncate">
                       {currentPhaseData.deliverable}
                     </span>
-                  </div>
-
-                  {/* Clean Single Prev / Next Controls */}
-                  <div className="pt-2 flex items-center justify-between border-t border-[#E2E8E2]">
-                    <button
-                      type="button"
-                      onClick={() => setActivePhase((prev) => (prev - 1 + phases.length) % phases.length)}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#525D57] hover:text-[#123C32] px-3 py-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      <span>Previous Phase</span>
-                    </button>
-
-                    {/* Simple Step Indicator */}
-                    <span className="text-xs font-mono font-bold text-[#123C32]">
-                      0{activePhase + 1} / 04
-                    </span>
-
-                    <button
-                      type="button"
-                      onClick={() => setActivePhase((prev) => (prev + 1) % phases.length)}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#1A4D41] px-3 py-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
-                    >
-                      <span>Next Phase</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
                   </div>
                 </div>
               </div>
@@ -698,105 +643,10 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 4. Section 4 — Engineered for Household Reliability */}
-      <section className="py-10 md:py-10 lg:py-10 bg-white border-y border-[#E2E8E2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Image Column using SmartImage */}
-            <div className="lg:col-span-5 relative">
-              <ScrollReveal delay={80}>
-                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8E2] shadow-md group">
-                  <div className="relative w-full h-72 sm:h-80 overflow-hidden">
-                    <SmartImage
-                      src={whyChooseImg}
-                      alt="Proton Power Infra Engineered Residential Rooftop Solar"
-                      className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
-                      containerClassName="w-full h-full absolute inset-0"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/90 via-transparent to-transparent pointer-events-none"></div>
-                  </div>
-                  <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-white font-tech pointer-events-none">
-                    <span className="text-xs font-bold">Terrace Preservation & Waterproofing</span>
-                    <span className="text-[10px] font-mono bg-white/20 px-2 py-0.5 rounded">
-                      25-YR DURABILITY
-                    </span>
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
-
-            {/* Technical Highlights */}
-            <div className="lg:col-span-7 space-y-4 text-left">
-              <ScrollReveal delay={0}>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech">
-                  <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-                  <span>Engineering Discipline</span>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={70}>
-                <h2 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight leading-tight">
-                  Engineered for 25 Years of Household Reliability
-                </h2>
-              </ScrollReveal>
-
-              <ScrollReveal delay={120}>
-                <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
-                  We bring the same industrial-grade engineering discipline to home rooftops that we apply to multi-megawatt utility solar parks:
-                </p>
-              </ScrollReveal>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 font-tech">
-                <ScrollReveal delay={150}>
-                  <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] h-full">
-                    <div className="text-xs font-bold text-[#123C32] mb-1">
-                      ✓ High-Conversion Mono PERC
-                    </div>
-                    <p className="text-[11px] text-[#525D57] leading-normal">
-                      Tier-1 half-cut bifacial panels designed to deliver maximum generation even under severe 45°C summer heat.
-                    </p>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal delay={180}>
-                  <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] h-full">
-                    <div className="text-xs font-bold text-[#123C32] mb-1">
-                      ✓ Zero Roof Puncture Technology
-                    </div>
-                    <p className="text-[11px] text-[#525D57] leading-normal">
-                      Chemical anchor fastenings or elevated pergolas that preserve full terrace usability and eliminate water seepage.
-                    </p>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal delay={210}>
-                  <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] h-full">
-                    <div className="text-xs font-bold text-[#123C32] mb-1">
-                      ✓ Complete PM Surya Ghar Subsidy
-                    </div>
-                    <p className="text-[11px] text-[#525D57] leading-normal">
-                      End-to-end documentation assistance to ensure your direct bank transfer subsidy (up to ₹78,000) is credited promptly.
-                    </p>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal delay={240}>
-                  <div className="p-3.5 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] h-full">
-                    <div className="text-xs font-bold text-[#123C32] mb-1">
-                      ✓ Rapid Local Indore Mobilization
-                    </div>
-                    <p className="text-[11px] text-[#525D57] leading-normal">
-                      Headquartered in Indore with quick-dispatch service engineers for proactive O&M and warranty assistance.
-                    </p>
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* 5. Common Questions (FAQs) - Default FAQ #1 Open */}
-      <section className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4]">
+      <section className="py-5 md:py-5 lg:py-5 bg-[#F7F8F4]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <ScrollReveal delay={0}>
@@ -860,10 +710,7 @@ export default function ResidentialSolar() {
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <ScrollReveal delay={0}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold uppercase tracking-wider border border-[#E8A83E]/40 font-tech mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Ready to Power Your Home with Clean Energy?</span>
-            </div>
+            
           </ScrollReveal>
 
           <ScrollReveal delay={70}>
