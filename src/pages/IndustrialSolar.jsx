@@ -69,11 +69,11 @@ function IndustrialBenefitCard({
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
         style={{
-          opacity: isMouseOver ? 1 : isActive ? 0.75 : 0.25,
+          opacity: isMouseOver ? 1 : isActive ? 0.85 : 0.35,
           background: isMouseOver
             ? `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
             : isActive
-            ? `linear-gradient(135deg, rgba(232, 168, 62, 0.8), rgba(18, 60, 50, 0.4), rgba(232, 168, 62, 0.6))`
+            ? `linear-gradient(135deg, rgba(232, 168, 62, 0.85), rgba(18, 60, 50, 0.4), rgba(232, 168, 62, 0.65))`
             : `rgba(226, 232, 226, 0.8)`,
         }}
       />
@@ -83,7 +83,7 @@ function IndustrialBenefitCard({
         className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
           isActive
             ? "bg-[#123C32] text-white shadow-xl shadow-black/20"
-            : "bg-white text-[#252A27] shadow-xs hover:shadow-md hover:bg-neutral-50"
+            : "bg-white text-[#252A27] shadow-xs hover:shadow-[0_8px_25px_rgba(232,168,62,0.18)] hover:border-amber-300/50 hover:bg-neutral-50"
         }`}
       >
         {/* Soft Interior Ambient Glow */}
@@ -165,7 +165,7 @@ function IndustrialBenefitCard({
               : "opacity-100 translate-y-0 max-h-10 mt-2"
           }`}
         >
-          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/15 group-hover:border-[#E8A83E]/30 group-hover:text-[#9A6208] transition-all truncate max-w-full">
+          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/20 group-hover:border-[#E8A83E]/40 group-hover:text-[#9A6208] group-hover:shadow-[0_0_10px_rgba(232,168,62,0.2)] transition-all truncate max-w-full">
             {benefit.stat}
           </span>
         </div>
@@ -491,8 +491,8 @@ export default function IndustrialSolar() {
       {/* 2. Section 2 — Industrial Solar Benefits (Compact Horizontal Accordion, Trimmed Padding, Zero Empty Space) */}
       <section className="py-6 sm:py-7 lg:py-8 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header - Centered without badge */}
-          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
+          {/* Section Header - Centered without badge, expanded max-w to prevent awkward word wrap */}
+          <div className="max-w-5xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
             <ScrollReveal delay={0}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
                 Why Manufacturing Giants Choose Proton Industrial Solar
@@ -534,7 +534,7 @@ export default function IndustrialSolar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header - Centered without badge */}
-          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
+          <div className="max-w-5xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
             <ScrollReveal delay={0}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
                 How We Execute Industrial Solar Turnkey Projects
@@ -548,7 +548,7 @@ export default function IndustrialSolar() {
             </ScrollReveal>
           </div>
 
-          {/* Single Streamlined Phase Stepper Rail (Compact, Clean & Non-Repetitive) */}
+          {/* Single Streamlined Phase Stepper Rail with Amber Hover & Active Glow */}
           <ScrollReveal delay={120}>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 mb-4 max-w-4xl mx-auto">
               {phases.map((ph, idx) => {
@@ -561,15 +561,17 @@ export default function IndustrialSolar() {
                       setActivePhase(idx);
                       setIsPhaseHovered(true);
                     }}
-                    className={`py-2 px-3 rounded-xl border text-center transition-all duration-500 ease-out cursor-pointer font-tech flex items-center justify-center gap-2 ${
+                    className={`py-2 px-3 rounded-xl border text-center transition-all duration-300 ease-out cursor-pointer font-tech flex items-center justify-center gap-2 group ${
                       isActive
-                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]/50 scale-[1.02]"
-                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4] scale-100"
+                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-[0_0_16px_rgba(232,168,62,0.35)] ring-1 ring-[#E8A83E]/50 scale-[1.02]"
+                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#E8A83E]/60 hover:bg-white hover:text-[#123C32] hover:shadow-[0_0_14px_rgba(232,168,62,0.25)] hover:scale-[1.02] scale-100"
                     }`}
                   >
                     <span
-                      className={`w-2 h-2 rounded-full shrink-0 transition-colors duration-500 ${
-                        isActive ? "bg-[#E8A83E]" : "bg-neutral-300"
+                      className={`w-2 h-2 rounded-full shrink-0 transition-all duration-300 ${
+                        isActive
+                          ? "bg-[#E8A83E] shadow-[0_0_8px_#E8A83E]"
+                          : "bg-neutral-300 group-hover:bg-[#E8A83E] group-hover:shadow-[0_0_6px_#E8A83E]"
                       }`}
                     />
                     <span className="text-xs sm:text-sm font-bold truncate">{ph.name}</span>
@@ -579,10 +581,10 @@ export default function IndustrialSolar() {
             </div>
           </ScrollReveal>
 
-          {/* Active Phase Story Stage with Mobile Touch Swipe */}
+          {/* Active Phase Story Stage with Mobile Touch Swipe & Subtle Hover Glow */}
           <ScrollReveal delay={200}>
             <div
-              className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-sm p-4 sm:p-5 lg:p-6 select-none"
+              className="bg-white rounded-2xl border border-[#E2E8E2] hover:border-[#123C32]/30 hover:shadow-[0_12px_36px_rgba(18,60,50,0.08)] transition-all duration-500 overflow-hidden shadow-sm p-4 sm:p-5 lg:p-6 select-none"
               onTouchStart={handlePhaseTouchStart}
               onTouchEnd={handlePhaseTouchEnd}
               onPointerDown={handlePhaseTouchStart}
@@ -638,27 +640,43 @@ export default function IndustrialSolar() {
                     </p>
                   </div>
 
-                  {/* Key Engineering Checkpoints */}
+                  {/* Key Engineering Checkpoints with Distinct Light Pastel Shades & Individual Glow */}
                   <div>
                     <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
                       Engineering Checkpoints:
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                      {currentPhaseData.highlights.map((h, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-1.5 text-xs text-[#202724] bg-[#F7F8F4] px-2.5 py-1.5 rounded-lg border border-[#E2E8E2]/70"
-                        >
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32] shrink-0" />
-                          <span className="truncate font-medium">{h}</span>
-                        </div>
-                      ))}
+                      {currentPhaseData.highlights.map((h, i) => {
+                        const style = [
+                          {
+                            card: "bg-emerald-50/70 border-emerald-200/80 text-emerald-950 hover:border-emerald-400 hover:shadow-[0_0_14px_rgba(16,185,129,0.22)]",
+                            icon: "text-emerald-700",
+                          },
+                          {
+                            card: "bg-amber-50/70 border-amber-200/80 text-amber-950 hover:border-amber-400 hover:shadow-[0_0_14px_rgba(232,168,62,0.25)]",
+                            icon: "text-amber-700",
+                          },
+                          {
+                            card: "bg-teal-50/70 border-teal-200/80 text-teal-950 hover:border-teal-400 hover:shadow-[0_0_14px_rgba(20,184,166,0.22)]",
+                            icon: "text-teal-700",
+                          },
+                        ][i % 3];
+                        return (
+                          <div
+                            key={i}
+                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border transition-all duration-300 cursor-default hover:scale-[1.01] ${style.card}`}
+                          >
+                            <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${style.icon}`} />
+                            <span className="truncate font-medium">{h}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
 
-                  {/* Deliverable Capsule */}
-                  <div className="px-3.5 py-2 rounded-xl bg-[#E9F0E9] border border-[#123C32]/15 flex items-center gap-2.5 font-tech">
-                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10">
+                  {/* Deliverable Capsule with Ambient Radiant Glow */}
+                  <div className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-50/80 via-amber-50/60 to-emerald-50/80 border border-emerald-200/80 hover:border-[#E8A83E] hover:shadow-[0_0_16px_rgba(232,168,62,0.22)] transition-all duration-300 flex items-center gap-2.5 font-tech">
+                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10 shadow-2xs">
                       Deliverable
                     </span>
                     <span className="text-xs font-bold text-[#202724] truncate">
@@ -694,7 +712,7 @@ export default function IndustrialSolar() {
               const isOpen = openFaq === idx;
               return (
                 <ScrollReveal key={idx} delay={idx * 60}>
-                  <div className="rounded-xl border border-[#E2E8E2] overflow-hidden bg-white shadow-2xs transition-all">
+                  <div className="rounded-xl border border-[#E2E8E2] hover:border-[#E8A83E]/50 hover:shadow-[0_4px_20px_rgba(232,168,62,0.12)] overflow-hidden bg-white shadow-2xs transition-all duration-300">
                     <button
                       type="button"
                       onClick={() => toggleFaq(idx)}

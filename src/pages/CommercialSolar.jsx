@@ -74,11 +74,11 @@ function CommercialBenefitCard({
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
         style={{
-          opacity: isMouseOver ? 1 : isActive ? 0.75 : 0.25,
+          opacity: isMouseOver ? 1 : isActive ? 0.85 : 0.35,
           background: isMouseOver
             ? `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
             : isActive
-            ? `linear-gradient(135deg, rgba(232, 168, 62, 0.8), rgba(18, 60, 50, 0.4), rgba(232, 168, 62, 0.6))`
+            ? `linear-gradient(135deg, rgba(232, 168, 62, 0.85), rgba(18, 60, 50, 0.4), rgba(232, 168, 62, 0.65))`
             : `rgba(226, 232, 226, 0.8)`,
         }}
       />
@@ -88,7 +88,7 @@ function CommercialBenefitCard({
         className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
           isActive
             ? "bg-[#123C32] text-white shadow-xl shadow-black/20"
-            : "bg-white text-[#252A27] shadow-xs hover:shadow-md hover:bg-neutral-50"
+            : "bg-white text-[#252A27] shadow-xs hover:shadow-[0_8px_25px_rgba(232,168,62,0.18)] hover:border-amber-300/50 hover:bg-neutral-50"
         }`}
       >
         {/* Soft Interior Ambient Glow */}
@@ -170,7 +170,7 @@ function CommercialBenefitCard({
               : "opacity-100 translate-y-0 max-h-10 mt-2"
           }`}
         >
-          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/15 group-hover:border-[#E8A83E]/30 group-hover:text-[#9A6208] transition-all truncate max-w-full">
+          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/20 group-hover:border-[#E8A83E]/40 group-hover:text-[#9A6208] group-hover:shadow-[0_0_10px_rgba(232,168,62,0.2)] transition-all truncate max-w-full">
             {benefit.stat}
           </span>
         </div>
@@ -380,8 +380,8 @@ export default function CommercialSolar() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
-      {/* 1. Hero Section - Equal Width & Height, Centered Content */}
-      <section className="relative overflow-hidden pt-10 pb-10 md:pt-14 md:pb-12 lg:pt-12 lg:pb-12 bg-[#123C32] text-white">
+      {/* 1. Hero Section - Equal Width & Height, Compact & Centered Content */}
+      <section className="relative overflow-hidden py-5 sm:py-6 lg:py-7 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
@@ -389,12 +389,12 @@ export default function CommercialSolar() {
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-            {/* Left Content Column - Equal 50% Width, Matching Height, All Text & Buttons Centered */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+            {/* Left Content Column - Equal 50% Width, Matching Compact Height, All Text & Buttons Centered */}
             <div className="flex flex-col h-full w-full">
-              <ScrollReveal delay={0} className="h-full flex flex-col justify-between items-center text-center space-y-4 sm:space-y-5 py-1">
+              <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-3 sm:space-y-3.5 py-0">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] font-heading text-center mx-auto max-w-lg">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
                   Power Your Enterprise with <br />
                   <span className="text-[#E8A83E] relative inline-block">
                     High-Yield Commercial Solar.
@@ -403,17 +403,17 @@ export default function CommercialSolar() {
                 </h1>
 
                 {/* Paragraph Description - Centered */}
-                <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
+                <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
                   Slash peak operational tariffs and hedge against annual utility rate hikes. Proton Power Infra delivers turnkey commercial rooftop and open-acreage ground-mount solar arrays engineered for maximum kilowatt-hour yield.
                 </p>
 
                 {/* CTA Button with Ambient Glow - Centered */}
-                <div className="pt-1 flex items-center justify-center w-full">
+                <div className="pt-0.5 flex items-center justify-center w-full">
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <Link
                       to="/enquiry?type=commercial"
-                      className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
+                      className="relative inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl text-xs sm:text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
                     >
                       <span>Request Commercial Feasibility Audit</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -422,21 +422,21 @@ export default function CommercialSolar() {
                 </div>
 
                 {/* Metrics Bar - Centered */}
-                <div className="pt-4 border-t border-white/15 grid grid-cols-3 gap-3 font-tech w-full max-w-lg mx-auto text-center">
+                <div className="pt-3 border-t border-white/15 grid grid-cols-3 gap-2.5 font-tech w-full max-w-lg mx-auto text-center">
                   <div>
-                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">50 kW – 5 MW+</div>
+                    <div className="text-base sm:text-lg font-black text-[#E8A83E]">50 kW – 5 MW+</div>
                     <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
                       Commercial Range
                     </div>
                   </div>
                   <div>
-                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">3 – 4 Years</div>
+                    <div className="text-base sm:text-lg font-black text-[#E8A83E]">3 – 4 Years</div>
                     <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
                       Capital Payback
                     </div>
                   </div>
                   <div>
-                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">40% Deprec.</div>
+                    <div className="text-base sm:text-lg font-black text-[#E8A83E]">40% Deprec.</div>
                     <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
                       Sec 32 Tax Shield
                     </div>
@@ -445,12 +445,12 @@ export default function CommercialSolar() {
               </ScrollReveal>
             </div>
 
-            {/* Right Visual Capsule - Equal 50% Width, Matching Height */}
+            {/* Right Visual Capsule - Equal 50% Width, Matching Compact Height */}
             <div className="flex flex-col h-full w-full">
               <ScrollReveal delay={140} className="h-full flex flex-col">
-                <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
+                <div className="relative w-full h-full min-h-[300px] sm:min-h-[330px] lg:min-h-[350px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
                   {/* Photo Frame (Full Height Edge-to-Edge) */}
-                  <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] overflow-hidden bg-black/40">
+                  <div className="relative w-full h-full min-h-[300px] sm:min-h-[330px] lg:min-h-[350px] overflow-hidden bg-black/40">
                     <SmartImage
                       src={commercialTopImg}
                       alt="Proton Power Infra High-Yield Commercial Solar Installation"
@@ -473,8 +473,8 @@ export default function CommercialSolar() {
                   </div>
 
                   {/* Bottom Spec Capsule */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
-                    <div className="flex items-center justify-between mb-1.5">
+                  <div className="absolute bottom-3 left-3 right-3 p-3 sm:p-3.5 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
+                    <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse shrink-0"></span>
                         <span className="text-xs font-bold text-white uppercase tracking-wider font-tech truncate">
@@ -496,8 +496,8 @@ export default function CommercialSolar() {
       {/* 2. Section 2 — Commercial Solar Benefits (Compact Horizontal Accordion, Trimmed Padding, Zero Empty Space) */}
       <section className="py-6 sm:py-7 lg:py-8 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header - Centered without badge */}
-          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
+          {/* Section Header - Centered without badge, expanded max-w to prevent awkward word wrap */}
+          <div className="max-w-5xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
             <ScrollReveal delay={0}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
                 Why Industry Leaders Choose Proton Commercial Solar
@@ -553,7 +553,7 @@ export default function CommercialSolar() {
             </ScrollReveal>
           </div>
 
-          {/* Single Streamlined Phase Stepper Rail (Compact, Clean & Non-Repetitive) */}
+          {/* Single Streamlined Phase Stepper Rail with Amber Hover & Active Glow */}
           <ScrollReveal delay={120}>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 mb-4 max-w-4xl mx-auto">
               {phases.map((ph, idx) => {
@@ -566,15 +566,17 @@ export default function CommercialSolar() {
                       setActivePhase(idx);
                       setIsPhaseHovered(true);
                     }}
-                    className={`py-2 px-3 rounded-xl border text-center transition-all duration-500 ease-out cursor-pointer font-tech flex items-center justify-center gap-2 ${
+                    className={`py-2 px-3 rounded-xl border text-center transition-all duration-300 ease-out cursor-pointer font-tech flex items-center justify-center gap-2 group ${
                       isActive
-                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]/50 scale-[1.02]"
-                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4] scale-100"
+                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-[0_0_16px_rgba(232,168,62,0.35)] ring-1 ring-[#E8A83E]/50 scale-[1.02]"
+                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#E8A83E]/60 hover:bg-white hover:text-[#123C32] hover:shadow-[0_0_14px_rgba(232,168,62,0.25)] hover:scale-[1.02] scale-100"
                     }`}
                   >
                     <span
-                      className={`w-2 h-2 rounded-full shrink-0 transition-colors duration-500 ${
-                        isActive ? "bg-[#E8A83E]" : "bg-neutral-300"
+                      className={`w-2 h-2 rounded-full shrink-0 transition-all duration-300 ${
+                        isActive
+                          ? "bg-[#E8A83E] shadow-[0_0_8px_#E8A83E]"
+                          : "bg-neutral-300 group-hover:bg-[#E8A83E] group-hover:shadow-[0_0_6px_#E8A83E]"
                       }`}
                     />
                     <span className="text-xs sm:text-sm font-bold truncate">{ph.name}</span>
@@ -584,10 +586,10 @@ export default function CommercialSolar() {
             </div>
           </ScrollReveal>
 
-          {/* Active Phase Story Stage with Mobile Touch Swipe */}
+          {/* Active Phase Story Stage with Mobile Touch Swipe & Subtle Hover Glow */}
           <ScrollReveal delay={200}>
             <div
-              className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-sm p-4 sm:p-5 lg:p-6 select-none"
+              className="bg-white rounded-2xl border border-[#E2E8E2] hover:border-[#123C32]/30 hover:shadow-[0_12px_36px_rgba(18,60,50,0.08)] transition-all duration-500 overflow-hidden shadow-sm p-4 sm:p-5 lg:p-6 select-none"
               onTouchStart={handlePhaseTouchStart}
               onTouchEnd={handlePhaseTouchEnd}
               onPointerDown={handlePhaseTouchStart}
@@ -643,27 +645,43 @@ export default function CommercialSolar() {
                     </p>
                   </div>
 
-                  {/* Key Engineering Checkpoints */}
+                  {/* Key Engineering Checkpoints with Distinct Light Pastel Shades & Individual Glow */}
                   <div>
                     <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
                       Engineering Checkpoints:
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                      {currentPhaseData.highlights.map((h, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-1.5 text-xs text-[#202724] bg-[#F7F8F4] px-2.5 py-1.5 rounded-lg border border-[#E2E8E2]/70"
-                        >
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32] shrink-0" />
-                          <span className="truncate font-medium">{h}</span>
-                        </div>
-                      ))}
+                      {currentPhaseData.highlights.map((h, i) => {
+                        const style = [
+                          {
+                            card: "bg-emerald-50/70 border-emerald-200/80 text-emerald-950 hover:border-emerald-400 hover:shadow-[0_0_14px_rgba(16,185,129,0.22)]",
+                            icon: "text-emerald-700",
+                          },
+                          {
+                            card: "bg-amber-50/70 border-amber-200/80 text-amber-950 hover:border-amber-400 hover:shadow-[0_0_14px_rgba(232,168,62,0.25)]",
+                            icon: "text-amber-700",
+                          },
+                          {
+                            card: "bg-teal-50/70 border-teal-200/80 text-teal-950 hover:border-teal-400 hover:shadow-[0_0_14px_rgba(20,184,166,0.22)]",
+                            icon: "text-teal-700",
+                          },
+                        ][i % 3];
+                        return (
+                          <div
+                            key={i}
+                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border transition-all duration-300 cursor-default hover:scale-[1.01] ${style.card}`}
+                          >
+                            <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${style.icon}`} />
+                            <span className="truncate font-medium">{h}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
 
-                  {/* Deliverable Capsule */}
-                  <div className="px-3.5 py-2 rounded-xl bg-[#E9F0E9] border border-[#123C32]/15 flex items-center gap-2.5 font-tech">
-                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10">
+                  {/* Deliverable Capsule with Ambient Radiant Glow */}
+                  <div className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-50/80 via-amber-50/60 to-emerald-50/80 border border-emerald-200/80 hover:border-[#E8A83E] hover:shadow-[0_0_16px_rgba(232,168,62,0.22)] transition-all duration-300 flex items-center gap-2.5 font-tech">
+                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10 shadow-2xs">
                       Deliverable
                     </span>
                     <span className="text-xs font-bold text-[#202724] truncate">
@@ -699,7 +717,7 @@ export default function CommercialSolar() {
               const isOpen = openFaq === idx;
               return (
                 <ScrollReveal key={idx} delay={idx * 60}>
-                  <div className="rounded-xl border border-[#E2E8E2] overflow-hidden bg-white shadow-2xs transition-all">
+                  <div className="rounded-xl border border-[#E2E8E2] hover:border-[#E8A83E]/50 hover:shadow-[0_4px_20px_rgba(232,168,62,0.12)] overflow-hidden bg-white shadow-2xs transition-all duration-300">
                     <button
                       type="button"
                       onClick={() => toggleFaq(idx)}
