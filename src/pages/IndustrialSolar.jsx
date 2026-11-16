@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Factory,
@@ -10,18 +10,14 @@ import {
   ChevronUp,
   ArrowRight,
   TrendingUp,
-  Cpu,
-  Layers,
   Phone,
-  Sparkles,
-  ChevronLeft,
-  ChevronRight,
-  Gauge,
-  Warehouse,
-  Flame,
   Award,
+  FileCheck,
+  Wrench,
 } from "lucide-react";
 import { COMPANY_DETAILS, FAQS } from "../data/companyData";
+import SmartImage from "../components/SmartImage";
+import ScrollReveal from "../components/ScrollReveal";
 
 // Industrial Assets
 import industrialTopImg from "../assets/industrial-assets/top-image.jpg";
@@ -29,683 +25,750 @@ import manufacturingImg from "../assets/industrial-assets/manufacturing-units.jp
 import agricultureImg from "../assets/industrial-assets/agriculture-food-processing.jpg";
 import chemicalPharmaImg from "../assets/industrial-assets/chemical-pharma.png";
 
+function IndustrialBenefitCard({
+  benefit,
+  idx,
+  isActive,
+  onActivate,
+  onHoverStart,
+  onHoverEnd,
+}) {
+  const Icon = benefit.icon;
+  const cardRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => {
+        setIsMouseOver(true);
+        onHoverStart();
+        onActivate(idx);
+      }}
+      onMouseLeave={() => {
+        setIsMouseOver(false);
+        onHoverEnd();
+      }}
+      onClick={() => onActivate(idx)}
+      className={`relative rounded-2xl p-[1.5px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer select-none group min-w-0 ${
+        isActive ? "lg:flex-[1.45]" : "lg:flex-1"
+      } h-auto lg:h-full`}
+    >
+      {/* Dynamic Cursor-Responsive Border Glow */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
+        style={{
+          opacity: isMouseOver ? 1 : isActive ? 0.75 : 0.25,
+          background: isMouseOver
+            ? `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
+            : isActive
+            ? `linear-gradient(135deg, rgba(232, 168, 62, 0.8), rgba(18, 60, 50, 0.4), rgba(232, 168, 62, 0.6))`
+            : `rgba(226, 232, 226, 0.8)`,
+        }}
+      />
+
+      {/* Inner Card Surface: Perfectly centered vertically with equal top and bottom distance */}
+      <div
+        className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
+          isActive
+            ? "bg-[#123C32] text-white shadow-xl shadow-black/20"
+            : "bg-white text-[#252A27] shadow-xs hover:shadow-md hover:bg-neutral-50"
+        }`}
+      >
+        {/* Soft Interior Ambient Glow */}
+        <div
+          className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+          style={{
+            background: isActive
+              ? `radial-gradient(160px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.20), transparent 70%)`
+              : `radial-gradient(160px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.12), transparent 70%)`,
+          }}
+        />
+
+        {/* Top Group: Icon + Heading + Subheading (Strictly Centered) */}
+        <div className="relative z-10 w-full flex flex-col items-center text-center">
+          {/* Centered Icon */}
+          <div
+            className={`rounded-xl flex items-center justify-center shrink-0 mx-auto transition-all duration-500 ease-out ${
+              isActive
+                ? "w-8 h-8 sm:w-9 sm:h-9 bg-[#E8A83E] text-[#123C32] shadow-[0_0_16px_rgba(232,168,62,0.4)] mb-1 scale-105"
+                : "w-9 h-9 sm:w-10 sm:h-10 bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32] group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300 mb-1.5 scale-100"
+            }`}
+          >
+            <Icon className={`stroke-[2.2] transition-all duration-300 ${isActive ? "w-4 h-4 sm:w-4.5 sm:h-4.5" : "w-4.5 h-4.5 sm:w-5 sm:h-5"}`} />
+          </div>
+
+          {/* Heading */}
+          <h3
+            className={`font-black font-heading tracking-tight transition-all duration-500 ease-out text-center mx-auto ${
+              isActive
+                ? "text-xs sm:text-sm lg:text-base text-white mb-0.5"
+                : "text-xs sm:text-sm lg:text-[15px] text-[#202724] group-hover:text-[#123C32] max-w-[145px] leading-snug mb-1"
+            }`}
+          >
+            {benefit.title}
+          </h3>
+
+          {/* Subheading */}
+          <div
+            className={`font-mono font-bold uppercase tracking-wider transition-colors duration-500 text-center mx-auto ${
+              isActive
+                ? "text-[9px] sm:text-[10px] text-[#E8A83E]"
+                : "text-[9px] sm:text-[10px] text-[#525D57] group-hover:text-[#E8A83E]"
+            }`}
+          >
+            {benefit.subtitle}
+          </div>
+        </div>
+
+        {/* Active Expanded Details: Stat + Description + Milestone (Gently glides in with smooth vertical float) */}
+        <div
+          className={`relative z-10 w-full flex flex-col items-center text-center transition-all duration-600 ease-out ${
+            isActive
+              ? "opacity-100 translate-y-0 max-h-40 my-1 pointer-events-auto"
+              : "opacity-0 translate-y-2 max-h-0 overflow-hidden pointer-events-none my-0"
+          }`}
+        >
+          {/* Stat Badge */}
+          <div className="text-xs sm:text-sm font-black font-tech text-[#E8A83E] text-center mb-1">
+            {benefit.stat}
+          </div>
+
+          {/* Description */}
+          <p className="text-[11px] sm:text-xs text-[#E9F0E9]/90 leading-snug text-center w-full px-1 line-clamp-2 mb-1.5">
+            {benefit.desc}
+          </p>
+
+          {/* Milestone Highlight */}
+          <div className="pt-1.5 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full truncate">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+            <span className="truncate">{benefit.highlight}</span>
+          </div>
+        </div>
+
+        {/* Inactive Bottom Metric Capsule: Centered with smooth crossfade */}
+        <div
+          className={`relative z-10 w-full flex items-center justify-center transition-all duration-600 ease-out ${
+            isActive
+              ? "opacity-0 -translate-y-1 max-h-0 overflow-hidden pointer-events-none mt-0"
+              : "opacity-100 translate-y-0 max-h-10 mt-2"
+          }`}
+        >
+          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/15 group-hover:border-[#E8A83E]/30 group-hover:text-[#9A6208] transition-all truncate max-w-full">
+            {benefit.stat}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function IndustrialSolar() {
-  const [activeStep, setActiveStep] = useState(0);
-  const [openFaq, setOpenFaq] = useState(null);
+  const [activeBenefit, setActiveBenefit] = useState(0);
+  const [isBenefitHovered, setIsBenefitHovered] = useState(false);
+  const benefitTimerRef = useRef(null);
 
-  const toggleFaq = (idx) => {
-    setOpenFaq(openFaq === idx ? null : idx);
-  };
+  const [activePhase, setActivePhase] = useState(0);
+  const [isPhaseHovered, setIsPhaseHovered] = useState(false);
+  const phaseTimerRef = useRef(null);
 
-  const stageTouchStartX = useRef(0);
-  const stageTouchStartY = useRef(0);
+  // Default first FAQ open as requested
+  const [openFaq, setOpenFaq] = useState(0);
 
-  const handleStageTouchStart = (e) => {
-    const touch = e.touches?.[0] || e.changedTouches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent || e;
-    if (touch && (touch.clientX !== undefined || touch.pageX !== undefined)) {
-      stageTouchStartX.current = touch.clientX ?? touch.pageX;
-      stageTouchStartY.current = touch.clientY ?? touch.pageY;
-    }
-  };
+  const phaseTouchStartX = useRef(0);
+  const phaseTouchStartY = useRef(0);
 
-  const handleStageTouchEnd = (e) => {
-    const touch = e.changedTouches?.[0] || e.touches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent || e;
-    if (!touch || (touch.clientX === undefined && touch.pageX === undefined)) return;
-    const currentX = touch.clientX ?? touch.pageX;
-    const currentY = touch.clientY ?? touch.pageY;
-    const diffX = stageTouchStartX.current - currentX;
-    const diffY = stageTouchStartY.current - currentY;
-
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
-      if (diffX > 0) {
-        // Swiped Left -> Next stage
-        setActiveStep((prev) => (prev + 1) % processStages.length);
-      } else {
-        // Swiped Right -> Prev stage
-        setActiveStep((prev) => (prev - 1 + processStages.length) % processStages.length);
-      }
-    }
-  };
-
-  // 3 Minimal, High-Impact Industrial Benefits (No Card Overload)
-  const industrialBenefits = [
+  // 5 Industrial Solar Benefits (Horizontal Accordion with Cursor Glow)
+  const benefits = [
     {
-      stat: "Up to 70%",
-      statLabel: "Tariff Slash",
-      title: "Peak-Tariff OPEX Relief",
-      desc: "Shield heavy factory operations from exorbitant DISCOM High-Tension (HT) tariffs and fuel price volatility with dedicated captive solar power.",
-      highlight: "Direct Factory Power Yield",
+      id: "tariff",
       icon: TrendingUp,
+      title: "Peak-Tariff Relief",
+      subtitle: "Slash HT Power Costs",
+      stat: "Up to 70% Bill Reduction",
+      desc: "Shield energy-intensive factory operations from high DISCOM High-Tension (HT) tariffs and fuel price volatility with dedicated captive solar power.",
+      highlight: "₹50L+ Annual Factory Savings",
     },
     {
-      stat: "In-House",
-      statLabel: "Manufacturing",
-      title: "Inverter Duty Transformer Synergy",
-      desc: "Unlike standard EPC contractors, Proton Power Infra manufactures its own solar step-up transformers, eliminating voltage harmonics and inverter tripping.",
-      highlight: "In-House Transformer Manufacturing",
+      id: "synergy",
       icon: Zap,
-      link: "/power-transformers",
-      linkText: "Explore Transformers →",
+      title: "Transformer Synergy",
+      subtitle: "In-House Transformer EPC",
+      stat: "Zero Harmonic Tripping",
+      desc: "Unlike standard EPCs, Proton manufactures in-house solar step-up transformers, preventing voltage harmonics, power factor penalties, and inverter tripouts.",
+      highlight: "In-House Transformer Manufacturing",
     },
     {
-      stat: "40% Year 1",
-      statLabel: "Tax Shield",
-      title: "RPO Compliance & Rapid ROI",
-      desc: "Fulfill statutory Renewable Purchase Obligations (RPO) while claiming 40% accelerated depreciation (Section 32) for full capital payback in 3–4 years.",
-      highlight: "Audit-Ready ESG Reporting",
+      id: "rpo",
       icon: Award,
+      title: "RPO & Tax Shield",
+      subtitle: "Section 32 Compliance",
+      stat: "40% Sec 32 Tax Shield",
+      desc: "Fulfill statutory Renewable Purchase Obligations (RPO) while claiming 40% accelerated depreciation in year one for a rapid 3–4 year capital payback.",
+      highlight: "3–4 Yrs Capital Payback",
+    },
+    {
+      id: "uptime",
+      icon: Factory,
+      title: "Heavy Load Uptime",
+      subtitle: "Industrial Racking & O&M",
+      stat: "99.8% Grid Availability",
+      desc: "Heavy-gauge galvanized structures and hot-dip industrial fasteners engineered to resist factory vibrations, chemical fumes, and high-wind loads.",
+      highlight: "Zero Assembly-Line Downtime",
+    },
+    {
+      id: "valuation",
+      icon: ShieldCheck,
+      title: "Industrial Equity",
+      subtitle: "25-Yr Asset Warranty",
+      stat: "25 Years Performance Tier",
+      desc: "Multi-megawatt rooftop and open-acreage solar arrays demonstrably increase industrial property appraisal value, ESG ratings, and investor appeal.",
+      highlight: "25-Year Linear Warranty",
     },
   ];
 
-  // 5-Stage Interactive Industrial Engineering Process (Zero-Downtime Workflow)
-  const processStages = [
+  // Auto-Cycle Spotlight for Section 2 (Every 2.0 seconds)
+  useEffect(() => {
+    if (isBenefitHovered) return;
+
+    benefitTimerRef.current = setInterval(() => {
+      setActiveBenefit((prev) => (prev + 1) % benefits.length);
+    }, 2000);
+
+    return () => {
+      if (benefitTimerRef.current) clearInterval(benefitTimerRef.current);
+    };
+  }, [isBenefitHovered, benefits.length]);
+
+  // 4 Industrial Turnkey Process Phases (Silky Crossfade between Assets)
+  const phases = [
     {
       step: "01",
-      title: "Factory Energy & Harmonic Audit",
-      subtitle: "Load Profiling & Structural Integrity",
+      name: "Load & Harmonic Audit",
+      title: "Factory Energy & Harmonic Distortion Audit",
+      subtitle: "15-Minute Load Curve & Shed Profiling",
+      image: manufacturingImg,
+      icon: Activity,
       desc: "Our power engineers inspect historical 15-minute load curves, contract demand, transformer tapping, power factor penalties, and factory shed load-bearing strength.",
-      checkpoints: [
-        "15-Minute Interval HT Load Profiling",
-        "Factory Shed Structural & Wind Load Analysis",
-        "Power Factor & Harmonic Distortion Mapping",
+      highlights: [
+        "15-Min Interval HT Load Profiling",
+        "Factory Shed Wind Load Analysis",
+        "Harmonic Distortion Mapping",
       ],
       deliverable: "Techno-Commercial Feasibility & Shadow-Loss Report",
     },
     {
       step: "02",
+      name: "Industrial CAD",
       title: "Customized Structural & Electrical CAD",
       subtitle: "Tailored Industrial Plant Engineering",
-      desc: "We design a customized solar array layout tailored to your factory's shed profile—optimizing cable run lengths, DC-to-AC ratios, and in-house step-up transformer sizing.",
-      checkpoints: [
-        "Shed-Specific Non-Penetrating Clamping",
-        "Tier-1 Mono PERC & String Inverter Engineering",
-        "DISCOM-Compliant Single Line Diagram (SLD)",
+      image: agricultureImg,
+      icon: FileCheck,
+      desc: "We design a customized solar array layout tailored to your factory shed profile—optimizing cable runs, DC-to-AC ratios, and in-house step-up transformer sizing.",
+      highlights: [
+        "Shed Non-Penetrating Clamping",
+        "Dual 11kV/33kV HT SLD Schematics",
+        "Lightning & Ground Grid Simulation",
       ],
-      deliverable: "Detailed Engineering Blueprint & Generation Simulation",
+      deliverable: "Complete Engineering Package & 3D Blueprints",
     },
     {
       step: "03",
-      title: "Zero-Downtime Turnkey Installation",
-      subtitle: "Safe Erection Without Stopping Production",
-      desc: "Our certified engineering crews assemble hot-dip galvanized mounting structures and deploy chemical anchor fastenings without causing a single minute of factory floor downtime.",
-      checkpoints: [
-        "Zero Industrial Production Interruption",
-        "Hot-Dip Galvanized Industrial Framing",
-        "Dedicated Lightning & Double-Earthing Grids",
+      name: "Turnkey EPC",
+      title: "Precision Mechanical & Electrical EPC",
+      subtitle: "Parallel Execution Without Halt",
+      image: chemicalPharmaImg,
+      icon: Wrench,
+      desc: "Certified technicians execute installation parallel to running production lines. Non-penetrating chemical clamps guarantee zero roof leakage and zero assembly-line interruption.",
+      highlights: [
+        "Zero Plant Downtime Fastening",
+        "Hot-Dip Galvanized Frames",
+        "Dual Protective Earthing Grid",
       ],
-      deliverable: "Structural Safety Certification & Equipment Commissioning",
+      deliverable: "CEIG Compliance & Mechanical Safety Sign-Off",
     },
     {
       step: "04",
-      title: "CEIG Approval & Substation Grid Sync",
-      subtitle: "Turnkey Regulatory & Electrical Clearance",
-      desc: "We handle the complete statutory workflow: Chief Electrical Inspector to Government (CEIG) clearance, state DISCOM approvals, and 11kV/33kV substation synchronization.",
-      checkpoints: [
-        "End-to-End CEIG Electrical Safety Sign-off",
-        "11kV / 33kV Substation Synchronization",
-        "Bi-Directional Net-Meter Activation",
+      name: "CEIG Sync & SCADA",
+      title: "CEIG Grid Synchronization & IoT Telemetry",
+      subtitle: "Sub-Second Telemetry & Control",
+      image: industrialTopImg,
+      icon: Zap,
+      desc: "We manage all DISCOM liaisoning, CEIG statutory approvals, and HT grid synchronization, backed by cloud SCADA for sub-second telemetry and fault detection.",
+      highlights: [
+        "DISCOM Net-Meter Synchronization",
+        "Sub-Second SCADA Telemetry App",
+        "Predictive IV-Curve Diagnostics",
       ],
-      deliverable: "Official Grid Evacuation Certificate & Net-Meter Activation",
-    },
-    {
-      step: "05",
-      title: "Real-Time SCADA Telemetry & Rapid O&M",
-      subtitle: "Continuous Plant Health & Performance Ratio",
-      desc: "Cloud-connected SCADA tracks string-level generation, ambient solar irradiance, and transformer thermal telemetry, backed by mechanized washing and rapid Indore field dispatch.",
-      checkpoints: [
-        "String-Level Cloud SCADA Telemetry",
-        "Preventive Thermographic Drone Inspections",
-        "Dedicated On-Call Field Mobilization",
-      ],
-      deliverable: "Live Mobile SCADA Dashboard & Guaranteed Plant Uptime",
+      deliverable: "DISCOM Synchronization & Handover Protocol",
     },
   ];
 
-  const currentStage = processStages[activeStep];
+  const currentPhaseData = phases[activePhase];
 
-  // 3 Key Industries We Serve (Matching User Asset Files)
-  const industries = [
-    {
-      id: "manufacturing",
-      image: manufacturingImg,
-      tag: "Continuous Heavy Loads",
-      title: "Manufacturing & Fabrication",
-      desc: "Engineered for high continuous loads: CNC machinery, metal fabrication lines, casting units, and automobile manufacturing requiring stable captive voltage.",
-      metrics: "500 kW to 10 MW+",
-    },
-    {
-      id: "chemical-pharma",
-      image: chemicalPharmaImg,
-      tag: "Corrosion-Proof Racking",
-      title: "Chemical & Pharmaceutical Plants",
-      desc: "Specialized non-corrosive anodized aluminum racking and sealed explosion-safe switchgear engineered for sensitive chemical and pharma cleanrooms.",
-      metrics: "250 kW to 5 MW+",
-    },
-    {
-      id: "agri-food",
-      image: agricultureImg,
-      tag: "Cold Chain & Refrigeration",
-      title: "Agriculture & Food Processing",
-      desc: "Continuous solar power for heavy refrigeration compressors, modern grain milling plants, dairy chilling networks, and multi-acre cold storage hubs.",
-      metrics: "100 kW to 3 MW+",
-    },
-  ];
+  // Auto-Shift Phases in Section 3 (Every 2.0 seconds)
+  useEffect(() => {
+    if (isPhaseHovered) return;
 
-  // Industrial FAQs
+    phaseTimerRef.current = setInterval(() => {
+      setActivePhase((prev) => (prev + 1) % phases.length);
+    }, 2000);
+
+    return () => {
+      if (phaseTimerRef.current) clearInterval(phaseTimerRef.current);
+    };
+  }, [isPhaseHovered, phases.length]);
+
+  // Mobile Touch Swipe Handlers for Phase section
+  const handlePhaseTouchStart = (e) => {
+    const touch = e.touches?.[0] || e.changedTouches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent || e;
+    if (touch && (touch.clientX !== undefined || touch.pageX !== undefined)) {
+      phaseTouchStartX.current = touch.clientX ?? touch.pageX;
+      phaseTouchStartY.current = touch.clientY ?? touch.pageY;
+    }
+  };
+
+  const handlePhaseTouchEnd = (e) => {
+    const touch = e.changedTouches?.[0] || e.touches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent || e;
+    if (!touch || (touch.clientX === undefined && touch.pageX === undefined)) return;
+    const currentX = touch.clientX ?? touch.pageX;
+    const currentY = touch.clientY ?? touch.pageY;
+    const diffX = phaseTouchStartX.current - currentX;
+    const diffY = phaseTouchStartY.current - currentY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        setActivePhase((prev) => (prev + 1) % phases.length);
+      } else {
+        setActivePhase((prev) => (prev - 1 + phases.length) % phases.length);
+      }
+    }
+  };
+
+  const toggleFaq = (idx) => {
+    setOpenFaq(openFaq === idx ? null : idx);
+  };
+
+  // Industrial FAQs (Default #1 Open)
   const industrialFaqs = [
     ...(FAQS.industrial || []),
     {
-      q: "Can our manufacturing factory run during solar installation?",
-      a: "Yes, absolutely. Our turnkey engineering methodology ensures 100% zero factory downtime. Civil and mechanical mounting on sheds or open land takes place during regular shifts, while electrical synchronization is scheduled during planned plant maintenance windows.",
+      q: "Can our factory continue manufacturing operations during rooftop solar installation?",
+      a: "Yes. Our industrial EPC workflows are engineered for zero production downtime. All mechanical structural erection, chemical anchoring, and module mounting take place without cutting factory power lines or disturbing active assembly floors.",
     },
     {
-      q: "How does Proton Power Infra's in-house transformer manufacturing benefit our factory?",
-      a: "Unlike standard EPCs who outsource transformers, we manufacture our own Inverter Duty Solar Transformers in Indore. This guarantees precision impedance matching, lower core losses, elimination of harmonic tripping, and immediate on-site technical support.",
+      q: "Why are Inverter Duty Transformers critical for multi-megawatt industrial solar?",
+      a: "Large industrial solar arrays experience severe pulse-width modulation harmonics and voltage surges from central/string inverters. Standard distribution transformers trip under these harmonics; our in-house manufactured inverter-duty transformers feature dual windings and electrostatic shielding designed specifically for uninterrupted solar generation.",
     },
   ];
 
   return (
-    <div className="pt-20">
-      {/* 1. Hero Section (Compact py-10, Single CTA Button, Tech Typography) */}
-      <section className="relative py-10 md:py-10 lg:py-10 bg-[#123C32] text-white overflow-hidden">
-        {/* Subtle background tech pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
+      {/* 1. Hero Section - Equal Width & Height, Centered Content */}
+      <section className="relative overflow-hidden pt-10 pb-10 md:pt-14 md:pb-12 lg:pt-12 lg:pb-12 bg-[#123C32] text-white">
+        {/* Subtle engineering grid background */}
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+        {/* Ambient lighting glows */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Left Column: Heading, Subtext, Single CTA, Micro-Metrics */}
-            <div className="lg:col-span-7 space-y-4 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/40 font-tech">
-                <Factory className="w-3.5 h-3.5" />
-                <span>Heavy Industrial Solar EPC & Transformers</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight font-heading">
-                Power Your Factory with Reliable Captive Solar.
-              </h1>
-
-              <p className="text-xs sm:text-sm md:text-base text-[#E9F0E9]/85 leading-relaxed font-normal max-w-2xl">
-                Hedge against rising industrial HT peak tariffs and utility outages. Proton Power Infra designs and installs multi-megawatt captive solar power plants with in-house inverter duty transformers engineered for non-stop factory operations.
-              </p>
-
-              {/* Exactly ONE CTA Button */}
-              <div className="pt-1">
-                <Link
-                  to="/enquiry?type=industrial"
-                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
-                >
-                  <span>Request Industrial Feasibility Audit</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-
-              {/* Micro-Metrics Bar */}
-              <div className="pt-4 border-t border-white/15 grid grid-cols-3 gap-3 font-tech">
-                <div>
-                  <div className="text-lg sm:text-xl lg:text-2xl font-black text-[#E8A83E]">100 kW – 10 MW+</div>
-                  <div className="text-[10px] sm:text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
-                    Industrial Scale
-                  </div>
-                </div>
-                <div>
-                  <div className="text-lg sm:text-xl lg:text-2xl font-black text-[#E8A83E]">Up to 70%</div>
-                  <div className="text-[10px] sm:text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
-                    HT Tariff Slash
-                  </div>
-                </div>
-                <div>
-                  <div className="text-lg sm:text-xl lg:text-2xl font-black text-[#E8A83E]">Tier-1 SCADA</div>
-                  <div className="text-[10px] sm:text-[11px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
-                    Real-Time Telemetry
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Visual Frame with top-image.jpg */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/80 bg-[#202724] group">
-                <div className="relative h-64 sm:h-72 lg:h-[320px] overflow-hidden">
-                  <img
-                    src={industrialTopImg}
-                    alt="Proton Power Infra Industrial Rooftop & Ground Mount Solar"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/90 via-transparent to-black/20"></div>
-                </div>
-
-                {/* Top Telemetry Capsule */}
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-bold text-[#123C32] shadow-sm font-tech">
-                    <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
-                    <span>Industrial Plant • Online</span>
-                  </div>
-                  <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[10px] font-mono text-[#E9F0E9] border border-white/10">
-                    <span>22.71° N, 75.85° E</span>
-                  </div>
-                </div>
-
-                {/* Bottom Spec Capsule */}
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-white/60 z-10">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-[#E8A83E]"></span>
-                      <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
-                        High-Voltage Industrial Solar & Transformers
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-[11px] text-[#525D57] leading-relaxed">
-                    Custom-engineered for manufacturing plants, cold chains, foundries, and chemical processing complexes.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Section 2 — Minimal Industrial Impact Strip (No Card Overload) */}
-      <section className="py-10 md:py-10 lg:py-10 bg-white border-b border-[#E2E8E2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
-                <span>Operational Advantage</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
-                Engineered for Heavy Continuous Operations
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-[#525D57] max-w-md leading-relaxed md:text-right">
-              Three core operational advantages built into every Proton Power Infra industrial installation.
-            </p>
-          </div>
-
-          {/* 3 Streamlined Pillars */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {industrialBenefits.map((b, idx) => {
-              const Icon = b.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-5 rounded-2xl bg-[#F7F8F4] border border-[#E2E8E2] hover:border-[#123C32]/40 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center">
-                        <Icon className="w-5 h-5 stroke-[2]" />
-                      </div>
-                      <div className="text-right font-tech">
-                        <span className="text-base sm:text-lg font-black text-[#123C32] block leading-tight">
-                          {b.stat}
-                        </span>
-                        <span className="text-[10px] font-bold text-[#525D57] uppercase tracking-wider">
-                          {b.statLabel}
-                        </span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-base font-bold text-[#202724] font-heading mb-2">
-                      {b.title}
-                    </h3>
-                    <p className="text-xs text-[#525D57] leading-relaxed mb-3">
-                      {b.desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-[#E2E8E2] flex items-center justify-between text-xs font-tech font-bold">
-                    {b.link ? (
-                      <Link
-                        to={b.link}
-                        className="text-[#123C32] hover:text-[#E8A83E] flex items-center gap-1 group-hover:underline"
-                      >
-                        <span>{b.linkText}</span>
-                      </Link>
-                    ) : (
-                      <span className="text-[#123C32] flex items-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-                        <span>{b.highlight}</span>
-                      </span>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Section 3 — Interactive Industrial Execution Pipeline (Zero-Scroll & Highly Intuitive) */}
-      <section className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] border-b border-[#E2E8E2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-5">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
-                <span>Disciplined Engineering Protocol</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
-                Our 5-Stage Zero-Downtime Process
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-[#525D57] max-w-md leading-relaxed md:text-right">
-              A proven industrial engineering workflow guaranteeing zero factory floor disruption from survey to grid synchronization.
-            </p>
-          </div>
-
-          {/* Stepper Navigation Pills */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-2.5 mb-4">
-            {processStages.map((st, idx) => {
-              const isActive = activeStep === idx;
-              return (
-                <button
-                  key={st.step}
-                  type="button"
-                  onClick={() => setActiveStep(idx)}
-                  className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer font-tech flex items-center gap-2.5 ${
-                    isActive
-                      ? "bg-[#123C32] text-white border-[#123C32] shadow-sm ring-2 ring-[#E8A83E]/40"
-                      : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4]"
-                  }`}
-                >
-                  <div
-                    className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                      isActive ? "bg-[#E8A83E] text-[#123C32]" : "bg-[#123C32]/10 text-[#123C32]"
-                    }`}
-                  >
-                    {st.step}
-                  </div>
-                  <div className="min-w-0">
-                    <div
-                      className={`text-[9px] font-bold uppercase tracking-wider ${
-                        isActive ? "text-[#E8A83E]" : "text-[#525D57]"
-                      }`}
-                    >
-                      Stage {st.step}
-                    </div>
-                    <div className="text-xs font-bold truncate">
-                      {st.title.split("&")[0].trim()}
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Interactive Active Stage Card */}
-          <div
-            className="bg-white rounded-2xl border border-[#E2E8E2] shadow-sm p-5 sm:p-6 text-left cursor-grab active:cursor-grabbing"
-            onTouchStart={handleStageTouchStart}
-            onTouchEnd={handleStageTouchEnd}
-            onPointerDown={handleStageTouchStart}
-            onPointerUp={handleStageTouchEnd}
-          >
-            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
-              {/* Left Column: Stage Detail */}
-              <div className="lg:w-3/5 space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold text-[#E8A83E] uppercase tracking-wider font-tech bg-[#123C32] px-2.5 py-0.5 rounded">
-                    Stage {currentStage.step} of 05
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+            {/* Left Content Column - Equal 50% Width, Matching Height, All Text & Buttons Centered */}
+            <div className="flex flex-col h-full w-full">
+              <ScrollReveal delay={0} className="h-full flex flex-col justify-between items-center text-center space-y-4 sm:space-y-5 py-1">
+                {/* Heading - Centered */}
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] font-heading text-center mx-auto max-w-lg">
+                  Energize Heavy Industry with <br />
+                  <span className="text-[#E8A83E] relative inline-block">
+                    Industrial-Grade Solar.
+                    <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                   </span>
-                  <span className="text-xs font-bold text-[#123C32] uppercase tracking-wide font-tech">
-                    {currentStage.subtitle}
-                  </span>
-                </div>
+                </h1>
 
-                <h3 className="text-xl sm:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
-                  {currentStage.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
-                  {currentStage.desc}
+                {/* Paragraph Description - Centered */}
+                <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
+                  Shield factory operating margins against steep High-Tension (HT) grid tariffs. Proton Power Infra engineers turnkey multi-megawatt industrial solar plants paired with in-house step-up transformer technology.
                 </p>
 
-                {/* Milestone Deliverable Badge */}
-                <div className="pt-1">
-                  <div className="px-3.5 py-2 rounded-lg bg-[#E9F0E9] border border-[#123C32]/15 flex items-center gap-2 font-tech">
-                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0">
-                      Deliverable:
-                    </span>
-                    <span className="text-xs font-bold text-[#202724] truncate">
-                      {currentStage.deliverable}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Checkpoints List + Direct Navigation */}
-              <div className="lg:w-2/5 flex flex-col justify-between space-y-4 bg-[#F7F8F4] p-4 rounded-xl border border-[#E2E8E2]">
-                <div>
-                  <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-2">
-                    Key Technical Checkpoints:
-                  </div>
-                  <div className="space-y-2">
-                    {currentStage.checkpoints.map((cp, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-[#202724]">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32] shrink-0 mt-0.5" />
-                        <span>{cp}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* In-Card Navigation Controls */}
-                <div className="pt-3 border-t border-[#E2E8E2] flex items-center justify-between">
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep((prev) => (prev - 1 + processStages.length) % processStages.length)}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#525D57] hover:text-[#123C32] px-2.5 py-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
-                  >
-                    <ChevronLeft className="w-3.5 h-3.5" />
-                    <span>Previous</span>
-                  </button>
-
-                  <div className="flex items-center gap-1">
-                    {processStages.map((st, idx) => {
-                      const isActive = activeStep === idx;
-                      return (
-                        <button
-                          key={st.step}
-                          type="button"
-                          onClick={() => setActiveStep(idx)}
-                          className={`w-6 h-6 rounded-md text-[11px] font-mono font-bold transition-all cursor-pointer ${
-                            isActive
-                              ? "bg-[#123C32] text-[#E8A83E] shadow-sm"
-                              : "bg-white text-[#525D57] hover:bg-black/5"
-                          }`}
-                        >
-                          {st.step}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep((prev) => (prev + 1) % processStages.length)}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#123C32] hover:text-[#1A4D41] px-2.5 py-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer font-tech"
-                  >
-                    <span>Next</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Section 4 — Industries We Serve (3 Cards Using User Assets) */}
-      <section id="industries-served" className="py-10 md:py-10 lg:py-10 bg-white scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
-                <span>Target Verticals</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
-                Specialized Solutions for Heavy Industry
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-[#525D57] max-w-md leading-relaxed md:text-right">
-              Tailored structural configurations and high-voltage power evacuation designed for specialized industrial operations.
-            </p>
-          </div>
-
-          {/* 3 Balanced Cards with High-Res User Assets */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {industries.map((ind) => (
-              <div
-                key={ind.id}
-                className="bg-[#F7F8F4] rounded-2xl border border-[#E2E8E2] hover:border-[#123C32]/40 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
-              >
-                {/* Image Container with Zoom */}
-                <div className="relative h-44 sm:h-48 overflow-hidden bg-[#202724]">
-                  <img
-                    src={ind.image}
-                    alt={ind.title}
-                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
-
-                  {/* Top Tag */}
-                  <div className="absolute top-2.5 left-2.5">
-                    <span className="px-2.5 py-0.5 rounded-md bg-[#123C32] text-[#E8A83E] text-[10px] font-bold uppercase tracking-wider font-tech shadow-sm">
-                      {ind.tag}
-                    </span>
-                  </div>
-
-                  {/* Bottom Metrics */}
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white font-tech text-xs">
-                    <span className="font-bold">{ind.title}</span>
-                    <span className="text-[10px] font-mono bg-white/20 px-2 py-0.5 rounded">
-                      {ind.metrics}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-4 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-base font-bold text-[#202724] font-heading mb-1.5">
-                      {ind.title}
-                    </h3>
-                    <p className="text-xs text-[#525D57] leading-relaxed mb-4">
-                      {ind.desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-[#E2E8E2]">
+                {/* CTA Button with Ambient Glow - Centered */}
+                <div className="pt-1 flex items-center justify-center w-full">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <Link
-                      to={`/enquiry?type=industrial&industry=${encodeURIComponent(ind.title)}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#E8A83E] transition-colors font-tech group/link"
+                      to="/enquiry?type=industrial"
+                      className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
                     >
-                      <span>Request Feasibility for {ind.title}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                      <span>Request Industrial Energy Audit</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
                     </Link>
                   </div>
                 </div>
-              </div>
-            ))}
+
+                {/* Metrics Bar - Centered */}
+                <div className="pt-4 border-t border-white/15 grid grid-cols-3 gap-3 font-tech w-full max-w-lg mx-auto text-center">
+                  <div>
+                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">100 kW – 10 MW+</div>
+                    <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                      Industrial Scale
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">Up to 70%</div>
+                    <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                      Tariff Reduction
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">In-House</div>
+                    <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
+                      Transformer Bay
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+
+            {/* Right Visual Capsule - Equal 50% Width, Matching Height */}
+            <div className="flex flex-col h-full w-full">
+              <ScrollReveal delay={140} className="h-full flex flex-col">
+                <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
+                  {/* Photo Frame (Full Height Edge-to-Edge) */}
+                  <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] overflow-hidden bg-black/40">
+                    <SmartImage
+                      src={industrialTopImg}
+                      alt="Proton Power Infra Industrial Rooftop & Ground Solar Project"
+                      className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
+                      containerClassName="w-full h-full absolute inset-0"
+                      priority={true}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/30 pointer-events-none"></div>
+                  </div>
+
+                  {/* Top Telemetry Capsule */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
+                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
+                      <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
+                      <span>Industrial Array • Active</span>
+                    </div>
+                    <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[9px] font-mono text-[#E9F0E9] border border-white/10">
+                      <span>22.71° N, 75.85° E</span>
+                    </div>
+                  </div>
+
+                  {/* Bottom Spec Capsule */}
+                  <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse shrink-0"></span>
+                        <span className="text-xs font-bold text-white uppercase tracking-wider font-tech truncate">
+                          Heavy Industrial Rooftop & Open Ground Solar
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-[#E9F0E9]/85 leading-relaxed font-sans line-clamp-2">
+                      Engineered for manufacturing factories, steel and cement works, chemical processing, and agricultural cold-storage chains.
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Section 5 — FAQs (Smooth Accordion, Compact) */}
-      <section className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] border-t border-[#E2E8E2]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
-              <span>Industrial FAQs</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight font-heading">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-xs sm:text-sm text-[#525D57] mt-1">
-              Details on continuous zero-downtime execution, SCADA telemetry, and in-house transformers.
-            </p>
+      {/* 2. Section 2 — Industrial Solar Benefits (Compact Horizontal Accordion, Trimmed Padding, Zero Empty Space) */}
+      <section className="py-6 sm:py-7 lg:py-8 bg-white border-b border-[#E2E8E2]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header - Centered without badge */}
+          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
+            <ScrollReveal delay={0}>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
+                Why Manufacturing Giants Choose Proton Industrial Solar
+              </h2>
+            </ScrollReveal>
+
+            <ScrollReveal delay={70}>
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
+                Transform energy overheads into high-yield captive assets with seamless transformer bay integration and guaranteed grid uptime.
+              </p>
+            </ScrollReveal>
           </div>
 
-          <div className="space-y-2.5">
+          {/* 5 Cards in Same Line: Horizontal Expanding Accordion (Compact 230px Height, Equal Top & Bottom Distance) */}
+          <ScrollReveal delay={120}>
+            <div className="flex flex-col lg:flex-row gap-2.5 sm:gap-3 h-auto lg:h-[230px] items-stretch">
+              {benefits.map((b, idx) => (
+                <IndustrialBenefitCard
+                  key={b.id}
+                  benefit={b}
+                  idx={idx}
+                  isActive={activeBenefit === idx}
+                  onActivate={setActiveBenefit}
+                  onHoverStart={() => setIsBenefitHovered(true)}
+                  onHoverEnd={() => setIsBenefitHovered(false)}
+                />
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 3. Section 3 — How We Execute Industrial Solar (Auto-Cycles every 2.0s, Pauses on Hover) */}
+      <section
+        id="process"
+        className="py-6 sm:py-7 lg:py-8 bg-[#F7F8F4] scroll-mt-20"
+        onMouseEnter={() => setIsPhaseHovered(true)}
+        onMouseLeave={() => setIsPhaseHovered(false)}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header - Centered without badge */}
+          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
+            <ScrollReveal delay={0}>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
+                How We Execute Industrial Solar Turnkey Projects
+              </h2>
+            </ScrollReveal>
+
+            <ScrollReveal delay={70}>
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
+                A rigorous 4-phase turnkey installation engineered for zero factory downtime and guaranteed electrical safety.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* Single Streamlined Phase Stepper Rail (Compact, Clean & Non-Repetitive) */}
+          <ScrollReveal delay={120}>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 mb-4 max-w-4xl mx-auto">
+              {phases.map((ph, idx) => {
+                const isActive = activePhase === idx;
+                return (
+                  <button
+                    key={ph.step}
+                    type="button"
+                    onClick={() => {
+                      setActivePhase(idx);
+                      setIsPhaseHovered(true);
+                    }}
+                    className={`py-2 px-3 rounded-xl border text-center transition-all duration-500 ease-out cursor-pointer font-tech flex items-center justify-center gap-2 ${
+                      isActive
+                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]/50 scale-[1.02]"
+                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/30 hover:bg-[#F7F8F4] scale-100"
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full shrink-0 transition-colors duration-500 ${
+                        isActive ? "bg-[#E8A83E]" : "bg-neutral-300"
+                      }`}
+                    />
+                    <span className="text-xs sm:text-sm font-bold truncate">{ph.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </ScrollReveal>
+
+          {/* Active Phase Story Stage with Mobile Touch Swipe */}
+          <ScrollReveal delay={200}>
+            <div
+              className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-sm p-4 sm:p-5 lg:p-6 select-none"
+              onTouchStart={handlePhaseTouchStart}
+              onTouchEnd={handlePhaseTouchEnd}
+              onPointerDown={handlePhaseTouchStart}
+              onPointerUp={handlePhaseTouchEnd}
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
+                {/* Left Column: Phase Photograph (Silky Crossfade Transition Between All Phases) */}
+                <div className="lg:col-span-5 flex flex-col h-full">
+                  <div className="relative rounded-xl overflow-hidden border border-[#E2E8E2] bg-neutral-900 group h-full min-h-[260px] sm:min-h-[290px] lg:min-h-full">
+                    {phases.map((ph, idx) => {
+                      const isCurrent = activePhase === idx;
+                      return (
+                        <div
+                          key={ph.step}
+                          className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                            isCurrent
+                              ? "opacity-100 scale-100 z-10"
+                              : "opacity-0 scale-105 z-0 pointer-events-none"
+                          }`}
+                        >
+                          <SmartImage
+                            src={ph.image}
+                            alt={ph.title}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            containerClassName="w-full h-full absolute inset-0"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/15 pointer-events-none"></div>
+
+                          {/* Subtitle Bar Overlay */}
+                          <div className="absolute bottom-3 left-3 right-3 text-[11px] text-[#E9F0E9] font-medium font-tech truncate pointer-events-none bg-black/50 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
+                            {ph.subtitle}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Right Column: Clean Story Narrative & Engineering Checkpoints (Matching Height with Smooth Fade Animation) */}
+                <div
+                  key={activePhase}
+                  className="lg:col-span-7 flex flex-col justify-between space-y-3 text-left h-full py-0.5 animate-smooth-fade"
+                >
+                  <div>
+                    <div className="text-[10px] sm:text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider mb-1">
+                      {currentPhaseData.subtitle}
+                    </div>
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                      {currentPhaseData.title}
+                    </h3>
+                    <p className="text-xs sm:text-[13px] text-[#525D57] leading-relaxed mt-1.5 font-normal">
+                      {currentPhaseData.desc}
+                    </p>
+                  </div>
+
+                  {/* Key Engineering Checkpoints */}
+                  <div>
+                    <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
+                      Engineering Checkpoints:
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      {currentPhaseData.highlights.map((h, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center gap-1.5 text-xs text-[#202724] bg-[#F7F8F4] px-2.5 py-1.5 rounded-lg border border-[#E2E8E2]/70"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32] shrink-0" />
+                          <span className="truncate font-medium">{h}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Deliverable Capsule */}
+                  <div className="px-3.5 py-2 rounded-xl bg-[#E9F0E9] border border-[#123C32]/15 flex items-center gap-2.5 font-tech">
+                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10">
+                      Deliverable
+                    </span>
+                    <span className="text-xs font-bold text-[#202724] truncate">
+                      {currentPhaseData.deliverable}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 4. Common Questions (FAQs) - Default FAQ #1 Open */}
+      <section className="py-6 sm:py-7 lg:py-8 bg-white border-t border-[#E2E8E2]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+            <ScrollReveal delay={0}>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+                Common Questions About Industrial Solar
+              </h2>
+            </ScrollReveal>
+
+            <ScrollReveal delay={70}>
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1">
+                Clear answers regarding factory uptime, HT grid synchronization, and in-house transformer integration.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          <div className="space-y-3">
             {industrialFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
-                <div key={idx} className="rounded-xl border border-[#E2E8E2] overflow-hidden bg-white">
-                  <button
-                    type="button"
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full p-4 sm:p-4.5 text-left flex items-center justify-between gap-4 hover:bg-[#F7F8F4] transition-colors cursor-pointer"
-                  >
-                    <span className="text-xs sm:text-sm font-bold text-[#202724] font-heading">
-                      {faq.q}
-                    </span>
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-colors ${
-                        isOpen ? "bg-[#123C32] text-white" : "bg-black/5 text-[#525D57]"
-                      }`}
+                <ScrollReveal key={idx} delay={idx * 60}>
+                  <div className="rounded-xl border border-[#E2E8E2] overflow-hidden bg-white shadow-2xs transition-all">
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(idx)}
+                      className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 hover:bg-[#F7F8F4] transition-colors cursor-pointer"
                     >
-                      {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                    </div>
-                  </button>
-                  {isOpen && (
-                    <div className="px-4 pb-4 pt-1 text-xs text-[#525D57] leading-relaxed border-t border-[#E2E8E2]/60">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
+                      <span className="text-sm sm:text-base font-bold text-[#202724] font-heading">
+                        {faq.q}
+                      </span>
+                      <div
+                        className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                          isOpen ? "bg-[#123C32] text-white" : "bg-black/5 text-[#525D57]"
+                        }`}
+                      >
+                        {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      </div>
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#525D57] leading-relaxed border-t border-[#E2E8E2]/60">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                </ScrollReveal>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* 6. Section 6 — Compact Consultation CTA Banner (Form Replaced with Single High-Impact Action) */}
+      {/* 5. Consultation CTA Banner */}
       <section className="py-10 md:py-10 lg:py-10 bg-[#123C32] text-white relative overflow-hidden">
         {/* Subtle radial glow */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold uppercase tracking-wider border border-[#E8A83E]/40 font-tech mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Ready to Slash Heavy Industrial Tariffs?</span>
-          </div>
+          <ScrollReveal delay={0}>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight font-heading mb-3">
+              Request Your Free Industrial Plant Feasibility Survey
+            </h2>
+          </ScrollReveal>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight font-heading mb-3">
-            Consult with Our Industrial Solar EPC Engineers
-          </h2>
+          <ScrollReveal delay={70}>
+            <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
+              Our power infrastructure engineers will assess your plant's sanctioned HT load, analyze shed vibration dynamics, and model a high-capacity solar and transformer solution with zero obligation.
+            </p>
+          </ScrollReveal>
 
-          <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
-            Submit your manufacturing plant specifications for an in-depth HT tariff assessment, roof structural evaluation, and custom captive solar ROI simulation with zero obligation.
-          </p>
+          <ScrollReveal delay={120}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              <Link
+                to="/enquiry?type=industrial"
+                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
+              >
+                <span>Schedule Industrial Energy Audit</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              </Link>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              to="/enquiry?type=industrial"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
-            >
-              <span>Schedule Industrial Energy Audit</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-            </Link>
+              <a
+                href={`tel:${COMPANY_DETAILS.primaryPhoneRaw || "+919770744687"}`}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all font-tech"
+              >
+                <Phone className="w-4 h-4 text-[#E8A83E]" />
+                <span>Call Us: {COMPANY_DETAILS.primaryPhone || "+91 97707 44687"}</span>
+              </a>
+            </div>
+          </ScrollReveal>
 
-            <a
-              href={`tel:${COMPANY_DETAILS.primaryPhoneRaw || "+919770744687"}`}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all font-tech"
-            >
-              <Phone className="w-4 h-4 text-[#E8A83E]" />
-              <span>Call Us: {COMPANY_DETAILS.primaryPhone || "+91 97707 44687"}</span>
-            </a>
-          </div>
-
-          <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-center gap-5 text-[11px] text-[#E9F0E9]/75 font-tech">
-            <span>✓ 100% Free HT Tariff & Roof Survey</span>
-            <span>✓ Zero Production Downtime Installation</span>
-            <span>✓ In-House Inverter Duty Solar Transformers</span>
-          </div>
+          <ScrollReveal delay={160}>
+            <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-center gap-5 text-xs text-[#E9F0E9]/75 font-tech">
+              <span>✓ 100% Free HT Feasibility Audit</span>
+              <span>✓ In-House Transformer Integration</span>
+              <span>✓ 25-Year Industrial Performance Warranty</span>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>
