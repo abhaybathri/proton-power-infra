@@ -134,7 +134,7 @@ export default function Hero() {
             </h1>
 
             {/* Clean Justified Description */}
-            <p className="text-sm sm:text-base text-[#525D57] leading-relaxed font-normal text-justify-clean">
+            <p className="text-sm sm:text-base text-[#525D57] leading-relaxed font-normal text-justify-center">
               Proton Power Infra is a leading solar panel installation company and power transformer manufacturer headquartered in Indore, with a nationwide footprint. Delivering high-yield solar EPC and in-house inverter duty transformers with precision, passion, and purpose.
             </p>
 

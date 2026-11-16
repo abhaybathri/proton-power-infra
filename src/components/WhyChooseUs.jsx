@@ -97,7 +97,7 @@ export default function WhyChooseUs() {
       stat: "2012+",
       badge: "Expert Leadership",
       title: "Dynamic Team",
-      desc: "The ideal blend of dynamic young innovators & seasoned power infrastructure professionals adhering to global standards.",
+      desc: "The ideal blend of dynamic innovators & seasoned power infrastructure professionals adhering to global standards.",
       tag: "CEA & MNRE Adherence",
       icon: Users,
     },

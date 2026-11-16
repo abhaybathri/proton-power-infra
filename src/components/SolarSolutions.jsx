@@ -266,10 +266,10 @@ export default function SolarSolutions() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="max-w-2xl text-left">
             <ScrollReveal delay={0}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
+              {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
                 <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
                 <span>Core Capabilities</span>
-              </div>
+              </div> */}
             </ScrollReveal>
 
             <ScrollReveal delay={80}>
