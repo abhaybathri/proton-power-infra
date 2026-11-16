@@ -62,42 +62,48 @@ function BenefitCard({
       }}
       onMouseLeave={onHoverEnd}
       onClick={() => onActivate(idx)}
-      className={`group relative rounded-2xl p-4 sm:p-5 border transition-all duration-500 cursor-pointer select-none overflow-hidden ${
+      className={`group relative rounded-2xl p-4 sm:p-5 border transition-all duration-300 cursor-pointer select-none overflow-hidden flex flex-col justify-between h-full ${
         isActive
-          ? "bg-[#123C32] text-white border-[#E8A83E] ring-2 ring-[#E8A83E]/60 shadow-xl shadow-[#123C32]/30 -translate-y-1.5 z-10"
-          : "bg-white text-[#252A27] border-[#E2E8E2] hover:border-[#E8A83E]/50 shadow-2xs hover:shadow-md"
+          ? "bg-[#123C32] text-white border-[#123C32] shadow-xl shadow-black/10 -translate-y-1"
+          : "bg-white text-[#252A27] border-[#E2E8E2] hover:border-[#123C32]/25 shadow-xs hover:shadow-md"
       }`}
     >
-      {/* Interactive Cursor Spotlight Glow Effect */}
+      {/* Subtle, refined cursor spotlight glow (no loud or clashing glow) */}
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
-          background: `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.28), rgba(254, 243, 199, 0.10) 50%, transparent 75%)`,
+          background: isActive
+            ? `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.08), transparent 70%)`
+            : `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.12), transparent 70%)`,
         }}
       />
 
-      {/* Top Solar Accent Bar on Active Card */}
-      {isActive && (
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-300 via-[#E8A83E] to-amber-300 shadow-[0_0_12px_#E8A83E] z-10" />
-      )}
-
-      {/* Content wrapper keeping elements above spotlight */}
+      {/* Top Content: Icon, Stat, Title, Subtitle, Description (Identical size at all times) */}
       <div className="relative z-10 flex flex-col items-start w-full">
         {/* Icon */}
         <div
-          className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
+          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-300 ${
             isActive
-              ? "bg-[#E8A83E] text-[#123C32] scale-110 shadow-[0_0_20px_rgba(232,168,62,0.45)]"
-              : "bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32] group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300"
+              ? "bg-[#E8A83E] text-[#123C32]"
+              : "bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32]"
           }`}
         >
           <Icon className="w-5 h-5 stroke-[2.2]" />
         </div>
 
+        {/* Stat Badge */}
+        <div
+          className={`text-base sm:text-lg font-black font-tech tracking-tight mt-3 transition-colors duration-300 ${
+            isActive ? "text-[#E8A83E]" : "text-[#123C32]"
+          }`}
+        >
+          {benefit.stat}
+        </div>
+
         {/* Main Heading */}
         <h3
-          className={`text-base font-bold font-heading mt-3 tracking-tight transition-colors ${
-            isActive ? "text-white" : "text-[#202724] group-hover:text-[#123C32]"
+          className={`text-sm sm:text-base font-bold font-heading mt-0.5 tracking-tight transition-colors duration-300 ${
+            isActive ? "text-white" : "text-[#202724]"
           }`}
         >
           {benefit.title}
@@ -105,36 +111,42 @@ function BenefitCard({
 
         {/* Subheading */}
         <div
-          className={`text-xs font-mono font-bold uppercase tracking-wider mt-0.5 transition-colors ${
-            isActive ? "text-[#E8A83E]" : "text-[#525D57] group-hover:text-[#E8A83E]"
+          className={`text-[10px] font-mono font-bold uppercase tracking-wider mt-0.5 transition-colors duration-300 ${
+            isActive ? "text-amber-200/90" : "text-[#525D57]"
           }`}
         >
           {benefit.subtitle}
         </div>
-      </div>
 
-      {/* Smoothly Expanded Details on Active / Hover */}
-      <div
-        className={`relative z-10 overflow-hidden transition-all duration-500 ease-out ${
-          isActive
-            ? "max-h-60 opacity-100 mt-3 pt-3 border-t border-white/15"
-            : "max-h-0 opacity-0 mt-0 pt-0 border-t-0"
-        }`}
-      >
-        {/* Stat Badge */}
-        <div className="text-sm font-black font-tech text-[#E8A83E] mb-1">
-          {benefit.stat}
-        </div>
-
-        {/* Description */}
-        <p className="text-xs text-[#E9F0E9]/90 leading-relaxed mb-2.5">
+        {/* Description: Always visible, same size across all cards */}
+        <p
+          className={`text-xs leading-relaxed mt-2 transition-colors duration-300 ${
+            isActive ? "text-[#E9F0E9]/85" : "text-[#525D57]"
+          }`}
+        >
           {benefit.desc}
         </p>
+      </div>
 
-        {/* Milestone Highlight */}
-        <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 text-[11px] font-tech font-bold text-[#E8A83E] truncate">
-          <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
-          <span className="truncate">{benefit.highlight}</span>
+      {/* Bottom Section: Key Milestone Highlight */}
+      <div
+        className={`relative z-10 pt-3 mt-3 border-t transition-colors duration-300 w-full ${
+          isActive ? "border-white/10" : "border-[#E2E8E2]"
+        }`}
+      >
+        <div className="flex items-center gap-1.5 text-[11px] font-tech font-bold truncate">
+          <CheckCircle2
+            className={`w-3.5 h-3.5 shrink-0 transition-colors duration-300 ${
+              isActive ? "text-[#E8A83E]" : "text-[#123C32]"
+            }`}
+          />
+          <span
+            className={`truncate transition-colors duration-300 ${
+              isActive ? "text-[#E8A83E]" : "text-[#123C32]"
+            }`}
+          >
+            {benefit.highlight}
+          </span>
         </div>
       </div>
     </div>
@@ -459,22 +471,20 @@ export default function ResidentialSolar() {
             </ScrollReveal>
           </div>
 
-          {/* 5 Compact Cards in the Same Line: Vertically centered when one expands, with fixed container height to prevent layout shift */}
-          <div className="min-h-[350px] lg:h-[350px] flex items-center">
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-center">
-              {benefits.map((b, idx) => (
-                <ScrollReveal key={b.id} delay={idx * 50} className="w-full">
-                  <BenefitCard
-                    benefit={b}
-                    idx={idx}
-                    isActive={activeBenefit === idx}
-                    onActivate={setActiveBenefit}
-                    onHoverStart={() => setIsBenefitHovered(true)}
-                    onHoverEnd={() => setIsBenefitHovered(false)}
-                  />
-                </ScrollReveal>
-              ))}
-            </div>
+          {/* 5 Cards in Same Line: Exact Same Size at all times, only color/theme switches on hover/auto-cycle (Zero shrinking/enlarging) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-stretch">
+            {benefits.map((b, idx) => (
+              <ScrollReveal key={b.id} delay={idx * 50} className="h-full">
+                <BenefitCard
+                  benefit={b}
+                  idx={idx}
+                  isActive={activeBenefit === idx}
+                  onActivate={setActiveBenefit}
+                  onHoverStart={() => setIsBenefitHovered(true)}
+                  onHoverEnd={() => setIsBenefitHovered(false)}
+                />
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
