@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Activity, ChevronLeft, ChevronRight } from "lucide-react";
+import SmartImage from "./SmartImage";
 import homeTopImage from "../assets/home-assets/home-top-image.jpg";
 import homeTop2 from "../assets/home-assets/home-top-2.jpg";
 import homeTop3 from "../assets/home-assets/home-top-3.jpg";
@@ -115,16 +116,14 @@ export default function Hero() {
       {/* High-tech engineering grid background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
+      {/* Ambient Lighting & Glow Meshes */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#123C32]/12 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+      <div className="absolute top-1/2 -right-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" style={{ animationDelay: "2s" }}></div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column (Content) */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Techy Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/15 text-[#123C32] text-xs font-bold tracking-wider uppercase font-tech">
-              <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
-              <span>Solar Energy & Power Infrastructure Since 2012</span>
-            </div>
-
             {/* Aesthetic Tech Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#202724] tracking-tight leading-[1.08] font-heading">
               Smarter Solar Solutions. <br />
@@ -134,35 +133,22 @@ export default function Hero() {
               </span>
             </h1>
 
-            {/* Exact Required Description */}
-            <p className="text-base sm:text-lg text-[#525D57] leading-relaxed max-w-2xl font-normal">
+            {/* Clean Justified Description */}
+            <p className="text-base sm:text-lg text-[#525D57] leading-relaxed max-w-2xl font-normal text-justify-clean">
               Proton Power Infra is a leading solar panel installation company and power transformer manufacturer headquartered in Indore, with a nationwide footprint. Delivering high-yield solar EPC and in-house inverter duty transformers with precision, passion, and purpose.
             </p>
 
-            {/* Exactly ONE CTA Button as explicitly requested */}
-            <div className="pt-2">
-              <Link
-                to="/enquiry"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-lg shadow-[#123C32]/20 hover:shadow-xl hover:shadow-[#123C32]/30 transition-all duration-300 group cursor-pointer font-tech tracking-wide"
-              >
-                <span>Request a Free Consultation</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
-              </Link>
-            </div>
-
-            {/* Tech Specs Micro-Bar */}
-            <div className="pt-6 border-t border-[#E2E8E2] grid grid-cols-3 gap-4 font-tech">
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-[#123C32]">125+ MW</div>
-                <div className="text-[11px] font-semibold text-[#525D57] uppercase tracking-wider">Commissioned</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-[#123C32]">In-House</div>
-                <div className="text-[11px] font-semibold text-[#525D57] uppercase tracking-wider">Transformers</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-black text-[#123C32]">Pan-India</div>
-                <div className="text-[11px] font-semibold text-[#525D57] uppercase tracking-wider">4 Strategic Hubs</div>
+            {/* Centered CTA Button with Ambient Glow Halo */}
+            <div className="pt-2 flex items-center justify-center max-w-2xl">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#123C32] via-[#E8A83E] to-[#123C32] rounded-2xl blur-md opacity-25 group-hover:opacity-60 transition duration-500 group-hover:scale-105"></div>
+                <Link
+                  to="/enquiry"
+                  className="relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-lg shadow-[#123C32]/25 hover:shadow-[0_0_30px_rgba(232,168,62,0.35)] transition-all duration-300 group cursor-pointer font-tech tracking-wide"
+                >
+                  <span>Request a Free Consultation</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
+                </Link>
               </div>
             </div>
           </div>
@@ -178,7 +164,7 @@ export default function Hero() {
               onPointerDown={handleTouchStart}
               onPointerUp={handleTouchEnd}
             >
-              {/* Image Presentation Frame with Smooth Crossfade & Motion */}
+              {/* Image Presentation Frame with Progressive Shimmer & Motion */}
               <div className="relative aspect-[4/4.5] overflow-hidden bg-black/40">
                 {HERO_SLIDES.map((slide, idx) => {
                   const isActive = idx === currentSlide;
@@ -189,16 +175,16 @@ export default function Hero() {
                         isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
                       }`}
                     >
-                      <img
+                      <SmartImage
                         src={slide.image}
                         alt={`Proton Power Infra ${slide.title}`}
                         className={`w-full h-full object-cover transition-transform duration-7000 ease-out ${
                           isActive && !isHovered ? "scale-108" : "scale-100"
                         }`}
-                        loading={idx === 0 ? "eager" : "lazy"}
+                        priority={idx === 0}
                       />
                       {/* Gradient overlay for contrast and telemetry readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/95 via-[#123C32]/25 to-black/35"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#123C32]/95 via-[#123C32]/25 to-black/35 pointer-events-none"></div>
                     </div>
                   );
                 })}
