@@ -84,9 +84,9 @@ function BenefitCard({
         }}
       />
 
-      {/* Inner Card Surface: Height is constant (240px on desktop), compact padding and zero empty space */}
+      {/* Inner Card Surface: Perfectly centered vertically with equal top and bottom distance */}
       <div
-        className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-500 overflow-hidden flex flex-col items-center text-center justify-between h-full w-full ${
+        className={`relative rounded-[14.5px] p-3 sm:p-3.5 lg:p-4 transition-all duration-500 overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
           isActive
             ? "bg-[#123C32] text-white shadow-xl shadow-black/20"
             : "bg-white text-[#252A27] shadow-xs hover:shadow-md hover:bg-neutral-50"
@@ -163,12 +163,12 @@ function BenefitCard({
           </div>
         </div>
 
-        {/* Inactive Bottom Metric Capsule: Fills the inactive card without empty space */}
+        {/* Inactive Bottom Metric Capsule: Centered with equal top and bottom spacing */}
         <div
           className={`relative z-10 w-full flex items-center justify-center transition-all duration-500 ${
             isActive
               ? "opacity-0 max-h-0 overflow-hidden pointer-events-none mt-0"
-              : "opacity-100 max-h-10 pt-1.5"
+              : "opacity-100 max-h-10 mt-2"
           }`}
         >
           <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/15 group-hover:border-[#E8A83E]/30 group-hover:text-[#9A6208] transition-all truncate max-w-full">
@@ -498,9 +498,9 @@ export default function ResidentialSolar() {
             </ScrollReveal>
           </div>
 
-          {/* 5 Cards in Same Line: Horizontal Expanding Accordion (Compact 240px Height, Zero Empty Space in Both States) */}
+          {/* 5 Cards in Same Line: Horizontal Expanding Accordion (Compact 230px Height, Equal Top & Bottom Distance) */}
           <ScrollReveal delay={150}>
-            <div className="flex flex-col lg:flex-row gap-2.5 sm:gap-3 h-auto lg:h-[240px] items-stretch">
+            <div className="flex flex-col lg:flex-row gap-2.5 sm:gap-3 h-auto lg:h-[230px] items-stretch">
               {benefits.map((b, idx) => (
                 <BenefitCard
                   key={b.id}
