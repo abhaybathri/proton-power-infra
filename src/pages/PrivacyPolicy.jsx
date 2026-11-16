@@ -3,28 +3,28 @@ import { COMPANY_DETAILS } from "../data/companyData";
 
 export default function PrivacyPolicy() {
   return (
-    <div className="pt-24 pb-20 bg-[#F7F8F4] min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-10 bg-[#F7F8F4] min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10 pb-6 border-b border-[#E2E8E2]">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 text-[#123C32] text-xs font-bold uppercase tracking-wider mb-3">
-            <Shield className="w-3.5 h-3.5" />
-            <span>Legal Documentation</span>
+        <div className="mb-6 pb-4 border-b border-[#E2E8E2]">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 text-[#123C32] text-xs font-bold uppercase tracking-wider mb-2 font-tech">
+            <Shield className="w-3.5 h-3.5 text-[#E8A83E]" />
+            <span>Corporate Governance</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#202724] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#202724] tracking-tight font-heading">
             Privacy Policy
           </h1>
-          <div className="flex items-center gap-2 text-xs text-[#525D57] mt-2">
+          <div className="flex items-center gap-2 text-xs text-[#525D57] mt-1.5 font-tech">
             <Calendar className="w-3.5 h-3.5 text-[#E8A83E]" />
-            <span>Last Updated: November 2026 | Prototype Placeholder</span>
+            <span>Effective Date: November 2026</span>
           </div>
         </div>
 
-        {/* Prototype Legal Notice */}
-        <div className="p-4 rounded-xl bg-[#E9F0E9] border border-[#123C32]/20 mb-8 flex items-start gap-3 text-xs text-[#123C32] leading-relaxed">
-          <AlertCircle className="w-5 h-5 text-[#E8A83E] shrink-0 mt-0.5" />
+        {/* Corporate Data Governance Notice */}
+        <div className="p-3.5 rounded-xl bg-[#E9F0E9] border border-[#123C32]/20 mb-6 flex items-start gap-2.5 text-xs text-[#123C32] leading-relaxed">
+          <AlertCircle className="w-4 h-4 text-[#E8A83E] shrink-0 mt-0.5" />
           <div>
-            <strong>Legal Template Placeholder:</strong> This policy represents standard corporate data governance for solar infrastructure lead generation and client communications. Final wording remains subject to review and approval by Proton Power Infra's legal counsel.
+            <strong>Corporate Data Privacy Assurance:</strong> This policy governs data handling across all digital channels and consultation forms for Proton Power Infrastructure Pvt. Ltd. Your facility and contact details are kept strictly confidential.
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   Factory,
@@ -35,6 +35,36 @@ export default function IndustrialSolar() {
 
   const toggleFaq = (idx) => {
     setOpenFaq(openFaq === idx ? null : idx);
+  };
+
+  const stageTouchStartX = useRef(0);
+  const stageTouchStartY = useRef(0);
+
+  const handleStageTouchStart = (e) => {
+    const touch = e.touches?.[0] || e.changedTouches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent || e;
+    if (touch && (touch.clientX !== undefined || touch.pageX !== undefined)) {
+      stageTouchStartX.current = touch.clientX ?? touch.pageX;
+      stageTouchStartY.current = touch.clientY ?? touch.pageY;
+    }
+  };
+
+  const handleStageTouchEnd = (e) => {
+    const touch = e.changedTouches?.[0] || e.touches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent || e;
+    if (!touch || (touch.clientX === undefined && touch.pageX === undefined)) return;
+    const currentX = touch.clientX ?? touch.pageX;
+    const currentY = touch.clientY ?? touch.pageY;
+    const diffX = stageTouchStartX.current - currentX;
+    const diffY = stageTouchStartY.current - currentY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swiped Left -> Next stage
+        setActiveStep((prev) => (prev + 1) % processStages.length);
+      } else {
+        // Swiped Right -> Prev stage
+        setActiveStep((prev) => (prev - 1 + processStages.length) % processStages.length);
+      }
+    }
   };
 
   // 3 Minimal, High-Impact Industrial Benefits (No Card Overload)
@@ -406,7 +436,13 @@ export default function IndustrialSolar() {
           </div>
 
           {/* Interactive Active Stage Card */}
-          <div className="bg-white rounded-2xl border border-[#E2E8E2] shadow-sm p-5 sm:p-6 text-left">
+          <div
+            className="bg-white rounded-2xl border border-[#E2E8E2] shadow-sm p-5 sm:p-6 text-left cursor-grab active:cursor-grabbing"
+            onTouchStart={handleStageTouchStart}
+            onTouchEnd={handleStageTouchEnd}
+            onPointerDown={handleStageTouchStart}
+            onPointerUp={handleStageTouchEnd}
+          >
             <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
               {/* Left Column: Stage Detail */}
               <div className="lg:w-3/5 space-y-3">

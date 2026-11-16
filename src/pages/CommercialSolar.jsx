@@ -109,8 +109,8 @@ export default function CommercialSolar() {
 
   return (
     <div className="pt-20">
-      {/* 1. Hero Section (Compact py-10 md:py-12, Single CTA Button, Tech Typography) */}
-      <section className="relative py-10 md:py-12 lg:py-14 bg-[#123C32] text-white overflow-hidden">
+      {/* 1. Hero Section (Compact py-10, Single CTA Button, Tech Typography) */}
+      <section className="relative py-10 md:py-10 lg:py-10 bg-[#123C32] text-white overflow-hidden">
         {/* Subtle background grid */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
@@ -210,7 +210,7 @@ export default function CommercialSolar() {
       </section>
 
       {/* 2. Section 2 — Ground-Mounted Solar Arrays (Minimal, Professional & Compact) */}
-      <section id="ground-mount-section" className="py-10 md:py-12 bg-white scroll-mt-20">
+      <section id="ground-mount-section" className="py-10 md:py-10 lg:py-10 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             {/* Left Column: Minimal Text + 4 Compact Capability Cards + Navigate to About Us */}
@@ -282,7 +282,7 @@ export default function CommercialSolar() {
       </section>
 
       {/* 3. Section 3 — Why Choose Proton Power Infra (4 Cards with Characteristic User Assets) */}
-      <section className="py-10 md:py-12 bg-[#F7F8F4] border-y border-[#E2E8E2]">
+      <section className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] border-y border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
@@ -353,7 +353,7 @@ export default function CommercialSolar() {
       </section>
 
       {/* 4. Section 4 — FAQs (Smooth Accordion, Compact) */}
-      <section className="py-10 md:py-12 bg-white">
+      <section className="py-10 md:py-10 lg:py-10 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
@@ -401,7 +401,7 @@ export default function CommercialSolar() {
       </section>
 
       {/* 5. Section 5 — Compact Consultation CTA Banner (Form Replaced with Single High-Impact Action) */}
-      <section className="py-10 md:py-12 bg-[#123C32] text-white relative overflow-hidden">
+      <section className="py-10 md:py-10 lg:py-10 bg-[#123C32] text-white relative overflow-hidden">
         {/* Subtle radial glow */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   Sun,
@@ -33,6 +33,37 @@ export default function SolarEPCServices() {
 
   const toggleFaq = (idx) => {
     setOpenFaq(openFaq === idx ? null : idx);
+  };
+
+  const epcTouchStartX = useRef(0);
+  const epcTouchStartY = useRef(0);
+
+  const handleEpcTouchStart = (e) => {
+    const touch = e.touches?.[0] || e.changedTouches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent || e;
+    if (touch && (touch.clientX !== undefined || touch.pageX !== undefined)) {
+      epcTouchStartX.current = touch.clientX ?? touch.pageX;
+      epcTouchStartY.current = touch.clientY ?? touch.pageY;
+    }
+  };
+
+  const handleEpcTouchEnd = (e) => {
+    const touch = e.changedTouches?.[0] || e.touches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent || e;
+    if (!touch || (touch.clientX === undefined && touch.pageX === undefined)) return;
+    const currentX = touch.clientX ?? touch.pageX;
+    const currentY = touch.clientY ?? touch.pageY;
+    const diffX = epcTouchStartX.current - currentX;
+    const diffY = epcTouchStartY.current - currentY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      setIsPlaying(false);
+      if (diffX > 0) {
+        // Swiped Left -> Next phase
+        setActivePhase((prev) => (prev + 1) % phases.length);
+      } else {
+        // Swiped Right -> Prev phase
+        setActivePhase((prev) => (prev - 1 + phases.length) % phases.length);
+      }
+    }
   };
 
   // 4 Core EPC Phases (Visual-First, Minimal Text)
@@ -245,7 +276,7 @@ export default function SolarEPCServices() {
       </section>
 
       {/* 2. Section 2 — Compact Turnkey Advantage Matrix */}
-      <section className="py-8 md:py-8 lg:py-8 bg-white border-b border-[#E2E8E2]">
+      <section className="py-10 md:py-10 lg:py-10 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
             {turnkeyAdvantages.map((adv, idx) => (
@@ -355,7 +386,13 @@ export default function SolarEPCServices() {
           </div>
 
           {/* Active Motion Stage Card (Side-by-Side Desktop, Compact & Zero-Scroll) */}
-          <div className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-md p-4 sm:p-5 lg:p-6">
+          <div
+            className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-md p-4 sm:p-5 lg:p-6 cursor-grab active:cursor-grabbing"
+            onTouchStart={handleEpcTouchStart}
+            onTouchEnd={handleEpcTouchEnd}
+            onPointerDown={handleEpcTouchStart}
+            onPointerUp={handleEpcTouchEnd}
+          >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
               {/* Left Column: Visual Asset with Smooth Zoom */}
               <div className="lg:col-span-6 relative">

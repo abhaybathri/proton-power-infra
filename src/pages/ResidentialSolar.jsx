@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   CheckCircle2,
@@ -33,6 +33,36 @@ export default function ResidentialSolar() {
   const [activeBenefit, setActiveBenefit] = useState(0);
   const [activePhase, setActivePhase] = useState(0);
   const [openFaq, setOpenFaq] = useState(null);
+
+  const phaseTouchStartX = useRef(0);
+  const phaseTouchStartY = useRef(0);
+
+  const handlePhaseTouchStart = (e) => {
+    const touch = e.touches?.[0] || e.changedTouches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent || e;
+    if (touch && (touch.clientX !== undefined || touch.pageX !== undefined)) {
+      phaseTouchStartX.current = touch.clientX ?? touch.pageX;
+      phaseTouchStartY.current = touch.clientY ?? touch.pageY;
+    }
+  };
+
+  const handlePhaseTouchEnd = (e) => {
+    const touch = e.changedTouches?.[0] || e.touches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent || e;
+    if (!touch || (touch.clientX === undefined && touch.pageX === undefined)) return;
+    const currentX = touch.clientX ?? touch.pageX;
+    const currentY = touch.clientY ?? touch.pageY;
+    const diffX = phaseTouchStartX.current - currentX;
+    const diffY = phaseTouchStartY.current - currentY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swiped Left -> Next phase
+        setActivePhase((prev) => (prev + 1) % phases.length);
+      } else {
+        // Swiped Right -> Prev phase
+        setActivePhase((prev) => (prev - 1 + phases.length) % phases.length);
+      }
+    }
+  };
 
   const toggleFaq = (idx) => {
     setOpenFaq(openFaq === idx ? null : idx);
@@ -273,7 +303,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 2. Section 2 — Benefits of Residential Solar (Interactive 5-Pillar Compact Deck) */}
-      <section className="py-14 md:py-18 lg:py-10 bg-white border-b border-[#E2E8E2]">
+      <section className="py-10 md:py-10 lg:py-10 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="max-w-3xl mb-10 sm:mb-12">
@@ -385,7 +415,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 3. Section 3 — How We Bring Solar (Interactive 4-Phase Story Walkthrough - Ultra Compact & Zero-Scroll) */}
-      <section id="process" className="py-4 md:py-6 lg:py-6 bg-[#F7F8F4] scroll-mt-20">
+      <section id="process" className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header (Clean & Horizontal on Desktop) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
@@ -442,7 +472,13 @@ export default function ResidentialSolar() {
           </div>
 
           {/* Active Phase Story Stage (Compact & Zero Scroll) */}
-          <div className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-md p-4 sm:p-5 lg:p-6">
+          <div
+            className="bg-white rounded-2xl border border-[#E2E8E2] overflow-hidden shadow-md p-4 sm:p-5 lg:p-6 cursor-grab active:cursor-grabbing"
+            onTouchStart={handlePhaseTouchStart}
+            onTouchEnd={handlePhaseTouchEnd}
+            onPointerDown={handlePhaseTouchStart}
+            onPointerUp={handlePhaseTouchEnd}
+          >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
               {/* Left Column: Phase Photography */}
               <div className="lg:col-span-5 relative">
@@ -565,7 +601,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 4. Section 4 — Engineered for Household Reliability (Compact & Non-Repetitive) */}
-      <section className="py-6 md:py-6 bg-white border-y border-[#E2E8E2]">
+      <section className="py-10 md:py-10 lg:py-10 bg-white border-y border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Image Column using why-choose-image.jpg */}
@@ -644,7 +680,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 5. Common Questions (FAQs) */}
-      <section className="py-8 md:py-10 bg-[#F7F8F4]">
+      <section className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-3">
@@ -695,7 +731,7 @@ export default function ResidentialSolar() {
       </section>
 
       {/* 6. Compact Consultation CTA Banner (Form Replaced with Single High-Impact Action) */}
-      <section className="py-14 md:py-10 bg-[#123C32] text-white relative overflow-hidden">
+      <section className="py-10 md:py-10 lg:py-10 bg-[#123C32] text-white relative overflow-hidden">
         {/* Subtle radial glow */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
 

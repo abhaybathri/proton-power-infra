@@ -53,8 +53,10 @@ export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
 
-  const SLIDE_DURATION = 4800; // ms per slide
+  const SLIDE_DURATION = 3500; // ms per slide
 
   // Auto-advance slider with pause on hover
   useEffect(() => {
@@ -70,19 +72,46 @@ export default function Hero() {
   }, [isHovered, currentSlide]);
 
   const handlePrev = (e) => {
-    e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   };
 
   const handleNext = (e) => {
-    e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+  };
+
+  // Touch Swipe Handlers for Mobile (Universal support for real touchscreens, pointer events & synthetic dispatches)
+  const handleTouchStart = (e) => {
+    const touch = e.touches?.[0] || e.changedTouches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent || e;
+    if (touch && (touch.clientX !== undefined || touch.pageX !== undefined)) {
+      touchStartX.current = touch.clientX ?? touch.pageX;
+      touchStartY.current = touch.clientY ?? touch.pageY;
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    const touch = e.changedTouches?.[0] || e.touches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent || e;
+    if (!touch || (touch.clientX === undefined && touch.pageX === undefined)) return;
+    const currentX = touch.clientX ?? touch.pageX;
+    const currentY = touch.clientY ?? touch.pageY;
+    const diffX = touchStartX.current - currentX;
+    const diffY = touchStartY.current - currentY;
+
+    // Only swipe if horizontal move is dominant and exceeds threshold
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        handleNext(); // swiped left -> next
+      } else {
+        handlePrev(); // swiped right -> prev
+      }
+    }
   };
 
   const activeSlide = HERO_SLIDES[currentSlide];
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-12 md:pt-28 md:pb-20 lg:pt-24 lg:pb-12 bg-[#F7F8F4]">
+    <section className="relative overflow-hidden pt-24 pb-10 md:pt-26 md:pb-10 lg:pt-24 lg:pb-10 bg-[#F7F8F4]">
       {/* High-tech engineering grid background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -141,9 +170,13 @@ export default function Hero() {
           {/* Right Column: Dynamic Motion Showcase Carousel */}
           <div className="lg:col-span-5 relative">
             <div
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-[#123C32] group select-none transition-all duration-500"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-[#123C32] group select-none transition-all duration-500 cursor-grab active:cursor-grabbing"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onPointerDown={handleTouchStart}
+              onPointerUp={handleTouchEnd}
             >
               {/* Image Presentation Frame with Smooth Crossfade & Motion */}
               <div className="relative aspect-[4/4.5] overflow-hidden bg-black/40">

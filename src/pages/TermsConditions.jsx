@@ -3,28 +3,28 @@ import { COMPANY_DETAILS } from "../data/companyData";
 
 export default function TermsConditions() {
   return (
-    <div className="pt-24 pb-20 bg-[#F7F8F4] min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-10 bg-[#F7F8F4] min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10 pb-6 border-b border-[#E2E8E2]">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 text-[#123C32] text-xs font-bold uppercase tracking-wider mb-3">
-            <FileCheck className="w-3.5 h-3.5" />
+        <div className="mb-6 pb-4 border-b border-[#E2E8E2]">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 text-[#123C32] text-xs font-bold uppercase tracking-wider mb-2 font-tech">
+            <FileCheck className="w-3.5 h-3.5 text-[#E8A83E]" />
             <span>Terms of Engagement</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#202724] tracking-tight">
-            Terms & Conditions
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#202724] tracking-tight font-heading">
+            Terms &amp; Conditions
           </h1>
-          <div className="flex items-center gap-2 text-xs text-[#525D57] mt-2">
+          <div className="flex items-center gap-2 text-xs text-[#525D57] mt-1.5 font-tech">
             <Calendar className="w-3.5 h-3.5 text-[#E8A83E]" />
-            <span>Effective Date: November 2026 | Prototype Placeholder</span>
+            <span>Effective Date: November 2026</span>
           </div>
         </div>
 
-        {/* Prototype Legal Notice */}
-        <div className="p-4 rounded-xl bg-[#E9F0E9] border border-[#123C32]/20 mb-8 flex items-start gap-3 text-xs text-[#123C32] leading-relaxed">
-          <AlertCircle className="w-5 h-5 text-[#E8A83E] shrink-0 mt-0.5" />
+        {/* Corporate Terms Notice */}
+        <div className="p-3.5 rounded-xl bg-[#E9F0E9] border border-[#123C32]/20 mb-6 flex items-start gap-2.5 text-xs text-[#123C32] leading-relaxed">
+          <AlertCircle className="w-4 h-4 text-[#E8A83E] shrink-0 mt-0.5" />
           <div>
-            <strong>Legal Template Placeholder:</strong> These terms govern general digital browsing, online quotation estimations, and preliminary engineering feasibility consultations. Final commercial EPC contracts will incorporate bespoke project SLAs.
+            <strong>Corporate Terms of Service:</strong> These terms govern general digital browsing, online quotation estimations, and preliminary engineering feasibility consultations for Proton Power Infrastructure Pvt. Ltd.
           </div>
         </div>
 

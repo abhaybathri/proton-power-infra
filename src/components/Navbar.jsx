@@ -271,6 +271,7 @@ export default function Navbar() {
               <NavLink
                 to="/"
                 end
+                onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
                   `block px-3 py-2.5 rounded-lg text-base font-bold ${
                     isActive ? "bg-[#123C32] text-white" : "text-[#202724] hover:bg-gray-50"
@@ -299,30 +300,35 @@ export default function Navbar() {
                   <div className="pl-4 pr-2 py-2 space-y-1 bg-[#F7F8F4] rounded-xl mt-1 border border-[#E2E8E2]/60">
                     <Link
                       to="/residential-solar"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
                     >
                       Residential Solar
                     </Link>
                     <Link
                       to="/commercial-solar"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
                     >
                       Commercial & Ground-Mounted Solar
                     </Link>
                     <Link
                       to="/industrial-solar"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
                     >
                       Industrial Solar Systems
                     </Link>
                     <Link
                       to="/power-transformers"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
                     >
                       Power Transformers Manufacturer
                     </Link>
                     <Link
                       to="/solar-epc-services"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block px-3 py-2 text-sm font-semibold text-[#525D57] hover:text-[#123C32]"
                     >
                       Turnkey Solar EPC & O&M
@@ -333,6 +339,7 @@ export default function Navbar() {
 
               <NavLink
                 to="/about"
+                onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
                   `block px-3 py-2.5 rounded-lg text-base font-bold ${
                     isActive ? "bg-[#123C32] text-white" : "text-[#202724] hover:bg-gray-50"
@@ -344,6 +351,7 @@ export default function Navbar() {
 
               <NavLink
                 to="/contact"
+                onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
                   `block px-3 py-2.5 rounded-lg text-base font-bold ${
                     isActive ? "bg-[#123C32] text-white" : "text-[#202724] hover:bg-gray-50"
@@ -357,6 +365,7 @@ export default function Navbar() {
             <div className="pt-6 border-t border-[#E2E8E2] mt-6">
               <Link
                 to="/enquiry"
+                onClick={() => setMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold bg-[#123C32] text-white shadow-md text-center"
               >
                 <span>Enquiry Now</span>

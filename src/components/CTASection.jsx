@@ -6,7 +6,7 @@ export default function CTASection({
   description = "Let's find the right solar energy or transformer solution for your facility. Connect with our engineering headquarters in Indore or regional offices in Delhi, Bhopal, and Dewas.",
 }) {
   return (
-    <section className="relative py-10 md:py-10 lg:py-12 bg-[#123C32] text-white overflow-hidden">
+    <section className="relative py-10 md:py-10 lg:py-10 bg-[#123C32] text-white overflow-hidden">
       {/* Subtle Background Glow & Pattern */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#123C32] via-[#1A4D41] to-[#0D2B24] opacity-95"></div>
       <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>

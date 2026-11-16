@@ -18,7 +18,7 @@ export default function SustainabilityImpact() {
   const annualCO2Tons = Math.round(((monthlyUnits * 12 * 0.82) / 1000) * 10) / 10; // ~0.82 kg CO2/kWh
 
   return (
-    <section className="py-10 md:py-10 lg:py-12 bg-[#123C32] text-white relative overflow-hidden">
+    <section className="py-10 md:py-10 lg:py-10 bg-[#123C32] text-white relative overflow-hidden">
       {/* Background Solar Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
