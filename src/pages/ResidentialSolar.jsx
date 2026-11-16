@@ -43,72 +43,62 @@ export default function ResidentialSolar() {
   const phaseTouchStartX = useRef(0);
   const phaseTouchStartY = useRef(0);
 
-  // 5 Focused Residential Solar Benefits (Auto-cycling spotlight + manual hover precedence)
+  // 5 Focused Residential Solar Benefits (Compact Cards in Same Line with Hover Expansion & Zero Numbers)
   const benefits = [
     {
       id: "savings",
-      number: "01",
       icon: DollarSign,
       title: "Cost Savings",
       subtitle: "Slash Monthly Bills",
-      stat: "Up to 90%",
-      statLabel: "Bill Reduction",
+      stat: "Up to 90% Bill Reduction",
       desc: "Cut electricity bills drastically by generating your own clean power from the sun, converting terrace space into financial yield.",
-      highlight: "₹45,000+ Annual Household Savings",
+      highlight: "₹45,000+ Annual Savings",
     },
     {
       id: "independence",
-      number: "02",
       icon: Shield,
       title: "Energy Independence",
       subtitle: "Hedge Tariff Hikes",
-      stat: "25 Years",
-      statLabel: "Price Stability",
+      stat: "25 Years Price Stability",
       desc: "Protect your family from unpredictable utility grid rate hikes with captive clean solar generation that remains steady for decades.",
-      highlight: "Shielded Against 5–8% Annual Hikes",
+      highlight: "Shielded Against 5–8% Hikes",
     },
     {
       id: "eco",
-      number: "03",
       icon: Leaf,
       title: "Eco-Friendly Living",
       subtitle: "Shrink Carbon Footprint",
-      stat: "~4.5 Tons",
-      statLabel: "CO2 Offset / Year",
+      stat: "~4.5 Tons CO2 Offset / Year",
       desc: "Lower carbon emissions permanently. A 5 kWp home system offsets ~4.5 tons of CO2 yearly—equal to planting 100+ trees.",
-      highlight: "Offsets 100+ Mature Trees Annually",
+      highlight: "Offsets 100+ Trees Annually",
     },
     {
       id: "valuation",
-      number: "04",
       icon: TrendingUp,
       title: "Property Value",
       subtitle: "Smart Home Asset",
-      stat: "+4% to 6%",
-      statLabel: "Home Resale Value",
+      stat: "+4% to 6% Home Resale Value",
       desc: "Certified rooftop solar systems demonstrably enhance long-term property appraisal values, attracting premium homebuyers.",
-      highlight: "Appraised as a Self-Powered Home",
+      highlight: "Appraised as a Smart Home",
     },
     {
       id: "subsidy",
-      number: "05",
       icon: Award,
       title: "Govt Subsidies",
       subtitle: "PM Surya Ghar Yojana",
-      stat: "Up to ₹78,000",
-      statLabel: "Direct DBT Benefit",
+      stat: "Up to ₹78,000 Direct DBT",
       desc: "Receive direct DBT subsidies up to ₹78,000 credited to your bank account, paired with seamless net-metering support.",
-      highlight: "Direct DBT Bank Transfer Assistance",
+      highlight: "Direct DBT Bank Transfer",
     },
   ];
 
-  // Auto-Cycle Spotlight for Section 2 (Every 1.8 seconds)
+  // Auto-Cycle Spotlight for Section 2 (Every 1.0 second as requested)
   useEffect(() => {
     if (isBenefitHovered) return;
 
     benefitTimerRef.current = setInterval(() => {
       setActiveBenefit((prev) => (prev + 1) % benefits.length);
-    }, 1800);
+    }, 1000);
 
     return () => {
       if (benefitTimerRef.current) clearInterval(benefitTimerRef.current);
@@ -334,13 +324,16 @@ export default function ResidentialSolar() {
         </div>
       </section>
 
-      {/* 2. Section 2 — Benefits of Residential Solar (Automated Luminous Spotlight Bento) */}
+      {/* 2. Section 2 — Benefits of Residential Solar (Compact Cards in Same Line with Auto-Glowing Hover) */}
       <section className="py-10 md:py-10 lg:py-10 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-3xl mb-6 sm:mb-8 text-left">
             <ScrollReveal delay={0}>
-              
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
+                <span>Benefits of Residential Solar</span>
+              </div>
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
@@ -356,14 +349,14 @@ export default function ResidentialSolar() {
             </ScrollReveal>
           </div>
 
-          {/* 5-Card Bento with Automated Cycling Spotlight + Zero Empty Space */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-stretch">
+          {/* 5 Compact Cards in the Same Line with Luminous Amber Glow & Hover Reveal (Zero Numbers, Zero Dark Green on Hover) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-start">
             {benefits.map((b, idx) => {
               const Icon = b.icon;
               const isActive = activeBenefit === idx;
 
               return (
-                <ScrollReveal key={b.id} delay={idx * 70} className="h-full">
+                <ScrollReveal key={b.id} delay={idx * 60} className="w-full">
                   <div
                     onMouseEnter={() => {
                       setIsBenefitHovered(true);
@@ -371,85 +364,69 @@ export default function ResidentialSolar() {
                     }}
                     onMouseLeave={() => setIsBenefitHovered(false)}
                     onClick={() => setActiveBenefit(idx)}
-                    className={`relative rounded-2xl p-4 sm:p-5 border transition-all duration-500 cursor-pointer flex flex-col justify-between h-full select-none ${
+                    className={`relative rounded-2xl p-4 sm:p-5 border transition-all duration-500 cursor-pointer select-none overflow-hidden ${
                       isActive
-                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-xl shadow-[#E8A83E]/20 -translate-y-2 ring-2 ring-[#E8A83E]/50"
-                        : "bg-white text-[#252A27] border-[#E2E8E2] hover:border-[#E8A83E]/60 shadow-2xs hover:shadow-lg"
+                        ? "bg-white border-[#E8A83E] ring-2 ring-[#E8A83E]/70 shadow-[0_0_30px_rgba(232,168,62,0.25)] -translate-y-2"
+                        : "bg-white border-[#E2E8E2] hover:border-[#E8A83E]/50 shadow-2xs hover:shadow-md"
                     }`}
                   >
-                    {/* Top Row: Radiant Icon & Stat Badge */}
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <div
-                          className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
-                            isActive
-                              ? "bg-gradient-to-br from-amber-100 to-amber-200 text-amber-950 border border-amber-400 scale-110 shadow-[0_0_20px_rgba(232,168,62,0.45)]"
-                              : "bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32]"
-                          }`}
-                        >
-                          <Icon className="w-5 h-5 stroke-[2.2]" />
-                        </div>
+                    {/* Top Solar Luminous Amber Accent Bar when Active */}
+                    {isActive && (
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-300 via-[#E8A83E] to-amber-300 shadow-[0_0_12px_#E8A83E]" />
+                    )}
 
-                        <span
-                          className={`text-xs font-mono font-bold px-2.5 py-1 rounded-md transition-colors ${
-                            isActive
-                              ? "bg-[#E8A83E] text-[#123C32] font-black"
-                              : "bg-[#123C32]/5 text-[#123C32] border border-[#123C32]/10"
-                          }`}
-                        >
-                          {b.number}
-                        </span>
-                      </div>
-
-                      {/* Stat & Title */}
-                      <div className="mb-2">
-                        <div
-                          className={`text-xl sm:text-2xl font-black font-tech tracking-tight transition-colors ${
-                            isActive ? "text-[#E8A83E]" : "text-[#123C32]"
-                          }`}
-                        >
-                          {b.stat}
-                        </div>
-                        <h3
-                          className={`text-sm sm:text-base font-bold font-heading mt-0.5 tracking-tight transition-colors ${
-                            isActive ? "text-white" : "text-[#202724]"
-                          }`}
-                        >
-                          {b.title}
-                        </h3>
-                        <div
-                          className={`text-[10px] font-mono font-bold uppercase tracking-wider mt-0.5 ${
-                            isActive ? "text-amber-200" : "text-[#E8A83E]"
-                          }`}
-                        >
-                          {b.subtitle}
-                        </div>
-                      </div>
-
-                      {/* Description: Perfectly filled, ZERO empty space */}
-                      <p
-                        className={`text-xs leading-relaxed transition-colors ${
-                          isActive ? "text-[#E9F0E9]/90" : "text-[#525D57]"
+                    {/* Compact Default View: Icon + Main Heading + Subheading */}
+                    <div className="flex flex-col items-start">
+                      <div
+                        className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
+                          isActive
+                            ? "bg-gradient-to-br from-[#E8A83E] via-amber-400 to-[#D4952D] text-[#202724] scale-110 shadow-[0_0_24px_rgba(232,168,62,0.55)] border border-amber-300"
+                            : "bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32]"
                         }`}
                       >
-                        {b.desc}
-                      </p>
+                        <Icon className="w-5 h-5 stroke-[2.2]" />
+                      </div>
+
+                      {/* Main Heading */}
+                      <h3
+                        className={`text-base font-bold font-heading mt-3 tracking-tight transition-colors ${
+                          isActive ? "text-[#123C32]" : "text-[#202724]"
+                        }`}
+                      >
+                        {b.title}
+                      </h3>
+
+                      {/* Subheading */}
+                      <div
+                        className={`text-xs font-mono font-bold uppercase tracking-wider mt-0.5 transition-colors ${
+                          isActive ? "text-[#E8A83E]" : "text-[#525D57]"
+                        }`}
+                      >
+                        {b.subtitle}
+                      </div>
                     </div>
 
-                    {/* Bottom Micro-Badge: Crisp & Saturated */}
+                    {/* Hover-Revealed Details (Stat, Description, Highlight Badge) */}
                     <div
-                      className={`pt-3 mt-3 border-t text-[11px] font-tech font-bold transition-colors ${
+                      className={`overflow-hidden transition-all duration-500 ease-out ${
                         isActive
-                          ? "border-white/15 text-[#E8A83E]"
-                          : "border-[#E2E8E2] text-[#123C32]"
+                          ? "max-h-60 opacity-100 mt-3 pt-3 border-t border-amber-200/70"
+                          : "max-h-0 opacity-0 mt-0 pt-0 border-t-0"
                       }`}
                     >
-                      <div className="flex items-center gap-1.5 truncate">
-                        <CheckCircle2
-                          className={`w-3.5 h-3.5 shrink-0 ${
-                            isActive ? "text-[#E8A83E]" : "text-[#123C32]"
-                          }`}
-                        />
+                      {/* Stat */}
+                      <div className="text-sm font-black font-tech text-[#123C32] mb-1">
+                        {b.stat}
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-xs text-[#525D57] leading-relaxed mb-2.5">
+                        {b.desc}
+                      </p>
+
+                      {/* Highlight Micro-Badge */}
+                      <div className="pt-2 border-t border-[#E2E8E2]/80 flex items-center gap-1.5 text-[11px] font-tech font-bold text-[#123C32] truncate">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
                         <span className="truncate">{b.highlight}</span>
                       </div>
                     </div>
