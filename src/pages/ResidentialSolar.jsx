@@ -42,6 +42,7 @@ function BenefitCard({
   const Icon = benefit.icon;
   const cardRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -57,96 +58,109 @@ function BenefitCard({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => {
+        setIsMouseOver(true);
         onHoverStart();
         onActivate(idx);
       }}
-      onMouseLeave={onHoverEnd}
+      onMouseLeave={() => {
+        setIsMouseOver(false);
+        onHoverEnd();
+      }}
       onClick={() => onActivate(idx)}
-      className={`group relative rounded-2xl p-4 sm:p-5 border transition-all duration-300 cursor-pointer select-none overflow-hidden flex flex-col justify-between h-full ${
-        isActive
-          ? "bg-[#123C32] text-white border-[#123C32] shadow-xl shadow-black/10 -translate-y-1"
-          : "bg-white text-[#252A27] border-[#E2E8E2] hover:border-[#123C32]/25 shadow-xs hover:shadow-md"
-      }`}
+      className={`relative rounded-2xl p-[1.5px] transition-all duration-500 ease-in-out cursor-pointer select-none group min-w-0 ${
+        isActive ? "lg:flex-[2.6]" : "lg:flex-1"
+      } h-auto lg:h-full`}
     >
-      {/* Subtle, refined cursor spotlight glow (no loud or clashing glow) */}
+      {/* Dynamic Cursor-Responsive Border Glow: Follows cursor position with directional intensity (e.g. right edge glows brighter when focused) */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300"
         style={{
-          background: isActive
-            ? `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.08), transparent 70%)`
-            : `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.12), transparent 70%)`,
+          opacity: isMouseOver ? 1 : isActive ? 0.75 : 0.25,
+          background: isMouseOver
+            ? `radial-gradient(220px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
+            : isActive
+            ? `linear-gradient(135deg, rgba(232, 168, 62, 0.8), rgba(18, 60, 50, 0.4), rgba(232, 168, 62, 0.6))`
+            : `rgba(226, 232, 226, 0.8)`,
         }}
       />
 
-      {/* Top Content: Icon, Stat, Title, Subtitle, Description (Identical size at all times) */}
-      <div className="relative z-10 flex flex-col items-start w-full">
-        {/* Icon */}
-        <div
-          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-300 ${
-            isActive
-              ? "bg-[#E8A83E] text-[#123C32]"
-              : "bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32]"
-          }`}
-        >
-          <Icon className="w-5 h-5 stroke-[2.2]" />
-        </div>
-
-        {/* Stat Badge */}
-        <div
-          className={`text-base sm:text-lg font-black font-tech tracking-tight mt-3 transition-colors duration-300 ${
-            isActive ? "text-[#E8A83E]" : "text-[#123C32]"
-          }`}
-        >
-          {benefit.stat}
-        </div>
-
-        {/* Main Heading */}
-        <h3
-          className={`text-sm sm:text-base font-bold font-heading mt-0.5 tracking-tight transition-colors duration-300 ${
-            isActive ? "text-white" : "text-[#202724]"
-          }`}
-        >
-          {benefit.title}
-        </h3>
-
-        {/* Subheading */}
-        <div
-          className={`text-[10px] font-mono font-bold uppercase tracking-wider mt-0.5 transition-colors duration-300 ${
-            isActive ? "text-amber-200/90" : "text-[#525D57]"
-          }`}
-        >
-          {benefit.subtitle}
-        </div>
-
-        {/* Description: Always visible, same size across all cards */}
-        <p
-          className={`text-xs leading-relaxed mt-2 transition-colors duration-300 ${
-            isActive ? "text-[#E9F0E9]/85" : "text-[#525D57]"
-          }`}
-        >
-          {benefit.desc}
-        </p>
-      </div>
-
-      {/* Bottom Section: Key Milestone Highlight */}
+      {/* Inner Card Surface: Height is constant (350px on desktop), content strictly centered horizontally */}
       <div
-        className={`relative z-10 pt-3 mt-3 border-t transition-colors duration-300 w-full ${
-          isActive ? "border-white/10" : "border-[#E2E8E2]"
+        className={`relative rounded-[14.5px] p-5 transition-all duration-500 overflow-hidden flex flex-col items-center text-center justify-center h-full w-full ${
+          isActive
+            ? "bg-[#123C32] text-white shadow-xl shadow-black/20"
+            : "bg-white text-[#252A27] shadow-xs hover:shadow-md hover:bg-neutral-50"
         }`}
       >
-        <div className="flex items-center gap-1.5 text-[11px] font-tech font-bold truncate">
-          <CheckCircle2
-            className={`w-3.5 h-3.5 shrink-0 transition-colors duration-300 ${
-              isActive ? "text-[#E8A83E]" : "text-[#123C32]"
-            }`}
-          />
-          <span
-            className={`truncate transition-colors duration-300 ${
-              isActive ? "text-[#E8A83E]" : "text-[#123C32]"
+        {/* Soft Interior Ambient Glow following cursor */}
+        <div
+          className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+          style={{
+            background: isActive
+              ? `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.20), transparent 70%)`
+              : `radial-gradient(180px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.12), transparent 70%)`,
+          }}
+        />
+
+        {/* Top / Main Group (Icon + Heading + Subheading Centered) */}
+        <div className="relative z-10 w-full flex flex-col items-center text-center">
+          {/* Centered Icon */}
+          <div
+            className={`rounded-xl flex items-center justify-center shrink-0 mx-auto transition-all duration-500 ${
+              isActive
+                ? "w-11 h-11 bg-[#E8A83E] text-[#123C32] scale-105 shadow-[0_0_20px_rgba(232,168,62,0.4)] mb-2.5"
+                : "w-12 h-12 bg-[#E9F0E9] border border-[#123C32]/10 text-[#123C32] group-hover:bg-amber-100 group-hover:text-amber-950 group-hover:border-amber-300 mb-4"
             }`}
           >
-            {benefit.highlight}
-          </span>
+            <Icon className={`stroke-[2.2] transition-all duration-300 ${isActive ? "w-5 h-5" : "w-6 h-6"}`} />
+          </div>
+
+          {/* Heading: Larger when inactive to fill vertical space cleanly, smoothly returns to original size on active */}
+          <h3
+            className={`font-black font-heading tracking-tight transition-all duration-500 text-center mx-auto ${
+              isActive
+                ? "text-base sm:text-lg text-white mb-1"
+                : "text-base sm:text-lg lg:text-xl text-[#202724] group-hover:text-[#123C32] max-w-[160px] leading-snug mb-2"
+            }`}
+          >
+            {benefit.title}
+          </h3>
+
+          {/* Subheading: Centered */}
+          <div
+            className={`font-mono font-bold uppercase tracking-wider transition-colors duration-300 text-center mx-auto ${
+              isActive
+                ? "text-[10px] sm:text-[11px] text-[#E8A83E] mb-3"
+                : "text-[11px] sm:text-xs text-[#525D57] group-hover:text-[#E8A83E]"
+            }`}
+          >
+            {benefit.subtitle}
+          </div>
+        </div>
+
+        {/* Remaining Details: Visible in Active Horizontally Expanded Card (Zero bottom growth, strictly width-based expansion) */}
+        <div
+          className={`relative z-10 w-full flex flex-col items-center text-center transition-all duration-500 ease-out ${
+            isActive
+              ? "opacity-100 max-h-48 mt-1"
+              : "opacity-0 max-h-0 overflow-hidden pointer-events-none mt-0"
+          }`}
+        >
+          {/* Stat Badge */}
+          <div className="text-sm sm:text-base font-black font-tech text-[#E8A83E] text-center mb-1.5">
+            {benefit.stat}
+          </div>
+
+          {/* Description */}
+          <p className="text-xs text-[#E9F0E9]/90 leading-relaxed text-center max-w-[280px] mx-auto mb-2.5 line-clamp-3">
+            {benefit.desc}
+          </p>
+
+          {/* Milestone Highlight */}
+          <div className="pt-2 border-t border-white/10 flex items-center justify-center gap-1.5 text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full">
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+            <span className="truncate">{benefit.highlight}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -471,11 +485,12 @@ export default function ResidentialSolar() {
             </ScrollReveal>
           </div>
 
-          {/* 5 Cards in Same Line: Exact Same Size at all times, only color/theme switches on hover/auto-cycle (Zero shrinking/enlarging) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-stretch">
-            {benefits.map((b, idx) => (
-              <ScrollReveal key={b.id} delay={idx * 50} className="h-full">
+          {/* 5 Cards in Same Line: Horizontal Expanding Accordion (Fixed Height, Expands Rightward on Desktop) */}
+          <ScrollReveal delay={150}>
+            <div className="flex flex-col lg:flex-row gap-3 sm:gap-3.5 h-auto lg:h-[350px] items-stretch">
+              {benefits.map((b, idx) => (
                 <BenefitCard
+                  key={b.id}
                   benefit={b}
                   idx={idx}
                   isActive={activeBenefit === idx}
@@ -483,9 +498,9 @@ export default function ResidentialSolar() {
                   onHoverStart={() => setIsBenefitHovered(true)}
                   onHoverEnd={() => setIsBenefitHovered(false)}
                 />
-              </ScrollReveal>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
