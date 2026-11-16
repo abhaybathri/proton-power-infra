@@ -378,8 +378,8 @@ export default function PowerTransformers() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
-      {/* 1. Hero Section - Equal Width & Height, Centered Content */}
-      <section className="relative overflow-hidden pt-10 pb-10 md:pt-14 md:pb-12 lg:pt-12 lg:pb-12 bg-[#123C32] text-white">
+      {/* 1. Hero Section - Equal Width & Height, Compact & Centered Content */}
+      <section className="relative overflow-hidden py-6 sm:py-7 lg:py-8 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
@@ -387,12 +387,12 @@ export default function PowerTransformers() {
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
             {/* Left Content Column - Equal 50% Width, Matching Height, All Text & Buttons Centered */}
-            <div className="flex flex-col h-full w-full">
-              <ScrollReveal delay={0} className="h-full flex flex-col justify-between items-center text-center space-y-4 sm:space-y-5 py-1">
+            <div className="flex flex-col h-full w-full justify-center">
+              <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] font-heading text-center mx-auto max-w-lg">
+                <h1 className="text-3xl sm:text-4xl lg:text-[34px] xl:text-[38px] font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
                   Industrial Power & <br />
                   <span className="text-[#E8A83E] relative inline-block">
                     Solar Inverter Transformers.
@@ -401,12 +401,12 @@ export default function PowerTransformers() {
                 </h1>
 
                 {/* Paragraph Description - Centered */}
-                <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
+                <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
                   Engineered in Indore for multi-megawatt solar plants and heavy industrial grids. Proton Power Infra designs, manufactures, and services high-efficiency step-up and step-down transformers up to 33kV.
                 </p>
 
                 {/* CTA Button with Ambient Glow - Centered */}
-                <div className="pt-1 flex items-center justify-center w-full">
+                <div className="pt-0.5 flex items-center justify-center w-full">
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <Link
@@ -444,11 +444,11 @@ export default function PowerTransformers() {
             </div>
 
             {/* Right Visual Capsule - Equal 50% Width, Matching Height */}
-            <div className="flex flex-col h-full w-full">
-              <ScrollReveal delay={140} className="h-full flex flex-col">
-                <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
+            <div className="flex flex-col h-full w-full justify-center">
+              <ScrollReveal delay={140} className="h-full flex flex-col justify-center">
+                <div className="relative w-full h-full min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px] max-h-[420px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
                   {/* Photo Frame (Full Height Edge-to-Edge) */}
-                  <div className="relative w-full h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] overflow-hidden bg-black/40">
+                  <div className="relative w-full h-full min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px] max-h-[420px] overflow-hidden bg-black/40">
                     <SmartImage
                       src={topImg}
                       alt="Proton Power Infra Heavy Duty Power Transformer"

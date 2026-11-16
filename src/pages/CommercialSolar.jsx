@@ -381,7 +381,7 @@ export default function CommercialSolar() {
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
       {/* 1. Hero Section - Equal Width & Height, Compact & Centered Content */}
-      <section className="relative overflow-hidden py-5 sm:py-6 lg:py-7 bg-[#123C32] text-white">
+      <section className="relative overflow-hidden py-6 sm:py-7 lg:py-8 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
@@ -390,11 +390,11 @@ export default function CommercialSolar() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-            {/* Left Content Column - Equal 50% Width, Matching Compact Height, All Text & Buttons Centered */}
-            <div className="flex flex-col h-full w-full">
-              <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-3 sm:space-y-3.5 py-0">
+            {/* Left Content Column - Equal 50% Width, Matching Height, All Text & Buttons Centered */}
+            <div className="flex flex-col h-full w-full justify-center">
+              <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
+                <h1 className="text-3xl sm:text-4xl lg:text-[34px] xl:text-[38px] font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
                   Power Your Enterprise with <br />
                   <span className="text-[#E8A83E] relative inline-block">
                     High-Yield Commercial Solar.
@@ -413,7 +413,7 @@ export default function CommercialSolar() {
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <Link
                       to="/enquiry?type=commercial"
-                      className="relative inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl text-xs sm:text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
+                      className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
                     >
                       <span>Request Commercial Feasibility Audit</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -422,21 +422,21 @@ export default function CommercialSolar() {
                 </div>
 
                 {/* Metrics Bar - Centered */}
-                <div className="pt-3 border-t border-white/15 grid grid-cols-3 gap-2.5 font-tech w-full max-w-lg mx-auto text-center">
+                <div className="pt-4 border-t border-white/15 grid grid-cols-3 gap-3 font-tech w-full max-w-lg mx-auto text-center">
                   <div>
-                    <div className="text-base sm:text-lg font-black text-[#E8A83E]">50 kW – 5 MW+</div>
+                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">50 kW – 5 MW+</div>
                     <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
                       Commercial Range
                     </div>
                   </div>
                   <div>
-                    <div className="text-base sm:text-lg font-black text-[#E8A83E]">3 – 4 Years</div>
+                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">3 – 4 Years</div>
                     <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
                       Capital Payback
                     </div>
                   </div>
                   <div>
-                    <div className="text-base sm:text-lg font-black text-[#E8A83E]">40% Deprec.</div>
+                    <div className="text-lg sm:text-xl font-black text-[#E8A83E]">40% Deprec.</div>
                     <div className="text-[10px] font-semibold text-[#E9F0E9]/80 uppercase tracking-wider">
                       Sec 32 Tax Shield
                     </div>
@@ -445,12 +445,12 @@ export default function CommercialSolar() {
               </ScrollReveal>
             </div>
 
-            {/* Right Visual Capsule - Equal 50% Width, Matching Compact Height */}
-            <div className="flex flex-col h-full w-full">
-              <ScrollReveal delay={140} className="h-full flex flex-col">
-                <div className="relative w-full h-full min-h-[300px] sm:min-h-[330px] lg:min-h-[350px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
+            {/* Right Visual Capsule - Equal 50% Width, Matching Height */}
+            <div className="flex flex-col h-full w-full justify-center">
+              <ScrollReveal delay={140} className="h-full flex flex-col justify-center">
+                <div className="relative w-full h-full min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px] max-h-[420px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 bg-neutral-900 group select-none flex flex-col justify-between">
                   {/* Photo Frame (Full Height Edge-to-Edge) */}
-                  <div className="relative w-full h-full min-h-[300px] sm:min-h-[330px] lg:min-h-[350px] overflow-hidden bg-black/40">
+                  <div className="relative w-full h-full min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px] max-h-[420px] overflow-hidden bg-black/40">
                     <SmartImage
                       src={commercialTopImg}
                       alt="Proton Power Infra High-Yield Commercial Solar Installation"
