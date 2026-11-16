@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, SunMedium } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 export default function CTASection({
   title = "Ready to Make the Switch to Solar & Reliable Power?",
@@ -13,35 +14,45 @@ export default function CTASection({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
-          <div className="w-12 h-12 rounded-xl bg-white/10 text-[#E8A83E] flex items-center justify-center mx-auto mb-2 border border-white/20 shadow-inner">
-            <SunMedium className="w-7 h-7" />
-          </div>
+          <ScrollReveal delay={0}>
+            <div className="w-12 h-12 rounded-xl bg-white/10 text-[#E8A83E] flex items-center justify-center mx-auto mb-2 border border-white/20 shadow-inner">
+              <SunMedium className="w-7 h-7" />
+            </div>
+          </ScrollReveal>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-tight font-heading">
-            {title}
-          </h2>
+          <ScrollReveal delay={70}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-tight font-heading">
+              {title}
+            </h2>
+          </ScrollReveal>
 
-          <p className="text-base sm:text-lg text-[#E9F0E9]/85 leading-relaxed font-normal">
-            {description}
-          </p>
+          <ScrollReveal delay={120}>
+            <p className="text-base sm:text-lg text-[#E9F0E9]/85 leading-relaxed font-normal">
+              {description}
+            </p>
+          </ScrollReveal>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link
-              to="/enquiry"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-md transition-all duration-200 group cursor-pointer font-tech"
-            >
-              <span>Request a Free Consultation</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+          <ScrollReveal delay={170}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <Link
+                to="/enquiry"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-md transition-all duration-200 group cursor-pointer font-tech"
+              >
+                <span>Request a Free Consultation</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </ScrollReveal>
 
-          <div className="pt-4 text-xs text-[#E9F0E9]/70 flex items-center justify-center gap-4 flex-wrap font-tech">
-            <span>✓ Zero Obligation Site Survey</span>
-            <span>•</span>
-            <span>✓ Tailored Engineering Report</span>
-            <span>•</span>
-            <span>✓ Transparent Payback Modeling</span>
-          </div>
+          <ScrollReveal delay={200}>
+            <div className="pt-4 text-xs text-[#E9F0E9]/70 flex items-center justify-center gap-4 flex-wrap font-tech">
+              <span>✓ Zero Obligation Site Survey</span>
+              <span>•</span>
+              <span>✓ Tailored Engineering Report</span>
+              <span>•</span>
+              <span>✓ Transparent Payback Modeling</span>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

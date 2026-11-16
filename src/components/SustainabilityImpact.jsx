@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Leaf, Sun, Zap, TrendingDown } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 export default function SustainabilityImpact() {
   // Interactive mini calculator state
@@ -26,64 +27,75 @@ export default function SustainabilityImpact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Bold Narrative */}
           <div className="lg:col-span-6 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/40 font-tech">
-              <Leaf className="w-3.5 h-3.5" />
-              <span>Solar Feasibility & Energy Yield Planning</span>
-            </div>
+            <ScrollReveal delay={0}>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/40 font-tech">
+                <Leaf className="w-3.5 h-3.5" />
+                <span>Solar Feasibility & Energy Yield Planning</span>
+              </div>
+            </ScrollReveal>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight font-heading">
-              Every Sunlight Hour <br />
-              <span className="text-[#E8A83E]">Is an Opportunity.</span>
-            </h2>
+            <ScrollReveal delay={80}>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight font-heading">
+                Every Sunlight Hour <br />
+                <span className="text-[#E8A83E]">Is an Opportunity.</span>
+              </h2>
+            </ScrollReveal>
 
-            <p className="text-base text-[#E9F0E9]/85 leading-relaxed font-normal">
-              Accelerating India’s transition to clean distributed energy requires more than panel installation—it demands precision engineering that guarantees 25 years of steady decarbonization.
-            </p>
+            <ScrollReveal delay={130}>
+              <p className="text-base text-[#E9F0E9]/85 leading-relaxed font-normal">
+                Accelerating India’s transition to clean distributed energy requires more than panel installation—it demands precision engineering that guarantees 25 years of steady decarbonization.
+              </p>
+            </ScrollReveal>
 
-            <p className="text-xs sm:text-sm text-[#E9F0E9]/75 leading-relaxed">
-              By replacing coal-reliant grid energy with on-site solar generation, every kilowatt installed acts as a permanent hedge against grid tariff inflation while directly shrinking enterprise carbon footprints.
-            </p>
+            <ScrollReveal delay={170}>
+              <p className="text-xs sm:text-sm text-[#E9F0E9]/75 leading-relaxed">
+                By replacing coal-reliant grid energy with on-site solar generation, every kilowatt installed acts as a permanent hedge against grid tariff inflation while directly shrinking enterprise carbon footprints.
+              </p>
+            </ScrollReveal>
 
             {/* Standard Environmental Impact Benchmarks */}
-            <div className="pt-4 border-t border-white/10">
-              <div className="text-xs text-[#E8A83E] font-bold font-tech uppercase tracking-wider mb-3">
-                Standard Benchmarks (Per 100 kWp Plant):
+            <ScrollReveal delay={200}>
+              <div className="pt-4 border-t border-white/10">
+                <div className="text-xs text-[#E8A83E] font-bold font-tech uppercase tracking-wider mb-3">
+                  Standard Benchmarks (Per 100 kWp Plant):
+                </div>
+
+                <div className="grid grid-cols-3 gap-3 font-tech">
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
+                    <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">
+                      ~140k
+                    </div>
+                    <div className="text-[10px] text-[#E9F0E9]/80 mt-0.5">
+                      Units Clean Power/Yr
+                    </div>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
+                    <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">
+                      ~115
+                    </div>
+                    <div className="text-[10px] text-[#E9F0E9]/80 mt-0.5">
+                      Tonnes CO2 Offset/Yr
+                    </div>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
+                    <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">
+                      ~5,200
+                    </div>
+                    <div className="text-[10px] text-[#E9F0E9]/80 mt-0.5">
+                      Trees Equivalent
+                    </div>
+                  </div>
+                </div>
               </div>
-
-              <div className="grid grid-cols-3 gap-3 font-tech">
-                <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                  <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">
-                    ~140k
-                  </div>
-                  <div className="text-[10px] text-[#E9F0E9]/80 mt-0.5">
-                    Units Clean Power/Yr
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                  <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">
-                    ~115
-                  </div>
-                  <div className="text-[10px] text-[#E9F0E9]/80 mt-0.5">
-                    Tonnes CO2 Offset/Yr
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                  <div className="text-xl sm:text-2xl font-black text-[#E8A83E]">
-                    ~5,200
-                  </div>
-                  <div className="text-[10px] text-[#E9F0E9]/80 mt-0.5">
-                    Trees Equivalent
-                  </div>
-                </div>
-              </div>
-            </div>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Interactive Solar Savings Calculator */}
           <div className="lg:col-span-6">
-            <div className="p-6 sm:p-8 rounded-2xl bg-[#202724] border border-[#E8A83E]/30 shadow-2xl space-y-5">
+            <ScrollReveal delay={140}>
+              <div className="p-6 sm:p-8 rounded-2xl bg-[#202724] border border-[#E8A83E]/30 shadow-2xl space-y-5">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center shrink-0">
@@ -204,6 +216,7 @@ export default function SustainabilityImpact() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

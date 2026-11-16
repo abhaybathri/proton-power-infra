@@ -96,8 +96,8 @@ export default function WhyChooseUs() {
       id: "team",
       stat: "2012+",
       badge: "Expert Leadership",
-      title: "Dynamic Engineering Team",
-      desc: "The ideal blend of dynamic young innovators and seasoned power infrastructure professionals adhering to global standards.",
+      title: "Dynamic Team",
+      desc: "The ideal blend of dynamic young innovators & seasoned power infrastructure professionals adhering to global standards.",
       tag: "CEA & MNRE Adherence",
       icon: Users,
     },
@@ -133,33 +133,41 @@ export default function WhyChooseUs() {
         {/* Compact Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-5 sm:mb-6 gap-3">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-              <span>Why Choose Proton Power Infra</span>
-            </div>
+            <ScrollReveal delay={0}>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
+                <span>Why Choose Proton Power Infra</span>
+              </div>
+            </ScrollReveal>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
-              Technical Brilliance with Global Standards
-            </h2>
+            <ScrollReveal delay={70}>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+                Technical Brilliance with Global Standards
+              </h2>
+            </ScrollReveal>
 
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal">
-              A dynamic team delivering precision, passion, and purpose across India since 2012.
-            </p>
+            <ScrollReveal delay={120}>
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal">
+                A dynamic team delivering precision, passion, and purpose across India since 2012.
+              </p>
+            </ScrollReveal>
           </div>
 
-          <Link
-            to="/about"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#1A4D41] font-tech self-start md:self-end shrink-0 group py-1"
-          >
-            <span>Read full corporate profile</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <ScrollReveal delay={150}>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#1A4D41] font-tech self-start md:self-end shrink-0 group py-1"
+            >
+              <span>Read full corporate profile</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </ScrollReveal>
         </div>
 
         {/* 5-Card Panoramic Bento with Interactive Spotlight Glow */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-3.5 items-stretch">
           {pillars.map((pillar, idx) => (
-            <ScrollReveal key={pillar.id} delay={idx * 70} className="h-full">
+            <ScrollReveal key={pillar.id} delay={idx * 80} className="h-full">
               <PillarCard pillar={pillar} index={idx} />
             </ScrollReveal>
           ))}

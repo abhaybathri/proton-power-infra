@@ -3,7 +3,6 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import SolarSolutions from "../components/SolarSolutions";
 import SustainabilityImpact from "../components/SustainabilityImpact";
 import CTASection from "../components/CTASection";
-import ScrollReveal from "../components/ScrollReveal";
 
 export default function Home() {
   return (
@@ -12,23 +11,16 @@ export default function Home() {
       <Hero />
 
       {/* Section 2: Why choose Proton Power Infra */}
-      <ScrollReveal>
-        <WhyChooseUs />
-      </ScrollReveal>
+      <WhyChooseUs />
 
       {/* Section 3: Our Solar & Transformer Solutions */}
-      <ScrollReveal>
-        <SolarSolutions />
-      </ScrollReveal>
+      <SolarSolutions />
 
       {/* Section 4: Solar Calculator & Savings Feasibility + Consultation CTA */}
-      <ScrollReveal>
-        <SustainabilityImpact />
-      </ScrollReveal>
+      <SustainabilityImpact />
 
-      <ScrollReveal>
-        <CTASection />
-      </ScrollReveal>
+      {/* Section 5: Consultation CTA */}
+      <CTASection />
     </div>
   );
 }

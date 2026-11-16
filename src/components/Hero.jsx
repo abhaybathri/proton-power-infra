@@ -123,7 +123,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column (Content) - Perfectly Proportioned */}
-          <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-left">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-center">
             {/* Aesthetic Tech Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#202724] tracking-tight leading-[1.12] font-heading">
               Smarter Solar Solutions. <br />
@@ -237,7 +237,7 @@ export default function Hero() {
                 </div>
 
                 {/* Progress Indicators & Slide Counter */}
-                <div className="flex items-center gap-2 shrink-0">
+                {/* <div className="flex items-center gap-2 shrink-0">
                   <div className="flex items-center gap-1">
                     {HERO_SLIDES.map((_, i) => (
                       <button
@@ -257,7 +257,7 @@ export default function Hero() {
                   <span className="text-[10px] font-mono font-bold text-[#E8A83E] px-1.5 py-0.5 rounded bg-white/10">
                     0{currentSlide + 1}/0{HERO_SLIDES.length}
                   </span>
-                </div>
+                </div> */}
               </div>
 
               {/* Corner Engineering Accents */}
