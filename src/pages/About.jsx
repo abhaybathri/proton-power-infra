@@ -30,12 +30,87 @@ import project1Img from "../assets/company/project-1.jpg";
 import project2Img from "../assets/company/project-2.jpg";
 
 export default function About() {
+  const [activeProject, setActiveProject] = useState(0);
   const scrollContainerRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const isPointerDown = useRef(false);
 
-  const scrollPortfolio = (direction) => {
+  // Smooth scroll to project card
+  const scrollToProject = (index) => {
+    setActiveProject(index);
     if (scrollContainerRef.current) {
-      const scrollAmount = direction === "left" ? -340 : 340;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      const container = scrollContainerRef.current;
+      const cards = container.children;
+      if (cards && cards[index]) {
+        const targetLeft = cards[index].offsetLeft - container.offsetLeft;
+        container.scrollTo({ left: targetLeft, behavior: "smooth" });
+      }
+    }
+  };
+
+  const handlePrev = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const prevIndex = (activeProject - 1 + portfolioProjects.length) % portfolioProjects.length;
+    scrollToProject(prevIndex);
+  };
+
+  const handleNext = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const nextIndex = (activeProject + 1) % portfolioProjects.length;
+    scrollToProject(nextIndex);
+  };
+
+  // Sync active index when user scrolls natively on mobile/desktop
+  const handleScroll = () => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    const cards = container.children;
+    if (!cards || cards.length === 0) return;
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+    const containerLeft = container.scrollLeft;
+
+    for (let i = 0; i < cards.length; i++) {
+      const cardLeft = cards[i].offsetLeft - container.offsetLeft;
+      const distance = Math.abs(cardLeft - containerLeft);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+    if (closestIndex !== activeProject) {
+      setActiveProject(closestIndex);
+    }
+  };
+
+  // Touch & Pointer Swipe Handlers for mobile & desktop drag
+  const handleTouchStart = (e) => {
+    const touch = e.touches?.[0] || e.changedTouches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent || e;
+    if (touch && (touch.clientX !== undefined || touch.pageX !== undefined)) {
+      touchStartX.current = touch.clientX ?? touch.pageX;
+      touchStartY.current = touch.clientY ?? touch.pageY;
+      isPointerDown.current = true;
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!isPointerDown.current) return;
+    isPointerDown.current = false;
+    const touch = e.changedTouches?.[0] || e.touches?.[0] || e.targetTouches?.[0] || e.nativeEvent?.changedTouches?.[0] || e.nativeEvent?.touches?.[0] || e.nativeEvent || e;
+    if (!touch || (touch.clientX === undefined && touch.pageX === undefined)) return;
+    const currentX = touch.clientX ?? touch.pageX;
+    const currentY = touch.clientY ?? touch.pageY;
+    const diffX = touchStartX.current - currentX;
+    const diffY = touchStartY.current - currentY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
     }
   };
 
@@ -292,8 +367,8 @@ export default function About() {
       {/* 3. Section 3 — Projects & Portfolio Showcase (Compact & Horizontal Scrollable) */}
       <section id="projects" className="py-10 md:py-10 lg:py-10 bg-[#F7F8F4] border-b border-[#E2E8E2] scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header with Scroll Controls */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
+          {/* Header with Slide & Navigation Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
                 <span>Executed Portfolios</span>
@@ -303,80 +378,141 @@ export default function About() {
               </h2>
             </div>
 
-            {/* Scroll Navigation Controls */}
-            <div className="flex items-center gap-2 font-tech">
-              <button
-                type="button"
-                onClick={() => scrollPortfolio("left")}
-                className="w-9 h-9 rounded-xl bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors flex items-center justify-center text-[#123C32] shadow-sm cursor-pointer"
-                aria-label="Scroll projects left"
+            {/* Slide Navigation & Indicator Controls */}
+            <div className="flex items-center gap-3 font-tech">
+              {/* Slide Counter Badge */}
+              <div
+                className="px-2.5 py-1 rounded-lg bg-white border border-[#E2E8E2] text-xs font-mono font-bold text-[#123C32] shadow-2xs"
+                aria-label={`Project 0${activeProject + 1} of 0${portfolioProjects.length}`}
               >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollPortfolio("right")}
-                className="w-9 h-9 rounded-xl bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors flex items-center justify-center text-[#123C32] shadow-sm cursor-pointer"
-                aria-label="Scroll projects right"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
+                0{activeProject + 1} / 0{portfolioProjects.length}
+              </div>
+
+              {/* Dot Indicators (Clickable) */}
+              <div className="hidden sm:flex items-center gap-1.5">
+                {portfolioProjects.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => scrollToProject(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                      activeProject === idx
+                        ? "w-6 bg-[#123C32]"
+                        : "w-2 bg-[#123C32]/20 hover:bg-[#123C32]/50"
+                    }`}
+                    aria-label={`Jump to project ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Arrow Navigation */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="w-9 h-9 rounded-xl bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors flex items-center justify-center text-[#123C32] shadow-sm cursor-pointer focus:outline-none"
+                  aria-label="Previous project"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="w-9 h-9 rounded-xl bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors flex items-center justify-center text-[#123C32] shadow-sm cursor-pointer focus:outline-none"
+                  aria-label="Next project"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Compact Scrollable Showcase Rail */}
+          {/* Touch-Swipeable & Draggable Scroll Showcase Rail */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-4 overflow-x-auto pb-3 pt-1 scrollbar-none snap-x snap-mandatory"
+            onScroll={handleScroll}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onPointerDown={handleTouchStart}
+            onPointerUp={handleTouchEnd}
+            className="flex gap-4 overflow-x-auto pb-3 pt-1 scrollbar-none snap-x snap-mandatory cursor-grab active:cursor-grabbing select-none"
           >
-            {portfolioProjects.map((p) => (
-              <div
-                key={p.id}
-                className="w-72 sm:w-80 shrink-0 snap-start bg-white rounded-2xl border border-[#E2E8E2] hover:border-[#123C32]/40 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
-              >
-                {/* Project Image */}
-                <div className="relative h-44 sm:h-48 overflow-hidden bg-[#202724]">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            {portfolioProjects.map((p, idx) => {
+              const isActive = activeProject === idx;
+              return (
+                <div
+                  key={p.id}
+                  onClick={() => scrollToProject(idx)}
+                  className={`w-72 sm:w-80 shrink-0 snap-start bg-white rounded-2xl border transition-all duration-300 flex flex-col group cursor-pointer ${
+                    isActive
+                      ? "border-[#123C32] shadow-md ring-2 ring-[#123C32]/30"
+                      : "border-[#E2E8E2] hover:border-[#123C32]/40 shadow-sm"
+                  }`}
+                >
+                  {/* Project Image */}
+                  <div className="relative h-44 sm:h-48 overflow-hidden rounded-t-2xl bg-[#202724]">
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out pointer-events-none"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
 
-                  {/* Category Pill */}
-                  <div className="absolute top-2.5 left-2.5">
-                    <span className="px-2.5 py-0.5 rounded-md bg-[#123C32] text-[#E8A83E] text-[10px] font-bold uppercase tracking-wider font-tech shadow-sm">
-                      {p.category}
-                    </span>
+                    {/* Category Pill */}
+                    <div className="absolute top-2.5 left-2.5 pointer-events-none">
+                      <span className="px-2.5 py-0.5 rounded-md bg-[#123C32] text-[#E8A83E] text-[10px] font-bold uppercase tracking-wider font-tech shadow-sm">
+                        {p.category}
+                      </span>
+                    </div>
+
+                    {/* Capacity Badge */}
+                    <div className="absolute bottom-2.5 right-2.5 pointer-events-none">
+                      <span className="text-[10px] font-mono font-bold bg-white/20 text-white px-2 py-0.5 rounded backdrop-blur-sm">
+                        {p.capacity}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Capacity Badge */}
-                  <div className="absolute bottom-2.5 right-2.5">
-                    <span className="text-[10px] font-mono font-bold bg-white/20 text-white px-2 py-0.5 rounded backdrop-blur-sm">
-                      {p.capacity}
-                    </span>
+                  {/* Minimal Information */}
+                  <div className="p-3.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-sm sm:text-base font-bold text-[#202724] font-heading mb-1 truncate">
+                        {p.title}
+                      </h3>
+                      <p className="text-xs text-[#525D57] leading-relaxed line-clamp-2">
+                        {p.tagline}
+                      </p>
+                    </div>
+
+                    <div className="pt-2.5 mt-2.5 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] text-[#123C32] font-bold font-tech">
+                      <span>100% Commissioned Asset</span>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
+                    </div>
                   </div>
                 </div>
+              );
+            })}
+          </div>
 
-                {/* Minimal Information */}
-                <div className="p-3.5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#202724] font-heading mb-1 truncate">
-                      {p.title}
-                    </h3>
-                    <p className="text-xs text-[#525D57] leading-relaxed line-clamp-2">
-                      {p.tagline}
-                    </p>
-                  </div>
-
-                  <div className="pt-2.5 mt-2.5 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] text-[#123C32] font-bold font-tech">
-                    <span>100% Commissioned Asset</span>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Mobile Dots Indicator & Swipe Hint */}
+          <div className="flex sm:hidden items-center justify-between mt-3 pt-2 border-t border-[#E2E8E2]/60 px-1 font-tech">
+            <span className="text-[11px] text-[#525D57] font-medium">
+              Swipe left / right to browse
+            </span>
+            <div className="flex items-center gap-1.5">
+              {portfolioProjects.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => scrollToProject(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    activeProject === idx ? "w-5 bg-[#123C32]" : "w-1.5 bg-[#123C32]/25"
+                  }`}
+                  aria-label={`Jump to project ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
