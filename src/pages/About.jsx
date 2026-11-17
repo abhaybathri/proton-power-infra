@@ -7,7 +7,6 @@ import {
   Award,
   CheckCircle2,
   ArrowRight,
-  ArrowLeft,
   Zap,
   Building,
   Cpu,
@@ -20,6 +19,9 @@ import {
   Compass,
   Layers,
   Factory,
+  ChevronDown,
+  ChevronUp,
+  SlidersHorizontal,
 } from "lucide-react";
 import { COMPANY_DETAILS } from "../data/companyData";
 import SmartImage from "../components/SmartImage";
@@ -32,6 +34,241 @@ import solarRowsImg from "../assets/company/real-project-solar-rows.jpg";
 import transformerSubstationImg from "../assets/company/real-project-transformer-substation.jpg";
 import project1Img from "../assets/company/project-1.jpg";
 import project2Img from "../assets/company/project-2.jpg";
+
+// =================================================================
+// Subcomponent: PillarCard with Cursor-Following Border & Glow
+// =================================================================
+function PillarCard({ icon: Icon, badge, badgeColor, title, description, metric }) {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative rounded-2xl p-[1.5px] transition-all duration-500 ease-out select-none group flex flex-col justify-between"
+    >
+      {/* Dynamic Cursor-Responsive Border Glow */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
+        style={{
+          opacity: isHovered ? 1 : 0.35,
+          background: isHovered
+            ? `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
+            : `linear-gradient(135deg, rgba(226, 232, 226, 0.9), rgba(247, 248, 244, 0.6))`,
+        }}
+      />
+
+      {/* Inner Card Surface */}
+      <div className="relative rounded-[14.5px] bg-white p-6 sm:p-7 flex flex-col justify-between h-full overflow-hidden transition-all duration-300 shadow-xs group-hover:shadow-xl group-hover:shadow-black/5">
+        {/* Soft Interior Ambient Glow following cursor */}
+        <div
+          className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+          style={{
+            background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.08), transparent 75%)`,
+          }}
+        />
+
+        <div className="relative z-10">
+          <div className="w-12 h-12 rounded-xl bg-[#E9F0E9] text-[#123C32] flex items-center justify-center mb-4 group-hover:bg-[#E8A83E] group-hover:text-[#123C32] group-hover:scale-105 transition-all duration-300 shadow-xs">
+            <Icon className="w-6 h-6 stroke-[2.2]" />
+          </div>
+          <div className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold font-tech uppercase tracking-wider mb-2.5 border ${badgeColor}`}>
+            {badge}
+          </div>
+          <h3 className="text-lg sm:text-xl font-bold text-[#202724] font-heading mb-2 leading-snug group-hover:text-[#123C32] transition-colors">
+            {title}
+          </h3>
+          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
+            {description}
+          </p>
+        </div>
+
+        <div className="relative z-10 pt-4 mt-5 border-t border-[#E2E8E2] text-xs font-bold text-[#123C32] font-tech flex items-center gap-1.5">
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
+          <span>{metric}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// =================================================================
+// Subcomponent: Architectural Project Card with Telemetry Drawer
+// =================================================================
+function ModernProjectCard({ project }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative rounded-2xl p-[1.5px] transition-all duration-500 ease-out select-none group flex flex-col justify-between"
+    >
+      {/* Dynamic Cursor-Responsive Border Glow */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
+        style={{
+          opacity: isHovered ? 1 : 0.35,
+          background: isHovered
+            ? `radial-gradient(320px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
+            : `linear-gradient(135deg, rgba(226, 232, 226, 0.9), rgba(247, 248, 244, 0.6))`,
+        }}
+      />
+
+      {/* Card Inner Surface */}
+      <div className="relative rounded-[14.5px] bg-white overflow-hidden flex flex-col justify-between h-full shadow-sm group-hover:shadow-xl group-hover:shadow-black/5 transition-all duration-300">
+        {/* Soft Interior Ambient Glow */}
+        <div
+          className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+          style={{
+            background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.06), transparent 75%)`,
+          }}
+        />
+
+        <div className="relative z-10 flex flex-col flex-1">
+          {/* Top Media Frame */}
+          <div className="relative h-52 sm:h-60 overflow-hidden bg-neutral-900">
+            <SmartImage
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 ease-out"
+              containerClassName="w-full h-full absolute inset-0"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30 pointer-events-none"></div>
+
+            {/* Top Badges */}
+            <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+              <span className="px-2.5 py-1 rounded-md bg-[#123C32]/90 backdrop-blur-md text-[#E8A83E] text-[11px] font-bold font-tech uppercase tracking-wider border border-white/10 shadow-sm">
+                {project.category}
+              </span>
+              <span className="px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-md text-[#123C32] text-[11px] font-mono font-bold shadow-sm">
+                {project.capacity}
+              </span>
+            </div>
+
+            {/* Bottom Live Commissioning Badge */}
+            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white text-[10px] font-mono border border-white/15">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>{project.status}</span>
+              </div>
+              <span className="text-[10px] font-mono text-white/90 bg-white/20 backdrop-blur-md px-2 py-0.5 rounded">
+                {project.location}
+              </span>
+            </div>
+          </div>
+
+          {/* Card Body */}
+          <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 className="text-lg sm:text-xl font-black text-[#202724] font-heading tracking-tight leading-snug group-hover:text-[#123C32] transition-colors mb-1.5">
+                {project.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mb-4">
+                {project.tagline}
+              </p>
+
+              {/* Key Specs Pills */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="px-2.5 py-1 rounded-md bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] text-[11px] font-tech font-semibold"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Interactive Engineering Telemetry HUD Toggle */}
+            <div className="pt-3 border-t border-[#E2E8E2]">
+              <button
+                type="button"
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="w-full flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-[#E9F0E9] text-[#123C32] text-xs font-bold font-tech transition-colors cursor-pointer group/btn"
+              >
+                <div className="flex items-center gap-2">
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-[#E8A83E]" />
+                  <span>{isExpanded ? "Hide Engineering Specs" : "View Technical Telemetry & Specs"}</span>
+                </div>
+                {isExpanded ? (
+                  <ChevronUp className="w-4 h-4 transition-transform" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform" />
+                )}
+              </button>
+
+              {/* Expandable Engineering HUD Drawer */}
+              {isExpanded && (
+                <div className="mt-3 p-3.5 rounded-xl bg-[#202724] text-white space-y-2 animate-fade-in border border-white/10">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-[#E8A83E] pb-1.5 border-b border-white/10">
+                    <span>Engineering Parameters</span>
+                    <span>Verified Asset</span>
+                  </div>
+
+                  <div className="space-y-1.5 text-[11px] font-tech text-[#E9F0E9]/90">
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="text-[#E9F0E9]/60 shrink-0">Grid Evacuation:</span>
+                      <span className="font-bold text-right text-white">{project.specs.grid}</span>
+                    </div>
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="text-[#E9F0E9]/60 shrink-0">Inverter / Transformer:</span>
+                      <span className="font-bold text-right text-[#E8A83E]">{project.specs.transformer}</span>
+                    </div>
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="text-[#E9F0E9]/60 shrink-0">Module & Structure:</span>
+                      <span className="font-bold text-right text-white">{project.specs.structure}</span>
+                    </div>
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="text-[#E9F0E9]/60 shrink-0">Carbon Offset:</span>
+                      <span className="font-bold text-right text-emerald-400">{project.specs.carbon}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Card Footer Action */}
+        <div className="px-5 sm:px-6 pb-5 pt-2 flex items-center justify-between border-t border-[#E2E8E2]/60">
+          <span className="text-[11px] font-mono font-semibold text-[#525D57]">
+            Asset ID: {project.id}
+          </span>
+          <Link
+            to={`/enquiry?project=${encodeURIComponent(project.title)}`}
+            className="inline-flex items-center gap-1.5 text-xs font-bold font-tech text-[#123C32] hover:text-[#E8A83E] transition-colors group/link"
+          >
+            <span>Inquire Similar Scope</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   // -------------------------------------------------------------
@@ -181,101 +418,114 @@ export default function About() {
   const currentMilestone = activeStage > 0 ? milestones[activeStage - 1] : milestones[0];
 
   // -------------------------------------------------------------
-  // Section 4: Projects Showcase State & Auto-Cycle
+  // Section 4: Projects Showcase State & Filter Logic
   // -------------------------------------------------------------
-  const [activeProject, setActiveProject] = useState(0);
-  const [isProjectHovered, setIsProjectHovered] = useState(false);
-  const projectTimerRef = useRef(null);
-
-  // Project Card Mouse Tracking for Dynamic Cursor Glow
-  const [projectMousePos, setProjectMousePos] = useState({ x: 0, y: 0 });
-  const [isProjectCardHovered, setIsProjectCardHovered] = useState(false);
-
-  const handleProjectMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setProjectMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const portfolioProjects = [
     {
-      id: "project-utility",
+      id: "PROJ-UTILITY-01",
       title: "Utility Ground-Mounted Solar Park",
-      tagline: "High-Yield Multi-Megawatt Clean Energy Generation",
+      tagline: "High-yield multi-megawatt generation synchronized with state power grid.",
       capacity: "Multi-MW Plant",
       category: "Utility Scale EPC",
-      specs: "33kV Grid Evacuation • Central Inverters • Tier-1 Mono PERC",
-      status: "100% Commissioned",
+      categoryKey: "utility",
       image: utilityPlantImg,
-      location: "Central India Grid",
-      badgeColor: "bg-emerald-50 text-emerald-800 border-emerald-200/80",
+      location: "Central India Transmission Grid",
+      status: "100% Commissioned",
+      tags: ["33kV Grid Sync", "Central Inverters", "Tier-1 Mono PERC"],
+      specs: {
+        grid: "33kV / 132kV Dedicated Transmission Bay",
+        transformer: "Inverter Duty Solar Step-Up (Dewas Works)",
+        structure: "Hot-Dip Galvanized Seasonal Tilt Tables",
+        carbon: "Est. ~18,000 MT Annual CO₂ Offset",
+      },
     },
     {
-      id: "project-rows",
+      id: "PROJ-CAPTIVE-02",
       title: "High-Yield Tracker & Fixed-Tilt Arrays",
-      tagline: "Heavy Industrial Captive Solar Power Generation",
+      tagline: "Industrial captive solar power for continuous manufacturing energy security.",
       capacity: "High PR Ratio",
       category: "Industrial Captive",
-      specs: "Zero-Export Protection • SCADA Telemetry • 99.4% Uptime",
-      status: "Active Captive Generation",
+      categoryKey: "industrial",
       image: solarRowsImg,
-      location: "Industrial Corridor, MP",
-      badgeColor: "bg-amber-50 text-amber-800 border-amber-200/80",
+      location: "Major Industrial Corridor, MP",
+      status: "Active Captive Generation",
+      tags: ["Zero-Export Telemetry", "SCADA Monitoring", "99.4% Uptime"],
+      specs: {
+        grid: "11kV In-Plant Synchronization",
+        transformer: "In-House Oil-Cooled Step-Up Units",
+        structure: "Single-Axis Smart Sun-Tracking Arrays",
+        carbon: "Est. ~9,500 MT Annual CO₂ Offset",
+      },
     },
     {
-      id: "project-substation",
+      id: "PROJ-SUBSTATION-03",
       title: "Inverter Duty Transformer Substation",
-      tagline: "Step-Up Voltage Synchronization to 33kV & 132kV",
+      tagline: "Step-up voltage synchronization built entirely at our Dewas manufacturing facility.",
       capacity: "HT Grid Sync",
       category: "In-House Transformers",
-      specs: "In-House Dewas Manufactured • Copper Wound • Low Loss",
-      status: "CEIG & DISCOM Approved",
+      categoryKey: "transformers",
       image: transformerSubstationImg,
-      location: "Substation Bay",
-      badgeColor: "bg-sky-50 text-sky-800 border-sky-200/80",
+      location: "Substation Bay & Dewas Works",
+      status: "CEIG & DISCOM Approved",
+      tags: ["In-House Dewas Works", "Electrolytic Copper", "Low Loss Topology"],
+      specs: {
+        grid: "0.8kV to 33kV Low-Loss Copper Wound",
+        transformer: "In-House Dewas Production Facility",
+        structure: "IS 2026 & IEC 60076 CPRI Type-Tested",
+        carbon: "Hermetically Sealed Nitrogen Cushion",
+      },
     },
     {
-      id: "project-1",
+      id: "PROJ-ROOFTOP-04",
       title: "Commercial Rooftop Solar Array",
-      tagline: "Zero-Downtime Facility Power Integration & Net Metering",
+      tagline: "Zero-downtime facility power integration paired with DISCOM net metering.",
       capacity: "Commercial Scale",
       category: "Commercial EPC",
-      specs: "Non-Penetrating Clamps • DISCOM Net-Metered • 80% Bill Cut",
-      status: "100% Commissioned Asset",
+      categoryKey: "commercial",
       image: project1Img,
-      location: "Commercial Complex",
-      badgeColor: "bg-purple-50 text-purple-800 border-purple-200/80",
+      location: "Corporate & Commercial Complex",
+      status: "100% Commissioned Asset",
+      tags: ["Non-Penetrating Clamps", "Net-Metered", "Up to 80% Bill Cut"],
+      specs: {
+        grid: "DISCOM Bi-Directional Net-Metered",
+        transformer: "LT/HT Grid Interface Protection",
+        structure: "Non-Penetrating Aluminum Ballasted Clamps",
+        carbon: "Est. ~1,200 MT Annual CO₂ Offset",
+      },
     },
     {
-      id: "project-2",
+      id: "PROJ-TURNKEY-05",
       title: "Multi-Megawatt Power Infrastructure",
-      tagline: "Turnkey Civil, Electrical & CEIG Statutory Execution",
+      tagline: "Turnkey civil, mechanical, electrical & CEIG statutory project delivery.",
       capacity: "Turnkey EPC",
-      category: "Turnkey Solar Park",
-      specs: "End-to-End Civil & Electrical • In-House HT Works",
-      status: "Grid Synchronized",
+      category: "Utility Scale EPC",
+      categoryKey: "utility",
       image: project2Img,
       location: "Turnkey Solar Park",
-      badgeColor: "bg-teal-50 text-teal-800 border-teal-200/80",
+      status: "Grid Synchronized",
+      tags: ["Turnkey Civil & Electrical", "In-House HT Works", "CEIG Sanctioned"],
+      specs: {
+        grid: "Dedicated Double-Circuit 33kV Evacuation Line",
+        transformer: "Multi-MVA Substation Step-Up Yard",
+        structure: "Optimized High-Wind Static Vetted MMS",
+        carbon: "Est. ~22,000 MT Annual CO₂ Offset",
+      },
     },
   ];
 
-  // Auto-Cycle Projects every 3.5 seconds when not hovered
-  useEffect(() => {
-    if (isProjectHovered) return;
+  const categories = [
+    { key: "all", label: "All Executed Portfolios", count: portfolioProjects.length },
+    { key: "utility", label: "Utility Scale EPC", count: portfolioProjects.filter((p) => p.categoryKey === "utility").length },
+    { key: "industrial", label: "Industrial Captive", count: portfolioProjects.filter((p) => p.categoryKey === "industrial").length },
+    { key: "transformers", label: "Power Transformers", count: portfolioProjects.filter((p) => p.categoryKey === "transformers").length },
+    { key: "commercial", label: "Commercial Rooftop", count: portfolioProjects.filter((p) => p.categoryKey === "commercial").length },
+  ];
 
-    projectTimerRef.current = setInterval(() => {
-      setActiveProject((prev) => (prev + 1) % portfolioProjects.length);
-    }, 3500);
-
-    return () => {
-      if (projectTimerRef.current) clearInterval(projectTimerRef.current);
-    };
-  }, [isProjectHovered, portfolioProjects.length]);
-
-  const currentProject = portfolioProjects[activeProject];
+  const filteredProjects = selectedCategory === "all"
+    ? portfolioProjects
+    : portfolioProjects.filter((p) => p.categoryKey === selectedCategory);
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
@@ -658,6 +908,7 @@ export default function About() {
 
       {/* =========================================================
           3. SECTION THREE: CORE PILLARS (Mission, Vision & Excellence)
+             With Cursor-Following Border & Ambient Glow Effect
          ========================================================= */}
       <section className="py-12 md:py-16 bg-[#F7F8F4] border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -671,257 +922,103 @@ export default function About() {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1: Our Mission */}
-            <div className="bg-white rounded-2xl p-6 border border-[#E2E8E2] hover:border-[#123C32]/40 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 flex flex-col justify-between group">
-              <div>
-                <div className="w-11 h-11 rounded-xl bg-[#E9F0E9] text-[#123C32] flex items-center justify-center mb-4 group-hover:bg-[#E8A83E] group-hover:text-[#123C32] transition-colors shadow-xs">
-                  <Target className="w-5 h-5 stroke-[2.2]" />
-                </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold font-tech uppercase tracking-wider mb-2 bg-emerald-50 text-emerald-800 border border-emerald-200/80">
-                  Our Mission
-                </div>
-                <h3 className="text-lg font-bold text-[#202724] font-heading mb-2">
-                  Democratizing Clean Power Across India
-                </h3>
-                <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
-                  To accelerate India's transition to clean energy by engineering cost-effective, high-yield solar EPC systems and in-house transformers accessible to homes, factories, and utility grids.
-                </p>
-              </div>
-              <div className="pt-4 mt-4 border-t border-[#E2E8E2] text-xs font-bold text-[#123C32] font-tech flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>125+ MW Installed Nationwide</span>
-              </div>
-            </div>
+            <PillarCard
+              icon={Target}
+              badge="Our Mission"
+              badgeColor="bg-emerald-50 text-emerald-800 border-emerald-200/80"
+              title="Democratizing Clean Power Across India"
+              description="To accelerate India's transition to clean energy by engineering cost-effective, high-yield solar EPC systems and in-house transformers accessible to homes, factories, and utility grids."
+              metric="125+ MW Installed Nationwide"
+            />
 
-            {/* Card 2: Our Vision */}
-            <div className="bg-white rounded-2xl p-6 border border-[#E2E8E2] hover:border-[#123C32]/40 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 flex flex-col justify-between group">
-              <div>
-                <div className="w-11 h-11 rounded-xl bg-[#E9F0E9] text-[#123C32] flex items-center justify-center mb-4 group-hover:bg-[#E8A83E] group-hover:text-[#123C32] transition-colors shadow-xs">
-                  <Eye className="w-5 h-5 stroke-[2.2]" />
-                </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold font-tech uppercase tracking-wider mb-2 bg-amber-50 text-amber-800 border border-amber-200/80">
-                  Our Vision
-                </div>
-                <h3 className="text-lg font-bold text-[#202724] font-heading mb-2">
-                  India's Most Dependable Energy Partner
-                </h3>
-                <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
-                  To stand as India's premier integrated renewable energy enterprise—seamlessly fusing advanced solar EPC design, in-house transformer manufacturing, and 25-year lifecycle performance.
-                </p>
-              </div>
-              <div className="pt-4 mt-4 border-t border-[#E2E8E2] text-xs font-bold text-[#123C32] font-tech flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Integrated EPC & Manufacturing</span>
-              </div>
-            </div>
+            <PillarCard
+              icon={Eye}
+              badge="Our Vision"
+              badgeColor="bg-amber-50 text-amber-800 border-amber-200/80"
+              title="India's Most Dependable Energy Partner"
+              description="To stand as India's premier integrated renewable energy enterprise—seamlessly fusing advanced solar EPC design, in-house transformer manufacturing, and 25-year lifecycle performance."
+              metric="Integrated EPC & Manufacturing"
+            />
 
-            {/* Card 3: Quality Standard */}
-            <div className="bg-white rounded-2xl p-6 border border-[#E2E8E2] hover:border-[#123C32]/40 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 flex flex-col justify-between group">
-              <div>
-                <div className="w-11 h-11 rounded-xl bg-[#E9F0E9] text-[#123C32] flex items-center justify-center mb-4 group-hover:bg-[#E8A83E] group-hover:text-[#123C32] transition-colors shadow-xs">
-                  <ShieldCheck className="w-5 h-5 stroke-[2.2]" />
-                </div>
-                <div className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold font-tech uppercase tracking-wider mb-2 bg-sky-50 text-sky-800 border border-sky-200/80">
-                  Engineering Rigor
-                </div>
-                <h3 className="text-lg font-bold text-[#202724] font-heading mb-2">
-                  Zero-Tolerance Quality & Grid Safety
-                </h3>
-                <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
-                  Every installation strictly complies with IEC, CEA, and DISCOM grid codes. From Tier-1 bifacial panels to double-wound copper transformers, we never compromise on safety.
-                </p>
-              </div>
-              <div className="pt-4 mt-4 border-t border-[#E2E8E2] text-xs font-bold text-[#123C32] font-tech flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>CEA & DISCOM Grid Compliant</span>
-              </div>
-            </div>
+            <PillarCard
+              icon={ShieldCheck}
+              badge="Engineering Rigor"
+              badgeColor="bg-sky-50 text-sky-800 border-sky-200/80"
+              title="Zero-Tolerance Quality & Grid Safety"
+              description="Every installation strictly complies with IEC, CEA, and DISCOM grid codes. From Tier-1 bifacial panels to double-wound copper transformers, we never compromise on safety."
+              metric="CEA & DISCOM Grid Compliant"
+            />
           </div>
         </div>
       </section>
 
       {/* =========================================================
-          4. SECTION FOUR: RECREATED PROJECTS SHOWCASE (Screen-Optimized,
-             Unique Master-Detail Spotlight, Cursor-Based Glow & Interactivity)
+          4. SECTION FOUR: RECREATED PROJECTS SHOWCASE
+             (Modern Architectural Matrix, Category Tabs & Telemetry HUD)
          ========================================================= */}
       <section
         id="projects"
         className="py-12 md:py-16 bg-white border-b border-[#E2E8E2] relative overflow-hidden scroll-mt-20"
-        onMouseEnter={() => setIsProjectHovered(true)}
-        onMouseLeave={() => setIsProjectHovered(false)}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Centered Section Heading */}
-          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-3">
-              Real Executed Projects Across India
+              Real Projects Executed Across India
             </h2>
             <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto font-normal">
               Explore our proven track record across utility-scale solar parks, heavy captive industrial arrays, and high-voltage transformer substations.
             </p>
           </ScrollReveal>
 
-          {/* Master-Detail Interactive Showcase Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-            {/* Left Column: Featured Spotlight Preview Card with Cursor Tracking Glow (lg:col-span-7) */}
-            <div className="lg:col-span-7 flex flex-col justify-between">
-              <div
-                onMouseMove={handleProjectMouseMove}
-                onMouseEnter={() => setIsProjectCardHovered(true)}
-                onMouseLeave={() => setIsProjectCardHovered(false)}
-                className="relative rounded-2xl p-[1.5px] transition-all duration-500 ease-out select-none shadow-2xl h-full flex flex-col justify-between overflow-hidden"
-              >
-                {/* Dynamic Cursor-Responsive Border Glow */}
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
-                  style={{
-                    opacity: isProjectCardHovered ? 1 : 0.45,
-                    background: isProjectCardHovered
-                      ? `radial-gradient(400px circle at ${projectMousePos.x}px ${projectMousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
-                      : `linear-gradient(135deg, rgba(232, 168, 62, 0.75), rgba(18, 60, 50, 0.4), rgba(232, 168, 62, 0.6))`,
-                  }}
-                />
-
-                {/* Main Visual Container */}
-                <div className="relative rounded-[14.5px] bg-[#202724] overflow-hidden flex-1 flex flex-col justify-between min-h-[380px] sm:min-h-[420px] lg:min-h-[460px]">
-                  {/* Photo with SmartImage */}
-                  <div className="absolute inset-0">
-                    <SmartImage
-                      src={currentProject.image}
-                      alt={currentProject.title}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out scale-100 hover:scale-105"
-                      containerClassName="w-full h-full absolute inset-0"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/30 pointer-events-none"></div>
-                  </div>
-
-                  {/* Top Badges Capsule */}
-                  <div className="relative z-10 p-4 sm:p-5 flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-[#123C32]/95 backdrop-blur-md text-[#E8A83E] text-xs font-bold font-tech uppercase tracking-wider border border-white/10 shadow-md">
-                      {currentProject.category}
-                    </span>
-
-                    <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[#123C32] text-xs font-mono font-bold shadow-md">
-                      {currentProject.capacity}
-                    </span>
-                  </div>
-
-                  {/* Bottom Information Glass Overlay */}
-                  <div className="relative z-10 p-5 sm:p-6 bg-gradient-to-t from-black/95 via-black/80 to-transparent">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
-                      <span className="text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider">
-                        {currentProject.status} • {currentProject.location}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-black text-white font-heading tracking-tight mb-1.5 leading-snug">
-                      {currentProject.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-[#E9F0E9]/90 font-medium mb-3">
-                      {currentProject.tagline}
-                    </p>
-
-                    <div className="pt-3 border-t border-white/15 flex flex-wrap items-center justify-between gap-3 text-xs font-tech text-[#E9F0E9]/80">
-                      <span>{currentProject.specs}</span>
-                      <Link
-                        to="/enquiry"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] font-bold text-xs transition-colors shadow-xs"
-                      >
-                        <span>Inquire Project</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Project Selector Rail / Cards (lg:col-span-5) */}
-            <div className="lg:col-span-5 flex flex-col justify-between space-y-2.5">
-              <div className="flex items-center justify-between mb-1 px-1">
-                <span className="text-xs font-bold text-[#525D57] uppercase tracking-wider font-tech">
-                  Select Project to Inspect ({portfolioProjects.length} Assets)
-                </span>
-                <span className="text-xs font-mono font-bold text-[#123C32]">
-                  0{activeProject + 1} / 0{portfolioProjects.length}
-                </span>
-              </div>
-
-              {portfolioProjects.map((p, idx) => {
-                const isActive = activeProject === idx;
-                return (
-                  <button
-                    key={p.id}
-                    type="button"
-                    onClick={() => setActiveProject(idx)}
-                    className={`w-full p-3 sm:p-3.5 rounded-xl border transition-all duration-400 text-left flex items-center gap-3.5 cursor-pointer group focus:outline-none ${
-                      isActive
-                        ? "bg-[#123C32] text-white border-[#E8A83E] shadow-lg shadow-[#123C32]/20 scale-[1.01] ring-1 ring-[#E8A83E]"
-                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/40 hover:bg-neutral-50 shadow-xs"
+          {/* Interactive Category Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 sm:mb-10">
+            {categories.map((cat) => {
+              const isSelected = selectedCategory === cat.key;
+              return (
+                <button
+                  key={cat.key}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.key)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold font-tech transition-all duration-300 cursor-pointer ${
+                    isSelected
+                      ? "bg-[#123C32] text-[#E8A83E] shadow-md shadow-[#123C32]/20 ring-1 ring-[#E8A83E]"
+                      : "bg-[#F7F8F4] text-[#525D57] hover:text-[#123C32] hover:bg-[#E9F0E9] border border-[#E2E8E2]"
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                      isSelected ? "bg-white/20 text-white" : "bg-neutral-200 text-[#525D57]"
                     }`}
                   >
-                    {/* Small Thumbnail */}
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden shrink-0 bg-neutral-900 border border-white/20">
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                    </div>
+                    {cat.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-                    {/* Meta info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-1 mb-0.5">
-                        <span
-                          className={`text-[10px] font-mono font-bold uppercase tracking-wider truncate ${
-                            isActive ? "text-[#E8A83E]" : "text-[#525D57]"
-                          }`}
-                        >
-                          {p.category}
-                        </span>
-                        <span
-                          className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 ${
-                            isActive ? "bg-white/15 text-white" : "bg-[#E9F0E9] text-[#123C32]"
-                          }`}
-                        >
-                          {p.capacity}
-                        </span>
-                      </div>
+          {/* Architectural Project Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 items-stretch">
+            {filteredProjects.map((project) => (
+              <ModernProjectCard key={project.id} project={project} />
+            ))}
+          </div>
 
-                      <h4
-                        className={`text-xs sm:text-sm font-bold font-heading truncate ${
-                          isActive ? "text-white" : "text-[#202724] group-hover:text-[#123C32]"
-                        }`}
-                      >
-                        {p.title}
-                      </h4>
-
-                      <p
-                        className={`text-[11px] truncate mt-0.5 ${
-                          isActive ? "text-[#E9F0E9]/75" : "text-[#525D57]"
-                        }`}
-                      >
-                        {p.tagline}
-                      </p>
-                    </div>
-
-                    {/* Active Indicator Chevron */}
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all ${
-                        isActive
-                          ? "bg-[#E8A83E] text-[#123C32]"
-                          : "text-transparent group-hover:text-[#123C32]/40"
-                      }`}
-                    >
-                      <ChevronRight className="w-4 h-4 stroke-[2.5]" />
-                    </div>
-                  </button>
-                );
-              })}
+          {/* Summary Strip */}
+          <div className="mt-10 p-4 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-tech text-[#525D57]">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Showing {filteredProjects.length} of {portfolioProjects.length} Verified Commissioned Assets</span>
             </div>
+            <Link
+              to="/enquiry"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#E8A83E] transition-colors"
+            >
+              <span>Need custom techno-commercial design? Inquire with our engineers</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </section>
