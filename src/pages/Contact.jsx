@@ -279,8 +279,9 @@ function ContactChannelCard({
   btnText,
   btnIcon: BtnIcon,
   btnUrl,
-  btnClass = "bg-[#123C32] hover:bg-[#1A4D41] text-white",
-  btnIconColor = "text-[#E8A83E]",
+  btnClass = "bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724]",
+  btnGlowClass = "bg-[#E8A83E] opacity-45 group-hover/btn:opacity-85",
+  btnIconColor = "text-[#202724]",
   isExternal = false,
   activeTag,
   iconHoverClass = "group-hover:border-[#E8A83E] group-hover:bg-[#FFFDF7] group-hover:text-[#D4952D] group-hover:shadow-[0_0_15px_rgba(232,168,62,0.25)]",
@@ -350,22 +351,28 @@ function ContactChannelCard({
           </div>
         </div>
 
-        {/* Prominent Action Button */}
+        {/* Prominent Action Button with Glowing Effect */}
         <div className="relative z-10 pt-4 mt-4 border-t border-[#E2E8E2]">
-          <a
-            href={btnUrl}
-            target={isExternal ? "_blank" : undefined}
-            rel={isExternal ? "noopener noreferrer" : undefined}
-            className={`w-full inline-flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 font-tech tracking-wide group/btn cursor-pointer ${btnClass}`}
-          >
-            {BtnIcon && <BtnIcon className={`w-4 h-4 ${btnIconColor}`} />}
-            <span>{btnText}</span>
-            {isExternal ? (
-              <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-0.5 transition-transform ml-auto" />
-            ) : (
-              <ArrowRight className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-1 transition-transform ml-auto" />
-            )}
-          </a>
+          <div className="relative group/btn w-full">
+            {/* Glowing Ambient Halo */}
+            <div
+              className={`absolute -inset-0.5 rounded-xl blur-sm transition-opacity duration-300 pointer-events-none ${btnGlowClass}`}
+            />
+            <a
+              href={btnUrl}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              className={`relative w-full inline-flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all duration-200 font-tech tracking-wide cursor-pointer ${btnClass}`}
+            >
+              {BtnIcon && <BtnIcon className={`w-4 h-4 ${btnIconColor}`} />}
+              <span>{btnText}</span>
+              {isExternal ? (
+                <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-0.5 transition-transform ml-auto" />
+              ) : (
+                <ArrowRight className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-1 transition-transform ml-auto" />
+              )}
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -648,18 +655,44 @@ export default function Contact() {
               btnText="Call Primary Desk"
               btnIcon={Phone}
               btnUrl={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
-              btnClass="bg-[#123C32] hover:bg-[#1A4D41] text-white shadow-md shadow-[#123C32]/20"
-              btnIconColor="text-[#E8A83E]"
+              btnClass="bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-[0_0_15px_rgba(232,168,62,0.3)] hover:shadow-[0_0_25px_rgba(232,168,62,0.55)]"
+              btnGlowClass="bg-[#E8A83E] opacity-50 group-hover/btn:opacity-90"
+              btnIconColor="text-[#202724]"
             >
-              <div className="space-y-1.5">
-                <div className="text-xs sm:text-sm font-bold text-[#123C32] font-tech flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                  <span>{COMPANY_DETAILS.phones[0].display}</span>
-                </div>
-                <div className="text-xs sm:text-sm font-semibold text-[#525D57] font-tech flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-neutral-300 shrink-0"></span>
-                  <span>{COMPANY_DETAILS.phones[1].display}</span>
-                </div>
+              <div className="space-y-2">
+                <a
+                  href={`tel:${COMPANY_DETAILS.phones[0].raw}`}
+                  className="group/phone flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-[#FFFDF7] border border-[#E2E8E2] hover:border-[#E8A83E] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(232,168,62,0.25)]"
+                  title="Click to call Primary Desk"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
+                    <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/phone:text-[#D4952D] font-tech transition-colors">
+                      {COMPANY_DETAILS.phones[0].display}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-tech font-bold uppercase tracking-wider text-[#525D57] group-hover/phone:text-[#D4952D] flex items-center gap-1 transition-colors">
+                    <span>Line 1</span>
+                    <Phone className="w-3 h-3 text-[#E8A83E]" />
+                  </span>
+                </a>
+
+                <a
+                  href={`tel:${COMPANY_DETAILS.phones[1].raw}`}
+                  className="group/phone flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-[#FFFDF7] border border-[#E2E8E2] hover:border-[#E8A83E] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(232,168,62,0.25)]"
+                  title="Click to call Secondary Desk"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                    <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/phone:text-[#D4952D] font-tech transition-colors">
+                      {COMPANY_DETAILS.phones[1].display}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-tech font-bold uppercase tracking-wider text-[#525D57] group-hover/phone:text-[#D4952D] flex items-center gap-1 transition-colors">
+                    <span>Line 2</span>
+                    <Phone className="w-3 h-3 text-[#E8A83E]" />
+                  </span>
+                </a>
               </div>
             </ContactChannelCard>
 
@@ -672,13 +705,23 @@ export default function Contact() {
               btnText="Send Direct Email"
               btnIcon={Mail}
               btnUrl={`mailto:${COMPANY_DETAILS.email}`}
-              btnClass="bg-[#123C32] hover:bg-[#1A4D41] text-white shadow-md shadow-[#123C32]/20"
-              btnIconColor="text-[#E8A83E]"
+              btnClass="bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-[0_0_15px_rgba(232,168,62,0.3)] hover:shadow-[0_0_25px_rgba(232,168,62,0.55)]"
+              btnGlowClass="bg-[#E8A83E] opacity-50 group-hover/btn:opacity-90"
+              btnIconColor="text-[#202724]"
             >
-              <div className="text-xs sm:text-sm font-bold text-[#123C32] font-tech truncate flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                <span className="truncate">{COMPANY_DETAILS.email}</span>
-              </div>
+              <a
+                href={`mailto:${COMPANY_DETAILS.email}`}
+                className="group/email flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-[#FFFDF7] border border-[#E2E8E2] hover:border-[#E8A83E] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(232,168,62,0.25)]"
+                title="Click to send official email"
+              >
+                <div className="flex items-center gap-2 truncate">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                  <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/email:text-[#D4952D] font-tech transition-colors truncate">
+                    {COMPANY_DETAILS.email}
+                  </span>
+                </div>
+                <Mail className="w-3.5 h-3.5 text-[#E8A83E] shrink-0 ml-2" />
+              </a>
             </ContactChannelCard>
 
             {/* Card 3: Instant WhatsApp Desk */}
@@ -691,14 +734,26 @@ export default function Contact() {
               btnIcon={MessageSquare}
               btnUrl={COMPANY_DETAILS.whatsappUrl}
               isExternal={true}
-              btnClass="bg-[#25D366] hover:bg-[#20ba59] text-white shadow-md shadow-[#25D366]/25"
+              btnClass="bg-[#25D366] hover:bg-[#20ba59] text-white shadow-[0_0_15px_rgba(37,211,102,0.3)] hover:shadow-[0_0_25px_rgba(37,211,102,0.55)]"
+              btnGlowClass="bg-[#25D366] opacity-45 group-hover/btn:opacity-85"
               btnIconColor="text-white fill-white"
               iconHoverClass="group-hover:border-[#25D366] group-hover:bg-emerald-50/50 group-hover:text-[#25D366] group-hover:shadow-[0_0_15px_rgba(37,211,102,0.25)]"
             >
-              <div className="text-xs sm:text-sm font-bold text-[#123C32] font-tech flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
-                <span>+91 97707 44687</span>
-              </div>
+              <a
+                href={COMPANY_DETAILS.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/wa flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-emerald-50/50 border border-[#E2E8E2] hover:border-[#25D366] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(37,211,102,0.25)]"
+                title="Click to chat on WhatsApp"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
+                  <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/wa:text-[#25D366] font-tech transition-colors">
+                    +91 97707 44687
+                  </span>
+                </div>
+                <MessageSquare className="w-3.5 h-3.5 text-[#25D366] shrink-0 fill-[#25D366]/20" />
+              </a>
             </ContactChannelCard>
           </div>
         </div>
