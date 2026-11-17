@@ -208,20 +208,20 @@ function ContactChannelCard({
           <div className="relative group/btn w-full">
             {/* Glowing Ambient Halo */}
             <div
-              className={`absolute -inset-0.5 rounded-xl blur-sm transition-opacity duration-300 pointer-events-none ${btnGlowClass}`}
+              className={`absolute -inset-1 rounded-xl blur-md transition duration-500 pointer-events-none group-hover/btn:scale-105 ${btnGlowClass}`}
             />
             <a
               href={btnUrl}
               target={isExternal ? "_blank" : undefined}
               rel={isExternal ? "noopener noreferrer" : undefined}
-              className={`relative w-full inline-flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all duration-200 font-tech tracking-wide cursor-pointer ${btnClass}`}
+              className={`relative w-full inline-flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold shadow-lg shadow-black/15 transition-all duration-300 font-tech tracking-wide cursor-pointer ${btnClass}`}
             >
               {BtnIcon && <BtnIcon className={`w-4 h-4 ${btnIconColor}`} />}
               <span>{btnText}</span>
               {isExternal ? (
                 <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-0.5 transition-transform ml-auto" />
               ) : (
-                <ArrowRight className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-1 group-hover/btn:text-[#123C32] transition-all ml-auto" />
+                <ArrowRight className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-1.5 transition-transform duration-200 ml-auto" />
               )}
             </a>
           </div>
@@ -557,9 +557,9 @@ export default function Contact() {
               btnText="Call Primary Desk"
               btnIcon={Phone}
               btnUrl={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
-              btnClass="bg-[#E8A83E] hover:bg-[#FDE68A] text-[#202724] hover:text-[#123C32] border-2 border-[#E8A83E] hover:border-[#123C32] shadow-sm hover:shadow-[0_0_16px_rgba(18,60,50,0.25)] transition-all duration-300"
-              btnGlowClass="bg-[#E8A83E] opacity-35 group-hover/btn:opacity-60"
-              btnIconColor="text-[#202724] group-hover/btn:text-[#123C32] transition-colors"
+              btnClass="bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724]"
+              btnGlowClass="bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] opacity-35 group-hover/btn:opacity-85"
+              btnIconColor="text-[#202724]"
             >
               <div className="space-y-2">
                 <a
@@ -607,9 +607,9 @@ export default function Contact() {
               btnText="Send Direct Email"
               btnIcon={Mail}
               btnUrl={`mailto:${COMPANY_DETAILS.email}`}
-              btnClass="bg-[#E8A83E] hover:bg-[#FDE68A] text-[#202724] hover:text-[#123C32] border-2 border-[#E8A83E] hover:border-[#123C32] shadow-sm hover:shadow-[0_0_16px_rgba(18,60,50,0.25)] transition-all duration-300"
-              btnGlowClass="bg-[#E8A83E] opacity-35 group-hover/btn:opacity-60"
-              btnIconColor="text-[#202724] group-hover/btn:text-[#123C32] transition-colors"
+              btnClass="bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724]"
+              btnGlowClass="bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] opacity-35 group-hover/btn:opacity-85"
+              btnIconColor="text-[#202724]"
             >
               <a
                 href={`mailto:${COMPANY_DETAILS.email}`}
@@ -636,8 +636,8 @@ export default function Contact() {
               btnIcon={MessageSquare}
               btnUrl={COMPANY_DETAILS.whatsappUrl}
               isExternal={true}
-              btnClass="bg-[#25D366] hover:bg-[#20ba59] text-white border-2 border-[#25D366] shadow-[0_0_15px_rgba(37,211,102,0.3)] hover:shadow-[0_0_25px_rgba(37,211,102,0.55)]"
-              btnGlowClass="bg-[#25D366] opacity-45 group-hover/btn:opacity-85"
+              btnClass="bg-[#25D366] hover:bg-[#20ba59] text-white"
+              btnGlowClass="bg-[#25D366] opacity-35 group-hover/btn:opacity-85"
               btnIconColor="text-white fill-white"
               iconHoverClass="group-hover:border-[#25D366] group-hover:bg-emerald-50/50 group-hover:text-[#25D366] group-hover:shadow-[0_0_15px_rgba(37,211,102,0.25)]"
             >
@@ -968,11 +968,11 @@ export default function Contact() {
                 {/* 6. GLOWING SUBMIT BUTTON */}
                 <div className="pt-2">
                   <div className="relative group/btn w-full">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-sm opacity-40 group-hover/btn:opacity-75 transition duration-300 pointer-events-none"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-md opacity-35 group-hover/btn:opacity-85 transition duration-500 group-hover/btn:scale-105 pointer-events-none"></div>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold bg-[#E8A83E] hover:bg-[#FDE68A] text-[#202724] hover:text-[#123C32] border-2 border-[#E8A83E] hover:border-[#123C32] shadow-md hover:shadow-[0_0_20px_rgba(18,60,50,0.25)] transition-all duration-300 cursor-pointer disabled:opacity-75 font-tech tracking-wide group/submit"
+                      className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/15 transition-all duration-300 cursor-pointer disabled:opacity-75 font-tech tracking-wide"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
@@ -982,7 +982,7 @@ export default function Contact() {
                       ) : (
                         <>
                           <span>Transmit Proposal Request to Senior Engineering Desk</span>
-                          <Send className="w-4 h-4 text-[#202724] group-hover/submit:text-[#123C32] group-hover/submit:translate-x-0.5 transition-all" />
+                          <Send className="w-4 h-4 text-[#202724] group-hover/btn:translate-x-1.5 transition-transform duration-200" />
                         </>
                       )}
                     </button>
