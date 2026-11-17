@@ -33,7 +33,7 @@ import ScrollReveal from "../components/ScrollReveal";
 import mainTopImg from "../assets/company/main-comany-name-image-or-top-image.jpg";
 
 // =================================================================
-// Category Definitions with Distinct Multi-Color Glow Signatures
+// Category Definitions for Integrated Enquiry Portal
 // =================================================================
 const SOLUTION_CATEGORIES = [
   {
@@ -42,10 +42,6 @@ const SOLUTION_CATEGORIES = [
     shortLabel: "Residential",
     scale: "3kW – 25kW",
     icon: SunMedium,
-    glowColor: "rgba(232, 168, 62, 0.4)", // Solar Gold
-    accentBorder: "border-[#E8A83E]",
-    activeBg: "bg-gradient-to-br from-[#123C32] to-[#1A4D41]",
-    tagColor: "bg-amber-100 text-amber-900 border-amber-300",
   },
   {
     id: "commercial",
@@ -53,10 +49,6 @@ const SOLUTION_CATEGORIES = [
     shortLabel: "Commercial",
     scale: "25kW – 500kW",
     icon: Building,
-    glowColor: "rgba(16, 185, 129, 0.4)", // Mint Emerald
-    accentBorder: "border-emerald-500",
-    activeBg: "bg-gradient-to-br from-[#123C32] to-[#0D382B]",
-    tagColor: "bg-emerald-100 text-emerald-900 border-emerald-300",
   },
   {
     id: "industrial",
@@ -64,10 +56,6 @@ const SOLUTION_CATEGORIES = [
     shortLabel: "Industrial",
     scale: "500kW – 50MW",
     icon: Factory,
-    glowColor: "rgba(14, 165, 233, 0.4)", // Electric Sky
-    accentBorder: "border-sky-500",
-    activeBg: "bg-gradient-to-br from-[#123C32] to-[#0A3042]",
-    tagColor: "bg-sky-100 text-sky-900 border-sky-300",
   },
   {
     id: "transformers",
@@ -75,10 +63,6 @@ const SOLUTION_CATEGORIES = [
     shortLabel: "Transformers",
     scale: "Inverter Duty & Substation",
     icon: Cpu,
-    glowColor: "rgba(168, 85, 247, 0.4)", // Royal Violet
-    accentBorder: "border-purple-500",
-    activeBg: "bg-gradient-to-br from-[#123C32] to-[#2B1B4A]",
-    tagColor: "bg-purple-100 text-purple-900 border-purple-300",
   },
   {
     id: "turnkey-epc",
@@ -86,140 +70,8 @@ const SOLUTION_CATEGORIES = [
     shortLabel: "Turnkey EPC",
     scale: "Utility & MW Scale",
     icon: Layers,
-    glowColor: "rgba(20, 184, 166, 0.4)", // Clean Teal
-    accentBorder: "border-teal-500",
-    activeBg: "bg-gradient-to-br from-[#123C32] to-[#0E3D39]",
-    tagColor: "bg-teal-100 text-teal-900 border-teal-300",
   },
 ];
-
-const DELIVERABLES_DATA = {
-  residential: {
-    categoryLabel: "Residential Rooftop Solar Feasibility",
-    deliverables: [
-      {
-        title: "3D Shadow & Rooftop Feasibility Audit",
-        desc: "High-resolution irradiance mapping to identify zero-shadow usable terrace areas.",
-      },
-      {
-        title: "PVSyst Simulated Generation Projections",
-        desc: "Computer-simulated annual kWh generation tailored to your location.",
-      },
-      {
-        title: "Bill Reduction & Payback ROI Model",
-        desc: "Financial payback timeline, up to 90% power bill savings, and ROI curve.",
-      },
-      {
-        title: "PM Surya Ghar Subsidy DBT Navigation",
-        desc: "Direct navigation of central and state rooftop solar subsidies up to ₹78,000.",
-      },
-      {
-        title: "Tier-1 Hardware Bill of Materials",
-        desc: "Mono-PERC bifacial panels and European/top-tier smart grid inverters.",
-      },
-    ],
-  },
-  commercial: {
-    categoryLabel: "Commercial Solar Proposal & Accelerated Tax Savings",
-    deliverables: [
-      {
-        title: "Rooftop & Super-Structure Engineering",
-        desc: "Elevated structures and structural load validation for commercial office buildings.",
-      },
-      {
-        title: "PVSyst Financial & 40% Accelerated Depreciation",
-        desc: "Detailed cash-flow analysis incorporating 40% accelerated tax depreciation.",
-      },
-      {
-        title: "LCOE vs Commercial Tariff Benchmarking",
-        desc: "Direct comparison between levelized solar unit cost vs state grid tariffs.",
-      },
-      {
-        title: "HT/LT Grid Synchronization Roadmap",
-        desc: "Single-line diagram (SLD), net-metering sanctioning, and DISCOM clearances.",
-      },
-      {
-        title: "Automated Remote Cloud Monitoring",
-        desc: "Real-time generation telemetry and preventative maintenance SLA package.",
-      },
-    ],
-  },
-  industrial: {
-    categoryLabel: "Industrial Captive Solar Feasibility & Peak Shaving",
-    deliverables: [
-      {
-        title: "Captive & Open Access Feasibility Study",
-        desc: "Evaluation of ground-mount, industrial shed, or open-access group captive models.",
-      },
-      {
-        title: "Structural & Purlin Load Vetting",
-        desc: "Wind speed and static load analysis for industrial metal sheds and terrain.",
-      },
-      {
-        title: "Contract Demand & Peak Shaving Analysis",
-        desc: "Curtail peak tariff demand surcharges and document verified ESG carbon offsets.",
-      },
-      {
-        title: "CEIG & Transmission Liaisoning",
-        desc: "End-to-end statutory approvals for electrical inspectorate and substation link.",
-      },
-      {
-        title: "Utility-Grade High-Yield Hardware",
-        desc: "Heavy-duty industrial inverters and structures with 25-year linear performance warranty.",
-      },
-    ],
-  },
-  transformers: {
-    categoryLabel: "Power Transformer Technical Topology & Works Spec",
-    deliverables: [
-      {
-        title: "Core & Coil Technical Topology Review",
-        desc: "Electrolytic copper-wound design customized for solar inverter or industrial duty.",
-      },
-      {
-        title: "Strict IS 2026 / IEC 60076 Standards",
-        desc: "Engineered to withstand harsh harmonics, extreme temperatures, and voltage spikes.",
-      },
-      {
-        title: "In-House Routine & Type Test Protocols",
-        desc: "Losses, impedance, HV, and temperature-rise testing at our Dewas/Indore facility.",
-      },
-      {
-        title: "Short-Circuit & Seismic Withstand Design",
-        desc: "High mechanical stability and low acoustic noise level engineering.",
-      },
-      {
-        title: "Fast-Track Logistics & Commissioning",
-        desc: "Direct transit to site, oil filtration, and on-site testing support.",
-      },
-    ],
-  },
-  "turnkey-epc": {
-    categoryLabel: "Turnkey Solar EPC Project Scope & Grid Evacuation",
-    deliverables: [
-      {
-        title: "Topography, Geotechnical & Hydrology Study",
-        desc: "Comprehensive civil and soil assessments for MW-scale utility solar parks.",
-      },
-      {
-        title: "33kV / 132kV Grid Evacuation Clearance",
-        desc: "Transmission line routing, bay extension, and DISCOM / TRANSCO liaisoning.",
-      },
-      {
-        title: "Integrated Transformer Substation Supply",
-        desc: "Single-source procurement with in-house manufactured step-up transformers.",
-      },
-      {
-        title: "MMS, Trackers & Robotic Cleaning Ready",
-        desc: "Optimized tilt or tracker arrays for peak solar irradiance capture.",
-      },
-      {
-        title: "CEIG Certification & 5-Year O&M SLA",
-        desc: "Rapid commercial operation date (COD) commissioning and preventive maintenance.",
-      },
-    ],
-  },
-};
 
 const FACILITY_OPTIONS = {
   residential: [
@@ -379,6 +231,57 @@ function ContactChannelCard({
   );
 }
 
+// =================================================================
+// Subcomponent: Enquiry Portal Container with Solar Gold Cursor Border Glow
+// =================================================================
+function EnquiryPortalContainer({ children }) {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative rounded-3xl p-[1.5px] transition-all duration-300 select-none max-w-4xl mx-auto shadow-2xl shadow-black/5"
+    >
+      {/* Dynamic Cursor-Responsive Border Glow (Solar Gold / Warm Tech Glow) */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-3xl transition-opacity duration-500"
+        style={{
+          opacity: isHovered ? 1 : 0.4,
+          background: isHovered
+            ? `radial-gradient(450px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.1) 75%, transparent 100%)`
+            : `linear-gradient(135deg, rgba(226, 232, 226, 0.9), rgba(247, 248, 244, 0.6))`,
+        }}
+      />
+
+      {/* Form Surface */}
+      <div className="relative rounded-[22.5px] bg-white p-6 sm:p-10 lg:p-12 shadow-sm overflow-hidden">
+        {/* Soft Interior Ambient Glow following cursor */}
+        <div
+          className="pointer-events-none absolute -inset-px rounded-[22.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+          style={{
+            background: `radial-gradient(350px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.05), transparent 75%)`,
+          }}
+        />
+
+        <div className="relative z-10">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Contact() {
   const [searchParams] = useSearchParams();
 
@@ -453,7 +356,6 @@ export default function Contact() {
   }, [initialCategory, paramReq]);
 
   const activeCategoryMeta = SOLUTION_CATEGORIES.find((c) => c.id === selectedCategory) || SOLUTION_CATEGORIES[0];
-  const activeDeliverables = DELIVERABLES_DATA[selectedCategory] || DELIVERABLES_DATA.residential;
   const facilityList = FACILITY_OPTIONS[selectedCategory] || FACILITY_OPTIONS.residential;
   const capacityPlaceholder = CAPACITY_PLACEHOLDERS[selectedCategory] || CAPACITY_PLACEHOLDERS.residential;
 
@@ -759,448 +661,352 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* =========================================================
-          3. INTEGRATED TECHNO-COMMERCIAL CONSULTATION & ENQUIRY HUB
-             (Multi-Color Glows, Solution Switcher, Dynamic Deliverables)
+            {/* =========================================================
+          3. RECREATED TECHNO-COMMERCIAL ENQUIRY & PROPOSAL PORTAL
+             (Simple, Elegant, Unified Container with Solar Gold Border Glow)
          ========================================================= */}
       <section id="inquiry-form" className="py-12 md:py-16 bg-[#F7F8F4] border-b border-[#E2E8E2] scroll-mt-20 relative overflow-hidden">
-        {/* Subtle multi-color background lighting mesh */}
+        {/* Soft Ambient Background Lighting */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute top-1/2 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold font-tech uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-              <span>Unified Techno-Commercial Portal</span>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <EnquiryPortalContainer>
+            {/* Header inside the form */}
+            <div className="border-b border-[#E2E8E2] pb-6 mb-7 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] text-xs font-bold font-tech uppercase tracking-wider mb-2">
+                  <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
+                  <span>Techno-Commercial Portal</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight leading-tight">
+                  Request Project Proposal &amp; Feasibility
+                </h2>
+                <p className="text-xs sm:text-sm text-[#525D57] mt-1 leading-relaxed">
+                  Fill in your parameters below. Our engineering desk will review technical feasibility and contact you within 24 business hours.
+                </p>
+              </div>
+
+              <div className="hidden sm:flex flex-col items-end shrink-0">
+                <span className="text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-2xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Response &lt; 24h
+                </span>
+                <span className="text-[10px] text-[#525D57] font-tech mt-1">
+                  Complimentary Feasibility Audit
+                </span>
+              </div>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-2">
-              Request Project Proposal &amp; Engineering Feasibility
-            </h2>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto font-normal">
-              Select your solution domain below to tailor technical parameters and view exact engineering deliverables prepared by our senior engineering desk.
-            </p>
-          </ScrollReveal>
 
-          {/* Interactive 5-Category Solution Switcher (Multi-Color Glowing Pills) */}
-          <div className="max-w-5xl mx-auto mb-8">
-            <label className="block text-center text-xs font-tech font-bold uppercase tracking-wider text-[#525D57] mb-3">
-              Select Target Solution Category:
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
-              {SOLUTION_CATEGORIES.map((cat) => {
-                const Icon = cat.icon;
-                const isSelected = selectedCategory === cat.id;
-
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => {
-                      setSelectedCategory(cat.id);
-                      setFormData((p) => ({ ...p, facilityType: "" }));
-                    }}
-                    className={`relative p-3 rounded-2xl border text-center transition-all duration-300 cursor-pointer flex flex-col items-center justify-center group focus:outline-none ${
-                      isSelected
-                        ? "bg-[#123C32] text-white shadow-xl scale-[1.03] ring-2 ring-[#E8A83E]"
-                        : "bg-white text-[#202724] border-[#E2E8E2] hover:border-[#123C32]/40 hover:bg-neutral-50 shadow-xs"
-                    }`}
-                    style={{
-                      boxShadow: isSelected ? `0 0 25px ${cat.glowColor}` : undefined,
-                    }}
-                  >
-                    {/* Glowing Icon Capsule */}
-                    <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-transform duration-300 group-hover:scale-110 ${
-                        isSelected
-                          ? "bg-[#E8A83E] text-[#123C32] shadow-sm"
-                          : "bg-[#E9F0E9] text-[#123C32]"
-                      }`}
-                    >
-                      <Icon className="w-4 h-4 stroke-[2.2]" />
-                    </div>
-
-                    <span className="font-bold text-xs leading-tight font-heading">
-                      {cat.shortLabel}
-                    </span>
-                    <span
-                      className={`text-[9px] font-mono mt-0.5 line-clamp-1 ${
-                        isSelected ? "text-[#E8A83E]" : "text-[#525D57]"
-                      }`}
-                    >
-                      {cat.scale}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Master Two-Column Grid: Left Deliverables HUD + Right Form */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
-            {/* Left Column: Dynamic Deliverables Scope (lg:col-span-5) */}
-            <div className="lg:col-span-5 flex flex-col justify-between bg-[#123C32] text-white rounded-2xl p-6 sm:p-7 shadow-xl relative overflow-hidden border border-[#123C32]/40">
-              {/* Dynamic multi-hue ambient background glow */}
-              <div
-                className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl pointer-events-none transition-all duration-700 opacity-25"
-                style={{ backgroundColor: activeCategoryMeta.glowColor }}
-              ></div>
-
-              <div className="space-y-4 relative z-10">
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[11px] font-tech font-bold tracking-wider text-[#E8A83E] uppercase block">
-                      Engineering Scope Included
-                    </span>
-                    <span className="text-[10px] font-tech text-[#E9F0E9]/80 px-2 py-0.5 rounded-full bg-white/10 border border-white/15">
-                      Complimentary Audit
-                    </span>
-                  </div>
-                  <h3 className="font-heading text-lg sm:text-xl font-bold text-white leading-snug">
-                    {activeDeliverables.categoryLabel}
-                  </h3>
+            {submitted ? (
+              /* Success Confirmation Screen */
+              <div className="py-8 text-center space-y-4 animate-fade-in">
+                <div className="w-16 h-16 rounded-full bg-[#E9F0E9] text-[#123C32] flex items-center justify-center mx-auto ring-8 ring-[#123C32]/10 shadow-md">
+                  <CheckCircle2 className="w-10 h-10 text-[#123C32]" />
                 </div>
 
-                {/* Dynamic Deliverables List */}
-                <div className="space-y-3 pt-1">
-                  {activeDeliverables.deliverables.map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 group">
-                      <CheckCircle2 className="w-4 h-4 text-[#E8A83E] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                      <div>
-                        <h4 className="text-xs font-bold text-white leading-tight">
-                          {item.title}
-                        </h4>
-                        <p className="text-[11px] text-[#E9F0E9]/75 mt-0.5 leading-relaxed">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Engineering SLA Guarantee */}
-                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs space-y-1.5 mt-2">
-                  <div className="flex items-center gap-1.5 font-bold text-[#E8A83E] text-[11px] font-tech uppercase tracking-wider">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>Engineering Commitment &amp; SLA</span>
-                  </div>
-                  <p className="text-[11px] text-[#E9F0E9]/80 leading-relaxed">
-                    Prepared by qualified electrical engineers using calibrated satellite irradiance &amp; load models. Guaranteed turnaround within 24 business hours.
+                <div className="space-y-1">
+                  <span className="inline-block px-3 py-1 rounded-full bg-[#123C32]/10 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech">
+                    Transmission Confirmed
+                  </span>
+                  <h4 className="font-heading text-2xl font-black text-[#202724]">
+                    Thank You, {formData.fullName}!
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#525D57] max-w-md mx-auto leading-relaxed">
+                    Your inquiry has been registered under reference <strong>{referenceId}</strong>. A senior engineer will review your parameters and connect via <strong>{formData.email}</strong>.
                   </p>
                 </div>
-              </div>
 
-              {/* Bottom Quick Desk Hotline */}
-              <div className="mt-6 pt-4 border-t border-white/10 relative z-10 space-y-3">
-                <div className="text-[11px] font-tech font-bold text-[#E8A83E] uppercase tracking-wider">
-                  Direct Engineering Desk
+                <div className="p-4 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] max-w-sm mx-auto text-left text-xs space-y-2">
+                  <div className="flex justify-between items-center pb-1 border-b border-[#E2E8E2]">
+                    <span className="text-[#525D57]">Tracking ID:</span>
+                    <span className="font-tech font-bold text-[#123C32]">{referenceId}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#525D57]">Domain:</span>
+                    <span className="font-bold text-[#202724]">{activeCategoryMeta.label}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#525D57]">Project Location:</span>
+                    <span className="font-semibold text-[#202724]">{formData.projectLocation}</span>
+                  </div>
+                  {formData.facilityType && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-[#525D57]">Facility Type:</span>
+                      <span className="font-semibold text-[#202724]">{formData.facilityType}</span>
+                    </div>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <a
-                    href={`tel:${COMPANY_DETAILS.phones[0].raw}`}
-                    className="flex items-center gap-2 p-2 rounded-xl bg-white/10 hover:bg-white/15 transition-colors border border-white/10 text-white"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
-                    <div className="truncate">
-                      <div className="text-[9px] text-[#E9F0E9]/70 font-tech">Direct Calling</div>
-                      <div className="text-[11px] font-bold truncate">{COMPANY_DETAILS.phones[0].display}</div>
-                    </div>
-                  </a>
+                <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <div className="relative group/wa w-full sm:w-auto">
+                    <div className="absolute -inset-0.5 bg-[#25D366] rounded-xl blur-sm opacity-45 group-hover/wa:opacity-85 transition duration-300 pointer-events-none"></div>
+                    <a
+                      href={`https://wa.me/919770744687?text=${encodeURIComponent(
+                        `Hello Proton Power Infra, I have submitted a ${activeCategoryMeta.label} proposal request (Ref: ${referenceId}) for ${formData.projectLocation}. Please provide techno-commercial feasibility details.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-bold shadow-md transition-all font-tech w-full sm:w-auto cursor-pointer"
+                    >
+                      <MessageSquare className="w-4 h-4 fill-white" />
+                      <span>Instant WhatsApp Follow-Up</span>
+                    </a>
+                  </div>
 
-                  <a
-                    href={`mailto:${COMPANY_DETAILS.email}`}
-                    className="flex items-center gap-2 p-2 rounded-xl bg-white/10 hover:bg-white/15 transition-colors border border-white/10 text-white"
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-[#E2E8E2] text-xs sm:text-sm font-semibold text-[#525D57] hover:bg-neutral-100 transition-colors cursor-pointer w-full sm:w-auto"
                   >
-                    <Mail className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
-                    <div className="truncate">
-                      <div className="text-[9px] text-[#E9F0E9]/70 font-tech">Official Desk</div>
-                      <div className="text-[11px] font-bold truncate">support@proton...</div>
-                    </div>
-                  </a>
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    <span>Submit Another Requirement</span>
+                  </button>
                 </div>
-
-                <a
-                  href={COMPANY_DETAILS.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#25D366] text-white text-xs font-bold shadow hover:bg-[#20ba59] transition-colors font-tech"
-                >
-                  <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Instant Technical Chat on WhatsApp</span>
-                </a>
               </div>
-            </div>
-
-            {/* Right Column: Unified Form Container (lg:col-span-7) */}
-            <div className="lg:col-span-7 relative rounded-2xl p-[2px] transition-all duration-500 shadow-2xl group/form">
-              {/* Dynamic Outer Aurora Glow - Multi-Color Halo */}
-              <div
-                className="absolute -inset-1.5 rounded-3xl blur-xl opacity-60 group-hover/form:opacity-90 transition duration-700 pointer-events-none"
-                style={{
-                  background: `linear-gradient(135deg, ${activeCategoryMeta.glowColor}, rgba(232, 168, 62, 0.4), rgba(16, 185, 129, 0.35), rgba(14, 165, 233, 0.4), rgba(168, 85, 247, 0.35))`,
-                }}
-              />
-
-              {/* Multi-Color Gradient Frame Border */}
-              <div
-                className="absolute inset-0 rounded-2xl opacity-80 pointer-events-none transition-opacity duration-500"
-                style={{
-                  background: `linear-gradient(135deg, #E8A83E, #10B981, #0EA5E9, #A855F7, #E8A83E)`,
-                }}
-              />
-
-              {/* Form Surface */}
-              <div className="relative rounded-[14.5px] bg-white p-6 sm:p-7 lg:p-8 h-full flex flex-col justify-between shadow-inner">
-                {/* Header */}
-                <div className="border-b border-[#E2E8E2] pb-4 mb-4">
+            ) : (
+              /* Live Form Fields */
+              <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                {/* 1. SERVICE / SOLUTION DOMAIN SELECTOR (INSIDE FORM) */}
+                <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold font-tech uppercase mb-1 border ${activeCategoryMeta.tagColor}`}>
-                        {activeCategoryMeta.label}
-                      </span>
-                      <h3 className="font-heading text-lg sm:text-xl font-bold text-[#202724]">
-                        {selectedCategory === "transformers"
-                          ? "Power Transformer Technical Specification"
-                          : selectedCategory === "turnkey-epc"
-                          ? "Turnkey Utility Solar EPC Proposal"
-                          : "Solar Energy Project Feasibility"}
-                      </h3>
-                    </div>
-                    <span className="text-[10px] font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                      Response &lt; 24h
+                    <label className="block text-xs font-semibold text-[#202724] font-tech uppercase tracking-wider">
+                      Select Solution Category <span className="text-[#E8A83E]">*</span>
+                    </label>
+                    <span className="text-[11px] font-tech text-[#525D57]">
+                      Selected: <strong className="text-[#123C32]">{activeCategoryMeta.label}</strong>
                     </span>
                   </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+                    {SOLUTION_CATEGORIES.map((cat) => {
+                      const Icon = cat.icon;
+                      const isSelected = selectedCategory === cat.id;
+
+                      return (
+                        <button
+                          key={cat.id}
+                          type="button"
+                          onClick={() => {
+                            setSelectedCategory(cat.id);
+                            setFormData((p) => ({ ...p, facilityType: "" }));
+                          }}
+                          className={`relative p-3 rounded-2xl border text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center group focus:outline-none ${
+                            isSelected
+                              ? "bg-[#123C32] text-white border-[#E8A83E] shadow-md ring-2 ring-[#E8A83E]/40 scale-[1.02]"
+                              : "bg-[#F7F8F4] text-[#202724] border-[#E2E8E2] hover:border-[#E8A83E]/60 hover:bg-[#FFFDF7] shadow-2xs"
+                          }`}
+                        >
+                          <div
+                            className={`w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-transform duration-200 group-hover:scale-110 ${
+                              isSelected
+                                ? "bg-[#E8A83E] text-[#123C32]"
+                                : "bg-white text-[#202724] border border-[#E2E8E2]"
+                            }`}
+                          >
+                            <Icon className="w-4 h-4 stroke-[2.2]" />
+                          </div>
+
+                          <span className="font-bold text-xs leading-tight font-heading">
+                            {cat.shortLabel}
+                          </span>
+                          <span
+                            className={`text-[9px] font-mono mt-0.5 line-clamp-1 ${
+                              isSelected ? "text-[#E8A83E]" : "text-[#525D57]"
+                            }`}
+                          >
+                            {cat.scale}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                {submitted ? (
-                  /* Success Confirmation Screen */
-                  <div className="py-8 text-center space-y-4 animate-fade-in">
-                    <div className="w-16 h-16 rounded-full bg-[#E9F0E9] text-[#123C32] flex items-center justify-center mx-auto ring-8 ring-[#123C32]/10 shadow-md">
-                      <CheckCircle2 className="w-10 h-10 text-[#123C32]" />
-                    </div>
-
-                    <div className="space-y-1">
-                      <span className="inline-block px-3 py-1 rounded-full bg-[#123C32]/10 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech">
-                        Transmission Confirmed
-                      </span>
-                      <h4 className="font-heading text-2xl font-black text-[#202724]">
-                        Thank You, {formData.fullName}!
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#525D57] max-w-md mx-auto leading-relaxed">
-                        Your inquiry has been registered under reference <strong>{referenceId}</strong>. A senior engineer will review your parameters and connect via <strong>{formData.email}</strong>.
-                      </p>
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] max-w-sm mx-auto text-left text-xs space-y-2">
-                      <div className="flex justify-between items-center pb-1 border-b border-[#E2E8E2]">
-                        <span className="text-[#525D57]">Tracking ID:</span>
-                        <span className="font-tech font-bold text-[#123C32]">{referenceId}</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-[#525D57]">Domain:</span>
-                        <span className="font-bold text-[#202724]">{activeCategoryMeta.label}</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-[#525D57]">Project Location:</span>
-                        <span className="font-semibold text-[#202724]">{formData.projectLocation}</span>
-                      </div>
-                    </div>
-
-                    <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-                      <a
-                        href={`https://wa.me/919770744687?text=${encodeURIComponent(
-                          `Hello Proton Power Infra, I have submitted a ${activeCategoryMeta.label} proposal request (Ref: ${referenceId}) for ${formData.projectLocation}. Please provide techno-commercial feasibility details.`
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] text-white text-xs font-bold shadow hover:bg-[#20ba59] transition-colors"
-                      >
-                        <MessageSquare className="w-3.5 h-3.5" />
-                        <span>Instant WhatsApp Follow-Up</span>
-                      </a>
-
-                      <button
-                        type="button"
-                        onClick={resetForm}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#E2E8E2] text-xs font-semibold text-[#525D57] hover:bg-neutral-100 transition-colors cursor-pointer"
-                      >
-                        <RefreshCw className="w-3.5 h-3.5" />
-                        <span>Submit Another Requirement</span>
-                      </button>
-                    </div>
+                {/* 2. CONTACT DETAILS: Full Name & Mobile Number */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                  <div>
+                    <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech uppercase tracking-wider">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="e.g. Vikram Sharma"
+                      className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
+                        errors.fullName
+                          ? "border-red-400 focus:ring-2 focus:ring-red-200"
+                          : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/30 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
+                      }`}
+                    />
+                    {errors.fullName && (
+                      <p className="text-red-500 text-[11px] mt-1">{errors.fullName}</p>
+                    )}
                   </div>
-                ) : (
-                  /* Live Form Fields */
-                  <form onSubmit={handleSubmit} noValidate className="space-y-4">
-                    {/* Row 1: Full Name & Mobile Number */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      <div>
-                        <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech">
-                          Full Name <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleChange}
-                          placeholder="e.g. Vikram Sharma"
-                          className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm bg-white focus:outline-none transition-all duration-200 ${
-                            errors.fullName
-                              ? "border-red-400 focus:ring-2 focus:ring-red-200"
-                              : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/40 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
-                          }`}
-                        />
-                        {errors.fullName && (
-                          <p className="text-red-500 text-[11px] mt-1">{errors.fullName}</p>
-                        )}
-                      </div>
 
-                      <div>
-                        <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech">
-                          Mobile Number <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="tel"
-                          name="mobileNumber"
-                          value={formData.mobileNumber}
-                          onChange={handleChange}
-                          placeholder="9770744687"
-                          maxLength={10}
-                          className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm bg-white focus:outline-none transition-all duration-200 ${
-                            errors.mobileNumber
-                              ? "border-red-400 focus:ring-2 focus:ring-red-200"
-                              : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/40 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
-                          }`}
-                        />
-                        {errors.mobileNumber && (
-                          <p className="text-red-500 text-[11px] mt-1">{errors.mobileNumber}</p>
-                        )}
-                      </div>
-                    </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech uppercase tracking-wider">
+                      Mobile Number <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="mobileNumber"
+                      value={formData.mobileNumber}
+                      onChange={handleChange}
+                      placeholder="9770744687"
+                      maxLength={10}
+                      className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
+                        errors.mobileNumber
+                          ? "border-red-400 focus:ring-2 focus:ring-red-200"
+                          : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/30 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
+                      }`}
+                    />
+                    {errors.mobileNumber && (
+                      <p className="text-red-500 text-[11px] mt-1">{errors.mobileNumber}</p>
+                    )}
+                  </div>
+                </div>
 
-                    {/* Row 2: Email & Project Location */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      <div>
-                        <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech">
-                          Email Address <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="vikram@company.com"
-                          className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm bg-white focus:outline-none transition-all duration-200 ${
-                            errors.email
-                              ? "border-red-400 focus:ring-2 focus:ring-red-200"
-                              : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/40 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
-                          }`}
-                        />
-                        {errors.email && (
-                          <p className="text-red-500 text-[11px] mt-1">{errors.email}</p>
-                        )}
-                      </div>
+                {/* 3. LOCATION & EMAIL: Email Address & Project Location */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech uppercase tracking-wider">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="vikram@company.com"
+                      className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
+                        errors.email
+                          ? "border-red-400 focus:ring-2 focus:ring-red-200"
+                          : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/30 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
+                      }`}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-[11px] mt-1">{errors.email}</p>
+                    )}
+                  </div>
 
-                      <div>
-                        <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech">
-                          City / Project Location <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="projectLocation"
-                          value={formData.projectLocation}
-                          onChange={handleChange}
-                          placeholder="e.g. Indore, Dewas, Bhopal, Delhi NCR"
-                          className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm bg-white focus:outline-none transition-all duration-200 ${
-                            errors.projectLocation
-                              ? "border-red-400 focus:ring-2 focus:ring-red-200"
-                              : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/40 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
-                          }`}
-                        />
-                        {errors.projectLocation && (
-                          <p className="text-red-500 text-[11px] mt-1">{errors.projectLocation}</p>
-                        )}
-                      </div>
-                    </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech uppercase tracking-wider">
+                      City / Project Location <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="projectLocation"
+                      value={formData.projectLocation}
+                      onChange={handleChange}
+                      placeholder="e.g. Indore, Dewas, Bhopal, Delhi NCR"
+                      className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
+                        errors.projectLocation
+                          ? "border-red-400 focus:ring-2 focus:ring-red-200"
+                          : "border-[#E2E8E2] focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/30 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)]"
+                      }`}
+                    />
+                    {errors.projectLocation && (
+                      <p className="text-red-500 text-[11px] mt-1">{errors.projectLocation}</p>
+                    )}
+                  </div>
+                </div>
 
-                    {/* Row 3: Facility Type & Capacity */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      <div>
-                        <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech">
-                          Facility Type
-                        </label>
-                        <select
-                          name="facilityType"
-                          value={formData.facilityType}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2E8E2] text-xs sm:text-sm bg-white focus:outline-none focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/40 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)] transition-all duration-200"
-                        >
-                          <option value="">Select Facility Type...</option>
-                          {facilityList.map((f, i) => (
-                            <option key={i} value={f}>
-                              {f}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
+                {/* 4. TECHNICAL PARAMETERS: Facility Type & Capacity / Bill */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech uppercase tracking-wider">
+                      Facility Type
+                    </label>
+                    <select
+                      name="facilityType"
+                      value={formData.facilityType}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-[#E2E8E2] text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/30 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)] transition-all duration-200 cursor-pointer"
+                    >
+                      <option value="">Select Facility Type...</option>
+                      {facilityList.map((f, i) => (
+                        <option key={i} value={f}>
+                          {f}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                      <div>
-                        <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech">
-                          Estimated Capacity / Bill
-                        </label>
-                        <input
-                          type="text"
-                          name="capacityOrBill"
-                          value={formData.capacityOrBill}
-                          onChange={handleChange}
-                          placeholder={capacityPlaceholder}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2E8E2] text-xs sm:text-sm bg-white focus:outline-none focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/40 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)] transition-all duration-200"
-                        />
-                      </div>
-                    </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech uppercase tracking-wider">
+                      Estimated Capacity / Bill
+                    </label>
+                    <input
+                      type="text"
+                      name="capacityOrBill"
+                      value={formData.capacityOrBill}
+                      onChange={handleChange}
+                      placeholder={capacityPlaceholder}
+                      className="w-full px-4 py-3 rounded-xl border border-[#E2E8E2] text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/30 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)] transition-all duration-200"
+                    />
+                  </div>
+                </div>
 
-                    {/* Row 4: Project Specifications / Notes */}
-                    <div>
-                      <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech">
-                        Project Specifications / Additional Notes
-                      </label>
-                      <textarea
-                        rows={3}
-                        name="notes"
-                        value={formData.notes}
-                        onChange={handleChange}
-                        placeholder="Detail your plant requirement, transformer kVA/MVA rating, target COD timeline, or any specific grid constraints..."
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2E8E2] text-xs sm:text-sm bg-white focus:outline-none focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/40 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)] transition-all duration-200"
-                      ></textarea>
-                    </div>
+                {/* 5. NOTES: Project Specifications / Additional Notes */}
+                <div>
+                  <label className="block text-xs font-semibold text-[#202724] mb-1 font-tech uppercase tracking-wider">
+                    Project Specifications / Additional Notes
+                  </label>
+                  <textarea
+                    rows={3}
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleChange}
+                    placeholder="Detail your plant requirement, transformer kVA/MVA rating, target COD timeline, or any specific grid constraints..."
+                    className="w-full px-4 py-3 rounded-xl border border-[#E2E8E2] text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none focus:border-[#E8A83E] focus:ring-2 focus:ring-[#E8A83E]/30 focus:shadow-[0_0_12px_rgba(232,168,62,0.2)] transition-all duration-200"
+                  ></textarea>
+                </div>
 
-                    {/* Glowing Multi-Color Aurora Submit Button */}
-                    <div className="pt-1">
-                      <div className="relative group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-emerald-400 to-sky-400 rounded-2xl blur-md opacity-45 group-hover:opacity-85 transition duration-500"></div>
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold bg-[#123C32] hover:bg-[#1A4D41] text-white shadow-lg transition-all duration-300 cursor-pointer disabled:opacity-75 font-tech tracking-wide"
-                        >
-                          {isSubmitting ? (
-                            <span>Transmitting Techno-Commercial Request...</span>
-                          ) : (
-                            <>
-                              <span>Transmit Proposal Request to Engineering Desk</span>
-                              <Send className="w-4 h-4 text-[#E8A83E]" />
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                )}
-              </div>
-            </div>
-          </div>
+                {/* 6. GLOWING SUBMIT BUTTON */}
+                <div className="pt-2">
+                  <div className="relative group/btn w-full">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-sm opacity-50 group-hover/btn:opacity-90 transition duration-300 pointer-events-none"></div>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-md transition-all duration-300 cursor-pointer disabled:opacity-75 font-tech tracking-wide"
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center gap-2">
+                          <RefreshCw className="w-4 h-4 animate-spin text-[#202724]" />
+                          <span>Transmitting Proposal Request to Engineering Desk...</span>
+                        </span>
+                      ) : (
+                        <>
+                          <span>Transmit Proposal Request to Senior Engineering Desk</span>
+                          <Send className="w-4 h-4 text-[#202724]" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Trust Footer Badges */}
+                <div className="pt-3 border-t border-[#E2E8E2] flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-tech text-[#525D57]">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    Zero Obligation Technical Assessment
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    100% Confidential Data Security
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#E8A83E]" />
+                    Response Guaranteed &lt; 24h
+                  </span>
+                </div>
+              </form>
+            )}
+          </EnquiryPortalContainer>
         </div>
       </section>
 
