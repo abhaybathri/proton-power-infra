@@ -68,7 +68,7 @@ function CommercialBenefitCard({
       onClick={() => onActivate(idx)}
       className={`relative rounded-2xl p-[1.5px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer select-none group min-w-0 ${
         isActive ? "lg:flex-[1.45]" : "lg:flex-1"
-      } h-auto lg:h-full`}
+      } h-[175px] sm:h-[180px] lg:h-full`}
     >
       {/* Dynamic Cursor-Responsive Border Glow */}
       <div
@@ -394,9 +394,9 @@ export default function CommercialSolar() {
             <div className="flex flex-col h-full w-full justify-center">
               <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[34px] xl:text-[38px] font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
+                <h1 className="text-3xl sm:text-4xl lg:text-[30px] xl:text-[34px] font-black tracking-tight text-white leading-[1.18] font-heading text-center mx-auto max-w-lg lg:max-w-xl">
                   Power Your Enterprise with <br />
-                  <span className="text-[#E8A83E] relative inline-block">
+                  <span className="text-[#E8A83E] relative inline-block lg:whitespace-nowrap">
                     High-Yield Commercial Solar.
                     <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                   </span>

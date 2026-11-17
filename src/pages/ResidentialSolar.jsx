@@ -69,7 +69,7 @@ function BenefitCard({
       onClick={() => onActivate(idx)}
       className={`relative rounded-2xl p-[1.5px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer select-none group min-w-0 ${
         isActive ? "lg:flex-[1.45]" : "lg:flex-1"
-      } h-auto lg:h-full`}
+      } h-[175px] sm:h-[180px] lg:h-full`}
     >
       {/* Dynamic Cursor-Responsive Border Glow */}
       <div

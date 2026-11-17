@@ -611,19 +611,41 @@ export default function Contact() {
               btnGlowClass="bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] opacity-35 group-hover/btn:opacity-85"
               btnIconColor="text-[#202724]"
             >
-              <a
-                href={`mailto:${COMPANY_DETAILS.email}`}
-                className="group/email flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-[#FFFDF7] border border-[#E2E8E2] hover:border-[#E8A83E] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(232,168,62,0.25)]"
-                title="Click to send official email"
-              >
-                <div className="flex items-center gap-2 truncate">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                  <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/email:text-[#D4952D] font-tech transition-colors truncate">
-                    {COMPANY_DETAILS.email}
+              <div className="space-y-2">
+                <a
+                  href={`mailto:${COMPANY_DETAILS.email}`}
+                  className="group/email flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-[#FFFDF7] border border-[#E2E8E2] hover:border-[#E8A83E] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(232,168,62,0.25)]"
+                  title="Click to send tender inquiries"
+                >
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
+                    <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/email:text-[#D4952D] font-tech transition-colors truncate">
+                      {COMPANY_DETAILS.email}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-tech font-bold uppercase tracking-wider text-[#525D57] group-hover/email:text-[#D4952D] flex items-center gap-1 transition-colors shrink-0 ml-2">
+                    <span>Tenders</span>
+                    <Mail className="w-3 h-3 text-[#E8A83E]" />
                   </span>
-                </div>
-                <Mail className="w-3.5 h-3.5 text-[#E8A83E] shrink-0 ml-2" />
-              </a>
+                </a>
+
+                <a
+                  href="mailto:projects@protonpowerinfra.com"
+                  className="group/email flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-[#FFFDF7] border border-[#E2E8E2] hover:border-[#E8A83E] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(232,168,62,0.25)]"
+                  title="Click to send project specifications & BOQ"
+                >
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                    <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/email:text-[#D4952D] font-tech transition-colors truncate">
+                      projects@protonpowerinfra.com
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-tech font-bold uppercase tracking-wider text-[#525D57] group-hover/email:text-[#D4952D] flex items-center gap-1 transition-colors shrink-0 ml-2">
+                    <span>Projects</span>
+                    <Mail className="w-3 h-3 text-[#E8A83E]" />
+                  </span>
+                </a>
+              </div>
             </ContactChannelCard>
 
             {/* Card 3: Instant WhatsApp Desk */}
@@ -641,21 +663,45 @@ export default function Contact() {
               btnIconColor="text-white fill-white"
               iconHoverClass="group-hover:border-[#25D366] group-hover:bg-emerald-50/50 group-hover:text-[#25D366] group-hover:shadow-[0_0_15px_rgba(37,211,102,0.25)]"
             >
-              <a
-                href={COMPANY_DETAILS.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/wa flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-emerald-50/50 border border-[#E2E8E2] hover:border-[#25D366] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(37,211,102,0.25)]"
-                title="Click to chat on WhatsApp"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
-                  <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/wa:text-[#25D366] font-tech transition-colors">
-                    +91 97707 44687
+              <div className="space-y-2">
+                <a
+                  href={COMPANY_DETAILS.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/wa flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-emerald-50/50 border border-[#E2E8E2] hover:border-[#25D366] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(37,211,102,0.25)]"
+                  title="Click to chat on WhatsApp with Primary Desk"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
+                    <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/wa:text-[#25D366] font-tech transition-colors">
+                      +91 97707 44687
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-tech font-bold uppercase tracking-wider text-[#525D57] group-hover/wa:text-[#25D366] flex items-center gap-1 transition-colors">
+                    <span>Chat 1</span>
+                    <MessageSquare className="w-3 h-3 text-[#25D366] fill-[#25D366]/20" />
                   </span>
-                </div>
-                <MessageSquare className="w-3.5 h-3.5 text-[#25D366] shrink-0 fill-[#25D366]/20" />
-              </a>
+                </a>
+
+                <a
+                  href="https://wa.me/919685320092?text=Hello%20Proton%20Power%20Infra%2C%20I%20am%20sharing%20site%20photos%20and%20project%20details."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/wa flex items-center justify-between p-2.5 rounded-xl bg-[#F7F8F4] hover:bg-emerald-50/50 border border-[#E2E8E2] hover:border-[#25D366] transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-[0_0_12px_rgba(37,211,102,0.25)]"
+                  title="Click to share site photos on WhatsApp Line 2"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#25D366] shrink-0"></span>
+                    <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/wa:text-[#25D366] font-tech transition-colors">
+                      +91 96853 20092
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-tech font-bold uppercase tracking-wider text-[#525D57] group-hover/wa:text-[#25D366] flex items-center gap-1 transition-colors">
+                    <span>Chat 2</span>
+                    <MessageSquare className="w-3 h-3 text-[#25D366] fill-[#25D366]/20" />
+                  </span>
+                </a>
+              </div>
             </ContactChannelCard>
           </div>
         </div>
@@ -1013,9 +1059,17 @@ export default function Contact() {
       {/* =========================================================
           4. HEADQUARTERS & REGIONAL OPERATIONS HUBS
          ========================================================= */}
-      <section className="py-12 md:py-14 bg-white border-b border-[#E2E8E2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 md:py-16 bg-white border-b border-[#E2E8E2] relative overflow-hidden">
+        {/* Subtle background ambient glows */}
+        <div className="absolute top-10 left-1/4 w-72 h-72 bg-[#E8A83E]/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold font-tech uppercase tracking-wider mb-2.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
+              <span>Pan-India Presence</span>
+            </span>
             <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-2">
               Our Headquarters &amp; Regional Operations Hubs
             </h2>
@@ -1028,49 +1082,55 @@ export default function Contact() {
             {COMPANY_DETAILS.offices.map((off, idx) => {
               const isHQ = off.role.toLowerCase().includes("headquarters");
               return (
-                <div
-                  key={idx}
-                  className={`p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between ${
-                    isHQ
-                      ? "bg-[#F7F8F4] border-[#123C32]/40 shadow-md ring-1 ring-[#123C32]/20"
-                      : "bg-[#F7F8F4] border-[#E2E8E2] hover:border-[#123C32]/30 shadow-xs"
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-2.5">
-                      <div className="flex items-center gap-2">
-                        <Building className="w-4 h-4 text-[#123C32]" />
-                        <h3 className="font-black text-base text-[#123C32] font-heading">
-                          {off.city}
-                        </h3>
+                <ScrollReveal key={idx} delay={idx * 70}>
+                  <div
+                    className={`group relative p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between h-full hover:-translate-y-1 ${
+                      isHQ
+                        ? "bg-[#F7F8F4] border-[#123C32]/40 shadow-md ring-1 ring-[#123C32]/20 hover:border-[#E8A83E] hover:shadow-[0_0_24px_rgba(232,168,62,0.22)]"
+                        : "bg-[#F7F8F4] border-[#E2E8E2] hover:border-[#E8A83E] hover:shadow-[0_0_20px_rgba(232,168,62,0.18)] shadow-xs"
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2.5">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${
+                            isHQ ? "bg-[#123C32] text-[#E8A83E]" : "bg-white border border-[#E2E8E2] text-[#123C32] group-hover:border-[#E8A83E]"
+                          }`}>
+                            <Building className="w-4 h-4" />
+                          </div>
+                          <h3 className="font-black text-base text-[#123C32] font-heading group-hover:text-[#D4952D] transition-colors">
+                            {off.city}
+                          </h3>
+                        </div>
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-tech flex items-center gap-1 ${
+                            isHQ
+                              ? "bg-[#123C32] text-[#E8A83E] shadow-xs"
+                              : "bg-[#E9F0E9] text-[#123C32] group-hover:bg-[#FFFDF7] group-hover:text-[#D4952D]"
+                          }`}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                          <span>{off.role}</span>
+                        </span>
                       </div>
-                      <span
-                        className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-tech ${
-                          isHQ
-                            ? "bg-[#123C32] text-[#E8A83E]"
-                            : "bg-[#E9F0E9] text-[#123C32]"
-                        }`}
-                      >
-                        {off.role}
-                      </span>
+
+                      <p className="text-xs text-[#525D57] leading-relaxed mb-3">
+                        {off.address}
+                      </p>
                     </div>
 
-                    <p className="text-xs text-[#525D57] leading-relaxed mb-3">
-                      {off.address}
-                    </p>
+                    <div className="pt-3 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] font-tech text-[#123C32] font-semibold">
+                      <span className="group-hover:text-[#D4952D] transition-colors">
+                        {isHQ
+                          ? "Design & Executive Hub"
+                          : off.city === "Dewas"
+                          ? "Manufacturing & Testing"
+                          : "Regional EPC Desk"}
+                      </span>
+                      <MapPin className="w-3.5 h-3.5 text-[#E8A83E] group-hover:scale-110 transition-transform" />
+                    </div>
                   </div>
-
-                  <div className="pt-3 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] font-tech text-[#123C32] font-semibold">
-                    <span>
-                      {isHQ
-                        ? "Design & Executive Hub"
-                        : off.city === "Dewas"
-                        ? "Manufacturing & Testing"
-                        : "Regional EPC Desk"}
-                    </span>
-                    <MapPin className="w-3.5 h-3.5 text-[#E8A83E]" />
-                  </div>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>

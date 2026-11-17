@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } f
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollProgressBar from "./components/ScrollProgressBar";
 
 // Pages
 import Home from "./pages/Home";
@@ -53,6 +54,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
+      <ScrollProgressBar />
       <div className="min-h-screen flex flex-col bg-[#F7F8F4] text-[#252A27]">
         {/* Sticky Header Navigation */}
         <Navbar />

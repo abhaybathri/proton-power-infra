@@ -800,7 +800,7 @@ export default function About() {
                 />
 
                 {/* Card Inner Surface */}
-                <div className="relative rounded-[14.5px] bg-white p-5 sm:p-7 lg:p-9 overflow-hidden">
+                <div className="relative rounded-[14.5px] bg-white p-4 sm:p-6 lg:p-8 overflow-hidden">
                   {/* Soft Interior Ambient Glow following cursor */}
                   <div
                     className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 hover:opacity-100 transition-opacity duration-300 z-0"
@@ -811,64 +811,60 @@ export default function About() {
                   />
 
                   {/* Giant Aesthetic Year Watermark */}
-                  <div className="absolute right-4 bottom-2 text-7xl sm:text-9xl font-black font-tech text-[#123C32]/[0.04] pointer-events-none select-none">
+                  <div className="absolute right-4 bottom-2 text-6xl sm:text-8xl lg:text-9xl font-black font-tech text-[#123C32]/[0.04] pointer-events-none select-none">
                     {currentMilestone.year}
                   </div>
 
-                  <div className="relative z-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
-                    {/* Left Column: Heading, Subtitle & Narrative */}
-                    <div className="flex-1 space-y-3">
+                  <div className="relative z-10 flex flex-col md:flex-row md:items-stretch justify-between gap-4 sm:gap-6">
+                    {/* Left Column: Heading, Clean Narrative & Visual Checkpoints */}
+                    <div className="flex-1 space-y-2.5 sm:space-y-3">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="px-3 py-1 rounded-full bg-[#123C32] text-[#E8A83E] text-xs font-bold font-tech uppercase tracking-wider shadow-xs">
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#123C32] text-[#E8A83E] text-[11px] sm:text-xs font-bold font-tech uppercase tracking-wider shadow-xs">
                           Milestone {currentMilestone.year}
                         </span>
-                        <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold font-tech uppercase border ${currentMilestone.pastelTag}`}>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold font-tech uppercase border ${currentMilestone.pastelTag}`}>
                           {currentMilestone.badge}
                         </span>
                       </div>
 
-                      <h3 className="text-xl sm:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                      <h3 className="text-lg sm:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
                         {currentMilestone.title}
                       </h3>
 
-                      <p className="text-xs sm:text-sm font-semibold text-[#123C32] font-heading">
-                        {currentMilestone.subtitle}
-                      </p>
-
-                      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed font-normal">
+                      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed font-normal line-clamp-2 sm:line-clamp-none">
                         {currentMilestone.description}
                       </p>
 
                       {/* Pastel Glowing Checkpoints */}
-                      <div className="pt-2 flex flex-wrap gap-2">
+                      <div className="pt-1 flex flex-wrap gap-1.5 sm:gap-2">
                         {currentMilestone.checkpoints.map((cp, idx) => (
                           <div
                             key={idx}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold font-tech transition-all duration-300 hover:scale-105 hover:shadow-xs cursor-default bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] hover:border-[#E8A83E]/60 hover:text-[#123C32]"
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold font-tech transition-all duration-300 hover:scale-105 hover:shadow-xs cursor-default bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] hover:border-[#E8A83E]/60 hover:text-[#123C32]"
                           >
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
+                            <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#123C32]" />
                             <span>{cp.label}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Right Column: Key Milestone Deliverable Badge */}
-                    <div className="w-full md:w-72 shrink-0 bg-[#F7F8F4] p-4 sm:p-5 rounded-xl border border-[#E2E8E2] flex flex-col justify-between">
+                    {/* Right Column: Key Milestone Deliverable Badge - Compact & Integrated */}
+                    <div className="w-full md:w-64 lg:w-72 shrink-0 bg-[#F7F8F4] p-3 sm:p-4 rounded-xl border border-[#E2E8E2] flex flex-col justify-between space-y-3">
                       <div>
-                        <div className="flex items-center gap-2 mb-2 text-[#123C32]">
-                          <Clock className="w-4 h-4 text-[#E8A83E]" />
-                          <span className="text-xs font-bold uppercase tracking-wider font-tech">
+                        <div className="flex items-center gap-1.5 mb-1.5 text-[#123C32]">
+                          <Clock className="w-3.5 h-3.5 text-[#E8A83E]" />
+                          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider font-tech">
                             Key Realized Impact
                           </span>
                         </div>
-                        <p className="text-xs text-[#202724] font-bold leading-relaxed">
+                        <p className="text-xs text-[#202724] font-bold leading-relaxed line-clamp-3 sm:line-clamp-none">
                           "{currentMilestone.deliverable}"
                         </p>
                       </div>
 
                       {/* Manual Previous / Next Buttons */}
-                      <div className="mt-4 pt-3 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] font-mono text-[#525D57]">
+                      <div className="pt-2 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] font-mono text-[#525D57]">
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
