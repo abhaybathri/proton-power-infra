@@ -269,9 +269,22 @@ const CAPACITY_PLACEHOLDERS = {
 };
 
 // =================================================================
-// Subcomponent: Direct Channel Card with Dynamic Color Glow
+// Subcomponent: Direct Channel Card with Solar Gold Cursor Border Glow
 // =================================================================
-function ContactChannelCard({ icon: Icon, title, description, content, action, actionUrl, isExternal = false, activeTag, glowColor }) {
+function ContactChannelCard({
+  icon: Icon,
+  title,
+  description,
+  children,
+  btnText,
+  btnIcon: BtnIcon,
+  btnUrl,
+  btnClass = "bg-[#123C32] hover:bg-[#1A4D41] text-white",
+  btnIconColor = "text-[#E8A83E]",
+  isExternal = false,
+  activeTag,
+  iconHoverClass = "group-hover:border-[#E8A83E] group-hover:bg-[#FFFDF7] group-hover:text-[#D4952D] group-hover:shadow-[0_0_15px_rgba(232,168,62,0.25)]",
+}) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -288,62 +301,71 @@ function ContactChannelCard({ icon: Icon, title, description, content, action, a
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative rounded-2xl p-[1.5px] transition-all duration-500 ease-out select-none group flex flex-col justify-between"
+      className="relative rounded-2xl p-[1.5px] transition-all duration-300 ease-out select-none group flex flex-col justify-between hover:-translate-y-1.5"
     >
-      {/* Multi-Color Dynamic Glow */}
+      {/* Dynamic Cursor-Responsive Border Glow (Solar Gold / Warm Tech Glow) */}
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
         style={{
           opacity: isHovered ? 1 : 0.35,
           background: isHovered
-            ? `radial-gradient(280px circle at ${mousePos.x}px ${mousePos.y}px, ${glowColor}, transparent 75%)`
-            : `linear-gradient(135deg, rgba(226, 232, 226, 0.8), rgba(247, 248, 244, 0.5))`,
+            ? `radial-gradient(320px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.15) 75%, transparent 100%)`
+            : `linear-gradient(135deg, rgba(226, 232, 226, 0.9), rgba(247, 248, 244, 0.6))`,
         }}
       />
 
-      <div className="relative rounded-[14.5px] bg-white p-5 sm:p-6 flex flex-col justify-between h-full overflow-hidden transition-all duration-300 shadow-xs group-hover:shadow-xl group-hover:shadow-black/5">
+      {/* Inner Card Surface */}
+      <div className="relative rounded-[14.5px] bg-white p-6 sm:p-7 flex flex-col justify-between h-full overflow-hidden transition-all duration-300 shadow-xs group-hover:shadow-2xl group-hover:shadow-black/5">
+        {/* Soft Interior Ambient Glow following cursor */}
+        <div
+          className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+          style={{
+            background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.08), transparent 75%)`,
+          }}
+        />
+
         <div className="relative z-10">
-          <div className="flex items-center justify-between mb-3">
-            <div className="w-11 h-11 rounded-xl bg-[#123C32] text-[#E8A83E] flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-xs">
-              <Icon className="w-5 h-5 stroke-[2.2]" />
+          {/* Header Row: Minimalist Icon + Status Tag */}
+          <div className="flex items-center justify-between mb-4">
+            <div
+              className={`w-12 h-12 rounded-2xl bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] flex items-center justify-center transition-all duration-300 group-hover:scale-105 shadow-xs ${iconHoverClass}`}
+            >
+              <Icon className="w-5 h-5 stroke-[2]" />
             </div>
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#E9F0E9] text-[#123C32] border border-[#123C32]/10">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F7F8F4] text-[#525D57] border border-[#E2E8E2] group-hover:border-[#E8A83E]/40 group-hover:text-[#123C32] transition-colors">
               {activeTag}
             </span>
           </div>
 
-          <h3 className="text-base sm:text-lg font-bold text-[#202724] font-heading mb-1 group-hover:text-[#123C32] transition-colors">
+          <h3 className="text-base sm:text-lg font-bold text-[#202724] font-heading mb-1.5 group-hover:text-[#123C32] transition-colors">
             {title}
           </h3>
-          <p className="text-xs text-[#525D57] mb-3 leading-relaxed">
+          <p className="text-xs text-[#525D57] mb-4 leading-relaxed">
             {description}
           </p>
 
-          <div className="text-xs sm:text-sm font-bold text-[#123C32] font-tech">
-            {content}
+          {/* Details / Content */}
+          <div className="mb-2">
+            {children}
           </div>
         </div>
 
-        <div className="relative z-10 pt-3 mt-4 border-t border-[#E2E8E2]">
-          {actionUrl ? (
-            <a
-              href={actionUrl}
-              target={isExternal ? "_blank" : undefined}
-              rel={isExternal ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#E8A83E] font-tech group/link transition-colors"
-            >
-              <span>{action}</span>
-              {isExternal ? (
-                <ExternalLink className="w-3.5 h-3.5" />
-              ) : (
-                <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
-              )}
-            </a>
-          ) : (
-            <span className="text-xs font-semibold text-[#525D57] font-tech">
-              {action}
-            </span>
-          )}
+        {/* Prominent Action Button */}
+        <div className="relative z-10 pt-4 mt-4 border-t border-[#E2E8E2]">
+          <a
+            href={btnUrl}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            className={`w-full inline-flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 font-tech tracking-wide group/btn cursor-pointer ${btnClass}`}
+          >
+            {BtnIcon && <BtnIcon className={`w-4 h-4 ${btnIconColor}`} />}
+            <span>{btnText}</span>
+            {isExternal ? (
+              <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-0.5 transition-transform ml-auto" />
+            ) : (
+              <ArrowRight className="w-3.5 h-3.5 opacity-80 group-hover/btn:translate-x-1 transition-transform ml-auto" />
+            )}
+          </a>
         </div>
       </div>
     </div>
@@ -603,11 +625,11 @@ export default function Contact() {
       </section>
 
       {/* =========================================================
-          2. DIRECT COMMUNICATIONS CHANNELS (Multi-Color Glowing Cards)
+          2. DIRECT COMMUNICATIONS CHANNELS (3 Minimalist Elegant Cards with Solar Gold Border Glow)
          ========================================================= */}
-      <section className="py-12 md:py-14 bg-white border-b border-[#E2E8E2]">
+      <section className="py-12 md:py-16 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-2">
               Direct Engineering &amp; Commercial Channels
             </h2>
@@ -616,51 +638,68 @@ export default function Contact() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 max-w-6xl mx-auto">
+            {/* Card 1: Telephone Inquiries */}
             <ContactChannelCard
               icon={Phone}
               title="Telephone Inquiries"
               description="Direct support lines for tenders, site surveys & quotations:"
-              content={`${COMPANY_DETAILS.phones[0].display} / ${COMPANY_DETAILS.phones[1].display}`}
-              action="Call Primary Desk"
-              actionUrl={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
               activeTag="2 Lines Active"
-              glowColor="rgba(232, 168, 62, 0.45)" // Gold Glow
-            />
+              btnText="Call Primary Desk"
+              btnIcon={Phone}
+              btnUrl={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
+              btnClass="bg-[#123C32] hover:bg-[#1A4D41] text-white shadow-md shadow-[#123C32]/20"
+              btnIconColor="text-[#E8A83E]"
+            >
+              <div className="space-y-1.5">
+                <div className="text-xs sm:text-sm font-bold text-[#123C32] font-tech flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                  <span>{COMPANY_DETAILS.phones[0].display}</span>
+                </div>
+                <div className="text-xs sm:text-sm font-semibold text-[#525D57] font-tech flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-neutral-300 shrink-0"></span>
+                  <span>{COMPANY_DETAILS.phones[1].display}</span>
+                </div>
+              </div>
+            </ContactChannelCard>
 
+            {/* Card 2: Official Email Desk */}
             <ContactChannelCard
               icon={Mail}
               title="Official Email Desk"
               description="Send architectural drawings, RFP tenders, and Single-Line Diagrams:"
-              content={COMPANY_DETAILS.email}
-              action="Send Email"
-              actionUrl={`mailto:${COMPANY_DETAILS.email}`}
               activeTag="24h Turnaround"
-              glowColor="rgba(16, 185, 129, 0.45)" // Emerald Glow
-            />
+              btnText="Send Direct Email"
+              btnIcon={Mail}
+              btnUrl={`mailto:${COMPANY_DETAILS.email}`}
+              btnClass="bg-[#123C32] hover:bg-[#1A4D41] text-white shadow-md shadow-[#123C32]/20"
+              btnIconColor="text-[#E8A83E]"
+            >
+              <div className="text-xs sm:text-sm font-bold text-[#123C32] font-tech truncate flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                <span className="truncate">{COMPANY_DETAILS.email}</span>
+              </div>
+            </ContactChannelCard>
 
+            {/* Card 3: Instant WhatsApp Desk */}
             <ContactChannelCard
               icon={MessageSquare}
               title="Instant WhatsApp Desk"
-              description="Fastest channel for site photos, live sharing, and feasibility chats:"
-              content="+91 97707 44687"
-              action="Open WhatsApp Chat"
-              actionUrl={COMPANY_DETAILS.whatsappUrl}
+              description="Fastest channel for site photos, rooftop videos, and feasibility chats:"
+              activeTag="Instant Chat"
+              btnText="Open WhatsApp Chat"
+              btnIcon={MessageSquare}
+              btnUrl={COMPANY_DETAILS.whatsappUrl}
               isExternal={true}
-              activeTag="Instant Messaging"
-              glowColor="rgba(37, 211, 102, 0.45)" // Green Glow
-            />
-
-            <ContactChannelCard
-              icon={Clock}
-              title="Operating Hours"
-              description="Technical consultation, plant testing, and visitor timings:"
-              content={`${COMPANY_DETAILS.workingHours} (Sun Closed)`}
-              action="Support Desk Active"
-              actionUrl={null}
-              activeTag="Mon – Sat"
-              glowColor="rgba(14, 165, 233, 0.45)" // Cyan Glow
-            />
+              btnClass="bg-[#25D366] hover:bg-[#20ba59] text-white shadow-md shadow-[#25D366]/25"
+              btnIconColor="text-white fill-white"
+              iconHoverClass="group-hover:border-[#25D366] group-hover:bg-emerald-50/50 group-hover:text-[#25D366] group-hover:shadow-[0_0_15px_rgba(37,211,102,0.25)]"
+            >
+              <div className="text-xs sm:text-sm font-bold text-[#123C32] font-tech flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
+                <span>+91 97707 44687</span>
+              </div>
+            </ContactChannelCard>
           </div>
         </div>
       </section>
