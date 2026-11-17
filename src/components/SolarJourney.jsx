@@ -134,7 +134,7 @@ export default function SolarJourney() {
         {/* Bottom CTA */}
         <div className="mt-12 text-center">
           <Link
-            to="/enquiry"
+            to="/contact#inquiry-form"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-md transition-all"
           >
             <span>Start Step 1: Request Your Free Solar Consultation</span>

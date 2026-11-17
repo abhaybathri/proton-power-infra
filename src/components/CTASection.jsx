@@ -35,7 +35,7 @@ export default function CTASection({
           <ScrollReveal delay={170}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <Link
-                to="/enquiry"
+                to="/contact#inquiry-form"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-md transition-all duration-200 group cursor-pointer font-tech"
               >
                 <span>Request a Free Consultation</span>

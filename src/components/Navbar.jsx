@@ -235,7 +235,7 @@ export default function Navbar() {
           {/* Right Action: Only "Enquiry Now" (Contact number removed as requested) */}
           <div className="hidden lg:flex items-center">
             <Link
-              to="/enquiry"
+              to="/contact#inquiry-form"
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-xs hover:shadow transition-all duration-200 group"
             >
               <span>Enquiry Now</span>
@@ -246,7 +246,7 @@ export default function Navbar() {
           {/* Mobile Right */}
           <div className="flex items-center gap-2 lg:hidden">
             <Link
-              to="/enquiry"
+              to="/contact#inquiry-form"
               className="text-xs font-bold bg-[#123C32] text-white px-3.5 py-2 rounded-lg shadow-xs"
             >
               Enquiry Now
@@ -364,7 +364,7 @@ export default function Navbar() {
 
             <div className="pt-6 border-t border-[#E2E8E2] mt-6">
               <Link
-                to="/enquiry"
+                to="/contact#inquiry-form"
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold bg-[#123C32] text-white shadow-md text-center"
               >

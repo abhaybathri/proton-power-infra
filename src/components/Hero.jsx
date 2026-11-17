@@ -143,7 +143,7 @@ export default function Hero() {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-[#123C32] via-[#E8A83E] to-[#123C32] rounded-2xl blur-md opacity-25 group-hover:opacity-60 transition duration-500 group-hover:scale-105"></div>
                 <Link
-                  to="/enquiry"
+                  to="/contact#inquiry-form"
                   className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-lg shadow-[#123C32]/25 hover:shadow-[0_0_30px_rgba(232,168,62,0.35)] transition-all duration-300 group cursor-pointer font-tech tracking-wide"
                 >
                   <span>Request a Free Consultation</span>

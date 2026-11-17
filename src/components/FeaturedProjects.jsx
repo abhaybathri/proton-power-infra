@@ -112,7 +112,7 @@ export default function FeaturedProjects() {
               {/* Action */}
               <div className="p-6 pt-0">
                 <Link
-                  to={`/enquiry?requirement=${encodeURIComponent(project.title)}`}
+                  to={`/contact?requirement=${encodeURIComponent(project.title)}#inquiry-form`}
                   className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-bold bg-[#F7F8F4] group-hover:bg-[#123C32] text-[#123C32] group-hover:text-white transition-colors"
                 >
                   <span>Inquire for Similar Project</span>

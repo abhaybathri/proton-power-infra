@@ -407,7 +407,7 @@ export default function IndustrialSolar() {
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <Link
-                      to="/enquiry?type=industrial"
+                      to="/contact?type=industrial#inquiry-form"
                       className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
                     >
                       <span>Request Industrial Energy Audit</span>
@@ -763,7 +763,7 @@ export default function IndustrialSolar() {
           <ScrollReveal delay={120}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
               <Link
-                to="/enquiry?type=industrial"
+                to="/contact?type=industrial#inquiry-form"
                 className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
               >
                 <span>Schedule Industrial Energy Audit</span>

@@ -412,7 +412,7 @@ export default function CommercialSolar() {
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <Link
-                      to="/enquiry?type=commercial"
+                      to="/contact?type=commercial#inquiry-form"
                       className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
                     >
                       <span>Request Commercial Feasibility Audit</span>
@@ -768,7 +768,7 @@ export default function CommercialSolar() {
           <ScrollReveal delay={120}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
               <Link
-                to="/enquiry?type=commercial"
+                to="/contact?type=commercial#inquiry-form"
                 className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
               >
                 <span>Schedule Commercial Energy Audit</span>

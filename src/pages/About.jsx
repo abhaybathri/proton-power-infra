@@ -285,7 +285,7 @@ function FlipProjectCard({ project }) {
             </div>
 
             <Link
-              to={`/enquiry?project=${encodeURIComponent(project.title)}`}
+              to={`/contact?project=${encodeURIComponent(project.title)}#inquiry-form`}
               onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#E8A83E] hover:bg-[#D4952D] text-[#123C32] font-bold text-xs font-tech transition-colors shadow-sm cursor-pointer shrink-0"
             >
@@ -1008,7 +1008,7 @@ export default function About() {
               <span>All 6 Executed Assets Commissioned &amp; Synchronized with DISCOM / State Grids</span>
             </div>
             <Link
-              to="/enquiry"
+              to="/contact#inquiry-form"
               className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#E8A83E] transition-colors"
             >
               <span>Need custom techno-commercial design? Inquire with our engineers</span>
@@ -1037,7 +1037,7 @@ export default function About() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
-              to="/enquiry"
+              to="/contact#inquiry-form"
               className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
             >
               <span>Schedule Project Consultation</span>

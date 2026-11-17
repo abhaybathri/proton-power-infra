@@ -107,7 +107,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/enquiry" className="hover:text-white transition-colors">
+                <Link to="/contact#inquiry-form" className="hover:text-white transition-colors">
                   Request a Quote
                 </Link>
               </li>

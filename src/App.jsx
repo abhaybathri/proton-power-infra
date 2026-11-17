@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -11,11 +11,16 @@ import CommercialSolar from "./pages/CommercialSolar";
 import IndustrialSolar from "./pages/IndustrialSolar";
 import PowerTransformers from "./pages/PowerTransformers";
 import SolarEPCServices from "./pages/SolarEPCServices";
-import Enquiry from "./pages/Enquiry";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
+
+// Redirect legacy /enquiry route to integrated /contact portal
+function EnquiryRedirect() {
+  const location = useLocation();
+  return <Navigate to={`/contact${location.search}${location.hash || "#inquiry-form"}`} replace />;
+}
 
 // 404 Not Found Page Component
 function NotFound() {
@@ -62,7 +67,7 @@ export default function App() {
             <Route path="/industrial-solar" element={<IndustrialSolar />} />
             <Route path="/power-transformers" element={<PowerTransformers />} />
             <Route path="/solar-epc-services" element={<SolarEPCServices />} />
-            <Route path="/enquiry" element={<Enquiry />} />
+            <Route path="/enquiry" element={<EnquiryRedirect />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

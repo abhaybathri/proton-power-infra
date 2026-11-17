@@ -217,7 +217,7 @@ export default function SustainabilityImpact() {
 
                 {/* Inquire Action Button */}
                 <Link
-                  to={`/enquiry?type=${consumerType}&bill=${monthlyBill}&capacity=${recommendedKW}`}
+                  to={`/contact?type=${consumerType}&bill=${monthlyBill}&capacity=${recommendedKW}#inquiry-form`}
                   className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] font-bold text-sm transition-colors shadow-md font-tech"
                 >
                   <span>Request Detailed Engineering Feasibility</span>
