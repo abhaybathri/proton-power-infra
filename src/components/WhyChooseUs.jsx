@@ -35,9 +35,9 @@ function PillarCard({ pillar, index }) {
       <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ring-1 ring-inset ring-[#E8A83E]/40 z-0" />
 
       {/* Architectural Watermark in Background */}
-      <div className="absolute -bottom-2 -right-1 font-tech font-black text-4xl text-[#123C32]/[0.03] group-hover:text-[#E8A83E]/12 pointer-events-none transition-colors select-none z-0">
+      {/* <div className="absolute -bottom-2 -right-1 font-tech font-black text-4xl text-[#123C32]/[0.03] group-hover:text-[#E8A83E]/12 pointer-events-none transition-colors select-none z-0">
         0{index + 1}
-      </div>
+      </div> */}
 
       <div className="relative z-10">
         {/* Top: Radiant Glowing Icon & High-Contrast Stat Tag */}
@@ -56,7 +56,7 @@ function PillarCard({ pillar, index }) {
           {pillar.title}
         </h3>
 
-        <p className="text-[11px] sm:text-xs text-[#525D57] group-hover:text-[#25322B] leading-relaxed transition-colors">
+        <p className="text-[11px] sm:text-xs text-[#525D57] group-hover:text-[#25322B] leading-relaxed transition-colors text-justify-clean">
           {pillar.desc}
         </p>
       </div>
@@ -134,10 +134,10 @@ export default function WhyChooseUs() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-5 sm:mb-6 gap-3">
           <div className="max-w-2xl">
             <ScrollReveal delay={0}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
+              {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
                 <span>Why Choose Proton Power Infra</span>
-              </div>
+              </div> */}
             </ScrollReveal>
 
             <ScrollReveal delay={70}>

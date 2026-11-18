@@ -36,22 +36,22 @@ export default function SustainabilityImpact() {
             <ScrollReveal delay={80} className="h-full flex flex-col">
               <div className="group relative h-full p-6 sm:p-8 rounded-2xl bg-[#202724]/85 backdrop-blur-md border border-white/10 hover:border-[#E8A83E]/50 shadow-2xl hover:shadow-[0_0_30px_rgba(232,168,62,0.12)] transition-all duration-500 flex flex-col justify-between space-y-6">
                 {/* Top Section: Eyebrow, Heading & Narrative */}
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/30 font-tech">
+                <div className="space-y-6">
+                  {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8A83E]/20 text-[#E8A83E] text-xs font-bold tracking-wider uppercase border border-[#E8A83E]/30 font-tech">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Solar Feasibility & Yield Planning</span>
-                  </div>
+                  </div> */}
 
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-tight font-heading">
                     Every Sunlight Hour <br />
                     <span className="text-[#E8A83E]">Is an Opportunity.</span>
                   </h2>
 
-                  <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-[#E9F0E9]/85 leading-relaxed font-normal text-justify-clean">
                     Accelerating India’s transition to clean distributed energy requires more than panel installation—it demands precision engineering that guarantees 25 years of steady decarbonization.
                   </p>
 
-                  <p className="text-xs sm:text-sm text-[#E9F0E9]/75 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#E9F0E9]/75 leading-relaxed text-justify-clean">
                     By replacing coal-reliant grid energy with on-site solar generation, every kilowatt installed acts as a permanent hedge against grid tariff inflation while directly shrinking enterprise carbon footprints.
                   </p>
                 </div>
@@ -111,8 +111,8 @@ export default function SustainabilityImpact() {
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#123C32] border border-[#E8A83E]/30 text-[#E8A83E] flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform">
-                      <Sun className="w-5 h-5 text-[#E8A83E]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#123C32] border border-[#E8A83E]/30 text-[#E8A83E] flex items-center justify-center shrink-0 shadow-inner group-hover:bg-gradient-to-br group-hover:from-amber-400 group-hover:to-amber-500 group-hover:text-[#202724] group-hover:border-amber-300 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(232,168,62,0.6)] transition-all duration-300">
+                      <Sun className="w-5 h-5 text-[#E8A83E] group-hover:text-[#202724] transition-colors" />
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-white font-heading">
@@ -123,8 +123,8 @@ export default function SustainabilityImpact() {
                       </p>
                     </div>
                   </div>
-                  <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-[#E8A83E]/20 border border-[#E8A83E]/40 text-[#E8A83E] font-tech flex items-center gap-1 shadow-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] animate-pulse"></span>
+                  <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-[#E8A83E]/20 border border-[#E8A83E]/40 text-[#E8A83E] font-tech flex items-center gap-1 shadow-xs group-hover:bg-[#E8A83E] group-hover:text-[#202724] group-hover:border-[#E8A83E] group-hover:shadow-[0_0_15px_rgba(232,168,62,0.5)] transition-all duration-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] group-hover:bg-[#202724] animate-pulse"></span>
                     <span>Interactive</span>
                   </span>
                 </div>
@@ -148,7 +148,7 @@ export default function SustainabilityImpact() {
                           consumerType === tab.id
                             ? "bg-[#E8A83E] text-[#202724] border-[#E8A83E] shadow-[0_0_12px_rgba(232,168,62,0.35)] scale-[1.02]"
                             : "bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:border-white/20 hover:text-white"
-                        }`}
+                        } hover:border-[#E8A83E]/50  hover:shadow-[0_0_15px_rgba(232,168,62,0.15)] hover:-translate-y-0.5  hover:border-[#E8A83E] transition-all duration-300`}
                       >
                         {tab.label}
                       </button>
@@ -183,29 +183,29 @@ export default function SustainabilityImpact() {
 
                 {/* Real-time Calculation Cards with Hover Glow */}
                 <div className="grid grid-cols-2 gap-3 pt-1 font-tech">
-                  <div className="group/calc p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#E8A83E]/50 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(232,168,62,0.15)] hover:-translate-y-0.5 transition-all duration-300">
-                    <div className="text-[11px] text-[#E9F0E9]/70 flex items-center gap-1">
-                      <Zap className="w-3.5 h-3.5 text-[#E8A83E] group-hover/calc:scale-110 transition-transform" />
+                  <div className="group/calc p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#E8A83E]/70 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(232,168,62,0.25)] hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="text-[11px] text-[#E9F0E9]/70 flex items-center gap-1 group-hover/calc:text-white transition-colors">
+                      <Zap className="w-3.5 h-3.5 text-[#E8A83E] group-hover/calc:text-amber-300 group-hover/calc:scale-115 group-hover/calc:drop-shadow-[0_0_8px_rgba(232,168,62,0.85)] transition-all" />
                       <span>Recommended Capacity</span>
                     </div>
                     <div className="text-xl font-bold text-white mt-1">
-                      {recommendedKW} <span className="text-xs font-normal text-[#E8A83E]">kWp</span>
+                      {recommendedKW} <span className="text-xs font-normal text-[#E8A83E] group-hover/calc:text-amber-300 group-hover/calc:drop-shadow-[0_0_6px_rgba(232,168,62,0.7)] transition-all">kWp</span>
                     </div>
                   </div>
 
-                  <div className="group/calc p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#E8A83E]/50 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(232,168,62,0.15)] hover:-translate-y-0.5 transition-all duration-300">
-                    <div className="text-[11px] text-[#E9F0E9]/70 flex items-center gap-1">
-                      <TrendingDown className="w-3.5 h-3.5 text-[#E8A83E] group-hover/calc:scale-110 transition-transform" />
+                  <div className="group/calc p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#E8A83E]/70 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(232,168,62,0.25)] hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="text-[11px] text-[#E9F0E9]/70 flex items-center gap-1 group-hover/calc:text-white transition-colors">
+                      <TrendingDown className="w-3.5 h-3.5 text-[#E8A83E] group-hover/calc:text-amber-300 group-hover/calc:scale-115 group-hover/calc:drop-shadow-[0_0_8px_rgba(232,168,62,0.85)] transition-all" />
                       <span>Est. Annual Savings</span>
                     </div>
-                    <div className="text-xl font-bold text-[#E8A83E] mt-1">
+                    <div className="text-xl font-bold text-[#E8A83E] group-hover/calc:text-amber-300 group-hover/calc:drop-shadow-[0_0_8px_rgba(232,168,62,0.6)] mt-1 transition-all">
                       ₹{annualSavings.toLocaleString("en-IN")}
                     </div>
                   </div>
 
-                  <div className="group/carbon col-span-2 p-3.5 rounded-xl bg-[#123C32]/90 border border-emerald-500/30 hover:border-[#E8A83E]/60 hover:shadow-[0_0_20px_rgba(232,168,62,0.18)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between">
+                  <div className="group/carbon col-span-2 p-3.5 rounded-xl bg-[#123C32]/90 border border-emerald-500/30 hover:border-[#E8A83E]/70 hover:shadow-[0_0_22px_rgba(232,168,62,0.25)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Leaf className="w-4 h-4 text-[#E8A83E] group-hover/carbon:scale-110 transition-transform" />
+                      <Leaf className="w-4 h-4 text-[#E8A83E] group-hover/carbon:text-amber-300 group-hover/carbon:scale-115 group-hover/carbon:drop-shadow-[0_0_8px_rgba(232,168,62,0.85)] transition-all" />
                       <div>
                         <div className="text-xs font-bold text-white font-heading">
                           Carbon Abatement
@@ -215,19 +215,19 @@ export default function SustainabilityImpact() {
                         </div>
                       </div>
                     </div>
-                    <div className="text-sm font-black text-[#E8A83E] font-tech">
+                    <div className="text-sm font-black text-[#E8A83E] group-hover/carbon:text-amber-300 group-hover/carbon:drop-shadow-[0_0_8px_rgba(232,168,62,0.6)] font-tech transition-all">
                       ~{annualCO2Tons} Tonnes / Yr
                     </div>
                   </div>
                 </div>
 
-                {/* Inquire Action Button with Single Glowing Amber Gradient */}
+                {/* Inquire Action Button with Glowing Border & Gradient Halo */}
                 <div className="pt-1">
                   <div className="relative group/btn w-full">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-md opacity-35 group-hover/btn:opacity-85 transition duration-500 group-hover/btn:scale-105 pointer-events-none"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-md opacity-40 group-hover/btn:opacity-90 transition duration-500 group-hover/btn:scale-105 pointer-events-none"></div>
                     <Link
                       to={`/contact?type=${consumerType}&bill=${monthlyBill}&capacity=${recommendedKW}#inquiry-form`}
-                      className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] font-bold text-sm shadow-lg shadow-black/15 transition-all duration-300 font-tech cursor-pointer tracking-wide"
+                      className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#E8A83E] via-[#F3B74F] to-[#D4952D] hover:from-[#F0B34A] hover:to-[#E8A83E] text-[#202724] font-bold text-sm border-2 border-amber-300/80 hover:border-white/90 shadow-[0_0_20px_rgba(232,168,62,0.35)] hover:shadow-[0_0_30px_rgba(232,168,62,0.6)] transition-all duration-300 font-tech cursor-pointer tracking-wide"
                     >
                       <span>Request Detailed Engineering Feasibility</span>
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1.5 transition-transform duration-200" />

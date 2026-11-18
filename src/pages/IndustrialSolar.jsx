@@ -93,7 +93,7 @@ function IndustrialBenefitCard({
             background: isActive
               ? `radial-gradient(160px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.20), transparent 70%)`
               : `radial-gradient(160px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.12), transparent 70%)`,
-          }}
+          }} 
         />
 
         {/* Top Group: Icon + Heading + Subheading (Strictly Centered) */}
@@ -146,14 +146,14 @@ function IndustrialBenefitCard({
           </div>
 
           {/* Description */}
-          <p className="text-[11px] sm:text-xs text-[#E9F0E9]/90 leading-snug text-center w-full px-1 line-clamp-2 mb-1.5">
+          <p className="text-[11px] sm:text-xs text-[#E9F0E9]/90 leading-snug text-center w-full px-1 line-clamp-2 mb-1.5 lg:mb-3">
             {benefit.desc}
           </p>
 
           {/* Milestone Highlight */}
           <div className="pt-1.5 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full truncate">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
-            <span className="truncate">{benefit.highlight}</span>
+            <CheckCircle2 className="lg:mt-2 lg:mb-1 w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+            <span className="truncate lg:mt-2 lg:mb-1">{benefit.highlight}</span>
           </div>
         </div>
 
@@ -165,7 +165,7 @@ function IndustrialBenefitCard({
               : "opacity-100 translate-y-0 max-h-10 mt-2"
           }`}
         >
-          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/20 group-hover:border-[#E8A83E]/40 group-hover:text-[#9A6208] group-hover:shadow-[0_0_10px_rgba(232,168,62,0.2)] transition-all truncate max-w-full">
+          <span className="px-2.5 py-0.5 sm:py-1 rounded-full bg-[#123C32]/5 border border-[#123C32]/10 text-[10px] font-tech font-bold text-[#123C32] group-hover:bg-[#E8A83E]/20 group-hover:border-[#E8A83E]/40 group-hover:text-[#9A6208] group-hover:shadow-[0_0_10px_rgba(232,168,62,0.2)] transition-all truncate max-w-full ">
             {benefit.stat}
           </span>
         </div>
@@ -730,7 +730,7 @@ export default function IndustrialSolar() {
                       </div>
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#525D57] leading-relaxed border-t border-[#E2E8E2]/60">
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#525D57] leading-relaxed border-t border-[#E2E8E2]/60 text-justify-clean">
                         {faq.a}
                       </div>
                     )}

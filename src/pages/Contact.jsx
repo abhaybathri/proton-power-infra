@@ -251,7 +251,7 @@ function EnquiryPortalContainer({ children }) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative rounded-3xl p-[1.5px] transition-all duration-300 select-none max-w-4xl mx-auto shadow-2xl shadow-black/5"
+      className="relative rounded-3xl p-[1px] transition-all duration-300 select-none max-w-4xl mx-auto shadow-2xl shadow-black/5"
     >
       {/* Dynamic Cursor-Responsive Border Glow (Solar Gold / Warm Tech Glow) */}
       <div
@@ -434,8 +434,8 @@ export default function Contact() {
             <div className="flex flex-col h-full w-full justify-center">
               <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[34px] xl:text-[38px] font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
-                  Connect with Our Engineers &amp; <br />
+                <h1 className="text-3xl sm:text-4xl lg:text-[34px] xl:text-[38px] font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg lg:max-w-xl">
+                  <span className="lg:whitespace-nowrap">Connect with Our Engineers &amp;</span> <br />
                   <span className="text-[#E8A83E] relative inline-block">
                     Techno-Commercial Portal.
                     <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
@@ -711,7 +711,7 @@ export default function Contact() {
           3. RECREATED TECHNO-COMMERCIAL ENQUIRY & PROPOSAL PORTAL
              (Simple, Elegant, Unified Container with Solar Gold Border Glow)
          ========================================================= */}
-      <section id="inquiry-form" className="py-12 md:py-16 bg-[#F7F8F4] border-b border-[#E2E8E2] scroll-mt-20 relative overflow-hidden">
+      <section id="inquiry-form" className="py-8 md:py-10 bg-[#F7F8F4] border-b border-[#E2E8E2] scroll-mt-20 relative overflow-hidden">
         {/* Soft Ambient Background Lighting */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -719,29 +719,24 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <EnquiryPortalContainer>
             {/* Header inside the form */}
-            <div className="border-b border-[#E2E8E2] pb-6 mb-7 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="border-b border-[#E2E8E2] pb-3 mb-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] text-xs font-bold font-tech uppercase tracking-wider mb-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-                  <span>Techno-Commercial Portal</span>
-                </div>
+                
                 <h2 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight leading-tight">
                   Request Project Proposal &amp; Feasibility
                 </h2>
-                <p className="text-xs sm:text-sm text-[#525D57] mt-1 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#525D57] mt-1 leading-relaxed text-justify-clean">
                   Fill in your parameters below. Our engineering desk will review technical feasibility and contact you within 24 business hours.
                 </p>
               </div>
 
-              <div className="hidden sm:flex flex-col items-end shrink-0">
+              {/* <div className="hidden sm:flex flex-col items-end shrink-0">
                 <span className="text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-2xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                   Response &lt; 24h
                 </span>
-                <span className="text-[10px] text-[#525D57] font-tech mt-1">
-                  Complimentary Feasibility Audit
-                </span>
-              </div>
+                
+              </div> */}
             </div>
 
             {submitted ? (

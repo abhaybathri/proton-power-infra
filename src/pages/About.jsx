@@ -86,7 +86,7 @@ function PillarCard({ icon: Icon, badge, badgeColor, title, description, metric 
           <h3 className="text-lg sm:text-xl font-bold text-[#202724] font-heading mb-2 leading-snug group-hover:text-[#123C32] transition-colors">
             {title}
           </h3>
-          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed text-justify-clean">
             {description}
           </p>
         </div>
@@ -118,7 +118,7 @@ function FlipProjectCard({ project }) {
 
   return (
     <div
-      className="group relative h-[380px] sm:h-[400px] w-full [perspective:1200px] cursor-pointer"
+      className="group relative h-[330px] sm:h-[350px] w-full [perspective:1200px] cursor-pointer"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => {
         setIsHovered(true);
@@ -143,7 +143,7 @@ function FlipProjectCard({ project }) {
             FRONT FACE (Only Image + Heading + Subheading)
            ========================================================= */}
         <div
-          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-md group-hover:shadow-2xl border-2 border-white/80 bg-neutral-900 flex flex-col justify-end"
+          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-md group-hover:shadow-2xl border-2 border-white/80 bg-[#0D2B24] flex flex-col justify-end"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -158,7 +158,7 @@ function FlipProjectCard({ project }) {
           />
 
           {/* Vignette Gradient for Crisp Contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D2B24]/95 via-[#0D2B24]/40 to-transparent pointer-events-none"></div>
 
           {/* Dynamic Cursor-Responsive Ambient Border Glow on Front */}
           <div
@@ -171,39 +171,37 @@ function FlipProjectCard({ project }) {
             }}
           />
 
-          {/* Top Status & Hover Hint */}
-          <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20 pointer-events-none">
+          {/* Top Status Badge */}
+          <div className="absolute top-3.5 left-3.5 z-20 pointer-events-none">
             <span className="px-2.5 py-1 rounded-md bg-[#123C32]/90 backdrop-blur-md text-[#E8A83E] text-[10px] font-bold font-tech uppercase tracking-wider border border-white/10 shadow-sm">
               {project.category}
             </span>
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white/90 text-[10px] font-mono border border-white/15">
-              <span>Hover to Flip</span>
-              <span className="text-[#E8A83E]">↻</span>
-            </div>
           </div>
 
-          {/* Bottom Heading & Subheading ONLY */}
-          <div className="relative z-20 p-5 sm:p-6 text-white">
-            <div className="flex items-center gap-2 mb-1.5">
+          {/* Bottom Heading & Subheading (Universal Height for Identical Framing) */}
+          <div className="relative z-20 p-4 sm:p-5 text-white">
+            <div className="flex items-center gap-2 mb-1">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider">
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider">
                 {project.capacity}
               </span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-black font-heading text-white tracking-tight leading-tight mb-1">
-              {project.title}
-            </h3>
-            <p className="text-xs sm:text-sm text-[#E9F0E9]/80 font-medium line-clamp-1">
+            <div className="min-h-[2.8rem] sm:min-h-[3.2rem] flex items-center mb-1">
+              <h3 className="text-lg sm:text-xl font-black font-heading text-white tracking-tight leading-snug line-clamp-2">
+                {project.title}
+              </h3>
+            </div>
+            <p className="text-xs sm:text-sm text-[#E9F0E9]/80 font-medium line-clamp-1 truncate">
               {project.subheading}
             </p>
           </div>
         </div>
 
         {/* =========================================================
-            BACK FACE (Flipped: Remaining Details, Less Text, High Visualization)
+            BACK FACE (Flipped: Compact 4 Sub-Cards, No Empty Space)
            ========================================================= */}
         <div
-          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-[#E8A83E]/70 bg-[#123C32] text-white p-5 sm:p-6 flex flex-col justify-between"
+          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-[#E8A83E]/70 bg-[#123C32] text-white p-4 sm:p-5 flex flex-col justify-between"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -220,8 +218,8 @@ function FlipProjectCard({ project }) {
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
 
           {/* Back Top: Category & Title */}
-          <div className="relative z-10 border-b border-white/15 pb-2.5">
-            <div className="flex items-center justify-between mb-1.5">
+          <div className="relative z-10 border-b border-white/15 pb-2">
+            <div className="flex items-center justify-between mb-1">
               <span className="px-2.5 py-0.5 rounded-full bg-[#E8A83E] text-[#123C32] text-[10px] font-black font-tech uppercase tracking-wider">
                 {project.category}
               </span>
@@ -229,56 +227,56 @@ function FlipProjectCard({ project }) {
                 Asset ID: {project.id}
               </span>
             </div>
-            <h4 className="text-base sm:text-lg font-black font-heading text-white leading-snug line-clamp-1">
+            <h4 className="text-sm sm:text-base font-black font-heading text-white leading-snug line-clamp-1">
               {project.title}
             </h4>
           </div>
 
           {/* Back Middle: 4 High-Impact Visual Metric Cards */}
-          <div className="relative z-10 grid grid-cols-2 gap-2.5 py-1">
-            <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
+          <div className="relative z-10 grid grid-cols-2 gap-2 my-auto">
+            <div className="p-2 sm:p-2.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
               <div className="flex items-center gap-1.5 text-[#E8A83E] text-[10px] font-bold font-tech uppercase">
                 <Zap className="w-3.5 h-3.5" />
                 <span>Grid Evacuation</span>
               </div>
-              <span className="text-xs font-bold text-white mt-1 leading-tight">
+              <span className="text-xs font-bold text-white mt-1 leading-tight truncate">
                 {project.specs.grid}
               </span>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
+            <div className="p-2 sm:p-2.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
               <div className="flex items-center gap-1.5 text-[#E8A83E] text-[10px] font-bold font-tech uppercase">
                 <Cpu className="w-3.5 h-3.5" />
                 <span>Substation Unit</span>
               </div>
-              <span className="text-xs font-bold text-white mt-1 leading-tight">
+              <span className="text-xs font-bold text-white mt-1 leading-tight truncate">
                 {project.specs.transformer}
               </span>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
+            <div className="p-2 sm:p-2.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
               <div className="flex items-center gap-1.5 text-[#E8A83E] text-[10px] font-bold font-tech uppercase">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Mounting System</span>
               </div>
-              <span className="text-xs font-bold text-white mt-1 leading-tight">
+              <span className="text-xs font-bold text-white mt-1 leading-tight truncate">
                 {project.specs.structure}
               </span>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
+            <div className="p-2 sm:p-2.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 flex flex-col justify-between">
               <div className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-bold font-tech uppercase">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>CO₂ Abatement</span>
               </div>
-              <span className="text-xs font-bold text-emerald-300 mt-1 leading-tight">
+              <span className="text-xs font-bold text-emerald-300 mt-1 leading-tight truncate">
                 {project.specs.carbon}
               </span>
             </div>
           </div>
 
           {/* Back Bottom: Live Status + Consultation Action Button */}
-          <div className="relative z-10 pt-2.5 border-t border-white/15 flex items-center justify-between gap-3">
+          <div className="relative z-10 pt-2 border-t border-white/15 flex items-center justify-between gap-3">
             <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#E9F0E9]/80 truncate">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
               <span className="truncate">{project.status}</span>
@@ -287,10 +285,10 @@ function FlipProjectCard({ project }) {
             <Link
               to={`/contact?project=${encodeURIComponent(project.title)}#inquiry-form`}
               onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#E8A83E] hover:bg-[#D4952D] text-[#123C32] font-bold text-xs font-tech transition-colors shadow-sm cursor-pointer shrink-0"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E8A83E] hover:bg-[#D4952D] text-[#123C32] font-bold text-xs font-tech transition-colors shadow-sm cursor-pointer shrink-0"
             >
               <span>Enquire Spec</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
         </div>
@@ -688,44 +686,11 @@ export default function About() {
               Top Bar: Minimal Header & Dynamic Progress Indicator
              ========================================================= */}
           <div className="max-w-6xl mx-auto w-full relative z-10">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-[#E2E8E2]">
-              {/* Left Brand Badge */}
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold font-tech uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-                  <span>Our Corporate Story</span>
-                </span>
-                <span className="text-xs font-mono font-bold text-[#525D57]">
-                  {activeStage === 0 ? "Timeline Introduction" : `Stage 0${activeStage} of 04`}
-                </span>
-              </div>
-
-              {/* Right Stage Selector Buttons */}
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                {milestones.map((m, idx) => {
-                  const stageNum = idx + 1;
-                  const isCurrent = activeStage === stageNum;
-                  const isPassed = activeStage > stageNum;
-
-                  return (
-                    <button
-                      key={m.year}
-                      type="button"
-                      onClick={() => scrollToStage(stageNum)}
-                      className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-tech font-bold transition-all duration-300 cursor-pointer ${
-                        isCurrent
-                          ? "bg-[#123C32] text-[#E8A83E] shadow-sm ring-1 ring-[#E8A83E]"
-                          : isPassed
-                          ? "bg-[#E9F0E9] text-[#123C32] hover:bg-[#123C32]/10"
-                          : "bg-neutral-100 text-[#525D57] hover:bg-neutral-200"
-                      }`}
-                      aria-label={`Jump to Milestone ${m.year}`}
-                    >
-                      <span>{m.year}</span>
-                    </button>
-                  );
-                })}
-              </div>
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#E2E8E2]">
+              {/* Clean Small Heading */}
+              <h3 className="text-sm sm:text-base font-bold text-[#123C32] font-heading tracking-tight">
+                Our Corporate Story
+              </h3>
             </div>
 
             {/* Glowing Scroll Progress Bar */}
@@ -815,61 +780,20 @@ export default function About() {
                     {currentMilestone.year}
                   </div>
 
-                  <div className="relative z-10 flex flex-col md:flex-row md:items-stretch justify-between gap-4 sm:gap-6">
-                    {/* Left Column: Heading, Clean Narrative & Visual Checkpoints */}
-                    <div className="flex-1 space-y-2.5 sm:space-y-3">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full bg-[#123C32] text-[#E8A83E] text-[11px] sm:text-xs font-bold font-tech uppercase tracking-wider shadow-xs">
-                          Milestone {currentMilestone.year}
-                        </span>
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold font-tech uppercase border ${currentMilestone.pastelTag}`}>
-                          {currentMilestone.badge}
-                        </span>
-                      </div>
+                  <div className="relative z-10 space-y-3">
+                    {/* Header Row: Badge & Navigation Controls */}
+                    <div className="flex items-center justify-between gap-3">
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold font-tech uppercase border ${currentMilestone.pastelTag}`}>
+                        {currentMilestone.badge}
+                      </span>
 
-                      <h3 className="text-lg sm:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
-                        {currentMilestone.title}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed font-normal line-clamp-2 sm:line-clamp-none">
-                        {currentMilestone.description}
-                      </p>
-
-                      {/* Pastel Glowing Checkpoints */}
-                      <div className="pt-1 flex flex-wrap gap-1.5 sm:gap-2">
-                        {currentMilestone.checkpoints.map((cp, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold font-tech transition-all duration-300 hover:scale-105 hover:shadow-xs cursor-default bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] hover:border-[#E8A83E]/60 hover:text-[#123C32]"
-                          >
-                            <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#123C32]" />
-                            <span>{cp.label}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Right Column: Key Milestone Deliverable Badge - Compact & Integrated */}
-                    <div className="w-full md:w-64 lg:w-72 shrink-0 bg-[#F7F8F4] p-3 sm:p-4 rounded-xl border border-[#E2E8E2] flex flex-col justify-between space-y-3">
-                      <div>
-                        <div className="flex items-center gap-1.5 mb-1.5 text-[#123C32]">
-                          <Clock className="w-3.5 h-3.5 text-[#E8A83E]" />
-                          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider font-tech">
-                            Key Realized Impact
-                          </span>
-                        </div>
-                        <p className="text-xs text-[#202724] font-bold leading-relaxed line-clamp-3 sm:line-clamp-none">
-                          "{currentMilestone.deliverable}"
-                        </p>
-                      </div>
-
-                      {/* Manual Previous / Next Buttons */}
-                      <div className="pt-2 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] font-mono text-[#525D57]">
+                      {/* Manual Previous / Next Buttons & Dots */}
+                      <div className="flex items-center gap-2">
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
                             onClick={() => scrollToStage(Math.max(activeStage - 1, 0))}
-                            className="p-1 rounded bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors cursor-pointer"
+                            className="p-1 rounded bg-[#F7F8F4] border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors cursor-pointer text-[#525D57]"
                             aria-label="Previous Milestone"
                           >
                             <ChevronLeft className="w-3.5 h-3.5" />
@@ -877,7 +801,7 @@ export default function About() {
                           <button
                             type="button"
                             onClick={() => scrollToStage(Math.min(activeStage + 1, 4))}
-                            className="p-1 rounded bg-white border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors cursor-pointer"
+                            className="p-1 rounded bg-[#F7F8F4] border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors cursor-pointer text-[#525D57]"
                             aria-label="Next Milestone"
                           >
                             <ChevronRight className="w-3.5 h-3.5" />
@@ -888,13 +812,34 @@ export default function About() {
                           {milestones.map((_, i) => (
                             <span
                               key={i}
-                              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                                activeStage - 1 === i ? "w-4 bg-[#123C32]" : "bg-[#123C32]/20"
+                              className={`h-1.5 rounded-full transition-all duration-300 ${
+                                activeStage - 1 === i ? "w-4 bg-[#123C32]" : "w-1.5 bg-[#123C32]/20"
                               }`}
                             />
                           ))}
                         </div>
                       </div>
+                    </div>
+
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                      {currentMilestone.title}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed font-normal text-justify-clean">
+                      {currentMilestone.description}
+                    </p>
+
+                    {/* Pastel Glowing Checkpoints */}
+                    <div className="pt-2 flex flex-wrap gap-2">
+                      {currentMilestone.checkpoints.map((cp, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold font-tech transition-all duration-300 hover:scale-105 hover:shadow-xs cursor-default bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] hover:border-[#E8A83E]/60 hover:text-[#123C32]"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
+                          <span>{cp.label}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -999,10 +944,10 @@ export default function About() {
 
           {/* Bottom Summary Strip */}
           <div className="mt-10 p-4 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-tech text-[#525D57]">
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span>All 6 Executed Assets Commissioned &amp; Synchronized with DISCOM / State Grids</span>
-            </div>
+            </div> */}
             <Link
               to="/contact#inquiry-form"
               className="inline-flex items-center gap-1.5 text-xs font-bold text-[#123C32] hover:text-[#E8A83E] transition-colors"
@@ -1018,11 +963,11 @@ export default function About() {
           5. SECTION FIVE: CONSULTATION CTA BANNER (Standardized
              #123C32 Banner with Radial Tech Glow & Dual Action Buttons)
          ========================================================= */}
-      <section className="py-12 md:py-16 bg-[#123C32] text-white relative overflow-hidden">
+      <section className="py-8 md:py-10 bg-[#123C32] text-white relative overflow-hidden">
         {/* Subtle radial glow */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight font-heading mb-3">
             Partner with Proton Power Infra for Your Energy Transition
           </h2>

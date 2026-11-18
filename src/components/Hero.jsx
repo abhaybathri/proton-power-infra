@@ -57,7 +57,7 @@ export default function Hero() {
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
 
-  const SLIDE_DURATION = 3500; // ms per slide
+  const SLIDE_DURATION = 3000; // ms per slide
 
   // Auto-advance slider with pause on hover
   useEffect(() => {

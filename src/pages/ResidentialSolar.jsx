@@ -157,9 +157,9 @@ function BenefitCard({
           </p>
 
           {/* Milestone Highlight */}
-          <div className="pt-1.5 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full truncate">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
-            <span className="truncate">{benefit.highlight}</span>
+          <div className="pt-1.5 mt-1 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full truncate">
+            <CheckCircle2 className=" lg:lg:mt-2 mb-1 w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+            <span className="truncate lg:mt-2 lg:mb-1">{benefit.highlight}</span>
           </div>
         </div>
 
@@ -731,7 +731,7 @@ export default function ResidentialSolar() {
                       </div>
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#525D57] leading-relaxed border-t border-[#E2E8E2]/60">
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#525D57] leading-relaxed border-t border-[#E2E8E2]/60 text-justify-clean">
                         {faq.a}
                       </div>
                     )}
