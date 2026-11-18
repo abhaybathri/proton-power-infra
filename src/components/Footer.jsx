@@ -197,7 +197,7 @@ export default function Footer() {
 
               <div className="pl-5 text-[10px] text-[#E9F0E9]/65 space-y-0.5">
                 <div><strong className="text-[#E8A83E]/90">Hubs:</strong> New Delhi • Bhopal • Dewas Plant</div>
-                <div><strong className="text-[#E8A83E]/90">Record:</strong> 125+ MW Commissioned Pan-India</div>
+                
               </div>
 
               <div className="flex items-center gap-2 pt-0.5">

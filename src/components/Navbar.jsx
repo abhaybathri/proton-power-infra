@@ -238,7 +238,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <div className="relative group/enq">
               {/* Ambient Golden Pulsing Halo Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-xs opacity-60 group-hover/enq:opacity-100 group-hover/enq:blur-sm transition-all duration-300 animate-pulse pointer-events-none"></div>
+              <div className="absolute -inset-1 hover:bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-xs opacity-60 group-hover/enq:opacity-100 group-hover/enq:blur-sm transition-all duration-300 animate-pulse pointer-events-none"></div>
 
               <Link
                 to="/contact#inquiry-form"
