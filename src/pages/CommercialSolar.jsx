@@ -156,7 +156,7 @@ function CommercialBenefitCard({
           </p>
 
           {/* Milestone Highlight */}
-          <div className="pt-1.5 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full truncate lg:mb-3">
+          <div className="pt-1.5 border-t border-white/10 flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-tech font-bold text-[#E8A83E] text-center w-full truncate">
             <CheckCircle2 className="lg:mt-2 lg:mb-1 w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
             <span className="truncate lg:mt-2 lg:mb-1">{benefit.highlight}</span>
           </div>

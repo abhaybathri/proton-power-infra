@@ -60,10 +60,12 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-xs border-b border-[#E2E8E2] py-2.5"
-          : "bg-[#F7F8F4]/95 backdrop-blur-sm py-3 border-b border-[#E2E8E2]/60"
+          ? "bg-white/95 backdrop-blur-md shadow-[0_4px_25px_rgba(18,60,50,0.08)] border-b border-[#E2E8E2] py-2"
+          : "bg-[#F7F8F4]/95 backdrop-blur-sm py-2.5 border-b border-[#E2E8E2]/60"
       }`}
     >
+      {/* Subtle Ambient Solar/Green Energy Line at Top */}
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#E8A83E]/70 to-transparent pointer-events-none"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -232,25 +234,38 @@ export default function Navbar() {
             </NavLink>
           </nav>
 
-          {/* Right Action: Only "Enquiry Now" (Contact number removed as requested) */}
+          {/* Right Action: "Enquiry Now" with Attractive Glow & Shimmer Animation */}
           <div className="hidden lg:flex items-center">
-            <Link
-              to="/contact#inquiry-form"
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold bg-[#123C32] text-white hover:bg-[#1A4D41] shadow-xs hover:shadow transition-all duration-200 group"
-            >
-              <span>Enquiry Now</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+            <div className="relative group/enq">
+              {/* Ambient Golden Pulsing Halo Glow */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-xs opacity-60 group-hover/enq:opacity-100 group-hover/enq:blur-sm transition-all duration-300 animate-pulse pointer-events-none"></div>
+
+              <Link
+                to="/contact#inquiry-form"
+                className="relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold bg-[#123C32] hover:bg-[#184E41] text-[#E8A83E] hover:text-white border border-[#E8A83E]/60 hover:border-[#E8A83E] shadow-[0_0_15px_rgba(232,168,62,0.3)] hover:shadow-[0_0_25px_rgba(232,168,62,0.6)] transition-all duration-300 font-tech tracking-wide cursor-pointer overflow-hidden"
+              >
+                {/* Sleek light-sweep shimmer */}
+                <div className="absolute inset-0 -translate-x-full group-hover/enq:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none"></div>
+
+                <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-ping shrink-0"></span>
+                <span className="relative z-10">Enquiry Now</span>
+                <ArrowRight className="w-4 h-4 text-[#E8A83E] group-hover/enq:translate-x-1 transition-transform relative z-10" />
+              </Link>
+            </div>
           </div>
 
           {/* Mobile Right */}
           <div className="flex items-center gap-2 lg:hidden">
-            <Link
-              to="/contact#inquiry-form"
-              className="text-xs font-bold bg-[#123C32] text-white px-3.5 py-2 rounded-lg shadow-xs"
-            >
-              Enquiry Now
-            </Link>
+            <div className="relative group/mobenq">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-lg blur-xs opacity-60 group-hover/mobenq:opacity-100 transition-opacity animate-pulse pointer-events-none"></div>
+              <Link
+                to="/contact#inquiry-form"
+                className="relative text-xs font-bold bg-[#123C32] text-[#E8A83E] px-3.5 py-2 rounded-lg border border-[#E8A83E]/50 flex items-center gap-1.5 shadow-sm font-tech"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] animate-ping"></span>
+                <span>Enquiry Now</span>
+              </Link>
+            </div>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

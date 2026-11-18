@@ -56,6 +56,29 @@ export default function SustainabilityImpact() {
                   </p>
                 </div>
 
+                {/* Middle Section: Engineering Execution Highlights (Fills Empty Space Elegantly) */}
+                <div className="grid grid-cols-2 gap-2.5 pt-1 font-tech">
+                  <div className="group/feat p-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-[#E8A83E]/50 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(232,168,62,0.15)] transition-all flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center shrink-0 border border-[#E8A83E]/30 group-hover/feat:scale-110 group-hover/feat:text-amber-300 transition-all">
+                      <Zap className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-bold text-white truncate">Zero Grid Outage</div>
+                      <div className="text-[10px] text-[#E9F0E9]/70 truncate">Smooth DISCOM sync</div>
+                    </div>
+                  </div>
+
+                  <div className="group/feat p-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-[#E8A83E]/50 hover:bg-white/[0.08] hover:shadow-[0_0_15px_rgba(232,168,62,0.15)] transition-all flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#123C32] text-[#E8A83E] flex items-center justify-center shrink-0 border border-[#E8A83E]/30 group-hover/feat:scale-110 group-hover/feat:text-amber-300 transition-all">
+                      <TrendingDown className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-bold text-white truncate">Tariff Inflation Hedge</div>
+                      <div className="text-[10px] text-[#E9F0E9]/70 truncate">Fixed unit rate for 25 yrs</div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Bottom Section: Standard Environmental Impact Benchmarks */}
                 <div className="pt-5 border-t border-white/10">
                   <div className="text-xs text-[#E8A83E] font-bold font-tech uppercase tracking-wider mb-3 flex items-center justify-between">
@@ -123,10 +146,7 @@ export default function SustainabilityImpact() {
                       </p>
                     </div>
                   </div>
-                  <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-[#E8A83E]/20 border border-[#E8A83E]/40 text-[#E8A83E] font-tech flex items-center gap-1 shadow-xs group-hover:bg-[#E8A83E] group-hover:text-[#202724] group-hover:border-[#E8A83E] group-hover:shadow-[0_0_15px_rgba(232,168,62,0.5)] transition-all duration-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] group-hover:bg-[#202724] animate-pulse"></span>
-                    <span>Interactive</span>
-                  </span>
+                  
                 </div>
 
                 {/* Segment Selector */}

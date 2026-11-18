@@ -1,42 +1,52 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Clock, ArrowUpRight } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowUpRight, ChevronRight } from "lucide-react";
 import { COMPANY_DETAILS, IMAGES } from "../data/companyData";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#202724] text-white pt-10 pb-5 border-t border-[#123C32]/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-5">
+    <footer className="relative bg-[#1C2320] text-white pt-8 pb-5 border-t border-white/10 overflow-hidden">
+      {/* Top Ambient Golden Line */}
+      <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#E8A83E]/50 to-transparent pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Main Grid: Compact, Balanced & Professional Structure */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-6">
           {/* Col 1: Brand & Intro (4 cols) */}
-          <div className="lg:col-span-4 space-y-4">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="h-11 bg-white p-1 rounded-lg border border-[#E2E8E2]">
-                <img
-                  src={IMAGES.officialLogo}
-                  alt="Proton Power Infra Logo"
-                  className="h-full w-auto object-contain"
-                />
-              </div>
-            </Link>
+          <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <Link to="/" className="inline-flex items-center gap-3 group focus:outline-none">
+                <div className="h-10 bg-white p-1 rounded-lg border border-[#E2E8E2] shadow-2xs group-hover:border-[#E8A83E]/60 transition-colors">
+                  <img
+                    src={IMAGES.officialLogo}
+                    alt="Proton Power Infra Logo"
+                    className="h-full w-auto object-contain"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-extrabold text-xs tracking-tight text-white leading-none uppercase font-tech">
+                    Proton Power Infra
+                  </span>
+                  <span className="text-[9px] font-semibold tracking-wider text-[#E8A83E] uppercase mt-0.5 font-tech">
+                    Solar EPC &amp; Transformers • 125+ MW
+                  </span>
+                </div>
+              </Link>
 
-            <p className="text-[#E9F0E9]/80 text-xs sm:text-sm leading-relaxed pr-2">
-              Proton Power Infra is a leading solar panel installation company and power transformer manufacturer headquartered in Indore, with a nationwide footprint. Since 2012, we've delivered 125+ MW of clean energy across India.
-            </p>
+              <p className="text-[#E9F0E9]/80 text-xs leading-relaxed pr-2">
+                India's trusted Solar EPC and Power Transformer manufacturer. Headquartered in Indore with in-house transformer production in Dewas, delivering 125+ MW of dependable renewable power infrastructure nationwide since 2012.
+              </p>
+            </div>
 
-            {/* Social Media Links provided by client */}
-            <div className="pt-2">
-              <div className="text-[11px] font-bold text-[#E8A83E] uppercase tracking-wider mb-2">
-                Follow Official Channels
-              </div>
-              <div className="flex items-center gap-2.5">
+            {/* Social Media Links & WhatsApp Direct Reach in a single compact row */}
+            <div className="pt-1 flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <a
                   href={COMPANY_DETAILS.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#0077b5] text-white flex items-center justify-center text-xs font-bold transition-colors"
+                  className="w-7 h-7 rounded-lg bg-white/10 hover:bg-[#0077b5] text-white flex items-center justify-center text-xs font-bold transition-all hover:scale-105 shadow-2xs"
                   aria-label="LinkedIn Profile"
                 >
                   in
@@ -45,7 +55,7 @@ export default function Footer() {
                   href={COMPANY_DETAILS.social.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-black text-white flex items-center justify-center text-xs font-bold transition-colors"
+                  className="w-7 h-7 rounded-lg bg-white/10 hover:bg-black text-white flex items-center justify-center text-xs font-bold transition-all hover:scale-105 shadow-2xs"
                   aria-label="X (Twitter) Profile"
                 >
                   X
@@ -54,7 +64,7 @@ export default function Footer() {
                   href={COMPANY_DETAILS.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#1877f2] text-white flex items-center justify-center text-xs font-bold transition-colors"
+                  className="w-7 h-7 rounded-lg bg-white/10 hover:bg-[#1877f2] text-white flex items-center justify-center text-xs font-bold transition-all hover:scale-105 shadow-2xs"
                   aria-label="Facebook Page"
                 >
                   fb
@@ -63,57 +73,60 @@ export default function Footer() {
                   href={COMPANY_DETAILS.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#e4405f] text-white flex items-center justify-center text-xs font-bold transition-colors"
+                  className="w-7 h-7 rounded-lg bg-white/10 hover:bg-[#e4405f] text-white flex items-center justify-center text-xs font-bold transition-all hover:scale-105 shadow-2xs"
                   aria-label="Instagram Profile"
                 >
                   ig
                 </a>
               </div>
-            </div>
 
-            <div className="pt-1">
               <a
                 href={COMPANY_DETAILS.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#123C32] hover:bg-[#1A4D41] text-white text-xs font-semibold border border-[#E8A83E]/30 transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#123C32] hover:bg-[#1A4D41] text-white text-[11px] font-semibold border border-[#E8A83E]/40 hover:border-[#E8A83E] shadow-2xs hover:shadow-[0_0_12px_rgba(37,211,102,0.3)] transition-all ml-1 font-tech"
               >
-                <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></span>
-                <span>Connect via WhatsApp</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-[#E8A83E]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></span>
+                <span>WhatsApp</span>
+                <ArrowUpRight className="w-3 h-3 text-[#E8A83E]" />
               </a>
             </div>
           </div>
 
           {/* Col 2: Quick Links (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-sm font-bold tracking-wider text-[#E8A83E] uppercase">
-              Quick Links
+            <h3 className="text-xs font-bold tracking-wider text-[#E8A83E] uppercase font-tech pb-1 border-b border-white/10">
+              Navigation
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm text-[#E9F0E9]/80">
+            <ul className="space-y-1.5 text-xs text-[#E9F0E9]/80 font-tech">
               <li>
-                <Link to="/" className="hover:text-white transition-colors">
-                  Home
+                <Link to="/" className="hover:text-[#E8A83E] transition-colors flex items-center gap-1.5 py-0.5">
+                  <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                  <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-white transition-colors">
-                  About Us (Since 2012)
+                <Link to="/about" className="hover:text-[#E8A83E] transition-colors flex items-center gap-1.5 py-0.5">
+                  <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                  <span>About Us (Since 2012)</span>
                 </Link>
               </li>
               <li>
-                <Link to="/careers" className="hover:text-white transition-colors">
-                  Careers & Talent
+                <Link to="/careers" className="hover:text-[#E8A83E] transition-colors flex items-center gap-1.5 py-0.5">
+                  <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                  <span>Careers &amp; Talent</span>
                 </Link>
               </li>
               <li>
-                <Link to="/contact#inquiry-form" className="hover:text-white transition-colors">
-                  Request a Quote
+                <Link to="/contact#inquiry-form" className="hover:text-[#E8A83E] transition-colors flex items-center gap-1.5 py-0.5">
+                  <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                  <span>Request a Quote</span>
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-white transition-colors">
-                  Contact Us
+                <Link to="/contact" className="hover:text-[#E8A83E] transition-colors flex items-center gap-1.5 py-0.5">
+                  <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                  <span>Contact Channels</span>
                 </Link>
               </li>
             </ul>
@@ -121,103 +134,94 @@ export default function Footer() {
 
           {/* Col 3: Solar & Transformer Solutions (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <h3 className="text-sm font-bold tracking-wider text-[#E8A83E] uppercase">
-              Solutions & Manufacturing
+            <h3 className="text-xs font-bold tracking-wider text-[#E8A83E] uppercase font-tech pb-1 border-b border-white/10">
+              Solutions &amp; Manufacturing
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm text-[#E9F0E9]/80">
+            <ul className="space-y-1.5 text-xs text-[#E9F0E9]/80 font-tech">
               <li>
-                <Link
-                  to="/residential-solar"
-                  className="hover:text-white transition-colors flex items-center justify-between group"
-                >
-                  <span>Residential Rooftop Solar</span>
+                <Link to="/residential-solar" className="hover:text-[#E8A83E] transition-colors flex items-center justify-between py-0.5 group">
+                  <span className="flex items-center gap-1.5">
+                    <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                    <span>Residential Rooftop</span>
+                  </span>
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/commercial-solar"
-                  className="hover:text-white transition-colors flex items-center justify-between group"
-                >
-                  <span>Commercial & Ground-Mount</span>
+                <Link to="/commercial-solar" className="hover:text-[#E8A83E] transition-colors flex items-center justify-between py-0.5 group">
+                  <span className="flex items-center gap-1.5">
+                    <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                    <span>Commercial &amp; Ground</span>
+                  </span>
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/industrial-solar"
-                  className="hover:text-white transition-colors flex items-center justify-between group"
-                >
-                  <span>Industrial Solar Systems</span>
+                <Link to="/industrial-solar" className="hover:text-[#E8A83E] transition-colors flex items-center justify-between py-0.5 group">
+                  <span className="flex items-center gap-1.5">
+                    <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                    <span>Industrial Solar Systems</span>
+                  </span>
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/power-transformers"
-                  className="hover:text-white transition-colors flex items-center justify-between text-[#E8A83E] group font-semibold"
-                >
-                  <span>Power Transformers Mfg</span>
-                  <span className="text-[10px] bg-[#E8A83E]/20 text-[#E8A83E] px-1 rounded">In-House</span>
+                <Link to="/power-transformers" className="hover:text-[#E8A83E] transition-colors flex items-center justify-between py-0.5 group">
+                  <span className="flex items-center gap-1.5">
+                    <ChevronRight className="w-3 h-3 text-[#E8A83E]" />
+                    <span>Power Transformers</span>
+                  </span>
+                  <span className="text-[9px] font-bold bg-[#E8A83E]/20 text-[#E8A83E] px-1.5 py-0.2 rounded font-mono">In-House</span>
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/solar-epc-services"
-                  className="hover:text-white transition-colors flex items-center justify-between group"
-                >
-                  <span>Turnkey Solar EPC & O&M</span>
+                <Link to="/solar-epc-services" className="hover:text-[#E8A83E] transition-colors flex items-center justify-between py-0.5 group">
+                  <span className="flex items-center gap-1.5">
+                    <ChevronRight className="w-3 h-3 text-[#E8A83E]/70" />
+                    <span>Turnkey Solar EPC &amp; O&amp;M</span>
+                  </span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Corporate Office & Regional Footprint (3 cols) */}
+          {/* Col 4: Corporate Office & Contacts (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <h3 className="text-sm font-bold tracking-wider text-[#E8A83E] uppercase">
-              Offices & Contact
+            <h3 className="text-xs font-bold tracking-wider text-[#E8A83E] uppercase font-tech pb-1 border-b border-white/10">
+              Offices &amp; Contact Desk
             </h3>
-            <div className="space-y-3 text-xs text-[#E9F0E9]/80">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#E8A83E] shrink-0 mt-0.5" />
-                <address className="not-italic leading-relaxed">
-                  <strong>Headquarters:</strong> <br />
-                  {COMPANY_DETAILS.address.full}
+            <div className="space-y-2 text-xs text-[#E9F0E9]/80 font-tech">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#E8A83E] shrink-0 mt-0.5" />
+                <address className="not-italic leading-tight text-[11px] text-[#E9F0E9]/75">
+                  <strong className="text-white">HQ:</strong> {COMPANY_DETAILS.address.full}
                 </address>
               </div>
 
-              <div className="pl-6 text-[11px] text-[#E9F0E9]/70 space-y-0.5">
-                <div><strong>Regional Offices:</strong> New Delhi • Bhopal • Dewas</div>
-                <div><strong>Track Record:</strong> 125+ MW Commissioned Pan-India</div>
+              <div className="pl-5 text-[10px] text-[#E9F0E9]/65 space-y-0.5">
+                <div><strong className="text-[#E8A83E]/90">Hubs:</strong> New Delhi • Bhopal • Dewas Plant</div>
+                <div><strong className="text-[#E8A83E]/90">Record:</strong> 125+ MW Commissioned Pan-India</div>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#E8A83E] shrink-0" />
-                <div className="flex flex-col">
-                  <a
-                    href={`tel:${COMPANY_DETAILS.phones[0].raw}`}
-                    className="hover:text-white transition-colors font-semibold"
-                  >
+              <div className="flex items-center gap-2 pt-0.5">
+                <Phone className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+                <div className="flex items-center gap-2 text-[11px]">
+                  <a href={`tel:${COMPANY_DETAILS.phones[0].raw}`} className="hover:text-white font-semibold transition-colors">
                     {COMPANY_DETAILS.phones[0].display}
                   </a>
-                  <a
-                    href={`tel:${COMPANY_DETAILS.phones[1].raw}`}
-                    className="hover:text-white transition-colors"
-                  >
+                  <span className="text-white/30">•</span>
+                  <a href={`tel:${COMPANY_DETAILS.phones[1].raw}`} className="hover:text-white transition-colors">
                     {COMPANY_DETAILS.phones[1].display}
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#E8A83E] shrink-0" />
-                <a
-                  href={`mailto:${COMPANY_DETAILS.email}`}
-                  className="hover:text-white transition-colors break-all"
-                >
+              <div className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
+                <a href={`mailto:${COMPANY_DETAILS.email}`} className="hover:text-white transition-colors text-[11px] truncate">
                   {COMPANY_DETAILS.email}
                 </a>
               </div>
 
-              <div className="flex items-center gap-2.5 pt-1 text-[#E9F0E9]/70">
-                <Clock className="w-4 h-4 text-[#E8A83E] shrink-0" />
+              <div className="flex items-center gap-2 text-[10px] text-[#E9F0E9]/65">
+                <Clock className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
                 <span>{COMPANY_DETAILS.workingHours}</span>
               </div>
             </div>
@@ -225,21 +229,21 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Legal */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#E9F0E9]/60">
+        <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#E9F0E9]/60 font-tech">
           <div>
             © {currentYear} {COMPANY_DETAILS.legalName} • 125+ MW Clean Energy Milestone.
           </div>
 
-          <div className="flex items-center gap-6">
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">
+          <div className="flex items-center gap-4">
+            <Link to="/privacy-policy" className="hover:text-[#E8A83E] transition-colors">
               Privacy Policy
             </Link>
-            <span className="text-gray-600">•</span>
-            <Link to="/terms-conditions" className="hover:text-white transition-colors">
-              Terms & Conditions
+            <span className="text-white/20">•</span>
+            <Link to="/terms-conditions" className="hover:text-[#E8A83E] transition-colors">
+              Terms &amp; Conditions
             </Link>
-            <span className="text-gray-600">•</span>
-            <Link to="/contact" className="hover:text-white transition-colors">
+            <span className="text-white/20">•</span>
+            <Link to="/contact" className="hover:text-[#E8A83E] transition-colors">
               Contact Support
             </Link>
           </div>

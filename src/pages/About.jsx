@@ -276,16 +276,16 @@ function FlipProjectCard({ project }) {
           </div>
 
           {/* Back Bottom: Live Status + Consultation Action Button */}
-          <div className="relative z-10 pt-2 border-t border-white/15 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#E9F0E9]/80 truncate">
+          <div className="relative z-10 pt-2 border-t border-white/15 flex items-center justify-center gap-3">
+            {/* <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#E9F0E9]/80 truncate">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
               <span className="truncate">{project.status}</span>
-            </div>
+            </div> */}
 
             <Link
               to={`/contact?project=${encodeURIComponent(project.title)}#inquiry-form`}
               onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E8A83E] hover:bg-[#D4952D] text-[#123C32] font-bold text-xs font-tech transition-colors shadow-sm cursor-pointer shrink-0"
+              className="inline-flex justify-center items-center px-3 py-2 rounded-lg w-full  bg-[#E8A83E] hover:bg-[#D4952D] text-[#123C32] font-bold text-xs font-tech transition-colors shadow-sm cursor-pointer shrink-0"
             >
               <span>Enquire Spec</span>
               <ArrowRight className="w-3 h-3" />
@@ -451,7 +451,7 @@ export default function About() {
   const portfolioProjects = [
     {
       id: "PROJ-UTILITY-01",
-      title: "Utility Ground-Mounted Solar Park",
+      title: "Multy Utility, Ground - Mounted Solar Park",
       subheading: "Multi-MW Grid Evacuation • Central India",
       capacity: "Multi-MW Plant",
       category: "Utility Scale EPC",
@@ -467,7 +467,7 @@ export default function About() {
     },
     {
       id: "PROJ-CAPTIVE-02",
-      title: "Industrial Captive Solar Array",
+      title: "Industrial & Commercial Captive Solar Array",
       subheading: "Heavy Factory Microgrid • High PR Ratio",
       capacity: "High PR Ratio",
       category: "Industrial Captive",
@@ -499,7 +499,7 @@ export default function About() {
     },
     {
       id: "PROJ-ROOFTOP-04",
-      title: "Commercial Rooftop Solar Plant",
+      title: "Modern Commercial Rooftop Solar Plant",
       subheading: "Corporate Power Integration • Net-Metered",
       capacity: "Commercial Scale",
       category: "Commercial EPC",
