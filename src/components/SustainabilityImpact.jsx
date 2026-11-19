@@ -20,16 +20,16 @@ export default function SustainabilityImpact() {
   const annualCO2Tons = Math.round(((monthlyUnits * 12 * 0.82) / 1000) * 10) / 10; // ~0.82 kg CO2/kWh
 
   return (
-    <section id="solar-calculator" className="py-10 md:py-14 bg-[#F7F8F4] text-[#202724] relative overflow-hidden border-b border-[#E2E8E2]">
+    <section id="solar-calculator" className="py-10 md:py-10 bg-[#E9F0E9] text-[#202724] relative overflow-hidden border-b border-[#E2E8E2]">
       {/* Background Subtle Pattern */}
       <div className="absolute inset-0 opacity-[0.035] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Top Header with Dual Navigation Buttons */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#E2E8E2]">
-          <div className="max-w-2xl">
+          <div className="min-w-full text-center">
             <ScrollReveal delay={0}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#123C32] tracking-tight leading-tight font-heading">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
                 Solar Feasibility &amp; Yield Planning
               </h2>
             </ScrollReveal>
@@ -40,34 +40,7 @@ export default function SustainabilityImpact() {
             </ScrollReveal>
           </div>
 
-          {/* Dual Navigation Controls */}
-          <ScrollReveal delay={100}>
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white border border-[#E2E8E2] shadow-2xs font-tech shrink-0 self-start md:self-end">
-              <button
-                type="button"
-                onClick={() => setActiveSection("calculator")}
-                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  activeSection === "calculator"
-                    ? "bg-[#123C32] text-white shadow-xs"
-                    : "text-[#525D57] hover:text-[#123C32] hover:bg-[#F7F8F4]"
-                }`}
-                aria-label="View Solar Calculator"
-              >
-                <Sun className="w-3.5 h-3.5 text-[#E8A83E]" />
-                <span>Solar Calculator</span>
-              </button>
-
-              <Link
-                to="/contact#inquiry-form"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold text-[#525D57] hover:text-[#123C32] hover:bg-[#F7F8F4] transition-all cursor-pointer group"
-                aria-label="Go to Consultation Enquiry Form"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-[#E8A83E] group-hover:scale-110 transition-transform" />
-                <span>Project Consultation</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-            </div>
-          </ScrollReveal>
+          
         </div>
 
         {/* Equal-Height Grid Layout matching website theme */}
@@ -80,7 +53,7 @@ export default function SustainabilityImpact() {
                 <div className="space-y-4">
                   <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-[#123C32] leading-tight font-heading">
                     Every Sunlight Hour <br />
-                    <span className="text-[#E8A83E]">Is an Opportunity.</span>
+                    <span className="text-[#E8A83E] w-full text-center">Is an Opportunity.</span>
                   </h3>
 
                   <p className="text-sm sm:text-base text-[#525D57] leading-relaxed font-normal text-justify-clean">

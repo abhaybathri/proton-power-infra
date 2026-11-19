@@ -19,8 +19,8 @@ export default function Home() {
       {/* Section 4: Solar Calculator & Savings Feasibility + Consultation CTA */}
       <SustainabilityImpact />
 
-      {/* Section 5: Consultation CTA */}
-      <CTASection />
+      {/* Section 5: Consultation CTA
+      <CTASection /> */}
     </div>
   );
 }

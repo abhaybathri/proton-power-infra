@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#1C2320] text-white pt-8 pb-5 border-t border-white/10 overflow-hidden">
+    <footer className="relative bg-[#123C32] text-white pt-8 pb-5 border-t border-white/10 overflow-hidden">
       {/* Top Ambient Golden Line */}
       <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#E8A83E]/50 to-transparent pointer-events-none"></div>
 

@@ -742,19 +742,19 @@ export default function IndustrialSolar() {
       </section>
 
       {/* 5. Consultation CTA Banner */}
-      <section className="py-10 md:py-10 lg:py-10 bg-[#123C32] text-white relative overflow-hidden">
-        {/* Subtle radial glow */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      <section className="py-10 md:py-12 bg-[#E9F0E9] text-[#202724] relative overflow-hidden border-t border-[#E2E8E2]">
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0 opacity-[0.035] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <ScrollReveal delay={0}>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight font-heading mb-3">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#123C32] tracking-tight leading-tight font-heading mb-3">
               Request Your Free Industrial Plant Feasibility Survey
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={70}>
-            <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
               Our power infrastructure engineers will assess your plant's sanctioned HT load, analyze shed vibration dynamics, and model a high-capacity solar and transformer solution with zero obligation.
             </p>
           </ScrollReveal>
@@ -763,27 +763,27 @@ export default function IndustrialSolar() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
               <Link
                 to="/contact?type=industrial#inquiry-form"
-                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
+                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#123C32] hover:bg-[#1A4D41] text-white shadow-md hover:shadow-lg transition-all duration-300 font-tech tracking-wide group cursor-pointer"
               >
                 <span>Schedule Industrial Energy Audit</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#E8A83E] group-hover:translate-x-1.5 transition-transform" />
               </Link>
 
               <a
                 href={`tel:${COMPANY_DETAILS.primaryPhoneRaw || "+919770744687"}`}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all font-tech"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold bg-white hover:bg-white/90 text-[#123C32] border border-[#E2E8E2] hover:border-[#123C32]/30 shadow-xs transition-all font-tech"
               >
-                <Phone className="w-4 h-4 text-[#E8A83E]" />
+                <Phone className="w-4 h-4 text-[#123C32]" />
                 <span>Call Us: {COMPANY_DETAILS.primaryPhone || "+91 97707 44687"}</span>
               </a>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={160}>
-            <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-center gap-5 text-xs text-[#E9F0E9]/75 font-tech">
-              <span>✓ 100% Free HT Feasibility Audit</span>
-              <span>✓ In-House Transformer Integration</span>
-              <span>✓ 25-Year Industrial Performance Warranty</span>
+            <div className="mt-6 pt-5 border-t border-[#123C32]/10 flex flex-wrap items-center justify-center gap-5 text-xs text-[#525D57] font-tech font-medium">
+              <span><strong className="text-[#123C32]">✓</strong> 100% Free HT Feasibility Audit</span>
+              <span><strong className="text-[#123C32]">✓</strong> In-House Transformer Integration</span>
+              <span><strong className="text-[#123C32]">✓</strong> 25-Year Industrial Performance Warranty</span>
             </div>
           </ScrollReveal>
         </div>

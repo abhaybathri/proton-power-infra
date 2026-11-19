@@ -263,7 +263,7 @@ export default function SolarSolutions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-6">
         {/* Header with Integrated Navigation Controls for Laptop & Desktop */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div className="max-w-2xl text-left">
+          <div className="min-w-full  flex flex-col items-center">
             <ScrollReveal delay={0}>
               {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold uppercase tracking-wider font-tech mb-2">
                 <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse"></span>
@@ -285,53 +285,7 @@ export default function SolarSolutions() {
           </div>
 
           {/* Navigation Controls: Dedicated Next / Prev Buttons & Indicators for Laptop/Desktop Accessibility */}
-          <ScrollReveal delay={180}>
-            <div className="flex items-center gap-3 self-start md:self-end shrink-0">
-              {/* Active Dot Indicators */}
-              {/* <div className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/80 border border-[#123C32]/10 backdrop-blur-md shadow-xs">
-                {INFRA_CAPABILITIES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      pauseAutoFloat();
-                      if (scrollRef.current) {
-                        const singleSetWidth = scrollRef.current.scrollWidth / 3;
-                        const target = singleSetWidth + i * 340;
-                        scrollRef.current.scrollTo({ left: target, behavior: "smooth" });
-                      }
-                      resumeAutoFloat(2500);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      activeDot === i ? "w-6 bg-[#123C32]" : "w-2 bg-[#123C32]/25 hover:bg-[#123C32]/50"
-                    }`}
-                    aria-label={`Jump to capability ${i + 1}`}
-                  />
-                ))}
-              </div> */}
-
-              {/* Prev / Next Action Arrows */}
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="w-10 h-10 rounded-xl bg-white border border-[#123C32]/15 text-[#123C32] hover:bg-[#123C32] hover:text-white shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
-                  aria-label="Previous capabilities"
-                  title="Scroll backward"
-                >
-                  <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="w-10 h-10 rounded-xl bg-white border border-[#123C32]/15 text-[#123C32] hover:bg-[#123C32] hover:text-white shadow-xs hover:shadow-md flex items-center justify-center transition-all duration-200 cursor-pointer group active:scale-95"
-                  aria-label="Next capabilities"
-                  title="Scroll forward"
-                >
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              </div>
-            </div>
-          </ScrollReveal>
+          
         </div>
       </div>
 
