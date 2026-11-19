@@ -516,7 +516,6 @@ export default function Contact() {
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/80 z-20">
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-ping"></span>
                         <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
                           Solar EPC &amp; Power Transformer Works
                         </span>

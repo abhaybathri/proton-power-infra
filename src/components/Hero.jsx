@@ -225,7 +225,6 @@ export default function Hero() {
               {/* Bottom Compact Telemetry Capsule */}
               <div className="absolute bottom-3 left-3 right-3 z-20 px-3.5 py-2.5 rounded-xl bg-black/65 backdrop-blur-md shadow-lg border border-white/15 transition-all duration-300 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="w-2 h-2 rounded-full bg-[#E8A83E] shrink-0 animate-pulse"></span>
                   <div className="truncate">
                     <span className="text-xs font-bold text-white uppercase tracking-wider font-tech block truncate">
                       {activeSlide.title}

@@ -100,7 +100,6 @@ function StreamCard({ item, onHoverStart, onHoverEnd }) {
       {/* Top Bar: Telemetry Badge + Crisp Solar Amber Icon */}
       <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none z-20">
         <span className="px-3 py-1 rounded-full text-[11px] font-bold font-tech uppercase tracking-wide bg-white/95 text-[#123C32] shadow-sm flex items-center gap-1.5 backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] animate-pulse"></span>
           <span>{item.index} • {item.capacity}</span>
         </span>
 
@@ -289,7 +288,7 @@ export default function SolarSolutions() {
           <ScrollReveal delay={180}>
             <div className="flex items-center gap-3 self-start md:self-end shrink-0">
               {/* Active Dot Indicators */}
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/80 border border-[#123C32]/10 backdrop-blur-md shadow-xs">
+              {/* <div className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/80 border border-[#123C32]/10 backdrop-blur-md shadow-xs">
                 {INFRA_CAPABILITIES.map((_, i) => (
                   <button
                     key={i}
@@ -308,7 +307,7 @@ export default function SolarSolutions() {
                     aria-label={`Jump to capability ${i + 1}`}
                   />
                 ))}
-              </div>
+              </div> */}
 
               {/* Prev / Next Action Arrows */}
               <div className="flex items-center gap-1.5">

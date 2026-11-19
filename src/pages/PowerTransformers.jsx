@@ -474,7 +474,6 @@ export default function PowerTransformers() {
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-pulse shrink-0"></span>
                         <span className="text-xs font-bold text-white uppercase tracking-wider font-tech truncate">
                           Heavy Duty Power & Solar Step-Up Transformers
                         </span>

@@ -37,8 +37,7 @@ export default function SmartImage({
           {/* Animated gradient shimmer bar */}
           <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[10px] font-mono text-white/80 shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] animate-ping"></span>
-            <span>Optimizing Visual...</span>
+            <span>Loading Visual...</span>
           </div>
         </div>
       )}

@@ -21,18 +21,18 @@ function PillarCard({ pillar, index }) {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="relative bg-white rounded-2xl p-4 sm:p-5 border border-[#E2E8E2] hover:border-[#E8A83E]/80 shadow-2xs hover:shadow-xl hover:shadow-[#E8A83E]/15 transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:-translate-y-1.5 cursor-pointer"
+      className="relative bg-white rounded-2xl p-4 sm:p-5 border border-[#E2E8E2] hover:border-[#E8A83E]/50 shadow-2xs hover:shadow-md hover:shadow-black/5 transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:-translate-y-0.5 cursor-pointer"
     >
-      {/* Interactive Luminous Spotlight Glow (Golden Solar Energy - Never Dark) */}
+      {/* Refined Subtle Luminous Spotlight (Gentle, Natural Glow) */}
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
-          background: `radial-gradient(240px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.20), rgba(254, 243, 199, 0.10) 50%, transparent 75%)`,
+          background: `radial-gradient(200px circle at ${mousePos.x}px ${mousePos.y}px, rgba(232, 168, 62, 0.08), rgba(254, 243, 199, 0.04) 50%, transparent 75%)`,
         }}
       />
 
-      {/* Subtle Glowing Border Ring on Hover */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ring-1 ring-inset ring-[#E8A83E]/40 z-0" />
+      {/* Subtle Border Ring on Hover */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ring-1 ring-inset ring-[#E8A83E]/20 z-0" />
 
       {/* Architectural Watermark in Background */}
       {/* <div className="absolute -bottom-2 -right-1 font-tech font-black text-4xl text-[#123C32]/[0.03] group-hover:text-[#E8A83E]/12 pointer-events-none transition-colors select-none z-0">
@@ -40,9 +40,9 @@ function PillarCard({ pillar, index }) {
       </div> */}
 
       <div className="relative z-10">
-        {/* Top: Radiant Glowing Icon & High-Contrast Stat Tag */}
+        {/* Top: Balanced Icon & High-Contrast Stat Tag */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="w-11 h-11 rounded-xl bg-[#E9F0E9] text-[#123C32] border border-[#123C32]/10 group-hover:bg-gradient-to-br group-hover:from-amber-100 group-hover:to-amber-200 group-hover:text-amber-900 group-hover:border-amber-400/60 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_0_24px_rgba(232,168,62,0.45)] flex items-center justify-center shrink-0 transition-all duration-300">
+          <div className="w-11 h-11 rounded-xl bg-[#E9F0E9] text-[#123C32] border border-[#123C32]/10 group-hover:bg-amber-50 group-hover:text-amber-900 group-hover:border-amber-300/60 group-hover:scale-105 group-hover:shadow-[0_0_12px_rgba(232,168,62,0.18)] flex items-center justify-center shrink-0 transition-all duration-300">
             <Icon className="w-5 h-5 stroke-[2.2]" />
           </div>
 

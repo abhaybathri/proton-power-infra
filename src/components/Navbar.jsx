@@ -237,8 +237,8 @@ export default function Navbar() {
           {/* Right Action: "Enquiry Now" with Attractive Glow & Shimmer Animation */}
           <div className="hidden lg:flex items-center">
             <div className="relative group/enq">
-              {/* Ambient Golden Pulsing Halo Glow */}
-              <div className="absolute -inset-1 hover:bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-xs opacity-60 group-hover/enq:opacity-100 group-hover/enq:blur-sm transition-all duration-300 animate-pulse pointer-events-none"></div>
+              {/* Ambient Golden Halo Glow */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-xs opacity-40 group-hover/enq:opacity-80 group-hover/enq:blur-sm transition-all duration-300 pointer-events-none"></div>
 
               <Link
                 to="/contact#inquiry-form"
@@ -247,7 +247,6 @@ export default function Navbar() {
                 {/* Sleek light-sweep shimmer */}
                 <div className="absolute inset-0 -translate-x-full group-hover/enq:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none"></div>
 
-                <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-ping shrink-0"></span>
                 <span className="relative z-10">Enquiry Now</span>
                 <ArrowRight className="w-4 h-4 text-[#E8A83E] group-hover/enq:translate-x-1 transition-transform relative z-10" />
               </Link>
@@ -257,12 +256,11 @@ export default function Navbar() {
           {/* Mobile Right */}
           <div className="flex items-center gap-2 lg:hidden">
             <div className="relative group/mobenq">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-lg blur-xs opacity-60 group-hover/mobenq:opacity-100 transition-opacity animate-pulse pointer-events-none"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-lg blur-xs opacity-40 group-hover/mobenq:opacity-80 transition-opacity pointer-events-none"></div>
               <Link
                 to="/contact#inquiry-form"
                 className="relative text-xs font-bold bg-[#123C32] text-[#E8A83E] px-3.5 py-2 rounded-lg border border-[#E8A83E]/50 flex items-center gap-1.5 shadow-sm font-tech"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] animate-ping"></span>
                 <span>Enquiry Now</span>
               </Link>
             </div>

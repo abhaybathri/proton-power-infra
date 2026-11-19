@@ -649,7 +649,6 @@ export default function About() {
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/80 z-20">
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-ping"></span>
                         <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
                           Solar EPC & Transformer Manufacturing
                         </span>
@@ -728,7 +727,6 @@ export default function About() {
                     onClick={() => scrollToStage(1)}
                     className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#123C32] text-white hover:bg-[#1a4f43] transition-all duration-300 shadow-md shadow-[#123C32]/20 text-xs font-bold font-tech cursor-pointer group"
                   >
-                    <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-ping"></span>
                     <span>Scroll Down to Trace Timeline</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -852,7 +850,6 @@ export default function About() {
              ========================================================= */}
           <div className="max-w-6xl mx-auto w-full relative z-10 pt-2 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] font-tech text-[#525D57]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#E8A83E] animate-ping"></span>
               <span>
                 {activeStage === 0
                   ? "Scroll down to begin interactive timeline"
