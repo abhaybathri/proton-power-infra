@@ -389,11 +389,13 @@ export default function IndustrialSolar() {
             <div className="flex flex-col h-full w-full justify-center">
               <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[34px] xl:text-[38px] font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
-                  Energize Heavy Industry with <br />
-                  <span className="text-[#E8A83E] relative inline-block">
+                <h1 className="font-black tracking-tight text-white leading-[1.15] font-heading text-center mx-auto max-w-xl">
+                  <span className="block text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] whitespace-nowrap">
+                    Energize Heavy Industry with
+                  </span>
+                  <span className="text-[#E8A83E] relative inline-block whitespace-nowrap text-[20px] sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] mt-1">
                     Industrial-Grade Solar.
-                    <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1.5 sm:h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                   </span>
                 </h1>
 

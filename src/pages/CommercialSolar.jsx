@@ -394,11 +394,13 @@ export default function CommercialSolar() {
             <div className="flex flex-col h-full w-full justify-center">
               <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[30px] xl:text-[34px] font-black tracking-tight text-white leading-[1.18] font-heading text-center mx-auto max-w-lg lg:max-w-xl">
-                  Power Your Enterprise with <br />
-                  <span className="text-[#E8A83E] relative inline-block lg:whitespace-nowrap">
+                <h1 className="font-black tracking-tight text-white leading-[1.18] font-heading text-center mx-auto max-w-xl">
+                  <span className="block text-2xl sm:text-3xl lg:text-[30px] xl:text-[34px] whitespace-nowrap">
+                    Power Your Enterprise with
+                  </span>
+                  <span className="text-[#E8A83E] relative inline-block whitespace-nowrap text-[18px] sm:text-2xl md:text-3xl lg:text-[30px] xl:text-[34px] mt-1">
                     High-Yield Commercial Solar.
-                    <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1.5 sm:h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                   </span>
                 </h1>
 

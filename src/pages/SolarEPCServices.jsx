@@ -392,11 +392,13 @@ export default function SolarEPCServices() {
             <div className="flex flex-col h-full w-full justify-center">
               <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[28px] xl:text-[32px] font-black tracking-tight text-white leading-[1.18] font-heading text-center mx-auto max-w-lg lg:max-w-xl">
-                  Turnkey Solar EPC & <br />
-                  <span className="text-[#E8A83E] relative inline-block lg:whitespace-nowrap">
+                <h1 className="font-black tracking-tight text-white leading-[1.18] font-heading text-center mx-auto max-w-xl">
+                  <span className="block text-2xl sm:text-3xl lg:text-[28px] xl:text-[32px] whitespace-nowrap">
+                    Turnkey Solar EPC &amp;
+                  </span>
+                  <span className="text-[#E8A83E] relative inline-block whitespace-nowrap text-[17px] sm:text-xl md:text-2xl lg:text-[28px] xl:text-[32px] mt-1">
                     Park Development Across India.
-                    <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1.5 sm:h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                   </span>
                 </h1>
 

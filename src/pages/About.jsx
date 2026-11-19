@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ShieldCheck,
   Target,
@@ -102,6 +102,7 @@ function FlipProjectCard({ project }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -111,9 +112,15 @@ function FlipProjectCard({ project }) {
     });
   };
 
+  const handleEnquire = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/contact?project=${encodeURIComponent(project.title)}#inquiry-form`);
+  };
+
   return (
     <div
-      className="group relative h-[330px] sm:h-[350px] w-full [perspective:1200px] cursor-pointer"
+      className="group relative h-[330px] sm:h-[350px] w-full [perspective:1200px] cursor-pointer select-none"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => {
         setIsHovered(true);
@@ -123,7 +130,11 @@ function FlipProjectCard({ project }) {
         setIsHovered(false);
         setIsFlipped(false);
       }}
-      onClick={() => setIsFlipped(!isFlipped)}
+      onClick={(e) => {
+        // Prevent flipping back when clicking action buttons or links
+        if (e.target.closest("button") || e.target.closest("a")) return;
+        setIsFlipped((prev) => !prev);
+      }}
     >
       {/* 3D Flip Container */}
       <div
@@ -138,7 +149,9 @@ function FlipProjectCard({ project }) {
             FRONT FACE (Only Image + Heading + Subheading)
            ========================================================= */}
         <div
-          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-md group-hover:shadow-2xl border-2 border-white/80 bg-[#0D2B24] flex flex-col justify-end"
+          className={`absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-md group-hover:shadow-2xl border-2 border-white/80 bg-[#0D2B24] flex flex-col justify-end transition-opacity duration-300 ${
+            isFlipped ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"
+          }`}
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -196,11 +209,13 @@ function FlipProjectCard({ project }) {
             BACK FACE (Flipped: Compact 4 Sub-Cards, No Empty Space)
            ========================================================= */}
         <div
-          className="absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-[#E8A83E]/70 bg-[#123C32] text-white p-4 sm:p-5 flex flex-col justify-between"
+          className={`absolute inset-0 h-full w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-[#E8A83E]/70 bg-[#123C32] text-white p-4 sm:p-5 flex flex-col justify-between transition-opacity duration-300 ${
+            isFlipped ? "pointer-events-auto opacity-100 z-20" : "pointer-events-none opacity-0"
+          }`}
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
+            transform: "rotateY(180deg) translateZ(1px)",
           }}
         >
           {/* Subtle radial tech lighting */}
@@ -271,20 +286,15 @@ function FlipProjectCard({ project }) {
           </div>
 
           {/* Back Bottom: Live Status + Consultation Action Button */}
-          <div className="relative z-10 pt-2 border-t border-white/15 flex items-center justify-center gap-3">
-            {/* <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#E9F0E9]/80 truncate">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-              <span className="truncate">{project.status}</span>
-            </div> */}
-
-            <Link
-              to={`/contact?project=${encodeURIComponent(project.title)}#inquiry-form`}
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex justify-center items-center px-3 py-2 rounded-lg w-full  bg-[#E8A83E] hover:bg-[#D4952D] text-[#123C32] font-bold text-xs font-tech transition-colors shadow-sm cursor-pointer shrink-0"
+          <div className="relative z-30 pt-2 border-t border-white/15 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={handleEnquire}
+              className="relative z-30 inline-flex justify-center items-center gap-2 px-3 py-2 rounded-lg w-full bg-[#E8A83E] hover:bg-[#D4952D] text-[#123C32] font-bold text-xs font-tech transition-colors shadow-sm cursor-pointer shrink-0"
             >
               <span>Enquire Spec</span>
-              <ArrowRight className="w-3 h-3" />
-            </Link>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
       </div>
@@ -425,11 +435,13 @@ export default function About() {
             <div className="flex flex-col h-full w-full justify-center">
               <ScrollReveal delay={0} className="h-full flex flex-col justify-center items-center text-center space-y-4 sm:space-y-4.5 py-1 min-h-[360px] sm:min-h-[380px] lg:h-[400px] lg:min-h-[400px]">
                 {/* Heading - Centered */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[34px] xl:text-[38px] font-black tracking-tight text-white leading-[1.14] font-heading text-center mx-auto max-w-lg">
-                  At the Forefront of India's <br />
-                  <span className="text-[#E8A83E] relative inline-block">
+                <h1 className="font-black tracking-tight text-white leading-[1.15] font-heading text-center mx-auto max-w-xl">
+                  <span className="block text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] whitespace-nowrap">
+                    At the Forefront of India's
+                  </span>
+                  <span className="text-[#E8A83E] relative inline-block whitespace-nowrap text-[21px] sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] mt-1">
                     Clean Energy Revolution.
-                    <span className="absolute -bottom-1 left-0 w-full h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1.5 sm:h-2 bg-[#E8A83E]/25 -z-10 rounded"></span>
                   </span>
                 </h1>
 
@@ -534,7 +546,7 @@ export default function About() {
           3. SECTION THREE: CORE PILLARS (Mission, Vision & Excellence)
              With Cursor-Following Border & Ambient Glow Effect
          ========================================================= */}
-      <section className="py-12 md:py-16 bg-[#F7F8F4] border-b border-[#E2E8E2]">
+      <section className="py-8 md:py-10 bg-[#F7F8F4] border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-10">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-3">
@@ -621,44 +633,43 @@ export default function About() {
       </section>
 
       {/* =========================================================
-          5. SECTION FIVE: CONSULTATION CTA BANNER (Standardized
-             #123C32 Banner with Radial Tech Glow & Dual Action Buttons)
+          5. SECTION FIVE: CONSULTATION CTA BANNER (Light Theme #E9F0E9)
          ========================================================= */}
-      <section className="py-8 md:py-10 bg-[#123C32] text-white relative overflow-hidden">
-        {/* Subtle radial glow */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#E8A83E_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      <section className="py-10 md:py-12 bg-[#E9F0E9] text-[#202724] relative overflow-hidden border-t border-[#E2E8E2]">
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0 opacity-[0.035] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-        <div className="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight font-heading mb-3">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#123C32] tracking-tight leading-tight font-heading mb-3">
             Partner with Proton Power Infra for Your Energy Transition
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
             Whether developing a multi-megawatt solar park, installing captive factory arrays, or sourcing Inverter Duty Solar Transformers, our engineers are ready to assist.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <Link
               to="/contact#inquiry-form"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#E8A83E]/20 transition-all duration-300 font-tech tracking-wide group cursor-pointer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#123C32] hover:bg-[#1A4D41] text-white shadow-md hover:shadow-lg transition-all duration-300 font-tech tracking-wide group cursor-pointer"
             >
               <span>Schedule Project Consultation</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-[#E8A83E] group-hover:translate-x-1.5 transition-transform" />
             </Link>
 
             <a
               href={`tel:${COMPANY_DETAILS.primaryPhoneRaw || "+919770744687"}`}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all font-tech"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold bg-white hover:bg-white/90 text-[#123C32] border border-[#E2E8E2] hover:border-[#123C32]/30 shadow-xs transition-all font-tech"
             >
-              <Phone className="w-4 h-4 text-[#E8A83E]" />
+              <Phone className="w-4 h-4 text-[#123C32]" />
               <span>Call Us: {COMPANY_DETAILS.primaryPhone || "+91 97707 44687"}</span>
             </a>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-[11px] text-[#E9F0E9]/75 font-tech">
-            <span>✓ 125+ MW Proven Track Record</span>
-            <span>✓ In-House Solar Transformer Manufacturing</span>
-            <span>✓ Pan-India Turnkey Commissioning</span>
+          <div className="mt-8 pt-6 border-t border-[#123C32]/10 flex flex-wrap items-center justify-center gap-6 text-xs text-[#525D57] font-tech font-medium">
+            <span><strong className="text-[#123C32]">✓</strong> 125+ MW Proven Track Record</span>
+            <span><strong className="text-[#123C32]">✓</strong> In-House Solar Transformer Manufacturing</span>
+            <span><strong className="text-[#123C32]">✓</strong> Pan-India Turnkey Commissioning</span>
           </div>
         </div>
       </section>

@@ -8,7 +8,7 @@ const MILESTONES = [
     era: "Foundational Phase",
     category: "INCEPTION & VISION",
     heading: "Foundation of Proton Power Infra in Indore",
-    subtitle: null,
+    subtitle: 'Thaught of give solar power to everyone',
     description:
       "Founded in Indore, Madhya Pradesh, Proton Power Infra embarked on a singular mission: to make clean, industrial-grade solar energy accessible, dependable, and economically viable across Central India.",
     achievements: [
@@ -98,7 +98,7 @@ export default function CompanyTimeline() {
       <div className="space-y-3 max-w-3xl">
         {/* Category Label */}
         <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold font-tech uppercase tracking-wider text-[#123C32]">
-          <span className="w-1.5 h-1.5 rounded-xs bg-[#E8A83E]" />
+          
           <span>{m.category}</span>
         </div>
 
@@ -135,7 +135,7 @@ export default function CompanyTimeline() {
         {/* Verified Deliverable Benchmark Capsule */}
         {m.deliverable && (
           <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-tech font-bold text-[#123C32]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E] shrink-0" />
+            
             <span className="text-[#525D57] font-normal uppercase tracking-wider text-[10px]">
               Verified Milestone:
             </span>
