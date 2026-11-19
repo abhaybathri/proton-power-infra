@@ -13,6 +13,10 @@ import {
   Sparkles,
   Phone,
   Activity,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Compass,
   Layers,
   Factory,
 } from "lucide-react";
@@ -295,11 +299,11 @@ function FlipProjectCard({ project }) {
 
 export default function About() {
   // -------------------------------------------------------------
-  // Section 2: Premium Scroll-Driven Corporate Story Timeline
+  // Section 2: Sticky Scrollytelling Timeline State & Logic
   // -------------------------------------------------------------
   const storyContainerRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0); // 0.0 to 1.0
-  const [activeMilestoneIndex, setActiveMilestoneIndex] = useState(0); // 0 to 3
+  const [activeStage, setActiveStage] = useState(0); // 0: Minimal Intro, 1: 2012, 2: 2016, 3: 2019, 4: 2024+
 
   // Milestone Card Mouse Tracking for Dynamic Cursor Glow
   const [milestoneMousePos, setMilestoneMousePos] = useState({ x: 0, y: 0 });
@@ -323,15 +327,12 @@ export default function About() {
       description:
         "Founded in Indore, Madhya Pradesh, Proton Power Infra embarked on a singular mission: to make clean, industrial-grade solar energy accessible, dependable, and economically viable across Central India.",
       checkpoints: [
-        { label: "Established in Indore, MP" },
-        { label: "Early Turnkey Rooftop EPC" },
-        { label: "DISCOM & Grid Approvals" },
+        { label: "Established in Indore, MP", color: "mint" },
+        { label: "Early Turnkey Rooftop EPC", color: "amber" },
+        { label: "DISCOM & Grid Approvals", color: "sky" },
       ],
       deliverable: "Commissioned First 10+ Multi-Kilowatt Commercial & Institutional Solar Systems",
-      image: project1Img,
-      locationTag: "Indore, Madhya Pradesh",
-      specTag: "Turnkey Commercial Rooftop EPC",
-      era: "Foundational Phase",
+      pastelTag: "bg-emerald-50 text-emerald-800 border-emerald-200/80",
     },
     {
       year: "2016",
@@ -342,15 +343,12 @@ export default function About() {
       description:
         "Recognizing that substation delivery bottlenecks often stall solar projects, we established our dedicated power transformer manufacturing facility in Dewas and Indore, producing specialized Inverter Duty Solar Transformers.",
       checkpoints: [
-        { label: "Dewas Manufacturing Hub" },
-        { label: "Inverter Duty Step-Up Units" },
-        { label: "BIS & CPRI Type-Tested" },
+        { label: "Dewas Manufacturing Hub", color: "amber" },
+        { label: "Inverter Duty Step-Up Units", color: "mint" },
+        { label: "BIS & CPRI Type-Tested", color: "sky" },
       ],
       deliverable: "100% In-House Substation Supply Guarantee for All EPC Contracts",
-      image: transformerSubstationImg,
-      locationTag: "Dewas & Indore Works",
-      specTag: "Inverter Duty Step-Up Transformers",
-      era: "Manufacturing Expansion",
+      pastelTag: "bg-amber-50 text-amber-800 border-amber-200/80",
     },
     {
       year: "2019",
@@ -361,15 +359,12 @@ export default function About() {
       description:
         "Transitioned into an Independent Power Producer (IPP) and large-scale utility developer, executing multi-megawatt ground-mounted solar farms and captive industrial solar arrays synchronized with state transmission grids.",
       checkpoints: [
-        { label: "Multi-Megawatt Solar Parks" },
-        { label: "33kV / 132kV HT Grid Sync" },
-        { label: "Captive Industrial PPA" },
+        { label: "Multi-Megawatt Solar Parks", color: "sky" },
+        { label: "33kV / 132kV HT Grid Sync", color: "amber" },
+        { label: "Captive Industrial PPA", color: "mint" },
       ],
       deliverable: "Synchronized Over 50+ MW of Utility Ground Assets to State Electricity Grids",
-      image: utilityPlantImg,
-      locationTag: "Central India Transmission Grid",
-      specTag: "33kV / 132kV HT Grid Evacuation",
-      era: "Utility Infrastructure",
+      pastelTag: "bg-sky-50 text-sky-800 border-sky-200/80",
     },
     {
       year: "2024+",
@@ -380,51 +375,47 @@ export default function About() {
       description:
         "Surpassed 125+ MW of installed solar capacity across India. Operating from offices in Indore, Delhi, Bhopal, and Dewas, we now engineer complete utility parks, factory microgrids, and thousands of subsidized residential rooftops.",
       checkpoints: [
-        { label: "125+ MW Proven Portfolio" },
-        { label: "Pan-India Execution Fleet" },
-        { label: "PM Surya Ghar Certified" },
+        { label: "125+ MW Proven Portfolio", color: "violet" },
+        { label: "Pan-India Execution Fleet", color: "mint" },
+        { label: "PM Surya Ghar Certified", color: "amber" },
       ],
       deliverable: "Trusted EPC & Transformer Partner to India's Premier Industrial Conglomerates",
-      image: project2Img,
-      locationTag: "Pan-India Operations",
-      specTag: "125+ MW Solar EPC & Substation Fleet",
-      era: "National Scale",
+      pastelTag: "bg-purple-50 text-purple-800 border-purple-200/80",
     },
   ];
 
-  // Throttled high-performance scroll observer
+  // Scroll Progress Calculator for Scrollytelling Section
   useEffect(() => {
-    let ticking = false;
-
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (!storyContainerRef.current) {
-            ticking = false;
-            return;
-          }
-          const rect = storyContainerRef.current.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          const topOffset = 80; // Height of fixed navbar
+      if (!storyContainerRef.current) return;
+      const rect = storyContainerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const topOffset = 80; // height of fixed navbar
 
-          const totalDist = storyContainerRef.current.offsetHeight - windowHeight;
-          if (totalDist <= 0) {
-            ticking = false;
-            return;
-          }
+      const totalDist = storyContainerRef.current.offsetHeight - windowHeight;
+      if (totalDist <= 0) return;
 
-          const scrolled = topOffset - rect.top;
-          const rawProgress = scrolled / totalDist;
-          const progress = Math.min(Math.max(rawProgress, 0), 1);
-          setScrollProgress(progress);
+      const scrolled = topOffset - rect.top;
+      const rawProgress = scrolled / totalDist;
+      const progress = Math.min(Math.max(rawProgress, 0), 1);
+      setScrollProgress(progress);
 
-          // 4 Milestones evenly distributed
-          const newIdx = Math.min(Math.floor(progress * 4), 3);
-          setActiveMilestoneIndex(newIdx);
-
-          ticking = false;
-        });
-        ticking = true;
+      // Progressive Reveal:
+      // Stage 0: Initial Minimal Intro (0.00 to 0.12)
+      // Stage 1: 2012 Milestone (0.12 to 0.35)
+      // Stage 2: 2016 Milestone (0.35 to 0.58)
+      // Stage 3: 2019 Milestone (0.58 to 0.80)
+      // Stage 4: 2024+ Milestone (0.80 to 1.00)
+      if (progress < 0.12) {
+        setActiveStage(0);
+      } else if (progress < 0.35) {
+        setActiveStage(1);
+      } else if (progress < 0.58) {
+        setActiveStage(2);
+      } else if (progress < 0.80) {
+        setActiveStage(3);
+      } else {
+        setActiveStage(4);
       }
     };
 
@@ -433,17 +424,17 @@ export default function About() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll to designated milestone
-  const scrollToMilestone = (milestoneIdx) => {
+  // Smooth scroll to designated stage threshold
+  const scrollToStage = (stageIdx) => {
     if (!storyContainerRef.current) return;
     const rect = storyContainerRef.current.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const sectionTop = rect.top + scrollTop - 80;
     const totalDist = storyContainerRef.current.offsetHeight - window.innerHeight;
 
-    // Target the center of that milestone's scroll segment
-    const targetProgress = (milestoneIdx + 0.5) / 4;
-    const targetY = sectionTop + totalDist * targetProgress;
+    // Target progress for each stage:
+    const stageTargets = [0.04, 0.22, 0.46, 0.69, 0.90];
+    const targetY = sectionTop + totalDist * stageTargets[stageIdx];
 
     window.scrollTo({
       top: targetY,
@@ -451,13 +442,7 @@ export default function About() {
     });
   };
 
-  const scrollToTimeline = () => {
-    const el = document.getElementById("corporate-story");
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  };
+  const currentMilestone = activeStage > 0 ? milestones[activeStage - 1] : milestones[0];
 
   // -------------------------------------------------------------
   // Section 4: 6 Universal Executed Projects
@@ -600,7 +585,7 @@ export default function About() {
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-2xl blur-md opacity-30 group-hover:opacity-75 transition duration-500 group-hover:scale-105"></div>
                     <button
                       type="button"
-                      onClick={scrollToTimeline}
+                      onClick={() => scrollToStage(0)}
                       className="relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/25 transition-all duration-300 font-tech tracking-wide cursor-pointer"
                     >
                       <span>Discover Our Corporate Journey</span>
@@ -681,350 +666,202 @@ export default function About() {
       </section>
 
       {/* =========================================================
-          2. SECTION TWO: OUR CORPORATE STORY
-             - Desktop (>= 1024px): Sticky Scroll-Driven Storytelling
-             - Mobile & Tablet (< 1024px): Dedicated Vertical Spine Timeline
+          2. SECTION TWO: OUR CORPORATE STORY (Sticky Scrollytelling,
+             Full Width, Initial Minimum Content, Progressive Reveal)
          ========================================================= */}
       <section
         id="corporate-story"
         ref={storyContainerRef}
-        className="relative w-full bg-white border-b border-[#E2E8E2] lg:h-[260vh]"
+        className="relative w-full bg-white border-b border-[#E2E8E2] h-[340vh] sm:h-[360vh]"
       >
-        {/* =========================================================
-            DESKTOP STICKY STAGE (>= 1024px)
-            Pinned under fixed navbar (top-20)
-           ========================================================= */}
-        <div className="hidden lg:flex sticky top-20 w-full h-[calc(100vh-5rem)] flex-col justify-between overflow-hidden bg-white/95 backdrop-blur-md z-20 px-4 sm:px-6 lg:px-8 py-3.5 xl:py-4">
+        {/* Sticky Viewport Stage: Pinned under fixed navbar (top-20) */}
+        <div className="sticky top-20 w-full h-[calc(100vh-5rem)] flex flex-col justify-between overflow-hidden bg-white/95 backdrop-blur-md z-20 px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
           {/* Subtle background ambient radial lighting */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#123C32]/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E8A83E]/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:28px_28px]" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#123C32]/5 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E8A83E]/5 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:28px_28px]"></div>
 
-          {/* Top Interactive Milestone Navigation & Progress Rail */}
-          <div className="max-w-5xl mx-auto w-full relative z-10">
-            {/* Header Title Row */}
-            <div className="flex items-end justify-between gap-4 pb-2 border-b border-[#E2E8E2]">
-              <div>
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#E9F0E9] text-[#123C32] text-[10px] font-bold font-tech uppercase tracking-wider mb-1 border border-[#123C32]/15">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E]"></span>
-                  <span>Our Corporate Story</span>
-                </div>
-                <h2 className="text-xl xl:text-2xl font-black text-[#202724] font-heading tracking-tight">
-                  Engineering India's Renewable Future Since 2012
-                </h2>
-              </div>
-
-              <div className="text-right shrink-0">
-                <span className="text-xs font-tech font-bold text-[#123C32]">
-                  Chapter 0{activeMilestoneIndex + 1} of 04
-                </span>
-                <p className="text-[11px] text-[#525D57] font-mono">
-                  {milestones[activeMilestoneIndex].era}
-                </p>
-              </div>
+          {/* =========================================================
+              Top Bar: Minimal Header & Dynamic Progress Indicator
+             ========================================================= */}
+          <div className="max-w-6xl mx-auto w-full relative z-10">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#E2E8E2]">
+              {/* Clean Small Heading */}
+              <h3 className="text-sm sm:text-base font-bold text-[#123C32] font-heading tracking-tight">
+                Our Corporate Story
+              </h3>
             </div>
 
-            {/* 4 Interactive Milestone Step Tabs */}
-            <div className="grid grid-cols-4 gap-2.5 mt-2">
-              {milestones.map((m, idx) => {
-                const isActive = activeMilestoneIndex === idx;
-                const isPassed = activeMilestoneIndex > idx;
-                return (
-                  <button
-                    key={m.year}
-                    type="button"
-                    onClick={() => scrollToMilestone(idx)}
-                    className={`group relative text-left p-2 rounded-xl transition-all duration-300 border cursor-pointer select-none ${
-                      isActive
-                        ? "bg-[#123C32] text-white border-[#123C32] shadow-md shadow-[#123C32]/20"
-                        : isPassed
-                        ? "bg-[#E9F0E9]/75 hover:bg-[#E9F0E9] text-[#123C32] border-[#123C32]/20"
-                        : "bg-white hover:bg-[#F7F8F4] text-[#525D57] hover:text-[#123C32] border-[#E2E8E2]"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-0.5">
-                      <span
-                        className={`text-xs font-black font-tech ${
-                          isActive ? "text-[#E8A83E]" : isPassed ? "text-[#123C32]" : "text-[#525D57]"
-                        }`}
-                      >
-                        {m.year}
-                      </span>
-                      <span
-                        className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold ${
-                          isActive
-                            ? "bg-white/15 text-white"
-                            : isPassed
-                            ? "bg-[#123C32]/10 text-[#123C32]"
-                            : "bg-[#F7F8F4] text-[#525D57]"
-                        }`}
-                      >
-                        0{idx + 1}
-                      </span>
-                    </div>
-                    <div
-                      className={`text-[11px] font-bold font-heading truncate ${
-                        isActive ? "text-white" : isPassed ? "text-[#123C32]" : "text-[#202724]"
-                      }`}
-                    >
-                      {m.badge}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Smooth Dynamic Progress Line */}
+            {/* Glowing Scroll Progress Bar */}
             <div className="w-full bg-[#E2E8E2] h-1.5 rounded-full overflow-hidden mt-2 relative">
               <div
                 className="h-full bg-gradient-to-r from-[#123C32] via-[#E8A83E] to-[#123C32] transition-all duration-300 ease-out"
                 style={{ width: `${Math.round(scrollProgress * 100)}%` }}
-              />
+              ></div>
             </div>
           </div>
 
-          {/* Center Stage: The Stable Pre-Mounted Milestone Story Card */}
-          <div className="max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center relative z-10 py-1.5">
-            <div
-              onMouseMove={handleMilestoneMouseMove}
-              onMouseEnter={() => setIsMilestoneCardHovered(true)}
-              onMouseLeave={() => setIsMilestoneCardHovered(false)}
-              className="relative w-full h-[380px] xl:h-[410px] rounded-2xl"
-            >
-              {/* Dynamic Cursor-Responsive Border Glow for Whole Card Frame */}
-              <div
-                className="pointer-events-none absolute -inset-0.5 rounded-2xl transition-opacity duration-500 z-20"
-                style={{
-                  opacity: isMilestoneCardHovered ? 1 : 0.4,
-                  background: isMilestoneCardHovered
-                    ? `radial-gradient(350px circle at ${milestoneMousePos.x}px ${milestoneMousePos.y}px, rgba(232, 168, 62, 0.8), rgba(18, 60, 50, 0.25) 50%, transparent 80%)`
-                    : "transparent",
-                }}
-              />
+          {/* =========================================================
+              Center Viewport Content:
+              - Stage 0: Less / Minimum Content (Clean Minimalist Intro)
+              - Stage 1-4: Progressively Revealed Milestone Cards
+             ========================================================= */}
+          <div className="max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center relative z-10 py-3">
+            {/* -------------------------------------------------------
+                STAGE 0: Initial Minimal View (Less / Minimum Content)
+               ------------------------------------------------------- */}
+            {activeStage === 0 && (
+              <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto px-4 animate-fade-in transition-all duration-700 ease-out">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-4">
+                  Engineering India's Renewable Future Since 2012
+                </h2>
 
-              {/* Stack of Pre-Mounted Milestone Cards (Smooth 3D Cross-Fade, Zero Reflow, Zero Top-Left Jump) */}
-              {milestones.map((m, idx) => {
-                const isActive = activeMilestoneIndex === idx;
-                const isPrev = activeMilestoneIndex > idx;
-                return (
-                  <div
-                    key={m.year}
-                    className={`absolute inset-0 w-full h-full rounded-2xl bg-white border border-[#E2E8E2] shadow-xl shadow-black/5 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${
-                      isActive
-                        ? "opacity-100 translate-y-0 scale-100 pointer-events-auto z-10"
-                        : isPrev
-                        ? "opacity-0 -translate-y-5 scale-[0.98] pointer-events-none z-0"
-                        : "opacity-0 translate-y-5 scale-[0.98] pointer-events-none z-0"
-                    }`}
+                <p className="text-xs sm:text-sm md:text-base text-[#525D57] leading-relaxed max-w-2xl mx-auto font-normal mb-8">
+                  From regional beginnings in Indore to a nationwide 125+ MW footprint and in-house transformer manufacturing, explore the defining milestones of our engineering journey.
+                </p>
+
+                {/* Minimalist Scroll Cue Pill */}
+                <div className="flex flex-col items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => scrollToStage(1)}
+                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#123C32] text-white hover:bg-[#1a4f43] transition-all duration-300 shadow-md shadow-[#123C32]/20 text-xs font-bold font-tech cursor-pointer group"
                   >
-                    <div className="grid grid-cols-12 h-full">
-                      {/* Left 7 Columns: Story Narrative & Engineering Metrics */}
-                      <div className="col-span-7 p-5 xl:p-6 flex flex-col justify-between h-full bg-white relative z-10">
-                        {/* Soft interior ambient glow following cursor */}
-                        <div
-                          className="pointer-events-none absolute -inset-px rounded-l-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-                          style={{
-                            opacity: isMilestoneCardHovered && isActive ? 1 : 0,
-                            background: `radial-gradient(280px circle at ${milestoneMousePos.x}px ${milestoneMousePos.y}px, rgba(232, 168, 62, 0.07), transparent 75%)`,
-                          }}
-                        />
+                    <span>Scroll Down to Trace Timeline</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </button>
 
-                        {/* Top Milestone Badge & Year */}
-                        <div className="relative z-10 flex items-center justify-between">
-                          <div className="flex items-center gap-2.5">
-                            <span className="text-3xl xl:text-4xl font-black font-tech text-[#123C32] tracking-tight">
-                              {m.year}
-                            </span>
-                            <span className="px-3 py-1 rounded-full text-xs font-bold font-tech uppercase tracking-wider bg-[#E9F0E9] text-[#123C32] border border-[#123C32]/15">
-                              {m.badge}
-                            </span>
-                          </div>
-                          <span className="text-xs font-mono text-[#525D57]">
-                            {m.era}
-                          </span>
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#525D57]/80 pt-1">
+                    <div className="w-3.5 h-6 rounded-full border-2 border-[#123C32]/40 flex items-start justify-center p-0.5">
+                      <div className="w-1 h-1.5 rounded-full bg-[#E8A83E] animate-bounce"></div>
+                    </div>
+                    <span>Scroll down slowly to unlock each milestone</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* -------------------------------------------------------
+                STAGE 1 – 4: Progressively Revealed Milestone Cards
+               ------------------------------------------------------- */}
+            {activeStage > 0 && (
+              <div
+                onMouseMove={handleMilestoneMouseMove}
+                onMouseEnter={() => setIsMilestoneCardHovered(true)}
+                onMouseLeave={() => setIsMilestoneCardHovered(false)}
+                className="relative rounded-2xl p-[1.5px] transition-all duration-700 ease-out select-none shadow-xl shadow-black/5 animate-fade-in"
+              >
+                {/* Dynamic Cursor-Responsive Border Glow */}
+                <div
+                  className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-500"
+                  style={{
+                    opacity: isMilestoneCardHovered ? 1 : 0.5,
+                    background: isMilestoneCardHovered
+                      ? `radial-gradient(350px circle at ${milestoneMousePos.x}px ${milestoneMousePos.y}px, rgba(232, 168, 62, 0.95), rgba(232, 168, 62, 0.35) 45%, rgba(18, 60, 50, 0.2) 75%, transparent 100%)`
+                      : `linear-gradient(135deg, rgba(232, 168, 62, 0.7), rgba(18, 60, 50, 0.35), rgba(232, 168, 62, 0.5))`,
+                  }}
+                />
+
+                {/* Card Inner Surface */}
+                <div className="relative rounded-[14.5px] bg-white p-4 sm:p-6 lg:p-8 overflow-hidden">
+                  {/* Soft Interior Ambient Glow following cursor */}
+                  <div
+                    className="pointer-events-none absolute -inset-px rounded-[14.5px] opacity-0 hover:opacity-100 transition-opacity duration-300 z-0"
+                    style={{
+                      opacity: isMilestoneCardHovered ? 1 : 0,
+                      background: `radial-gradient(280px circle at ${milestoneMousePos.x}px ${milestoneMousePos.y}px, rgba(232, 168, 62, 0.08), transparent 75%)`,
+                    }}
+                  />
+
+                  {/* Giant Aesthetic Year Watermark */}
+                  <div className="absolute right-4 bottom-2 text-6xl sm:text-8xl lg:text-9xl font-black font-tech text-[#123C32]/[0.04] pointer-events-none select-none">
+                    {currentMilestone.year}
+                  </div>
+
+                  <div className="relative z-10 space-y-3">
+                    {/* Header Row: Badge & Navigation Controls */}
+                    <div className="flex items-center justify-between gap-3">
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold font-tech uppercase border ${currentMilestone.pastelTag}`}>
+                        {currentMilestone.badge}
+                      </span>
+
+                      {/* Manual Previous / Next Buttons & Dots */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => scrollToStage(Math.max(activeStage - 1, 0))}
+                            className="p-1 rounded bg-[#F7F8F4] border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors cursor-pointer text-[#525D57]"
+                            aria-label="Previous Milestone"
+                          >
+                            <ChevronLeft className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => scrollToStage(Math.min(activeStage + 1, 4))}
+                            className="p-1 rounded bg-[#F7F8F4] border border-[#E2E8E2] hover:bg-[#123C32] hover:text-white transition-colors cursor-pointer text-[#525D57]"
+                            aria-label="Next Milestone"
+                          >
+                            <ChevronRight className="w-3.5 h-3.5" />
+                          </button>
                         </div>
 
-                        {/* Main Milestone Narrative */}
-                        <div className="relative z-10 space-y-1.5 my-auto">
-                          <h3 className="text-lg xl:text-xl font-black text-[#202724] font-heading tracking-tight leading-snug">
-                            {m.title}
-                          </h3>
-                          <p className="text-xs font-semibold text-[#E8A83E] font-tech">
-                            {m.subtitle}
-                          </p>
-                          <p className="text-xs xl:text-sm text-[#525D57] leading-relaxed text-justify-clean font-normal">
-                            {m.description}
-                          </p>
-                        </div>
-
-                        {/* Checkpoints & Deliverable Footprint */}
-                        <div className="relative z-10 pt-2 border-t border-[#E2E8E2] space-y-2.5">
-                          <div className="flex flex-wrap gap-1.5">
-                            {m.checkpoints.map((cp, cIdx) => (
-                              <span
-                                key={cIdx}
-                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium font-tech bg-[#F7F8F4] border border-[#E2E8E2] text-[#252A27]"
-                              >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
-                                {cp.label}
-                              </span>
-                            ))}
-                          </div>
-
-                          <div className="flex items-center gap-2 text-xs font-tech font-bold text-[#123C32]">
-                            <Award className="w-4 h-4 text-[#E8A83E] shrink-0" />
-                            <span className="truncate">{m.deliverable}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Right 5 Columns: Edge-to-Edge Project Visual */}
-                      <div className="col-span-5 h-full relative overflow-hidden bg-neutral-900 border-l border-[#E2E8E2] group">
-                        <SmartImage
-                          src={m.image}
-                          alt={m.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                          containerClassName="w-full h-full absolute inset-0"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/25 pointer-events-none" />
-
-                        {/* Top Telemetry Capsule */}
-                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-20 pointer-events-none">
-                          <span className="px-2.5 py-1 rounded-md bg-[#123C32]/90 backdrop-blur-md text-[#E8A83E] text-[10px] font-bold font-tech uppercase tracking-wider border border-white/10 shadow-xs">
-                            {m.locationTag}
-                          </span>
-                          <span className="text-[10px] font-mono text-white/90 bg-black/40 backdrop-blur-md px-2 py-0.5 rounded border border-white/10">
-                            {m.year} Milestone
-                          </span>
-                        </div>
-
-                        {/* Bottom Telemetry Capsule */}
-                        <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-xl bg-white/95 backdrop-blur-md border border-white/80 shadow-md z-20">
-                          <div className="text-[11px] font-bold text-[#123C32] font-tech uppercase tracking-wide truncate">
-                            {m.specTag}
-                          </div>
-                          <div className="text-[10px] text-[#525D57] font-medium line-clamp-1 mt-0.5">
-                            {m.deliverable}
-                          </div>
+                        <div className="flex items-center gap-1">
+                          {milestones.map((_, i) => (
+                            <span
+                              key={i}
+                              className={`h-1.5 rounded-full transition-all duration-300 ${
+                                activeStage - 1 === i ? "w-4 bg-[#123C32]" : "w-1.5 bg-[#123C32]/20"
+                              }`}
+                            />
+                          ))}
                         </div>
                       </div>
                     </div>
+
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                      {currentMilestone.title}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed font-normal text-justify-clean">
+                      {currentMilestone.description}
+                    </p>
+
+                    {/* Pastel Glowing Checkpoints */}
+                    <div className="pt-2 flex flex-wrap gap-2">
+                      {currentMilestone.checkpoints.map((cp, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold font-tech transition-all duration-300 hover:scale-105 hover:shadow-xs cursor-default bg-[#F7F8F4] border border-[#E2E8E2] text-[#202724] hover:border-[#E8A83E]/60 hover:text-[#123C32]"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#123C32]" />
+                          <span>{cp.label}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Bottom Status Footer Bar: Scroll Helper Hint */}
-          <div className="max-w-5xl mx-auto w-full relative z-10 pt-2 border-t border-[#E2E8E2] flex items-center justify-between text-xs font-tech text-[#525D57]">
+          {/* =========================================================
+              Bottom Status Footer Bar: Scroll Helper Hint
+             ========================================================= */}
+          <div className="max-w-6xl mx-auto w-full relative z-10 pt-2 border-t border-[#E2E8E2] flex items-center justify-between text-[11px] font-tech text-[#525D57]">
             <div className="flex items-center gap-2">
-              <div className="w-3.5 h-5 rounded-full border-2 border-[#123C32]/30 flex items-start justify-center p-0.5">
-                <div className="w-1 h-1.5 rounded-full bg-[#E8A83E] animate-bounce"></div>
-              </div>
               <span>
-                {activeMilestoneIndex === 3
-                  ? "Corporate story sequence complete • Continue scrolling down to explore our Core Pillars"
-                  : `Currently inspecting ${milestones[activeMilestoneIndex].year} (${milestones[activeMilestoneIndex].badge}) • Scroll to explore next chapter`}
+                {activeStage === 0
+                  ? "Scroll down to begin interactive timeline"
+                  : activeStage === 4
+                  ? "Milestone sequence complete • Keep scrolling down for Core Pillars"
+                  : `Currently inspecting Milestone ${currentMilestone.year} • Scroll down for next milestone`}
               </span>
             </div>
 
-            <div className="flex items-center gap-3 font-mono text-[11px]">
-              <span>{Math.round(scrollProgress * 100)}% Journey Progress</span>
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div className="hidden sm:flex items-center gap-2 font-mono">
+              <span>{Math.round(scrollProgress * 100)}% Scrolled</span>
             </div>
-          </div>
-        </div>
-
-        {/* =========================================================
-            MOBILE & TABLET TIMELINE: Dedicated Vertical Storytelling
-            (Natural Touch Scrolling, Zero Whitespace, Screen-Efficient)
-           ========================================================= */}
-        <div className="block lg:hidden px-4 sm:px-6 py-8 sm:py-10 bg-[#F7F8F4]">
-          <ScrollReveal delay={0} className="mb-6">
-            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#E9F0E9] text-[#123C32] text-[10px] font-bold font-tech uppercase tracking-wider mb-2 border border-[#123C32]/15">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E8A83E]"></span>
-              <span>Our Corporate Story</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight leading-tight mb-2">
-              Engineering India's Renewable Future Since 2012
-            </h2>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed font-normal">
-              From regional beginnings in Indore to a nationwide 125+ MW footprint and in-house transformer manufacturing, explore our engineering milestones.
-            </p>
-          </ScrollReveal>
-
-          {/* Vertical Timeline Spine */}
-          <div className="relative border-l-2 border-[#123C32]/20 ml-3 sm:ml-4 pl-5 sm:pl-7 space-y-6">
-            {milestones.map((m, idx) => (
-              <ScrollReveal key={m.year} delay={idx * 60} className="relative">
-                {/* Numbered Node on the Vertical Spine */}
-                <div className="absolute -left-[27px] sm:-left-[35px] top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#123C32] text-[#E8A83E] border-2 border-white shadow-sm flex items-center justify-center text-xs font-black font-tech">
-                  0{idx + 1}
-                </div>
-
-                {/* Milestone Card */}
-                <div className="rounded-2xl bg-white border border-[#E2E8E2] shadow-sm hover:shadow-md transition-shadow p-4 sm:p-5 overflow-hidden">
-                  {/* Header: Year + Badge */}
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-2xl font-black font-tech text-[#123C32] tracking-tight">
-                      {m.year}
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-tech uppercase tracking-wider bg-[#E9F0E9] text-[#123C32] border border-[#123C32]/15">
-                      {m.badge}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base sm:text-lg font-black text-[#202724] font-heading tracking-tight leading-snug mb-1">
-                    {m.title}
-                  </h3>
-                  <p className="text-xs font-semibold text-[#E8A83E] font-tech mb-2">
-                    {m.subtitle}
-                  </p>
-
-                  {/* Authentic Project Image */}
-                  <div className="relative w-full h-36 sm:h-44 rounded-xl overflow-hidden my-2.5 border border-[#E2E8E2] bg-neutral-900">
-                    <SmartImage
-                      src={m.image}
-                      alt={m.title}
-                      className="w-full h-full object-cover"
-                      containerClassName="w-full h-full absolute inset-0"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-tech text-white">
-                      <span className="bg-[#123C32]/90 backdrop-blur-xs px-2 py-0.5 rounded font-bold text-[#E8A83E] border border-white/10">
-                        {m.locationTag}
-                      </span>
-                      <span className="bg-black/50 backdrop-blur-xs px-2 py-0.5 rounded font-mono">
-                        {m.era}
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-[#525D57] leading-relaxed text-justify-clean mb-3">
-                    {m.description}
-                  </p>
-
-                  {/* Compact Checkpoints */}
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {m.checkpoints.map((cp, cIdx) => (
-                      <span
-                        key={cIdx}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-medium font-tech bg-[#F7F8F4] border border-[#E2E8E2] text-[#252A27]"
-                      >
-                        <CheckCircle2 className="w-3 h-3 text-[#123C32]" />
-                        {cp.label}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Deliverable highlight */}
-                  <div className="pt-2.5 border-t border-[#E2E8E2] flex items-center gap-1.5 text-[11px] font-tech font-bold text-[#123C32]">
-                    <Award className="w-3.5 h-3.5 text-[#E8A83E] shrink-0" />
-                    <span className="line-clamp-1">{m.deliverable}</span>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
         </div>
       </section>
