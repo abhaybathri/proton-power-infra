@@ -595,7 +595,7 @@ export default function About() {
          ========================================================= */}
       <section
         id="projects"
-        className="py-12 md:py-16 bg-white border-b border-[#E2E8E2] relative overflow-hidden scroll-mt-20"
+        className="py-8 md:py-10 bg-white border-b border-[#E2E8E2] relative overflow-hidden scroll-mt-20"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Centered Section Heading */}

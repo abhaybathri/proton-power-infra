@@ -75,15 +75,15 @@ const MILESTONES = [
 export default function CompanyTimeline() {
   // Introduction Section connecting to the timeline
   const introduction = (
-    <div className="max-w-4xl space-y-2 border-b border-[#E2E8E2] pb-6">
+    <div className="min-w-full space-y-2 border-b border-[#E2E8E2] pb-6 flex flex-col items-center">
       <div className="inline-flex items-center gap-2 text-[11px] font-bold font-tech uppercase tracking-wider text-[#123C32]">
-        <span className="w-2 h-2 rounded-xs bg-[#E8A83E]" />
+        
         <span>OUR CORPORATE STORY</span>
       </div>
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] font-heading tracking-tight leading-tight">
         Engineering India's Renewable Future Since 2012
       </h2>
-      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-3xl font-normal pt-1">
+      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-3xl font-normal pt-1 text-center">
         From regional beginnings in Indore to a nationwide 125+ MW footprint and in-house transformer manufacturing, explore the defining milestones of our engineering journey.
       </p>
     </div>
@@ -147,7 +147,7 @@ export default function CompanyTimeline() {
   }));
 
   return (
-    <section id="corporate-story" className="relative w-full border-b border-[#E2E8E2] bg-[#F7F8F4]">
+    <section id="corporate-story" className="relative w-full border-b border-[#E2E8E2] bg-[#F7F8F4] ">
       <Timeline data={timelineData} introduction={introduction} />
     </section>
   );
