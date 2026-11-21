@@ -140,12 +140,12 @@ export default function SustainabilityImpact() {
             <ScrollReveal delay={140} className="h-full flex flex-col">
               <div className="group relative h-full p-6 sm:p-8 rounded-2xl bg-white border border-[#E2E8E2] hover:border-[#123C32]/30 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-5">
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-[#E2E8E2] pb-4">
+                <div className="flex items-center justify-center border-b border-[#E2E8E2] pb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] flex items-center justify-center shrink-0 shadow-2xs">
                       <Sun className="w-5 h-5 text-[#123C32]" />
                     </div>
-                    <div>
+                    <div >
                       <h3 className="text-base font-bold text-[#123C32] font-heading">
                         Solar Impact &amp; Savings Calculator
                       </h3>
@@ -155,9 +155,7 @@ export default function SustainabilityImpact() {
                     </div>
                   </div>
 
-                  <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-[#123C32]/10 text-[#123C32] font-tech border border-[#123C32]/20">
-                    Interactive
-                  </span>
+                  
                 </div>
 
                 {/* Segment Selector */}

@@ -454,15 +454,7 @@ export default function ResidentialSolar() {
                   </div>
 
                   {/* Top Telemetry Capsule */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
-                      <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
-                      <span>Residential Array • Active</span>
-                    </div>
-                    <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[9px] font-mono text-[#E9F0E9] border border-white/10">
-                      <span>22.71° N, 75.85° E</span>
-                    </div>
-                  </div>
+                  
 
                   {/* Bottom Spec Capsule */}
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
@@ -499,7 +491,7 @@ export default function ResidentialSolar() {
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl lg:max-w-none mx-auto lg:whitespace-nowrap">
                 Transform unused terrace space into a high-return clean energy asset with guaranteed linear yield for 25 years.
               </p>
             </ScrollReveal>
@@ -533,7 +525,7 @@ export default function ResidentialSolar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header - Centered without badge */}
-          <div className="max-w-3xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
+          <div className="max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-4 sm:mb-5 text-center flex flex-col items-center">
             <ScrollReveal delay={0}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center">
                 How We Bring Solar to Your Home
@@ -541,7 +533,7 @@ export default function ResidentialSolar() {
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl lg:max-w-none mx-auto lg:whitespace-nowrap">
                 A seamless 4-phase turnkey story engineered for maximum yield and zero household disruption.
               </p>
             </ScrollReveal>
@@ -695,7 +687,7 @@ export default function ResidentialSolar() {
       {/* 5. Common Questions (FAQs) - Default FAQ #1 Open */}
       <section className="py-5 md:py-5 lg:py-5 bg-[#F7F8F4]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <div className="text-center max-w-2xl lg:max-w-none mx-auto mb-6 sm:mb-8">
             <ScrollReveal delay={0}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
                 Common Questions About Home Solar
@@ -703,7 +695,7 @@ export default function ResidentialSolar() {
             </ScrollReveal>
 
             <ScrollReveal delay={120}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 lg:whitespace-nowrap">
                 Clear answers regarding subsidies, terrace space requirements, and net-metering timelines.
               </p>
             </ScrollReveal>
@@ -757,7 +749,7 @@ export default function ResidentialSolar() {
           </ScrollReveal>
 
           <ScrollReveal delay={70}>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mb-6 font-normal">
               Our certified solar engineers will inspect your terrace, calculate shadow-free capacity, and provide an accurate cost and PM Surya Ghar subsidy simulation with zero obligation.
             </p>
           </ScrollReveal>

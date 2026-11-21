@@ -51,7 +51,7 @@ export function Timeline({ data, introduction }) {
     >
       {/* Introduction Section */}
       {introduction && (
-        <div className="max-w-7xl mx-auto pt-10 sm:pt-14 md:pt-16 pb-4 sm:pb-6 px-4 sm:px-6 md:px-8 lg:px-10">
+        <div className="max-w-7xl mx-auto pt-8 md:pt-10 pb-2 sm:pb-3 px-4 sm:px-6 md:px-8 lg:px-10">
           {introduction}
         </div>
       )}
@@ -61,7 +61,11 @@ export function Timeline({ data, introduction }) {
         {data.map((item, index) => (
           <div
             key={item.year || index}
-            className="flex justify-start pt-8 sm:pt-12 md:pt-16 lg:pt-20 md:gap-8 lg:gap-12"
+            className={`flex justify-start ${
+              index === 0
+                ? "pt-3 sm:pt-4 md:pt-5 lg:pt-6"
+                : "pt-8 sm:pt-12 md:pt-16 lg:pt-20"
+            } md:gap-8 lg:gap-12`}
           >
             {/* Desktop Left Column: Sticky Marker & Year */}
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-28 md:top-36 self-start max-w-xs lg:max-w-sm md:w-full">
@@ -110,7 +114,7 @@ export function Timeline({ data, introduction }) {
           style={{
             height: height + "px",
           }}
-          className="absolute left-8 md:left-8 top-0 overflow-hidden w-[2px] bg-gradient-to-b from-transparent via-[#123C32]/25 to-transparent [mask-image:linear-gradient(to_bottom,transparent_0%,black_5%,black_95%,transparent_100%)] pointer-events-none"
+          className="absolute left-8 md:left-8 top-0 overflow-hidden w-[2px] bg-gradient-to-b from-transparent via-[#123C32]/25 to-transparent [mask-image:linear-gradient(to_bottom,transparent_0%,black_2%,black_98%,transparent_100%)] pointer-events-none"
         >
           {/* Motion Scroll Progress Fill */}
           <motion.div

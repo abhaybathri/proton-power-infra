@@ -75,15 +75,15 @@ const MILESTONES = [
 export default function CompanyTimeline() {
   // Introduction Section connecting to the timeline
   const introduction = (
-    <div className="min-w-full space-y-2 border-b border-[#E2E8E2] pb-6 flex flex-col items-center">
-      <div className="inline-flex items-center gap-2 text-[11px] font-bold font-tech uppercase tracking-wider text-[#123C32]">
+    <div className="min-w-full space-y-2 border-b border-[#E2E8E2] pb-4 sm:pb-5 flex flex-col items-center justify-center">
+      <div className="inline-flex items-center gap-2 text-l font-bold font-tech uppercase tracking-wider text-[#123C32]">
         
         <span>OUR CORPORATE STORY</span>
       </div>
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] font-heading tracking-tight leading-tight">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] font-heading tracking-tight leading-tight text-center">
         Engineering India's Renewable Future Since 2012
       </h2>
-      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-3xl font-normal pt-1 text-center">
+      <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-3xl lg:max-w-5xl xl:max-w-none font-normal pt-1 text-center xl:whitespace-nowrap">
         From regional beginnings in Indore to a nationwide 125+ MW footprint and in-house transformer manufacturing, explore the defining milestones of our engineering journey.
       </p>
     </div>

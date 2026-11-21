@@ -68,27 +68,17 @@ export default function Navbar() {
       <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#E8A83E]/70 to-transparent pointer-events-none"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo Only (Brand Image contains full company name clearly) */}
           <Link
             to="/"
-            className="flex items-center gap-3 group focus:outline-none"
+            className="flex items-center focus:outline-none group py-0.5"
             aria-label="Proton Power Infra Homepage"
           >
-            <div className="h-10 sm:h-11 flex items-center justify-center p-1 rounded-lg bg-white border border-[#E2E8E2] shadow-2xs group-hover:shadow transition-shadow">
-              <img
-                src={IMAGES.officialLogo}
-                alt="Proton Power Infra Official Logo"
-                className="h-full w-auto object-contain max-w-[150px] sm:max-w-[170px]"
-              />
-            </div>
-            <div className="hidden sm:flex flex-col">
-              <span className="font-extrabold text-xs tracking-tight text-[#123C32] leading-none uppercase font-tech">
-                Proton Power Infra
-              </span>
-              <span className="text-[9px] font-semibold tracking-wider text-[#E8A83E] uppercase mt-0.5">
-                Solar & Transformers • 125+ MW
-              </span>
-            </div>
+            <img
+              src={IMAGES.navbarLogo}
+              alt="Proton Power Infra"
+              className="h-10 sm:h-11 md:h-12 lg:h-[50px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation: Home, Services & Solutions, About Us, Contact Us */}

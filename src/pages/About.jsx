@@ -180,18 +180,15 @@ function FlipProjectCard({ project }) {
           />
 
           {/* Top Status Badge */}
-          <div className="absolute top-3.5 left-3.5 z-20 pointer-events-none">
-            <span className="px-2.5 py-1 rounded-md bg-[#123C32]/90 backdrop-blur-md text-[#E8A83E] text-[10px] font-bold font-tech uppercase tracking-wider border border-white/10 shadow-sm">
-              {project.category}
-            </span>
-          </div>
+          
 
           {/* Bottom Heading & Subheading (Universal Height for Identical Framing) */}
           <div className="relative z-20 p-4 sm:p-5 text-white">
             <div className="flex items-center gap-2 mb-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              
               <span className="text-[10px] sm:text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider">
-                {project.capacity}
+                {project.capacity
+                }
               </span>
             </div>
             <div className="min-h-[2.8rem] sm:min-h-[3.2rem] flex items-center mb-1">
@@ -417,7 +414,7 @@ export default function About() {
   ];
 
   return (
-    <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
+    <div className="pt-20 bg-[#F7F8F4] text-[#252A27] gap-0">
       {/* =========================================================
           1. HERO SECTION (Golden Standard: Matching 400px Heights, 
              Centered Content, No Redundant Badges)
@@ -446,7 +443,7 @@ export default function About() {
                 </h1>
 
                 {/* Paragraph Description - Centered */}
-                <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
+                <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
                   Headquartered in Indore with pan-India execution, Proton Power Infra combines turnkey Solar EPC engineering with in-house Inverter Duty Power Transformer manufacturing. Since 2012, powering 125+ MW of industrial, utility, and clean energy infrastructure with uncompromising precision.
                 </p>
 
@@ -506,15 +503,7 @@ export default function About() {
                   </div>
 
                   {/* Top Telemetry Capsule */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
-                      <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
-                      <span>Proton Power Infra • Corporate HQ</span>
-                    </div>
-                    <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[9px] font-mono text-[#E9F0E9] border border-white/10">
-                      <span>22.75° N, 75.89° E</span>
-                    </div>
-                  </div>
+                  
 
                   {/* Bottom Spec Capsule */}
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/80 z-20">
@@ -548,11 +537,11 @@ export default function About() {
          ========================================================= */}
       <section className="py-8 md:py-10 bg-[#F7F8F4] border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-10">
+          <ScrollReveal delay={0} className="text-center max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-10">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-3">
               Built on Integrity, Engineered for Performance
             </h2>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto font-normal">
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl lg:max-w-none mx-auto font-normal lg:whitespace-nowrap">
               Our guiding principles guarantee that every megawatt engineered and transformer manufactured delivers decades of dependable power generation.
             </p>
           </ScrollReveal>
@@ -599,11 +588,11 @@ export default function About() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Centered Section Heading */}
-          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+          <ScrollReveal delay={0} className="text-center max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-3">
               Real Projects Executed Across India
             </h2>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto font-normal">
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl lg:max-w-none mx-auto font-normal lg:whitespace-nowrap">
               Hover over any project card to reveal its technical specifications, substation engineering, and verified environmental telemetry.
             </p>
           </ScrollReveal>
@@ -644,7 +633,7 @@ export default function About() {
             Partner with Proton Power Infra for Your Energy Transition
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl lg:max-w-4xl xl:max-w-none mx-auto mb-6 font-normal xl:whitespace-nowrap">
             Whether developing a multi-megawatt solar park, installing captive factory arrays, or sourcing Inverter Duty Solar Transformers, our engineers are ready to assist.
           </p>
 

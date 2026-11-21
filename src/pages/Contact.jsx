@@ -24,6 +24,7 @@ import {
   X,
   FileText,
   SlidersHorizontal,
+  AlertCircle,
 } from "lucide-react";
 import { COMPANY_DETAILS } from "../data/companyData";
 import SmartImage from "../components/SmartImage";
@@ -206,9 +207,9 @@ function ContactChannelCard({
         {/* Prominent Action Button with Glowing Effect */}
         <div className="relative z-10 pt-4 mt-4 border-t border-[#E2E8E2]">
           <div className="relative group/btn w-full">
-            {/* Glowing Ambient Halo */}
+            {/* Subtle, Professional Ambient Halo */}
             <div
-              className={`absolute -inset-1 rounded-xl blur-md transition duration-500 pointer-events-none group-hover/btn:scale-105 ${btnGlowClass}`}
+              className={`absolute -inset-0.5 rounded-xl blur-sm transition-all duration-300 pointer-events-none opacity-0 group-hover/btn:opacity-100 ${btnGlowClass}`}
             />
             <a
               href={btnUrl}
@@ -321,6 +322,8 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [referenceId, setReferenceId] = useState("");
+  const [submitError, setSubmitError] = useState("");
+  const [submittedData, setSubmittedData] = useState(null);
   const location = useLocation();
 
   // Smooth scroll to inquiry form if hash or query parameters are targeted
@@ -384,24 +387,80 @@ export default function Contact() {
     const { name, value } = e.target;
     setFormData((p) => ({ ...p, [name]: value }));
     if (errors[name]) setErrors((p) => ({ ...p, [name]: "" }));
+    if (submitError) setSubmitError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      const generatedId = `PPI-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-      setReferenceId(generatedId);
+    setSubmitError("");
+
+    const apiUrl = (import.meta.env.VITE_API_URL || "http://localhost:8000").replace(/\/+$/, "");
+    const cleanMobile = formData.mobileNumber.replace(/\D/g, "").slice(-10);
+
+    const payload = {
+      fullName: formData.fullName.trim(),
+      email: formData.email.trim(),
+      mobile: cleanMobile,
+      customerType: activeCategoryMeta.label || "Residential Solar",
+      projectLocation: formData.projectLocation.trim(),
+      propertyType: formData.facilityType?.trim() || "",
+      electricityConsumption: formData.capacityOrBill?.trim() || "",
+      message: formData.notes?.trim() || "",
+    };
+
+    try {
+      const response = await fetch(`${apiUrl}/api/enquiries`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (response.ok && result?.success) {
+        const cleanMsgId = result.messageId
+          ? String(result.messageId).replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase()
+          : "";
+        const genRef = cleanMsgId
+          ? `PPI-${new Date().getFullYear()}-${cleanMsgId}`
+          : `PPI-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+        setSubmittedData({ ...formData });
+        setReferenceId(genRef);
+        setSubmitted(true);
+        setFormData({
+          fullName: "",
+          mobileNumber: "",
+          email: "",
+          projectLocation: "",
+          facilityType: "",
+          capacityOrBill: "",
+          notes: "",
+        });
+        setErrors({});
+      } else {
+        setSubmitError(
+          result?.message || "Unable to submit your enquiry right now. Please try again."
+        );
+      }
+    } catch (err) {
+      console.error("Enquiry submission error:", err);
+      setSubmitError("Unable to submit your enquiry right now. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-    }, 700);
+    }
   };
 
   const resetForm = () => {
     setSubmitted(false);
     setReferenceId("");
+    setSubmitError("");
+    setSubmittedData(null);
     setFormData({
       fullName: "",
       mobileNumber: "",
@@ -411,6 +470,7 @@ export default function Contact() {
       capacityOrBill: "",
       notes: "",
     });
+    setErrors({});
   };
 
   return (
@@ -445,7 +505,7 @@ export default function Contact() {
                 </h1>
 
                 {/* Paragraph Description - Centered */}
-                <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg mx-auto">
+                <p className="text-xs sm:text-sm text-[#E9F0E9]/85 leading-relaxed font-normal text-center max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto">
                   Direct engineering desk for turnkey Solar EPC feasibility, in-house Power Transformer manufacturing, and rapid plant deployment. Headquartered in Indore with nationwide execution and zero-obligation proposals.
                 </p>
 
@@ -503,16 +563,8 @@ export default function Contact() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/30 pointer-events-none"></div>
                   </div>
 
-                  {/* Top Telemetry Capsule */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
-                      <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
-                      <span>Indore Corporate HQ • Active</span>
-                    </div>
-                    <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[9px] font-mono text-[#E9F0E9] border border-white/10">
-                      <span>22.75° N, 75.89° E</span>
-                    </div>
-                  </div>
+                  
+                  
 
                   {/* Bottom Spec Capsule */}
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/80 z-20">
@@ -539,11 +591,11 @@ export default function Contact() {
          ========================================================= */}
       <section className="py-12 md:py-16 bg-white border-b border-[#E2E8E2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+          <ScrollReveal delay={0} className="text-center max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-2">
               Direct Engineering &amp; Commercial Channels
             </h2>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl lg:max-w-none mx-auto lg:whitespace-nowrap">
               Choose the fastest communication channel for your organization. Our senior engineers respond promptly during business hours.
             </p>
           </ScrollReveal>
@@ -558,9 +610,9 @@ export default function Contact() {
               btnText="Call Primary Desk"
               btnIcon={Phone}
               btnUrl={`tel:${COMPANY_DETAILS.primaryPhoneRaw}`}
-              btnClass="bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724]"
-              btnGlowClass="bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] opacity-35 group-hover/btn:opacity-85"
-              btnIconColor="text-[#202724]"
+              btnClass="bg-[#0F382A] hover:bg-[#164E3A] text-white shadow-sm hover:shadow-[0_4px_16px_rgba(15,56,42,0.35)] hover:-translate-y-0.5 transition-all duration-200"
+              btnGlowClass="bg-[#0F382A]/30"
+              btnIconColor="text-white"
             >
               <div className="space-y-2">
                 <a
@@ -569,7 +621,7 @@ export default function Contact() {
                   title="Click to call Primary Desk"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
+                    
                     <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/phone:text-[#D4952D] font-tech transition-colors">
                       {COMPANY_DETAILS.phones[0].display}
                     </span>
@@ -586,7 +638,7 @@ export default function Contact() {
                   title="Click to call Secondary Desk"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                    
                     <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/phone:text-[#D4952D] font-tech transition-colors">
                       {COMPANY_DETAILS.phones[1].display}
                     </span>
@@ -608,9 +660,9 @@ export default function Contact() {
               btnText="Send Direct Email"
               btnIcon={Mail}
               btnUrl={`mailto:${COMPANY_DETAILS.email}`}
-              btnClass="bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724]"
-              btnGlowClass="bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] opacity-35 group-hover/btn:opacity-85"
-              btnIconColor="text-[#202724]"
+              btnClass="bg-[#D17118] hover:bg-[#A36402] text-white shadow-sm hover:shadow-[0_4px_16px_rgba(186,117,6,0.35)] hover:-translate-y-0.5 transition-all duration-200 drop-shadow-[0_1px_1.5px_rgba(0,0,0,0.3)]"
+              btnGlowClass="bg-[#BA7506]/35"
+              btnIconColor="text-white drop-shadow-[0_1px_1.5px_rgba(0,0,0,0.3)]"
             >
               <div className="space-y-2">
                 <a
@@ -619,7 +671,7 @@ export default function Contact() {
                   title="Click to send tender inquiries"
                 >
                   <div className="flex items-center gap-2 truncate">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
+                    
                     <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/email:text-[#D4952D] font-tech transition-colors truncate">
                       {COMPANY_DETAILS.email}
                     </span>
@@ -636,7 +688,7 @@ export default function Contact() {
                   title="Click to send project specifications & BOQ"
                 >
                   <div className="flex items-center gap-2 truncate">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                    
                     <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/email:text-[#D4952D] font-tech transition-colors truncate">
                       projects@protonpowerinfra.com
                     </span>
@@ -659,8 +711,8 @@ export default function Contact() {
               btnIcon={MessageSquare}
               btnUrl={COMPANY_DETAILS.whatsappUrl}
               isExternal={true}
-              btnClass="bg-[#25D366] hover:bg-[#20ba59] text-white"
-              btnGlowClass="bg-[#25D366] opacity-35 group-hover/btn:opacity-85"
+              btnClass="bg-[#25D366] hover:bg-[#20ba59] text-white shadow-sm hover:shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:-translate-y-0.5 transition-all duration-200"
+              btnGlowClass="bg-[#25D366]/30"
               btnIconColor="text-white fill-white"
               iconHoverClass="group-hover:border-[#25D366] group-hover:bg-emerald-50/50 group-hover:text-[#25D366] group-hover:shadow-[0_0_15px_rgba(37,211,102,0.25)]"
             >
@@ -673,7 +725,7 @@ export default function Contact() {
                   title="Click to chat on WhatsApp with Primary Desk"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
+                   
                     <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/wa:text-[#25D366] font-tech transition-colors">
                       +91 97707 44687
                     </span>
@@ -692,7 +744,7 @@ export default function Contact() {
                   title="Click to share site photos on WhatsApp Line 2"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#25D366] shrink-0"></span>
+                    
                     <span className="text-xs sm:text-sm font-bold text-[#202724] group-hover/wa:text-[#25D366] font-tech transition-colors">
                       +91 96853 20092
                     </span>
@@ -721,12 +773,12 @@ export default function Contact() {
           <EnquiryPortalContainer>
             {/* Header inside the form */}
             <div className="border-b border-[#E2E8E2] pb-3 mb-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
+              <div className="w-full">
                 
-                <h2 className="text-2xl sm:text-3xl font-black text-[#202724] font-heading tracking-tight leading-tight">
+                <h2 className="text-2xl sm:text-3xl font-black text-center text-[#202724] font-heading tracking-tight leading-tight">
                   Request Project Proposal &amp; Feasibility
                 </h2>
-                <p className="text-xs sm:text-sm text-[#525D57] mt-1 leading-relaxed text-justify-clean">
+                <p className="text-xs sm:text-sm text-[#525D57] mt-1 leading-relaxed text-center max-w-2xl lg:max-w-none mx-auto">
                   Fill in your parameters below. Our engineering desk will review technical feasibility and contact you within 24 business hours.
                 </p>
               </div>
@@ -752,10 +804,10 @@ export default function Contact() {
                     Transmission Confirmed
                   </span>
                   <h4 className="font-heading text-2xl font-black text-[#202724]">
-                    Thank You, {formData.fullName}!
+                    Thank You, {submittedData?.fullName || formData.fullName}!
                   </h4>
                   <p className="text-xs sm:text-sm text-[#525D57] max-w-md mx-auto leading-relaxed">
-                    Your inquiry has been registered under reference <strong>{referenceId}</strong>. A senior engineer will review your parameters and connect via <strong>{formData.email}</strong>.
+                    Your inquiry has been registered under reference <strong>{referenceId}</strong>. A senior engineer will review your parameters and connect via <strong>{submittedData?.email || formData.email}</strong>.
                   </p>
                 </div>
 
@@ -770,12 +822,12 @@ export default function Contact() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-[#525D57]">Project Location:</span>
-                    <span className="font-semibold text-[#202724]">{formData.projectLocation}</span>
+                    <span className="font-semibold text-[#202724]">{submittedData?.projectLocation || formData.projectLocation}</span>
                   </div>
-                  {formData.facilityType && (
+                  {(submittedData?.facilityType || formData.facilityType) && (
                     <div className="flex justify-between items-center">
                       <span className="text-[#525D57]">Facility Type:</span>
-                      <span className="font-semibold text-[#202724]">{formData.facilityType}</span>
+                      <span className="font-semibold text-[#202724]">{submittedData?.facilityType || formData.facilityType}</span>
                     </div>
                   )}
                 </div>
@@ -785,7 +837,7 @@ export default function Contact() {
                     <div className="absolute -inset-0.5 bg-[#25D366] rounded-xl blur-sm opacity-45 group-hover/wa:opacity-85 transition duration-300 pointer-events-none"></div>
                     <a
                       href={`https://wa.me/919770744687?text=${encodeURIComponent(
-                        `Hello Proton Power Infra, I have submitted a ${activeCategoryMeta.label} proposal request (Ref: ${referenceId}) for ${formData.projectLocation}. Please provide techno-commercial feasibility details.`
+                        `Hello Proton Power Infra, I have submitted a ${activeCategoryMeta.label} proposal request (Ref: ${referenceId}) for ${submittedData?.projectLocation || formData.projectLocation}. Please provide techno-commercial feasibility details.`
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -1007,24 +1059,33 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
+                {/* Submission Error Banner */}
+                {submitError && (
+                  <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm font-medium flex items-center gap-2.5 animate-fade-in">
+                    <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
+
                 {/* 6. GLOWING SUBMIT BUTTON */}
                 <div className="pt-2">
                   <div className="relative group/btn w-full">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-[#E8A83E] via-amber-300 to-[#E8A83E] rounded-xl blur-md opacity-35 group-hover/btn:opacity-85 transition duration-500 group-hover/btn:scale-105 pointer-events-none"></div>
+                    {/* Subtle, Professional Ambient Halo */}
+                    <div className="absolute -inset-0.5 rounded-xl bg-[#0F382A]/30 opacity-0 group-hover/btn:opacity-100 blur-sm transition-all duration-300 pointer-events-none" />
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold bg-[#E8A83E] hover:bg-[#D4952D] text-[#202724] shadow-lg shadow-black/15 transition-all duration-300 cursor-pointer disabled:opacity-75 font-tech tracking-wide"
+                      className="relative w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold bg-[#0F382A] hover:bg-[#164E3A] text-white shadow-sm hover:shadow-[0_4px_16px_rgba(15,56,42,0.35)] hover:-translate-y-0.5 transition-all duration-200 cursor-pointer disabled:opacity-75 font-tech tracking-wide"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
-                          <RefreshCw className="w-4 h-4 animate-spin text-[#202724]" />
-                          <span>Transmitting Proposal Request to Engineering Desk...</span>
+                          <RefreshCw className="w-4 h-4 animate-spin text-white" />
+                          <span>Submitting...</span>
                         </span>
                       ) : (
                         <>
                           <span>Transmit Proposal Request to Senior Engineering Desk</span>
-                          <Send className="w-4 h-4 text-[#202724] group-hover/btn:translate-x-1.5 transition-transform duration-200" />
+                          <Send className="w-4 h-4 text-white group-hover/btn:translate-x-1.5 transition-transform duration-200" />
                         </>
                       )}
                     </button>
@@ -1055,21 +1116,18 @@ export default function Contact() {
       {/* =========================================================
           4. HEADQUARTERS & REGIONAL OPERATIONS HUBS
          ========================================================= */}
-      <section className="py-12 md:py-16 bg-white border-b border-[#E2E8E2] relative overflow-hidden">
+      <section className="py-12 md:py-12 bg-white border-b border-[#E2E8E2] relative overflow-hidden">
         {/* Subtle background ambient glows */}
         <div className="absolute top-10 left-1/4 w-72 h-72 bg-[#E8A83E]/5 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <ScrollReveal delay={0} className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#123C32]/10 border border-[#123C32]/20 text-[#123C32] text-xs font-bold font-tech uppercase tracking-wider mb-2.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#E8A83E]" />
-              <span>Pan-India Presence</span>
-            </span>
+          <ScrollReveal delay={0} className="text-center max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-8 sm:mb-10">
+            
             <h2 className="text-2xl sm:text-3xl font-black text-[#202724] tracking-tight font-heading leading-tight mb-2">
               Our Headquarters &amp; Regional Operations Hubs
             </h2>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl lg:max-w-none mx-auto lg:whitespace-nowrap">
               Strategic offices across Central India and NCR providing rapid engineering mobilization, regulatory liaisoning, and on-site support.
             </p>
           </ScrollReveal>
@@ -1089,9 +1147,7 @@ export default function Contact() {
                     <div>
                       <div className="flex items-center justify-between mb-2.5">
                         <div className="flex items-center gap-2">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${
-                            isHQ ? "bg-[#123C32] text-[#E8A83E]" : "bg-white border border-[#E2E8E2] text-[#123C32] group-hover:border-[#E8A83E]"
-                          }`}>
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110`}>
                             <Building className="w-4 h-4" />
                           </div>
                           <h3 className="font-black text-base text-[#123C32] font-heading group-hover:text-[#D4952D] transition-colors">
@@ -1099,11 +1155,7 @@ export default function Contact() {
                           </h3>
                         </div>
                         <span
-                          className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-tech flex items-center gap-1 ${
-                            isHQ
-                              ? "bg-[#123C32] text-[#E8A83E] shadow-xs"
-                              : "bg-[#E9F0E9] text-[#123C32] group-hover:bg-[#FFFDF7] group-hover:text-[#D4952D]"
-                          }`}
+                          className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded font-tech flex items-center gap-1`}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                           <span>{off.role}</span>
@@ -1141,16 +1193,12 @@ export default function Contact() {
           <div className="bg-white rounded-2xl p-6 sm:p-7 border border-[#E2E8E2] shadow-sm">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#123C32] text-[#E8A83E] font-tech">
-                  Corporate Location
-                </span>
+                
                 <h3 className="text-xl sm:text-2xl font-black text-[#202724] font-heading mt-1">
                   Visit Our Vijay Nagar Headquarters in Indore
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm text-[#525D57] max-w-md">
-                In-person engineering meetings, architectural blueprint evaluations, and contract discussions are hosted during working hours.
-              </p>
+              
             </div>
 
             <div className="rounded-xl overflow-hidden border border-[#E2E8E2] relative h-72 sm:h-80 lg:h-96 w-full shadow-xs">

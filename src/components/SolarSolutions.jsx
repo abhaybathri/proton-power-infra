@@ -98,20 +98,11 @@ function StreamCard({ item, onHoverStart, onHoverEnd }) {
       <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 ring-1 ring-inset ring-[#E8A83E]/50 transition-opacity duration-300 z-10" />
 
       {/* Top Bar: Telemetry Badge + Crisp Solar Amber Icon */}
-      <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none z-20">
-        <span className="px-3 py-1 rounded-full text-[11px] font-bold font-tech uppercase tracking-wide bg-white/95 text-[#123C32] shadow-sm flex items-center gap-1.5 backdrop-blur-md">
-          <span>{item.index} • {item.capacity}</span>
-        </span>
-
-        {/* Radiant Icon (Solar Amber accent, crisp & high contrast) */}
-        <div className="w-9 h-9 rounded-xl bg-white/95 backdrop-blur-md text-[#123C32] group-hover:bg-[#E8A83E] group-hover:text-[#123C32] group-hover:scale-105 border border-white/40 flex items-center justify-center transition-all duration-300 shrink-0 shadow-sm">
-          <Icon className="w-4 h-4 stroke-[2.2]" />
-        </div>
-      </div>
+      
 
       {/* Bottom Content: Always shows Target + Title, smooth hover reveals Tagline & Button */}
       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-20 space-y-2">
-        <div>
+        <div className="flex flex-col items-center">
           <span className="text-[10px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider block">
             {item.target}
           </span>
@@ -122,9 +113,7 @@ function StreamCard({ item, onHoverStart, onHoverEnd }) {
 
         {/* Hover-Revealed Info & Action Button */}
         <div className="max-h-0 opacity-0 group-hover:max-h-24 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden space-y-2.5">
-          <p className="text-xs text-gray-200 leading-relaxed font-normal">
-            {item.tagline}
-          </p>
+          
 
           <Link
             to={`/${item.slug}`}

@@ -459,15 +459,7 @@ export default function IndustrialSolar() {
                   </div>
 
                   {/* Top Telemetry Capsule */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#123C32] shadow-sm font-tech">
-                      <Activity className="w-3.5 h-3.5 text-[#E8A83E] animate-pulse" />
-                      <span>Industrial Array • Active</span>
-                    </div>
-                    <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[9px] font-mono text-[#E9F0E9] border border-white/10">
-                      <span>22.71° N, 75.85° E</span>
-                    </div>
-                  </div>
+                  
 
                   {/* Bottom Spec Capsule */}
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-black/70 backdrop-blur-md shadow-lg border border-white/15 z-20">
@@ -501,7 +493,7 @@ export default function IndustrialSolar() {
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl lg:max-w-none mx-auto lg:whitespace-nowrap">
                 Transform energy overheads into high-yield captive assets with seamless transformer bay integration and guaranteed grid uptime.
               </p>
             </ScrollReveal>
@@ -543,7 +535,7 @@ export default function IndustrialSolar() {
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl mx-auto">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-center max-w-xl lg:max-w-none mx-auto lg:whitespace-nowrap">
                 A rigorous 4-phase turnkey installation engineered for zero factory downtime and guaranteed electrical safety.
               </p>
             </ScrollReveal>
@@ -694,7 +686,7 @@ export default function IndustrialSolar() {
       {/* 4. Common Questions (FAQs) - Default FAQ #1 Open */}
       <section className="py-6 sm:py-7 lg:py-8 bg-white border-t border-[#E2E8E2]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <div className="text-center max-w-2xl lg:max-w-none mx-auto mb-6 sm:mb-8">
             <ScrollReveal delay={0}>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#202724] tracking-tight leading-tight font-heading">
                 Common Questions About Industrial Solar
@@ -702,7 +694,7 @@ export default function IndustrialSolar() {
             </ScrollReveal>
 
             <ScrollReveal delay={70}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 lg:whitespace-nowrap">
                 Clear answers regarding factory uptime, HT grid synchronization, and in-house transformer integration.
               </p>
             </ScrollReveal>
@@ -756,7 +748,7 @@ export default function IndustrialSolar() {
           </ScrollReveal>
 
           <ScrollReveal delay={70}>
-            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl mx-auto mb-6 font-normal">
+            <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mb-6 font-normal">
               Our power infrastructure engineers will assess your plant's sanctioned HT load, analyze shed vibration dynamics, and model a high-capacity solar and transformer solution with zero obligation.
             </p>
           </ScrollReveal>

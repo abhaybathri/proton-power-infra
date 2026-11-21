@@ -16,22 +16,17 @@ export default function Footer() {
           {/* Col 1: Brand & Intro (4 cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
             <div className="space-y-3">
-              <Link to="/" className="inline-flex items-center gap-3 group focus:outline-none">
-                <div className="h-10 bg-white p-1 rounded-lg border border-[#E2E8E2] shadow-2xs group-hover:border-[#E8A83E]/60 transition-colors">
-                  <img
-                    src={IMAGES.officialLogo}
-                    alt="Proton Power Infra Logo"
-                    className="h-full w-auto object-contain"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-extrabold text-xs tracking-tight text-white leading-none uppercase font-tech">
-                    Proton Power Infra
-                  </span>
-                  <span className="text-[9px] font-semibold tracking-wider text-[#E8A83E] uppercase mt-0.5 font-tech">
-                    Solar EPC &amp; Transformers • 125+ MW
-                  </span>
-                </div>
+              {/* Logo Only (Brand Image contains full company name clearly, matching Header) */}
+              <Link
+                to="/"
+                className="inline-flex items-center focus:outline-none group py-0.5"
+                aria-label="Proton Power Infra Homepage"
+              >
+                <img
+                  src={IMAGES.navbarLogo}
+                  alt="Proton Power Infra"
+                  className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                />
               </Link>
 
               <p className="text-[#E9F0E9]/80 text-xs leading-relaxed pr-2">

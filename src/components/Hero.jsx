@@ -192,15 +192,7 @@ export default function Hero() {
               </div>
 
               {/* High-Tech Top Overlay Bar */}
-              <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
-                <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-bold text-[#123C32] shadow-sm font-tech">
-                  <Activity className="w-3 h-3 text-[#E8A83E] animate-pulse" />
-                  <span className="transition-all duration-300">{activeSlide.telemetry}</span>
-                </div>
-                <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#202724]/85 backdrop-blur-md text-[9px] font-mono text-[#E9F0E9] border border-white/10">
-                  <span>{activeSlide.coordinates}</span>
-                </div>
-              </div>
+              
 
               {/* Navigation Arrows (Interactive on hover/tap) */}
               <div className="absolute top-1/2 -translate-y-1/2 left-2 right-2 z-30 flex items-center justify-between pointer-events-none">

@@ -1,6 +1,7 @@
 // Official Assets & Real Projects
 import officialLogo from "../assets/company/official-logo.jpg";
 import logoPng from "../assets/company/logo.png";
+import navbarLogo from "../assets/company/navbar-logo.png";
 import mainCompanyTopImage from "../assets/company/main-comany-name-image-or-top-image.jpg";
 import realSolarRows from "../assets/company/real-project-solar-rows.jpg";
 import realTransformerSubstation from "../assets/company/real-project-transformer-substation.jpg";
@@ -67,6 +68,7 @@ export const COMPANY_DETAILS = {
 export const IMAGES = {
   logo: logoPng,
   officialLogo: officialLogo,
+  navbarLogo: navbarLogo,
   hero: homeTopImage,
   heroTop: homeTopImage,
   homeResidential: homeResidential,
