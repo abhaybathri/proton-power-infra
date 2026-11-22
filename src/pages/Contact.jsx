@@ -397,7 +397,7 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitError("");
 
-    const apiUrl = (import.meta.env.VITE_API_URL || "http://localhost:8000").replace(/\/+$/, "");
+    const apiUrl = (import.meta.env.VITE_API_KEY || "http://localhost:8000").replace(/\/+$/, "");
     const cleanMobile = formData.mobileNumber.replace(/\D/g, "").slice(-10);
 
     const payload = {
