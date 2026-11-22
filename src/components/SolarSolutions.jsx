@@ -5,11 +5,11 @@ import SmartImage from "./SmartImage";
 import ScrollReveal from "./ScrollReveal";
 
 // Home Assets Images
-import residentialImg from "../assets/home-assets/residential-solar.jpg";
-import commercialImg from "../assets/home-assets/comercial-ground-solar.jpg";
-import industrialImg from "../assets/home-assets/industrial-solar.jpg";
-import transformerImg from "../assets/home-assets/solar-transformer.jpg";
-import turnkeyImg from "../assets/home-assets/turnkey-solar.jpg";
+import residentialImg from "../assets/home-assets/residential-solar.webp";
+import commercialImg from "../assets/home-assets/comercial-ground-solar.webp";
+import industrialImg from "../assets/home-assets/industrial-solar.webp";
+import transformerImg from "../assets/home-assets/solar-transformer.webp";
+import turnkeyImg from "../assets/home-assets/turnkey-solar.webp";
 
 const INFRA_CAPABILITIES = [
   {
@@ -137,22 +137,34 @@ export default function SolarSolutions() {
   const resumeTimeout = useRef(null);
 
   // Drag-to-scroll refs
+  // Drag-to-scroll refs
   const isDragging = useRef(false);
   const startX = useRef(0);
-  const startScrollLeft = useRef(0);
 
-  // Duplicate items 3 times for seamless infinite circular floating and navigation
-  const streamItems = [...INFRA_CAPABILITIES, ...INFRA_CAPABILITIES, ...INFRA_CAPABILITIES];
+  // Duplicate items 6 times for uninterrupted infinite continuous floating and bidirectional scrolling
+  const streamItems = [
+    ...INFRA_CAPABILITIES,
+    ...INFRA_CAPABILITIES,
+    ...INFRA_CAPABILITIES,
+    ...INFRA_CAPABILITIES,
+    ...INFRA_CAPABILITIES,
+    ...INFRA_CAPABILITIES,
+  ];
+  const numSets = 6;
 
   // Guaranteed continuous floating ticker loop (smooth hardware-accelerated 60fps)
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    // Center in the second duplicated set initially so scrolling left/right has infinite runway
-    if (el.scrollLeft === 0) {
-      el.scrollLeft = el.scrollWidth / 3;
-    }
+    // Center in Set 2 initially so scrolling left/right has infinite runway
+    const initScroll = () => {
+      if (el && el.scrollWidth > 0 && el.scrollLeft === 0) {
+        el.scrollLeft = (el.scrollWidth * 2) / numSets;
+      }
+    };
+    initScroll();
+    const timer = setTimeout(initScroll, 100);
 
     const speed = 0.65; // gentle continuous glide speed
 
@@ -160,11 +172,14 @@ export default function SolarSolutions() {
       if (!isPaused && !isInteracting.current && el) {
         el.scrollLeft += speed;
 
-        // Seamless wrap-around boundaries
-        if (el.scrollLeft >= (el.scrollWidth * 2) / 3) {
-          el.scrollLeft -= el.scrollWidth / 3;
-        } else if (el.scrollLeft <= 0) {
-          el.scrollLeft += el.scrollWidth / 3;
+        const singleSetWidth = el.scrollWidth / numSets;
+        if (singleSetWidth > 0) {
+          // Seamless wrap-around boundaries
+          if (el.scrollLeft >= singleSetWidth * 4) {
+            el.scrollLeft -= singleSetWidth * 2;
+          } else if (el.scrollLeft <= singleSetWidth * 1) {
+            el.scrollLeft += singleSetWidth * 2;
+          }
         }
       }
       animFrameRef.current = requestAnimationFrame(loop);
@@ -173,16 +188,26 @@ export default function SolarSolutions() {
     animFrameRef.current = requestAnimationFrame(loop);
 
     return () => {
+      clearTimeout(timer);
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
   }, [isPaused]);
 
-  // Compute active card dot on scroll
+  // Compute active card dot & wrap seamlessly during manual scrolling (touch, wheel, drag)
   const handleScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
-    const singleSetWidth = el.scrollWidth / 3;
-    const normalized = (el.scrollLeft % singleSetWidth + singleSetWidth) % singleSetWidth;
+    const singleSetWidth = el.scrollWidth / numSets;
+    if (singleSetWidth <= 0) return;
+
+    // Seamless bidirectional wrap-around during user scroll
+    if (el.scrollLeft >= singleSetWidth * 4) {
+      el.scrollLeft -= singleSetWidth * 2;
+    } else if (el.scrollLeft <= singleSetWidth * 1) {
+      el.scrollLeft += singleSetWidth * 2;
+    }
+
+    const normalized = ((el.scrollLeft % singleSetWidth) + singleSetWidth) % singleSetWidth;
     const cardStep = singleSetWidth / INFRA_CAPABILITIES.length;
     const idx = Math.min(
       INFRA_CAPABILITIES.length - 1,
@@ -226,22 +251,24 @@ export default function SolarSolutions() {
   // Mouse Drag Handlers
   const handleMouseDown = (e) => {
     isDragging.current = true;
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    startScrollLeft.current = scrollRef.current.scrollLeft;
+    startX.current = e.pageX;
     pauseAutoFloat();
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging.current || !scrollRef.current) return;
     e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.4;
-    scrollRef.current.scrollLeft = startScrollLeft.current - walk;
+    const x = e.pageX;
+    const deltaX = x - startX.current;
+    startX.current = x;
+    scrollRef.current.scrollLeft -= deltaX * 1.3;
   };
 
   const handleMouseUp = () => {
-    isDragging.current = false;
-    resumeAutoFloat(1500);
+    if (isDragging.current) {
+      isDragging.current = false;
+      resumeAutoFloat(1500);
+    }
   };
 
   return (
@@ -309,13 +336,16 @@ export default function SolarSolutions() {
             ref={scrollRef}
             onScroll={handleScroll}
             onMouseEnter={pauseAutoFloat}
-            onMouseLeave={() => resumeAutoFloat(1000)}
+            onMouseLeave={() => {
+              handleMouseUp();
+              resumeAutoFloat(1000);
+            }}
             onTouchStart={pauseAutoFloat}
             onTouchEnd={() => resumeAutoFloat(1500)}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
-            className="flex gap-4 sm:gap-5 px-4 overflow-x-auto scrollbar-none scroll-smooth cursor-grab active:cursor-grabbing select-none"
+            className="flex gap-4 sm:gap-5 px-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             {streamItems.map((item, idx) => (

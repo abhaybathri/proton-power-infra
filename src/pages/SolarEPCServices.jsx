@@ -15,13 +15,14 @@ import {
 import { COMPANY_DETAILS } from "../data/companyData";
 import SmartImage from "../components/SmartImage";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 
 // Solar EPC Dedicated Assets
 import topImg from "../assets/solar-epc-assets/top-image.png";
-import designImg from "../assets/solar-epc-assets/Plant Design & Engineering.png";
-import liaisoningImg from "../assets/solar-epc-assets/Approvals & Liaisoning.png";
-import constructionImg from "../assets/solar-epc-assets/Construction & Procurement Management.png";
-import omImg from "../assets/solar-epc-assets/O&M.png";
+import designImg from "../assets/solar-epc-assets/Plant Design & Engineering.webp";
+import liaisoningImg from "../assets/solar-epc-assets/Approvals & Liaisoning.webp";
+import constructionImg from "../assets/solar-epc-assets/Construction & Procurement Management.webp";
+import omImg from "../assets/solar-epc-assets/O&M.webp";
 
 function EpcBenefitCard({
   benefit,
@@ -378,6 +379,23 @@ export default function SolarEPCServices() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
+      <SEO
+        title="Turnkey Solar EPC & O&M Services (MW-Scale) | Proton Power Infra"
+        description="End-to-end solar EPC contracting: land topography, civil engineering, CEIG liaisoning, procurement, grid evacuation, and 25-year SCADA-enabled O&M support."
+        canonical="https://protonpowerinfra.com/solar-epc-services"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Turnkey Solar EPC & O&M Services",
+          "provider": {
+            "@type": "Organization",
+            "name": "Proton Power Infra",
+            "url": "https://protonpowerinfra.com"
+          },
+          "serviceType": "Solar EPC Contracting & Utility Parks",
+          "description": "Comprehensive turnkey solar EPC solutions including site engineering, DISCOM liaisoning, plant erection, transformer integration, and SCADA monitoring."
+        }}
+      />
       {/* 1. Hero Section - Equal Width & Height, Compact & Centered Content */}
       <section className="relative overflow-hidden py-6 sm:py-7 lg:py-8 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
@@ -639,7 +657,7 @@ export default function SolarEPCServices() {
                     </p>
                   </div>
 
-                  {/* Key Engineering Checkpoints with Distinct Light Pastel Shades & Individual Glow */}
+                  {/* Key Engineering Checkpoints */}
                   <div>
                     <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
                       Engineering Checkpoints:
@@ -648,22 +666,22 @@ export default function SolarEPCServices() {
                       {currentPhaseData.highlights.map((h, i) => {
                         const style = [
                           {
-                            card: "bg-emerald-50/70 border-emerald-200/80 text-emerald-950 hover:border-emerald-400 hover:shadow-[0_0_14px_rgba(16,185,129,0.22)]",
+                            card: "bg-emerald-50/50 border-emerald-100/80 text-emerald-950",
                             icon: "text-emerald-700",
                           },
                           {
-                            card: "bg-amber-50/70 border-amber-200/80 text-amber-950 hover:border-amber-400 hover:shadow-[0_0_14px_rgba(232,168,62,0.25)]",
+                            card: "bg-amber-50/50 border-amber-100/80 text-amber-950",
                             icon: "text-amber-700",
                           },
                           {
-                            card: "bg-teal-50/70 border-teal-200/80 text-teal-950 hover:border-teal-400 hover:shadow-[0_0_14px_rgba(20,184,166,0.22)]",
+                            card: "bg-teal-50/50 border-teal-100/80 text-teal-950",
                             icon: "text-teal-700",
                           },
                         ][i % 3];
                         return (
                           <div
                             key={i}
-                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border transition-all duration-300 cursor-default hover:scale-[1.01] ${style.card}`}
+                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border cursor-default select-none transition-colors ${style.card}`}
                           >
                             <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${style.icon}`} />
                             <span className="truncate font-medium">{h}</span>
@@ -673,9 +691,9 @@ export default function SolarEPCServices() {
                     </div>
                   </div>
 
-                  {/* Deliverable Capsule with Ambient Radiant Glow */}
-                  <div className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-50/80 via-amber-50/60 to-emerald-50/80 border border-emerald-200/80 hover:border-[#E8A83E] hover:shadow-[0_0_16px_rgba(232,168,62,0.22)] transition-all duration-300 flex items-center gap-2.5 font-tech">
-                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10 shadow-2xs">
+                  {/* Deliverable Capsule */}
+                  <div className="px-3.5 py-2 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] flex items-center gap-2.5 font-tech select-none">
+                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#E2E8E2] shadow-2xs">
                       Deliverable
                     </span>
                     <span className="text-xs font-bold text-[#202724] truncate">

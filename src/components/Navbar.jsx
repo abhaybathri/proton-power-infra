@@ -77,7 +77,11 @@ export default function Navbar() {
             <img
               src={IMAGES.navbarLogo}
               alt="Proton Power Infra"
-              className="h-10 sm:h-11 md:h-12 lg:h-[50px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              width="127"
+              height="56"
+              fetchPriority="high"
+              decoding="async"
+              className="h-12 sm:h-13 md:h-14 lg:h-[56px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
             />
           </Link>
 

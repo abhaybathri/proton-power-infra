@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Send, Upload, CheckCircle2, FileText, Sparkles, MapPin, Users, Award, ShieldCheck } from "lucide-react";
 import { COMPANY_DETAILS } from "../data/companyData";
+import SEO from "../components/SEO";
 
 export default function Careers() {
   const [formData, setFormData] = useState({
@@ -84,6 +85,18 @@ export default function Careers() {
 
   return (
     <div className="pt-24 sm:pt-28 pb-10 bg-[#F7F8F4] min-h-screen">
+      <SEO
+        title="Careers at Proton Power Infra | Join India's Clean Energy Team"
+        description="Explore career opportunities in solar EPC design, transformer engineering, project management, and site execution at Proton Power Infra headquarters in Indore."
+        canonical="https://protonpowerinfra.com/careers"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Careers at Proton Power Infra",
+          "description": "Career opportunities in solar EPC engineering, power transformer design, and clean energy execution at Proton Power Infra.",
+          "url": "https://protonpowerinfra.com/careers"
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Compact Hero Banner */}
         <div className="text-center max-w-3xl mx-auto mb-7 sm:mb-8 space-y-2">
@@ -186,6 +199,7 @@ export default function Careers() {
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleChange}
+                      autoComplete="name"
                       placeholder="e.g. Rahul Verma"
                       className={`w-full px-3 py-2 rounded-lg border text-xs sm:text-sm bg-[#F7F8F4] focus:bg-white focus:outline-none focus:ring-2 transition-all ${
                         errors.fullName ? "border-red-400 focus:ring-red-200" : "border-[#E2E8E2] focus:ring-[#123C32]/20 focus:border-[#123C32]"
@@ -205,6 +219,7 @@ export default function Careers() {
                         name="mobileNumber"
                         value={formData.mobileNumber}
                         onChange={handleChange}
+                        autoComplete="tel"
                         placeholder="98765 43210"
                         maxLength={10}
                         className={`w-full pl-10 pr-3 py-2 rounded-lg border text-xs sm:text-sm bg-[#F7F8F4] focus:bg-white focus:outline-none focus:ring-2 transition-all ${
@@ -226,6 +241,7 @@ export default function Careers() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      autoComplete="email"
                       placeholder="rahul@example.com"
                       className={`w-full px-3 py-2 rounded-lg border text-xs sm:text-sm bg-[#F7F8F4] focus:bg-white focus:outline-none focus:ring-2 transition-all ${
                         errors.email ? "border-red-400 focus:ring-red-200" : "border-[#E2E8E2] focus:ring-[#123C32]/20 focus:border-[#123C32]"

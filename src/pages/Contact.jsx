@@ -29,9 +29,10 @@ import {
 import { COMPANY_DETAILS } from "../data/companyData";
 import SmartImage from "../components/SmartImage";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 
 // Authentic HQ Photo
-import mainTopImg from "../assets/company/main-comany-name-image-or-top-image.jpg";
+import mainTopImg from "../assets/company/main-comany-name-image-or-top-image.webp";
 
 // =================================================================
 // Category Definitions for Integrated Enquiry Portal
@@ -475,6 +476,18 @@ export default function Contact() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] min-h-screen text-[#252A27]">
+      <SEO
+        title="Contact Engineering Desk & Request Proposal | Proton Power Infra"
+        description="Connect directly with our engineering desk in Indore. Request zero-obligation techno-commercial proposals, substation feasibility audits, and solar project quotations."
+        canonical="https://protonpowerinfra.com/contact"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact Proton Power Infra",
+          "description": "Techno-commercial engineering desk for Solar EPC feasibility audits and Inverter Duty Power Transformer manufacturing inquiries.",
+          "url": "https://protonpowerinfra.com/contact"
+        }}
+      />
       {/* =========================================================
           1. HERO SECTION (Golden Standard: Matching 400px Heights, 
              Centered Content, Prominent Multi-Color Glows)
@@ -928,6 +941,7 @@ export default function Contact() {
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleChange}
+                      autoComplete="name"
                       placeholder="e.g. Vikram Sharma"
                       className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
                         errors.fullName
@@ -949,6 +963,7 @@ export default function Contact() {
                       name="mobileNumber"
                       value={formData.mobileNumber}
                       onChange={handleChange}
+                      autoComplete="tel"
                       placeholder="9770744687"
                       maxLength={10}
                       className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
@@ -974,6 +989,7 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      autoComplete="email"
                       placeholder="vikram@company.com"
                       className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
                         errors.email
@@ -995,6 +1011,7 @@ export default function Contact() {
                       name="projectLocation"
                       value={formData.projectLocation}
                       onChange={handleChange}
+                      autoComplete="address-level2"
                       placeholder="e.g. Indore, Dewas, Bhopal, Delhi NCR"
                       className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm bg-[#F7F8F4] hover:bg-white focus:bg-white focus:outline-none transition-all duration-200 ${
                         errors.projectLocation

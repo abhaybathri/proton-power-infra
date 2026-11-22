@@ -13,16 +13,22 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+            // Do not bundle motion into the initial vendor chunks; keep it with the lazy About page
+            if (id.includes('motion')) {
+              return undefined;
+            }
+            if (
+              id.includes('/react/') ||
+              id.includes('\\react\\') ||
+              id.includes('/react-dom/') ||
+              id.includes('\\react-dom\\') ||
+              id.includes('/react-router-dom/') ||
+              id.includes('\\react-router-dom\\') ||
+              id.includes('/react-router/') ||
+              id.includes('\\react-router\\')
+            ) {
               return 'vendor-react';
             }
-            if (id.includes('motion')) {
-              return 'vendor-motion';
-            }
-            if (id.includes('lucide-react')) {
-              return 'vendor-icons';
-            }
-            return 'vendor-other';
           }
         },
       },

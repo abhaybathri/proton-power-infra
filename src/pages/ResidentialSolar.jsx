@@ -22,14 +22,15 @@ import {
 import { FAQS, COMPANY_DETAILS } from "../data/companyData";
 import SmartImage from "../components/SmartImage";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 
 // Residential Assets
-import topImage from "../assets/residential-solar-assets/top-image.png";
-import siteAssesmentImg from "../assets/residential-solar-assets/site-assesment-phase.png";
-import customizeDesignImg from "../assets/residential-solar-assets/customize-design-phase.png";
-import installationImg from "../assets/residential-solar-assets/installation-phase.png";
-import systemInstallationImg from "../assets/residential-solar-assets/system-installation-phase.png";
-import whyChooseImg from "../assets/residential-solar-assets/why-choose-image.jpg";
+import topImage from "../assets/residential-solar-assets/top-image.webp";
+import siteAssesmentImg from "../assets/residential-solar-assets/site-assesment-phase.webp";
+import customizeDesignImg from "../assets/residential-solar-assets/customize-design-phase.webp";
+import installationImg from "../assets/residential-solar-assets/installation-phase.webp";
+import systemInstallationImg from "../assets/residential-solar-assets/system-installation-phase.webp";
+import whyChooseImg from "../assets/residential-solar-assets/why-choose-image.webp";
 
 function BenefitCard({
   benefit,
@@ -370,6 +371,23 @@ export default function ResidentialSolar() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
+      <SEO
+        title="Residential Rooftop Solar Solutions (3kW – 25kW) | Proton Power Infra"
+        description="Turnkey rooftop solar installations for independent villas, row houses, and residential societies with MNRE subsidy liaisoning, net-metering, and Tier-1 modules."
+        canonical="https://protonpowerinfra.com/residential-solar"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Residential Rooftop Solar Solutions",
+          "provider": {
+            "@type": "Organization",
+            "name": "Proton Power Infra",
+            "url": "https://protonpowerinfra.com"
+          },
+          "serviceType": "Residential Solar EPC & Rooftop Installation",
+          "description": "High-yield distributed residential solar systems for villas, bungalows, and housing societies with complete MNRE subsidy and net-metering liaisoning."
+        }}
+      />
       {/* 1. Hero Section - Equal Width & Height, Compact & Centered Content */}
       <section className="relative overflow-hidden py-6 sm:py-7 lg:py-8 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
@@ -631,7 +649,7 @@ export default function ResidentialSolar() {
                     </p>
                   </div>
 
-                  {/* Key Engineering Checkpoints with Distinct Light Pastel Shades & Individual Glow */}
+                  {/* Key Engineering Checkpoints */}
                   <div>
                     <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
                       Engineering Checkpoints:
@@ -640,22 +658,22 @@ export default function ResidentialSolar() {
                       {currentPhaseData.highlights.map((h, i) => {
                         const style = [
                           {
-                            card: "bg-emerald-50/70 border-emerald-200/80 text-emerald-950 hover:border-emerald-400 hover:shadow-[0_0_14px_rgba(16,185,129,0.22)]",
+                            card: "bg-emerald-50/50 border-emerald-100/80 text-emerald-950",
                             icon: "text-emerald-700",
                           },
                           {
-                            card: "bg-amber-50/70 border-amber-200/80 text-amber-950 hover:border-amber-400 hover:shadow-[0_0_14px_rgba(232,168,62,0.25)]",
+                            card: "bg-amber-50/50 border-amber-100/80 text-amber-950",
                             icon: "text-amber-700",
                           },
                           {
-                            card: "bg-teal-50/70 border-teal-200/80 text-teal-950 hover:border-teal-400 hover:shadow-[0_0_14px_rgba(20,184,166,0.22)]",
+                            card: "bg-teal-50/50 border-teal-100/80 text-teal-950",
                             icon: "text-teal-700",
                           },
                         ][i % 3];
                         return (
                           <div
                             key={i}
-                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border transition-all duration-300 cursor-default hover:scale-[1.01] ${style.card}`}
+                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border cursor-default select-none transition-colors ${style.card}`}
                           >
                             <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${style.icon}`} />
                             <span className="truncate font-medium">{h}</span>
@@ -665,9 +683,9 @@ export default function ResidentialSolar() {
                     </div>
                   </div>
 
-                  {/* Deliverable Capsule with Ambient Radiant Glow */}
-                  <div className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-50/80 via-amber-50/60 to-emerald-50/80 border border-emerald-200/80 hover:border-[#E8A83E] hover:shadow-[0_0_16px_rgba(232,168,62,0.22)] transition-all duration-300 flex items-center gap-2.5 font-tech">
-                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10 shadow-2xs">
+                  {/* Deliverable Capsule */}
+                  <div className="px-3.5 py-2 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] flex items-center gap-2.5 font-tech select-none">
+                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#E2E8E2] shadow-2xs">
                       Deliverable
                     </span>
                     <span className="text-xs font-bold text-[#202724] truncate">

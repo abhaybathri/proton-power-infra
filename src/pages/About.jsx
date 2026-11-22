@@ -18,20 +18,21 @@ import { COMPANY_DETAILS } from "../data/companyData";
 import SmartImage from "../components/SmartImage";
 import ScrollReveal from "../components/ScrollReveal";
 import CompanyTimeline from "../components/about/CompanyTimeline";
+import SEO from "../components/SEO";
 
 // Authentic Company Assets
-import mainTopImg from "../assets/company/main-comany-name-image-or-top-image.jpg";
-import utilityPlantImg from "../assets/company/real-project-utility-plant.jpg";
-import solarRowsImg from "../assets/company/real-project-solar-rows.jpg";
-import transformerSubstationImg from "../assets/company/real-project-transformer-substation.jpg";
-import project1Img from "../assets/company/project-1.jpg";
-import project2Img from "../assets/company/project-2.jpg";
-import groundMountedImg from "../assets/commercial-assets/ground-mounted-image.jpg";
+import mainTopImg from "../assets/company/main-comany-name-image-or-top-image.webp";
+import utilityPlantImg from "../assets/company/real-project-utility-plant.webp";
+import solarRowsImg from "../assets/company/real-project-solar-rows.webp";
+import transformerSubstationImg from "../assets/company/real-project-transformer-substation.webp";
+import project1Img from "../assets/company/project-1.webp";
+import project2Img from "../assets/company/project-2.webp";
+import groundMountedImg from "../assets/commercial-assets/ground-mounted-image.webp";
 
 // =================================================================
 // Subcomponent: PillarCard with Cursor-Following Border & Glow
 // =================================================================
-function PillarCard({ icon: Icon, badge, badgeColor, title, description, metric }) {
+function PillarCard({ icon: Icon, badge, title, description, metric }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -72,12 +73,18 @@ function PillarCard({ icon: Icon, badge, badgeColor, title, description, metric 
         />
 
         <div className="relative z-10">
-          <div className="w-12 h-12 rounded-xl bg-[#E9F0E9] text-[#123C32] flex items-center justify-center mb-4 group-hover:bg-[#E8A83E] group-hover:text-[#123C32] group-hover:scale-105 transition-all duration-300 shadow-xs">
-            <Icon className="w-6 h-6 stroke-[2.2]" />
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-xl bg-[#E9F0E9] text-[#123C32] flex items-center justify-center group-hover:bg-[#E8A83E] group-hover:text-[#123C32] group-hover:scale-105 transition-all duration-300 shadow-xs">
+              <Icon className="w-6 h-6 stroke-[2.2]" />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-0.5 rounded-full bg-[#E8A83E]"></span>
+              <span className="text-xs font-bold font-tech uppercase tracking-widest text-[#123C32]">
+                {badge}
+              </span>
+            </div>
           </div>
-          <div className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold font-tech uppercase tracking-wider mb-2.5 border ${badgeColor}`}>
-            {badge}
-          </div>
+
           <h3 className="text-lg sm:text-xl font-bold text-[#202724] font-heading mb-2 leading-snug group-hover:text-[#123C32] transition-colors">
             {title}
           </h3>
@@ -96,20 +103,42 @@ function PillarCard({ icon: Icon, badge, badgeColor, title, description, metric 
 }
 
 // =================================================================
-// Subcomponent: FlipProjectCard (Visual-First, Flip on Hover)
+// Subcomponent: FlipProjectCard (Visual-First, Flip on Hover & Click)
 // =================================================================
-function FlipProjectCard({ project }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+function FlipProjectCard({ project, isFlipped: isFlippedControlled, onToggleFlip }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
 
   const handleMouseMove = (e) => {
+    // Only track cursor glow on devices with fine pointer (mouse)
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePos({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
     });
+  };
+
+  const handleMouseEnter = () => {
+    // Only flip on hover if device has hover capability (desktop/laptop)
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      setIsHovered(false);
+    }
+  };
+
+  const handleClick = (e) => {
+    // Prevent flipping back when clicking action buttons or links
+    if (e.target.closest("button") || e.target.closest("a")) return;
+    if (onToggleFlip) {
+      onToggleFlip();
+    }
   };
 
   const handleEnquire = (e) => {
@@ -118,27 +147,19 @@ function FlipProjectCard({ project }) {
     navigate(`/contact?project=${encodeURIComponent(project.title)}#inquiry-form`);
   };
 
+  const isFlipped = isFlippedControlled || isHovered;
+
   return (
     <div
       className="group relative h-[330px] sm:h-[350px] w-full [perspective:1200px] cursor-pointer select-none"
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => {
-        setIsHovered(true);
-        setIsFlipped(true);
-      }}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setIsFlipped(false);
-      }}
-      onClick={(e) => {
-        // Prevent flipping back when clicking action buttons or links
-        if (e.target.closest("button") || e.target.closest("a")) return;
-        setIsFlipped((prev) => !prev);
-      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       {/* 3D Flip Container */}
       <div
-        className="relative h-full w-full rounded-2xl transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        className="relative h-full w-full rounded-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
         style={{
           transformStyle: "preserve-3d",
           WebkitTransformStyle: "preserve-3d",
@@ -300,6 +321,8 @@ function FlipProjectCard({ project }) {
 }
 
 export default function About() {
+  const [activeFlippedId, setActiveFlippedId] = useState(null);
+
   // Smooth scroll handler for Hero CTA to Corporate Story section
   const scrollToTimeline = () => {
     const el = document.getElementById("corporate-story");
@@ -415,6 +438,18 @@ export default function About() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27] gap-0">
+      <SEO
+        title="About Proton Power Infra | Over a Decade of Clean Energy Leadership"
+        description="Learn about Proton Power Infra's 12-year journey since 2012, commissioned 125+ MW clean energy portfolio, in-house transformer manufacturing, and executive engineering leadership."
+        canonical="https://protonpowerinfra.com/about"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "name": "About Proton Power Infra",
+          "description": "Learn about Proton Power Infra's 12-year journey since 2012, commissioned 125+ MW clean energy portfolio, in-house transformer manufacturing, and executive engineering leadership.",
+          "url": "https://protonpowerinfra.com/about"
+        }}
+      />
       {/* =========================================================
           1. HERO SECTION (Golden Standard: Matching 400px Heights, 
              Centered Content, No Redundant Badges)
@@ -550,7 +585,6 @@ export default function About() {
             <PillarCard
               icon={Target}
               badge="Our Mission"
-              badgeColor="bg-emerald-50 text-emerald-800 border-emerald-200/80"
               title="Democratizing Clean Power Across India"
               description="To accelerate India's transition to clean energy by engineering cost-effective, high-yield solar EPC systems and in-house transformers accessible to homes, factories, and utility grids."
               metric="125+ MW Installed Nationwide"
@@ -559,7 +593,6 @@ export default function About() {
             <PillarCard
               icon={Eye}
               badge="Our Vision"
-              badgeColor="bg-amber-50 text-amber-800 border-amber-200/80"
               title="India's Most Dependable Energy Partner"
               description="To stand as India's premier integrated renewable energy enterprise—seamlessly fusing advanced solar EPC design, in-house transformer manufacturing, and 25-year lifecycle performance."
               metric="Integrated EPC & Manufacturing"
@@ -568,7 +601,6 @@ export default function About() {
             <PillarCard
               icon={ShieldCheck}
               badge="Engineering Rigor"
-              badgeColor="bg-sky-50 text-sky-800 border-sky-200/80"
               title="Zero-Tolerance Quality & Grid Safety"
               description="Every installation strictly complies with IEC, CEA, and DISCOM grid codes. From Tier-1 bifacial panels to double-wound copper transformers, we never compromise on safety."
               metric="CEA & DISCOM Grid Compliant"
@@ -600,7 +632,14 @@ export default function About() {
           {/* Universal 6-Card Grid: Perfectly fills 3 columns on large screen with ZERO empty space */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {portfolioProjects.map((project) => (
-              <FlipProjectCard key={project.id} project={project} />
+              <FlipProjectCard
+                key={project.id}
+                project={project}
+                isFlipped={activeFlippedId === project.id}
+                onToggleFlip={() => {
+                  setActiveFlippedId((currentId) => (currentId === project.id ? null : project.id));
+                }}
+              />
             ))}
           </div>
 

@@ -1,9 +1,16 @@
 import { Shield, AlertCircle, Calendar } from "lucide-react";
 import { COMPANY_DETAILS } from "../data/companyData";
+import SEO from "../components/SEO";
 
 export default function PrivacyPolicy() {
   return (
     <div className="pt-24 sm:pt-28 pb-10 bg-[#F7F8F4] min-h-screen">
+      <SEO
+        title="Privacy Policy | Proton Power Infra"
+        description="Privacy policy and data governance practices of Proton Power Infrastructure Pvt. Ltd."
+        canonical="https://protonpowerinfra.com/privacy-policy"
+        noindex={false}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-6 pb-4 border-b border-[#E2E8E2]">

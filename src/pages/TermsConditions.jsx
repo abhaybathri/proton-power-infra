@@ -1,9 +1,16 @@
 import { FileCheck, AlertCircle, Calendar } from "lucide-react";
 import { COMPANY_DETAILS } from "../data/companyData";
+import SEO from "../components/SEO";
 
 export default function TermsConditions() {
   return (
     <div className="pt-24 sm:pt-28 pb-10 bg-[#F7F8F4] min-h-screen">
+      <SEO
+        title="Terms & Conditions | Proton Power Infra"
+        description="Terms and conditions governing the use of Proton Power Infra techno-commercial services and digital portal."
+        canonical="https://protonpowerinfra.com/terms-conditions"
+        noindex={false}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-6 pb-4 border-b border-[#E2E8E2]">

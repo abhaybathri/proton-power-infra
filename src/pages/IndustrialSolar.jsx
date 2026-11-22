@@ -18,12 +18,13 @@ import {
 import { COMPANY_DETAILS, FAQS } from "../data/companyData";
 import SmartImage from "../components/SmartImage";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 
 // Industrial Assets
-import industrialTopImg from "../assets/industrial-assets/top-image.jpg";
-import manufacturingImg from "../assets/industrial-assets/manufacturing-units.jpg";
-import agricultureImg from "../assets/industrial-assets/agriculture-food-processing.jpg";
-import chemicalPharmaImg from "../assets/industrial-assets/chemical-pharma.png";
+import industrialTopImg from "../assets/industrial-assets/top-image.webp";
+import manufacturingImg from "../assets/industrial-assets/manufacturing-units.webp";
+import agricultureImg from "../assets/industrial-assets/agriculture-food-processing.webp";
+import chemicalPharmaImg from "../assets/industrial-assets/chemical-pharma.webp";
 
 function IndustrialBenefitCard({
   benefit,
@@ -375,6 +376,23 @@ export default function IndustrialSolar() {
 
   return (
     <div className="pt-20 bg-[#F7F8F4] text-[#252A27]">
+      <SEO
+        title="Industrial Captive Solar Plants (500kW – 50MW) | Proton Power Infra"
+        description="Multi-megawatt rooftop and open-access captive solar power systems for factories, mills, cold storages, and pharma plants paired with in-house step-up substations."
+        canonical="https://protonpowerinfra.com/industrial-solar"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Industrial Captive Solar Plants",
+          "provider": {
+            "@type": "Organization",
+            "name": "Proton Power Infra",
+            "url": "https://protonpowerinfra.com"
+          },
+          "serviceType": "Industrial Solar EPC & Power Plants",
+          "description": "Multi-megawatt industrial rooftop and ground-mounted captive solar installations engineered for heavy manufacturing and processing mills."
+        }}
+      />
       {/* 1. Hero Section - Equal Width & Height, Compact & Centered Content */}
       <section className="relative overflow-hidden py-6 sm:py-7 lg:py-8 bg-[#123C32] text-white">
         {/* Subtle engineering grid background */}
@@ -633,7 +651,7 @@ export default function IndustrialSolar() {
                     </p>
                   </div>
 
-                  {/* Key Engineering Checkpoints with Distinct Light Pastel Shades & Individual Glow */}
+                  {/* Key Engineering Checkpoints */}
                   <div>
                     <div className="text-[10px] font-bold text-[#202724] uppercase tracking-wider font-tech mb-1.5">
                       Engineering Checkpoints:
@@ -642,22 +660,22 @@ export default function IndustrialSolar() {
                       {currentPhaseData.highlights.map((h, i) => {
                         const style = [
                           {
-                            card: "bg-emerald-50/70 border-emerald-200/80 text-emerald-950 hover:border-emerald-400 hover:shadow-[0_0_14px_rgba(16,185,129,0.22)]",
+                            card: "bg-emerald-50/50 border-emerald-100/80 text-emerald-950",
                             icon: "text-emerald-700",
                           },
                           {
-                            card: "bg-amber-50/70 border-amber-200/80 text-amber-950 hover:border-amber-400 hover:shadow-[0_0_14px_rgba(232,168,62,0.25)]",
+                            card: "bg-amber-50/50 border-amber-100/80 text-amber-950",
                             icon: "text-amber-700",
                           },
                           {
-                            card: "bg-teal-50/70 border-teal-200/80 text-teal-950 hover:border-teal-400 hover:shadow-[0_0_14px_rgba(20,184,166,0.22)]",
+                            card: "bg-teal-50/50 border-teal-100/80 text-teal-950",
                             icon: "text-teal-700",
                           },
                         ][i % 3];
                         return (
                           <div
                             key={i}
-                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border transition-all duration-300 cursor-default hover:scale-[1.01] ${style.card}`}
+                            className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg border cursor-default select-none transition-colors ${style.card}`}
                           >
                             <CheckCircle2 className={`w-3.5 h-3.5 shrink-0 ${style.icon}`} />
                             <span className="truncate font-medium">{h}</span>
@@ -667,9 +685,9 @@ export default function IndustrialSolar() {
                     </div>
                   </div>
 
-                  {/* Deliverable Capsule with Ambient Radiant Glow */}
-                  <div className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-50/80 via-amber-50/60 to-emerald-50/80 border border-emerald-200/80 hover:border-[#E8A83E] hover:shadow-[0_0_16px_rgba(232,168,62,0.22)] transition-all duration-300 flex items-center gap-2.5 font-tech">
-                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#123C32]/10 shadow-2xs">
+                  {/* Deliverable Capsule */}
+                  <div className="px-3.5 py-2 rounded-xl bg-[#F7F8F4] border border-[#E2E8E2] flex items-center gap-2.5 font-tech select-none">
+                    <span className="text-[10px] font-bold text-[#123C32] uppercase tracking-wider shrink-0 bg-white px-2 py-0.5 rounded border border-[#E2E8E2] shadow-2xs">
                       Deliverable
                     </span>
                     <span className="text-xs font-bold text-[#202724] truncate">

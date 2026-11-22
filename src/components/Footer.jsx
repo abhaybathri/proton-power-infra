@@ -25,7 +25,11 @@ export default function Footer() {
                 <img
                   src={IMAGES.navbarLogo}
                   alt="Proton Power Infra"
-                  className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                  width="181"
+                  height="80"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-14 sm:h-16 md:h-[72px] lg:h-[80px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
                 />
               </Link>
 

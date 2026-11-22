@@ -1,29 +1,29 @@
 // Official Assets & Real Projects
-import officialLogo from "../assets/company/official-logo.jpg";
-import logoPng from "../assets/company/logo.png";
-import navbarLogo from "../assets/company/navbar-logo.png";
-import mainCompanyTopImage from "../assets/company/main-comany-name-image-or-top-image.jpg";
-import realSolarRows from "../assets/company/real-project-solar-rows.jpg";
-import realTransformerSubstation from "../assets/company/real-project-transformer-substation.jpg";
-import realUtilityPlant from "../assets/company/real-project-utility-plant.jpg";
-import project1Img from "../assets/company/project-1.jpg";
-import project2Img from "../assets/company/project-2.jpg";
+import officialLogo from "../assets/company/logo-optimized.webp";
+import logoPng from "../assets/company/logo-optimized.webp";
+import navbarLogo from "../assets/company/logo-optimized.webp";
+import mainCompanyTopImage from "../assets/company/main-comany-name-image-or-top-image.webp";
+import realSolarRows from "../assets/company/real-project-solar-rows.webp";
+import realTransformerSubstation from "../assets/company/real-project-transformer-substation.webp";
+import realUtilityPlant from "../assets/company/real-project-utility-plant.webp";
+import project1Img from "../assets/company/project-1.webp";
+import project2Img from "../assets/company/project-2.webp";
 
 // Supporting Verified Assets
-import commercialGround from "../assets/commercial-assets/ground-mounted-image.jpg";
-import transformerUnit1 from "../assets/power-transformer-assets/manufacturing.png";
-import transformerUnit2 from "../assets/power-transformer-assets/step-up-transformer.png";
-import transformerUnit3 from "../assets/power-transformer-assets/step-down.png";
-import approvalImg from "../assets/solar-epc-assets/Approvals & Liaisoning.png";
-import engineeringImg from "../assets/solar-epc-assets/Plant Design & Engineering.png";
+import commercialGround from "../assets/commercial-assets/ground-mounted-image.webp";
+import transformerUnit1 from "../assets/power-transformer-assets/manufacturing.webp";
+import transformerUnit2 from "../assets/power-transformer-assets/step-up-transformer.webp";
+import transformerUnit3 from "../assets/power-transformer-assets/step-down.webp";
+import approvalImg from "../assets/solar-epc-assets/Approvals & Liaisoning.webp";
+import engineeringImg from "../assets/solar-epc-assets/Plant Design & Engineering.webp";
 
 // Dedicated Home Assets
-import homeTopImage from "../assets/home-assets/home-top-image.jpg";
-import homeResidential from "../assets/home-assets/residential-solar.jpg";
-import homeCommercialGround from "../assets/home-assets/comercial-ground-solar.jpg";
-import homeIndustrial from "../assets/home-assets/industrial-solar.jpg";
-import homeTransformer from "../assets/home-assets/solar-transformer.jpg";
-import homeTurnkeyEPC from "../assets/home-assets/turnkey-solar.jpg";
+import homeTopImage from "../assets/home-assets/home-top-image.webp";
+import homeResidential from "../assets/home-assets/residential-solar.webp";
+import homeCommercialGround from "../assets/home-assets/comercial-ground-solar.webp";
+import homeIndustrial from "../assets/home-assets/industrial-solar.webp";
+import homeTransformer from "../assets/home-assets/solar-transformer.webp";
+import homeTurnkeyEPC from "../assets/home-assets/turnkey-solar.webp";
 
 export const COMPANY_DETAILS = {
   name: "Proton Power Infra",

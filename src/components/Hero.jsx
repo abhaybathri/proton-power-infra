@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import SmartImage from "./SmartImage";
-import homeTopImage from "../assets/home-assets/home-top-image.jpg";
-import homeTop2 from "../assets/home-assets/home-top-2.jpg";
-import homeTop3 from "../assets/home-assets/home-top-3.jpg";
-import homeTop4 from "../assets/home-assets/home-top-4.jpg";
+import homeTopImage from "../assets/home-assets/home-top-image.webp";
+import homeTop2 from "../assets/home-assets/home-top-2.webp";
+import homeTop3 from "../assets/home-assets/home-top-3.webp";
+import homeTop4 from "../assets/home-assets/home-top-4.webp";
 
 const HERO_SLIDES = [
   {
@@ -117,8 +117,8 @@ export default function Hero() {
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
       {/* Ambient Lighting & Glow Meshes */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#123C32]/12 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
-      <div className="absolute top-1/2 -right-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" style={{ animationDelay: "2s" }}></div>
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#123C32]/12 rounded-full blur-3xl pointer-events-none animate-pulse-glow transform-gpu"></div>
+      <div className="absolute top-1/2 -right-24 w-96 h-96 bg-[#E8A83E]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow transform-gpu" style={{ animationDelay: "2s" }}></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -178,6 +178,8 @@ export default function Hero() {
                       <SmartImage
                         src={slide.image}
                         alt={`Proton Power Infra ${slide.title}`}
+                        width={588}
+                        height={420}
                         className={`w-full h-full object-cover transition-transform duration-7000 ease-out ${
                           isActive && !isHovered ? "scale-106" : "scale-100"
                         }`}

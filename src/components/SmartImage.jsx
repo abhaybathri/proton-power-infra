@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
-import { ImageOff, Loader2 } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { ImageOff } from "lucide-react";
 
 /**
  * SmartImage
  * Ultra-modern progressive image loader with glass shimmer placeholder,
  * smooth blur-up fade transition, and zero-flicker progressive loading.
+ * Optimized with fetchPriority, native decoding, eager/lazy switches.
  */
 export default function SmartImage({
   src,
@@ -13,18 +14,18 @@ export default function SmartImage({
   containerClassName = "",
   loading = "lazy",
   priority = false,
+  fetchPriority,
   onImageLoad,
+  width,
+  height,
   ...props
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const imgRef = useRef(null);
 
-  // If priority image is already cached by browser
   useEffect(() => {
-    if (!src) return;
-    const img = new Image();
-    img.src = src;
-    if (img.complete && img.naturalWidth > 0) {
+    if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
       setIsLoaded(true);
     }
   }, [src]);
@@ -50,10 +51,14 @@ export default function SmartImage({
         </div>
       ) : (
         <img
+          ref={imgRef}
           src={src}
           alt={alt}
+          width={width}
+          height={height}
           loading={priority ? "eager" : loading}
-          decoding="async"
+          fetchPriority={priority ? "high" : fetchPriority || "auto"}
+          decoding={priority ? "sync" : "async"}
           onLoad={() => {
             setIsLoaded(true);
             if (onImageLoad) onImageLoad();
