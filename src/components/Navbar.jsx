@@ -81,7 +81,7 @@ export default function Navbar() {
               height="56"
               fetchPriority="high"
               decoding="async"
-              className="h-12 sm:h-13 md:h-14 lg:h-[56px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              className="h-12 sm:h-13 md:h-14 lg:h-[45px] w-auto object-contain transition-transform duration-200 group-hover:scale-105"
             />
           </Link>
 

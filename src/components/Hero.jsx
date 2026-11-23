@@ -112,7 +112,7 @@ export default function Hero() {
   const activeSlide = HERO_SLIDES[currentSlide];
 
   return (
-    <section className="relative overflow-hidden pt-20 pb-8 md:pt-22 md:pb-9 lg:pt-20 lg:pb-8 bg-[#F7F8F4]">
+    <section className="relative overflow-hidden pt-26 sm:pt-28 lg:pt-28 pb-10 sm:pb-12 lg:pb-12 bg-[#F7F8F4]">
       {/* High-tech engineering grid background */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#123C32_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
