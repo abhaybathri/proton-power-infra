@@ -33,7 +33,7 @@ export default function Footer() {
                 />
               </Link>
 
-              <p className="text-[#E9F0E9]/80 text-xs leading-relaxed pr-2">
+              <p className="text-[#E9F0E9]/80 text-xs leading-relaxed pr-2 text-justify-clean">
                 India's trusted Solar EPC and Power Transformer manufacturer. Headquartered in Indore with in-house transformer production in Dewas, delivering 125+ MW of dependable renewable power infrastructure nationwide since 2012.
               </p>
             </div>
@@ -229,7 +229,7 @@ export default function Footer() {
 
         {/* Bottom Bar: Copyright & Legal */}
         <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#E9F0E9]/60 font-tech">
-          <div>
+          <div className="text-center">
             © {currentYear} {COMPANY_DETAILS.legalName} • 125+ MW Clean Energy Milestone.
           </div>
 

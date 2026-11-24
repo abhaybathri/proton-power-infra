@@ -652,7 +652,7 @@ export default function SolarEPCServices() {
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
                       {currentPhaseData.title}
                     </h3>
-                    <p className="text-xs sm:text-[13px] text-[#525D57] leading-relaxed mt-1.5 font-normal">
+                    <p className="text-xs sm:text-[13px] text-[#525D57] leading-relaxed mt-1.5 font-normal text-justify-clean">
                       {currentPhaseData.desc}
                     </p>
                   </div>

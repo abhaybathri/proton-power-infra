@@ -648,7 +648,7 @@ export default function CommercialSolar() {
                     <div className="text-[10px] sm:text-[11px] font-mono font-bold text-[#E8A83E] uppercase tracking-wider mb-1">
                       {currentPhaseData.subtitle}
                     </div>
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-[#202724] font-heading tracking-tight leading-snug text-justify-clean">
                       {currentPhaseData.title}
                     </h3>
                     <p className="text-xs sm:text-[13px] text-[#525D57] leading-relaxed mt-1.5 font-normal">

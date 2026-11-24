@@ -288,13 +288,13 @@ export default function SolarSolutions() {
             </ScrollReveal>
 
             <ScrollReveal delay={80}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading">
+              <h2 className="w-full text-xl sm:text-xl lg:text-4xl font-black text-[#202724] tracking-tight leading-tight font-heading text-center ">
                 Complete Clean Energy Infrastructure
               </h2>
             </ScrollReveal>
 
             <ScrollReveal delay={140}>
-              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal">
+              <p className="text-xs sm:text-sm text-[#525D57] leading-relaxed mt-1 font-normal text-justify-center text-center">
                 From high-yield private rooftop installations to utility-scale solar parks and custom in-house inverter duty transformers engineered under one roof.
               </p>
             </ScrollReveal>

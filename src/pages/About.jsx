@@ -544,7 +544,7 @@ export default function About() {
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-white/95 backdrop-blur-md shadow-lg border border-white/80 z-20">
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech">
+                        <span className="text-xs font-bold text-[#123C32] uppercase tracking-wider font-tech text-justify-clean">
                           Solar EPC & Transformer Manufacturing
                         </span>
                       </div>

@@ -588,7 +588,7 @@ export default function Contact() {
                         </span>
                       </div>
                     </div>
-                    <p className="text-[11px] text-[#525D57] leading-relaxed">
+                    <p className="text-[11px] text-[#525D57] leading-relaxed text-justify-clean">
                       Plot No. 242, Sch. No. 78, Vijay Nagar, Indore. Single-Line Diagram audits &amp; transformer technical specifications reviewed daily.
                     </p>
                   </div>
